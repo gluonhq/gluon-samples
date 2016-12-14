@@ -1,0 +1,55 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.javafxports:jfxmobile-plugin:1.1.1'
+    }
+}
+
+plugins {
+    id "com.github.hierynomus.license" version "0.13.1"
+}
+apply plugin: 'org.javafxports.jfxmobile'
+
+repositories {
+    jcenter()
+    maven {
+        url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
+    }
+}
+
+mainClassName = 'com.gluonhq.rubik.GluonRubik'
+
+dependencies {
+    compile 'com.gluonhq:charm:4.1.0'
+}
+
+jfxmobile {
+    downConfig {
+        version = '3.0.0'
+        plugins 'display', 'lifecycle', 'statusbar', 'storage'
+    }
+    android {
+        manifest = 'src/android/AndroidManifest.xml'
+    }
+    ios {
+        infoPList = file('src/ios/Default-Info.plist')
+        forceLinkClasses = [
+                'com.jpl.**.*',
+                'com.gluonhq.**.*',
+                'com.javafx.**.*',
+                'javax.annotations.**.*',
+                'javax.inject.**.*',
+                'javax.json.**.*',
+                'org.glassfish.json.**.*'
+        ]
+    }
+}
+
+license {
+    skipExistingHeaders
+    mapping {
+        fxml = 'XML_STYLE'
+    }
+}

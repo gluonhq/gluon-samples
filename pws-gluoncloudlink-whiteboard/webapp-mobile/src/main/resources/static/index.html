@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" class="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="description" content="CloudLink Whiteboard">
+        <meta name="title" content="CloudLink Whiteboard">
+        <title>Whiteboard</title>
+
+        <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.1.1/css/bootstrap.min.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <div id="body" class="row">
+                <div class="page-header">
+                    <h1>Whiteboard</h1>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <table id="whiteboard" class="table">
+                            <tr>
+                                <th class="col-md-2">Id</th>
+                                <th class="col-md-4">Title</th>
+                                <th class="col-md-1">Creation Date</th>
+                                <th class="col-md-1"></th>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-4">
+                        <form id="add-form">
+                            <div class="form-group">
+                                <label for="title">Title:</label>
+                                <input type="text" class="form-control" name="title" id="title" />
+                            </div>
+                            <button type="button" class="btn btn-default" id="add-item">Add</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="webjars/jquery/2.1.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                $.get("front/whiteboard", function(data) {
+                    for (var i = 0; i < data.length; i++) {
+                        addRow(data[i]);
+                    }
+                });
+
+                $('#add-item').click(function() {
+                    $.post("front/whiteboard", {title: $("#title").val()}, function(data) {
+                        if (data.hasOwnProperty("id")) {
+                            addRow(data);
+                        }
+                        $("#title").val("");
+                    });
+                });
+
+                function addRow(item) {
+                    var date = new Date(item.creationDate * 1000);
+                    var row = $("<tr id='" + item.id + "'></tr>");
+                    row.append($("<td>" + item.id +  "</td>"));
+                    row.append($("<td>" + item.title +  "</td>"));
+                    row.append($("<td>" + date.getFullYear() + "/" + ("0" + date.getMonth()).substr(-2) + "/" + ("0" + date.getDate()).substr(-2) + " " + ("0" + date.getHours()).substr(-2) + ":" + ("0" + date.getMinutes()).substr(-2) + ":" + ("0" + date.getSeconds()).substr(-2) + "</td>"));
+                    row.append($("<td><button class=\"btn btn-default\" type=\"button\"><span class=\"glyphicon glyphicon-trash\"></span></button></td>"));
+                    $("#whiteboard").append(row);
+                    $(row).find('button').click(function() {
+                        $.ajax({url: "front/whiteboard/" + item.id, type: 'DELETE', success: function(data) {
+                            $(row).remove();
+                        }});
+                    });
+                }
+            });
+        </script>
+    </body>
+</html>

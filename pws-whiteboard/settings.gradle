@@ -1,0 +1,7 @@
+include 'webapp-base'
+include 'webapp-mobile'
+include 'mobileapp'
+
+rootProject.name = 'PWS GCL Whiteboard'
+
+

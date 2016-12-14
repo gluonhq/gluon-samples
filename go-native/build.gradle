@@ -1,0 +1,57 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.javafxports:jfxmobile-plugin:1.1.1'
+    }
+}
+
+plugins {
+    id "com.github.hierynomus.license" version "0.13.1"
+}
+
+apply plugin: 'org.javafxports.jfxmobile'
+
+repositories {
+    jcenter()
+    maven {
+        url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
+    }
+}
+
+mainClassName = 'com.gluonhq.gonative.GoNative'
+
+dependencies {
+    compile 'com.gluonhq:charm:2.1.1'
+    compile 'com.airhacks:afterburner.mfx:1.6.2'
+    androidRuntime 'com.gluonhq:charm-android:2.1.1'
+    iosRuntime 'com.gluonhq:charm-ios:2.1.1'
+    desktopRuntime 'com.gluonhq:charm-desktop:2.1.1'
+    desktopCompile 'com.github.sarxos:webcam-capture:0.3.10'
+}
+
+jfxmobile {
+    android {
+        manifest = 'src/android/AndroidManifest.xml'
+    }
+    ios {
+        infoPList = file('src/ios/Default-Info.plist')
+        forceLinkClasses = [
+                'com.gluonhq.gonative.**.*',
+                'com.gluonhq.**.*',
+                'io.datafx.**.*',
+                'javax.annotations.**.*',
+                'javax.inject.**.*',
+                'javax.json.**.*',
+                'org.glassfish.json.**.*'
+        ]
+    }
+}
+
+license {
+    skipExistingHeaders
+    mapping {
+        fxml = 'XML_STYLE'
+    }
+}

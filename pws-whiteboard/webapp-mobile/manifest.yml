@@ -1,0 +1,7 @@
+---
+applications:
+- name: whiteboard-mobile-demo
+  memory: 512M
+  instances: 1
+  random-route: true
+  path: build/libs/webapp-mobile.jar
