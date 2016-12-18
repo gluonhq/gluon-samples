@@ -21,5 +21,5 @@ To execute the sample, do as follows:
 Documentation
 -------------
 
-Read more about this particular sample in the [Deep Dive](http://docs.gluonhq.com/connect/latest/#_sampe) sample section
+Read more about this particular sample in the [Deep Dive](http://docs.gluonhq.com/connect/latest/#_sample) sample section
 on the Gluon Connect documentation website.
