@@ -1,0 +1,4 @@
+/.nb-gradle/
+/.idea/
+build/
+*.iml
