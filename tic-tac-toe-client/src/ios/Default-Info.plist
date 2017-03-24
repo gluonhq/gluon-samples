@@ -3,8 +3,10 @@
 <plist version="1.0">
 <dict>
         <key>CFBundleIdentifier</key>
-        <string>com.gluonhq.demos.tictactoe.TicTacToe</string>
+        <string>com.gluonhq.demos.tictactoe</string>
         <key>CFBundleVersion</key>
+        <string>1</string>
+	<key>CFBundleShortVersionString</key>
         <string>1.0</string>
         <key>CFBundleExecutable</key>
         <string>TicTacToe</string>
@@ -50,5 +52,12 @@
                 <integer>1</integer>
                 <integer>2</integer>
         </array>
+        <key>MinimumOSVersion</key>
+        <string>8.0</string>
+        <key>UIRequiresFullScreen</key>
+        <string>YES</string>
+        <key>UIStatusBarStyle</key>
+        <string>UIStatusBarStyleLightContent</string>
+        <key>UIViewControllerBasedStatusBarAppearance</key> <false/>
 </dict>
 </plist>
