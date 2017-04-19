@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:1.1.1'
+        classpath 'org.javafxports:jfxmobile-plugin:1.3.5'
     }
 }
 
@@ -23,13 +23,13 @@ repositories {
 mainClassName = 'com.gluonhq.samples.connect.rest.Main'
 
 dependencies {
-    compile 'com.gluonhq:charm:4.1.0'
+    compile 'com.gluonhq:charm:4.3.3'
 }
 
 jfxmobile {
     downConfig {
-        version = '3.0.0'
-        plugins 'display', 'lifecycle', 'statusbar', 'storage'
+        version = '3.2.4'
+        plugins 'browser', 'display', 'lifecycle', 'statusbar', 'storage'
     }
     android {
         manifest = 'src/android/AndroidManifest.xml'
@@ -38,7 +38,6 @@ jfxmobile {
         infoPList = file('src/ios/Default-Info.plist')
         forceLinkClasses = [
                 'com.gluonhq.**.*',
-                'io.datafx.**.*',
                 'javax.annotations.**.*',
                 'javax.inject.**.*',
                 'javax.json.**.*',

@@ -29,12 +29,14 @@ package com.gluonhq.comments20.cloud;
 import com.gluonhq.charm.down.Services;
 import com.gluonhq.charm.down.plugins.Cache;
 import com.gluonhq.charm.down.plugins.CacheService;
+import com.gluonhq.cloudlink.client.data.DataClient;
+import com.gluonhq.cloudlink.client.data.DataClientBuilder;
+import com.gluonhq.cloudlink.client.data.SyncFlag;
+import com.gluonhq.cloudlink.client.user.User;
+import com.gluonhq.cloudlink.client.user.UserClient;
 import com.gluonhq.comments20.model.Comment;
 import com.gluonhq.connect.GluonObservableList;
 import com.gluonhq.connect.ConnectState;
-import com.gluonhq.connect.gluoncloud.GluonClient;
-import com.gluonhq.connect.gluoncloud.SyncFlag;
-import com.gluonhq.connect.gluoncloud.User;
 import com.gluonhq.connect.provider.DataProvider;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
@@ -44,35 +46,37 @@ import javafx.collections.FXCollections;
 import javafx.scene.image.Image;
 import javax.annotation.PostConstruct;
 
-/** Service to access the application on Gluon Cloud, retrieve a list with comments
+/**
+ * Service to access the application on Gluon CloudLink, retrieve a list with comments
  * and send new comments to the list.
- * 
  */
 public class Service {
 
-    private GluonClient gluonClient;
+    private DataClient dataClient;
     
-    /*
-    Every list stored under the same application on the Cloud has a unique id:
-    */
+    private UserClient userClient;
+    
+    /**
+     * Every list stored under the same application on Gluon CloudLink has a unique id:
+     */
     private static final String CLOUD_LIST_ID = "comments v2.0";
     
-    /*
-    An observable wrapper of the retrieved list, used to expose it and bind the 
-    ListView items to the list.
-    */
+    /**
+     * An observable wrapper of the retrieved list, used to expose it and bind the
+     * ListView items to the list.
+     */
     private final ListProperty<Comment> commentsList = 
             new SimpleListProperty<>(FXCollections.<Comment>observableArrayList()); 
     
-    /*
-    The authenticated user. Check
-    http://docs.gluonhq.com/charm/latest/#_user_authentication
-    */
+    /**
+     * The authenticated user. Check
+     * http://docs.gluonhq.com/cloudlink/latest/#_applying_login_methods
+     */
     private final ObjectProperty<User> user = new SimpleObjectProperty<>();
     
-    /*
-    Contains a comment that can be edited
-    */
+    /**
+     * Contains a comment that can be edited
+     */
     private final ObjectProperty<Comment> activeComment = new SimpleObjectProperty<>();
     
     public ObjectProperty<Comment> activeCommentProperty() {
@@ -92,7 +96,7 @@ public class Service {
     
     public static Image getUserImage(String userPicture) {
         if (userPicture == null || userPicture.isEmpty()) {
-            /**
+            /*
              * https://commons.wikimedia.org/wiki/File:WikiFont_uniE600_-_userAvatar_-_blue.svg
              * By User:MGalloway (WMF) (mw:Design/WikiFont) [CC BY-SA 3.0 (http://creativecommons.org/licenses/by-sa/3.0)], via Wikimedia Commons
              */
@@ -114,26 +118,29 @@ public class Service {
      */
     @PostConstruct
     public void postConstruct() {
-        gluonClient = GluonClientProvider.getGluonClient();
-        user.bind(gluonClient.authenticatedUserProperty());
+        userClient = new UserClient();
+        dataClient = DataClientBuilder.create()
+                    .authenticateWith(userClient)
+                    .build();
+        user.bind(userClient.authenticatedUserProperty());
     }
     
     /**
-     * Once there's a valid gluonClient, the contents of the list can be retrieved. This will return a 
+     * Once there's a valid dataClient, the contents of the list can be retrieved. This will return a
      * GluonObservableList. Note the flags:
-     * - LIST_WRITE_THROUGH: Changes in the local list are reflected to the remote copy of that list on Gluon Cloud.
-     * - LIST_READ_THROUGH: Changes in the remote list on Gluon Cloud are reflected to the local copy of that list
-     * - OBJECT_READ_THROUGH: Changes in observable properties of objects in the remote list on Gluon Cloud are reflected to the local objects of that list
-     * - OBJECT_WRITE_THROUGH: Changes in the observable properties of objects in the local list are reflected to the remote copy on Gluon Cloud
-     
-     * This means that any change done in any client app will be reflected in the cloud, and inmediatelly broadcasted
+     * - LIST_WRITE_THROUGH: Changes in the local list are reflected to the remote copy of that list on Gluon CloudLink.
+     * - LIST_READ_THROUGH: Changes in the remote list on Gluon CloudLink are reflected to the local copy of that list
+     * - OBJECT_READ_THROUGH: Changes in observable properties of objects in the remote list on Gluon CloudLink are reflected to the local objects of that list
+     * - OBJECT_WRITE_THROUGH: Changes in the observable properties of objects in the local list are reflected to the remote copy on Gluon CloudLink
+     *
+     * This means that any change done in any client app will be reflected in Gluon CloudLink, and immediately broadcast
      * to all the listening applications.
      */
     public void retrieveComments() {
-        GluonObservableList<Comment> retrieveList = DataProvider.<Comment>retrieveList(
-                gluonClient.createListDataReader(CLOUD_LIST_ID, 
+        GluonObservableList<Comment> retrieveList = DataProvider.retrieveList(
+                dataClient.createListDataReader(CLOUD_LIST_ID,
                 Comment.class,  
-                SyncFlag.LIST_READ_THROUGH, SyncFlag.LIST_WRITE_THROUGH, 
+                SyncFlag.LIST_READ_THROUGH, SyncFlag.LIST_WRITE_THROUGH,
                 SyncFlag.OBJECT_READ_THROUGH, SyncFlag.OBJECT_WRITE_THROUGH));
         
         retrieveList.stateProperty().addListener((obs, ov, nv) -> {
@@ -145,7 +152,7 @@ public class Service {
     
     /**  
      * Add a new comment to the list
-     * Note comments can be deleted directly on the ListView, since its bounded to the list
+     * Note comments can be deleted directly on the ListView, since it's bound to the list
      * @param comment
      */
     public void addComment(Comment comment) {

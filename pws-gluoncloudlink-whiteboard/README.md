@@ -54,8 +54,18 @@ This key and the secret need to be inserted into both the `webapp-mobile` and `m
 
 * In `webapp-mobile`, you can enter the key and secret in the class named `com.gluonhq.cloudlink.sample.whiteboard.mobile.service.CloudLinkService`.
 The fields are defined as static fields at the top of the class.
-* In `mobileapp`, the key and secret can be set in the class named `com.gluonhq.cloudlink.sample.whiteboard.service.Service`.
-Again, the fields that need to be updated are defined at the top of the class as static fields.
+* In `mobileapp`, the key and secret must be set in the Gluon CloudLink configuration file. Create a file called
+`gluoncloudlink_config.json` in the directory `mobileapp/src/main/resources`. Enter the following JSON content into the
+file, replacing the values with the generated key and secret of your application:
+
+~~~json
+{
+  "gluonCredentials": {
+    "applicationKey": "CLOUDLINK_APPLICATION_KEY",
+    "applicationSecret": "CLOUDLINK_APPLICATION_SECRET"
+  }
+}
+~~~
 
 #### Push the webapp-mobile application
 
@@ -71,13 +81,14 @@ $ cf push -f webapp-mobile/manifest.yml
 
 When the mobile application generates an item on the whiteboard, Gluon CloudLink can push data to other back ends,
  by configuring a connector in your Gluon Application. Download the Gluon CloudLink Dashboard application from
- http://gluonhq.com/products/cloudlink/cloudlink-dashboard/. Run the application with the following command:
+ the Gluon CloudLink portal. Run the application with the following command (make sure you replace the version 
+number with the one from your Dashboard version):
 
 ~~~
-$ java -jar cloudlink-dashboard-3.0.0-preview-b3.jar
+$ java -jar cloudlink-dashboard-3.2.9.jar
 ~~~
 
-Sign in with the key and secret of your Gluon Application and navigate to the Configuration section. Select
+Sign in with the email and password provided in the portal and navigate to the Configuration section. Select
 `REST` from the combo box at the top and click the + button. In the URL textfield, enter the application URL
 you received from PWS, appending it with `/cloudlink`. Click the Save button to update the configuration of
 the REST connector.

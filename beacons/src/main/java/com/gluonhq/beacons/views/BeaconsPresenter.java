@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, Gluon
+ * Copyright (c) 2016, 2017 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,6 @@
  */
 package com.gluonhq.beacons.views;
 
-import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
@@ -42,6 +41,8 @@ import com.gluonhq.charm.down.plugins.BleService;
 import com.gluonhq.charm.down.plugins.ble.Configuration;
 import com.gluonhq.charm.down.plugins.ble.Proximity;
 import com.gluonhq.charm.down.plugins.ble.ScanDetection;
+import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
+import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.When;
@@ -54,7 +55,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class BeaconsPresenter {
+public class BeaconsPresenter extends GluonPresenter<Beacons> {
 
     @Inject Settings settings;
 	
@@ -159,9 +160,9 @@ public class BeaconsPresenter {
                     buttonScan.disableProperty().bind(buttonStop.disableProperty().not());
                     buttonStop.setDisable(true);
 
-                    AppBar appBar = MobileApplication.getInstance().getAppBar();
+                    AppBar appBar = getApp().getAppBar();
                     appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                            MobileApplication.getInstance().showLayer(Beacons.MENU_LAYER)));
+                            getApp().showLayer(DRAWER_LAYER)));
                     appBar.setTitleText("Beacons");
                     appBar.getActionItems().addAll(buttonScan, buttonStop);
                 }
@@ -169,9 +170,9 @@ public class BeaconsPresenter {
             return null;
         }).orElseGet(() -> {
             beacons.showingProperty().addListener((obs, oldValue, newValue) -> {
-                AppBar appBar = MobileApplication.getInstance().getAppBar();
+                AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        MobileApplication.getInstance().showLayer(Beacons.MENU_LAYER)));
+                        getApp().showLayer(DRAWER_LAYER)));
                 appBar.setTitleText("Beacons");
             });
             return null;

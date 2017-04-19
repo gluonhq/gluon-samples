@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, Gluon
+ * Copyright (c) 2016, 2017 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,8 @@
  */
 package com.gluonhq.comments.views;
 
-import com.gluonhq.charm.glisten.application.MobileApplication;
+import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
+import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.layout.layer.FloatingActionButton;
 import com.gluonhq.charm.glisten.mvc.View;
@@ -38,9 +39,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javax.inject.Inject;
-import static com.gluonhq.comments.Comments.EDITION_VIEW;
 
-public class CommentsPresenter {
+public class CommentsPresenter extends GluonPresenter<Comments> {
 
     @Inject 
     private Service service;
@@ -54,15 +54,15 @@ public class CommentsPresenter {
     public void initialize() {
         comments.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
-                AppBar appBar = MobileApplication.getInstance().getAppBar();
+                AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        MobileApplication.getInstance().showLayer(Comments.MENU_LAYER)));
+                        getApp().showLayer(DRAWER_LAYER)));
                 appBar.setTitleText("Comments");
             }
         });
         
         comments.getLayers().add(new FloatingActionButton(MaterialDesignIcon.ADD.text, 
-            e -> MobileApplication.getInstance().switchView(EDITION_VIEW)).getLayer());
+            e -> AppViewManager.EDITION_VIEW.switchView()).getLayer());
         
         commentsList.setCellFactory(p -> new CommentListCell());
         commentsList.setPlaceholder(new Label("There are no comments"));

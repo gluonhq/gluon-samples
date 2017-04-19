@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, Gluon
+ * Copyright (c) 2016, 2017 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,7 @@
  */
 package com.gluonhq.notesapp.views;
 
-import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.notesapp.NotesApp;
 import com.gluonhq.notesapp.model.Note;
 import java.util.function.Predicate;
@@ -35,7 +35,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
-public class FilterPresenter {
+public class FilterPresenter extends GluonPresenter<NotesApp> {
 
     @FXML private TextField searchField;
     
@@ -45,13 +45,13 @@ public class FilterPresenter {
     
     @FXML
     private void search() {
-        MobileApplication.getInstance().hideLayer(NotesApp.POPUP_FILTER_NOTES);
+        getApp().hideLayer(NotesApp.POPUP_FILTER_NOTES);
     }
     
     @FXML
     private void close() {
         searchField.clear();
-        MobileApplication.getInstance().hideLayer(NotesApp.POPUP_FILTER_NOTES);
+        getApp().hideLayer(NotesApp.POPUP_FILTER_NOTES);
     }
 
     public Predicate<? super Note> getPredicate() {

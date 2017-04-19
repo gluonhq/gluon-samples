@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:1.1.1'
+        classpath 'org.javafxports:jfxmobile-plugin:1.3.5'
     }
 }
 
@@ -23,13 +23,12 @@ repositories {
 mainClassName = 'com.gluonhq.beacons.Beacons'
 
 dependencies {
-    compile 'com.gluonhq:charm:4.1.0'
-    compileNoRetrolambda 'com.airhacks:afterburner.mfx:1.6.2'
+    compile 'com.gluonhq:glisten-afterburner:1.2.0'
 }
 
 jfxmobile {
     downConfig {
-        version = '3.0.0'
+        version = '3.2.4'
         plugins 'ble', 'display', 'lifecycle', 'statusbar', 'storage'
     }
     android {

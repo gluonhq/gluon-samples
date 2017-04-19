@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, Gluon
+ * Copyright (c) 2016, 2017 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,11 +26,8 @@
  */
 package com.gluonhq.beacons;
 
-import com.gluonhq.beacons.views.BeaconsView;
-import com.gluonhq.beacons.views.SettingsView;
+import com.gluonhq.beacons.views.AppViewManager;
 import com.gluonhq.charm.glisten.application.MobileApplication;
-import com.gluonhq.charm.glisten.layout.layer.SidePopupView;
-import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.Swatch;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -38,16 +35,9 @@ import javafx.stage.Stage;
 
 public class Beacons extends MobileApplication {
 
-    public static final String MAIN_VIEW = HOME_VIEW;
-    public static final String SETTINGS_VIEW = "Settings View";
-    public static final String MENU_LAYER = "Side Menu";
-    
     @Override
     public void init() {
-        addViewFactory(MAIN_VIEW, () -> (View) new BeaconsView().getView());
-        addViewFactory(SETTINGS_VIEW, () -> (View) new SettingsView().getView());
-        
-        addLayerFactory(MENU_LAYER, () -> new SidePopupView(new DrawerManager().getDrawer()));
+        AppViewManager.registerViewsAndDrawer(this);
     }
 
     @Override

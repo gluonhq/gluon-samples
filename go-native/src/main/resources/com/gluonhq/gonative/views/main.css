@@ -29,12 +29,16 @@
 }
 
 #title {
-    -fx-font-size: 1.8em;
+    -fx-font-size: 1.6em;
     -fx-text-fill: -primary-swatch-900;
 }
 
 .button {
-    -fx-alignment: CENTER_LEFT;
-    -fx-graphic-text-gap: 20;
-    -fx-padding: 10;
+    -fx-font-size: 1.2em;
+    -fx-alignment: CENTER;
+    -fx-padding: 10 20 10 20;
+}
+
+.icon > .label {
+    -fx-font-size: 2em;
 }

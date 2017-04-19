@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, Gluon
+ * Copyright (c) 2016, 2017 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,29 +26,18 @@
  */
 package com.gluonhq.comments20;
 
-import com.gluonhq.comments20.views.CommentsView;
-import com.gluonhq.comments20.views.EditionView;
 import com.gluonhq.charm.glisten.application.MobileApplication;
-import com.gluonhq.charm.glisten.layout.layer.SidePopupView;
-import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.Swatch;
+import com.gluonhq.comments20.views.AppViewManager;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Comments20 extends MobileApplication {
 
-    public static final String COMMENTS_VIEW = HOME_VIEW;
-    public static final String EDITION_VIEW = "Edition View";
-    public static final String MENU_LAYER = "Side Menu";
-    
-
     @Override
     public void init() {
-        addViewFactory(COMMENTS_VIEW, () -> (View) new CommentsView().getView());
-        addViewFactory(EDITION_VIEW, () -> (View) new EditionView().getView());
-        
-        addLayerFactory(MENU_LAYER, () -> new SidePopupView(new DrawerManager().getDrawer()));
+        AppViewManager.registerViewsAndDrawer(this);
     }
 
     @Override

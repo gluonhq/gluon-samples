@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, Gluon
+ * Copyright (c) 2016, 2017 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,9 +28,9 @@ package com.gluonhq.comments20.views;
 
 import com.gluonhq.charm.down.Services;
 import com.gluonhq.charm.down.plugins.DisplayService;
+import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
+import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
-import com.gluonhq.charm.glisten.application.MobileApplication;
-import static com.gluonhq.charm.glisten.application.MobileApplication.HOME_VIEW;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.Avatar;
 import com.gluonhq.charm.glisten.mvc.View;
@@ -47,7 +47,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javax.inject.Inject;
 
-public class EditionPresenter {
+public class EditionPresenter extends GluonPresenter<Comments20> {
 
     @Inject 
     private Service service;
@@ -115,9 +115,9 @@ public class EditionPresenter {
                 
                 authorText.setDisable(!authorText.getText().isEmpty());
                 
-                AppBar appBar = MobileApplication.getInstance().getAppBar();
+                AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        MobileApplication.getInstance().showLayer(Comments20.MENU_LAYER)));
+                        getApp().showLayer(DRAWER_LAYER)));
                 appBar.setTitleText("Edition");
             } else {
                 authorText.clear();
@@ -139,7 +139,7 @@ public class EditionPresenter {
         authorText.clear();
         commentsText.clear();
         service.activeCommentProperty().set(null);
-        MobileApplication.getInstance().switchView(HOME_VIEW);
+        getApp().goHome();
     }
 
     @FXML
