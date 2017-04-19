@@ -26,23 +26,24 @@
  */
 package com.gluonhq.comments.cloud;
 
+import com.gluonhq.cloudlink.client.data.DataClient;
+import com.gluonhq.cloudlink.client.data.DataClientBuilder;
 import com.gluonhq.comments.model.Comment;
 import com.gluonhq.connect.GluonObservableList;
 import com.gluonhq.connect.ConnectState;
-import com.gluonhq.connect.gluoncloud.GluonClient;
 import com.gluonhq.connect.provider.DataProvider;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javax.annotation.PostConstruct;
 
-/** Service to access the application on Gluon Cloud, retrieve a list with comments
+/**
+ * Service to access the application on Gluon CloudLink, retrieve a list with comments
  * and send new comments to the list.
- * 
  */
 public class Service {
 
-    private GluonClient gluonClient;
+    private DataClient dataClient;
     
     /*
     Every list stored under the same application on the Cloud has a unique id:
@@ -61,7 +62,7 @@ public class Service {
      */
     @PostConstruct
     public void postConstruct() {
-        gluonClient = GluonClientProvider.getGluonClient();
+        dataClient = DataClientBuilder.create().build();
     }
     
     /**
@@ -75,7 +76,7 @@ public class Service {
      */
     public void retrieveComments() {
         GluonObservableList<Comment> retrieveList = DataProvider.<Comment>retrieveList(
-                gluonClient.createListDataReader(CLOUD_LIST_ID, Comment.class));
+                dataClient.createListDataReader(CLOUD_LIST_ID, Comment.class));
         
         retrieveList.stateProperty().addListener((obs, ov, nv) -> {
             if (ConnectState.SUCCEEDED.equals(nv)) {

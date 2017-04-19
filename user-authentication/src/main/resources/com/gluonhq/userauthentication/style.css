@@ -1,0 +1,13 @@
+.root {
+
+}
+
+.authentication {
+    -fx-alignment: center;
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+}
+
+.authentication > .title {
+    -fx-font-weight: bold;
+}

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gluonhq.pushnotes" android:versionCode="1" android:versionName="1.0">
+        <supports-screens android:xlargeScreens="true"/>
+        <permission android:name="com.gluonhq.pushnotes.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+        <uses-permission android:name="com.gluonhq.pushnotes.C2D_MESSAGE" />
+        <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+        <uses-permission android:name="android.permission.INTERNET"/>
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        <uses-permission android:name="android.permission.WAKE_LOCK"/>
+        <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="21"/>
+        <application android:label="pushnotes" android:name="android.support.multidex.MultiDexApplication" android:icon="@mipmap/ic_launcher">
+                <meta-data android:name="com.google.android.gms.version" android:value="9452000"/>
+                <activity android:name="javafxports.android.FXActivity" 
+                          android:label="pushnotes" 
+                          android:launchMode="singleTop"
+                          android:configChanges="orientation|screenSize">
+                        <meta-data android:name="main.class" android:value="com.gluonhq.pushnotes.PushNotes"/>
+                        <meta-data android:name="debug.port" android:value="0"/>
+                        <intent-filter>
+                                <action android:name="android.intent.action.MAIN"/>
+                                <category android:name="android.intent.category.LAUNCHER"/>
+                        </intent-filter>
+                </activity>
+                <receiver
+                    android:name="com.google.android.gms.gcm.GcmReceiver"
+                    android:exported="true"
+                    android:permission="com.google.android.c2dm.permission.SEND" >
+                    <intent-filter>
+                        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                        <category android:name="com.gluonhq.pushnotes" />
+                    </intent-filter>
+                </receiver>
+                <service
+                    android:name="com.gluonhq.impl.charm.down.plugins.android.PushGcmListenerService"
+                    android:exported="false" >
+                    <intent-filter>
+                        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                    </intent-filter>
+                </service>
+                <service
+                    android:name="com.gluonhq.impl.charm.down.plugins.android.PushInstanceIDListenerService"
+                    android:exported="false">
+                    <intent-filter>
+                        <action android:name="com.google.android.gms.iid.InstanceID" />
+                    </intent-filter>
+                </service>
+                <service 
+                    android:name="com.gluonhq.impl.charm.down.plugins.android.RegistrationIntentService"
+                    android:exported="false" >
+                </service>
+                
+                <activity android:name="com.gluonhq.impl.charm.down.plugins.android.PushNotificationActivity"
+                        android:parentActivityName="javafxports.android.FXActivity">
+                    <meta-data android:name="android.support.PARENT_ACTIVITY"
+                               android:value="javafxports.android.FXActivity"/>
+                </activity>
+        </application>
+</manifest>

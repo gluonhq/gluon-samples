@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, Gluon
+ * Copyright (c) 2016, 2017 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,9 +26,9 @@
  */
 package com.gluonhq.comments.views;
 
+import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
+import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
-import com.gluonhq.charm.glisten.application.MobileApplication;
-import static com.gluonhq.charm.glisten.application.MobileApplication.HOME_VIEW;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
@@ -43,7 +43,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javax.inject.Inject;
 
-public class EditionPresenter {
+public class EditionPresenter extends GluonPresenter<Comments> {
 
     @Inject 
     private Service service;
@@ -65,9 +65,9 @@ public class EditionPresenter {
         
         edition.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
-                AppBar appBar = MobileApplication.getInstance().getAppBar();
+                AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        MobileApplication.getInstance().showLayer(Comments.MENU_LAYER)));
+                        getApp().showLayer(DRAWER_LAYER)));
                 appBar.setTitleText("Edition");
             }
         });
@@ -82,7 +82,7 @@ public class EditionPresenter {
     void onCancel(ActionEvent event) {
         authorText.setText("");
         commentsText.setText("");
-        MobileApplication.getInstance().switchView(HOME_VIEW);
+        getApp().goHome();
     }
 
     @FXML
@@ -90,7 +90,7 @@ public class EditionPresenter {
         service.addComment(new Comment(authorText.getText(), commentsText.getText()));
         authorText.setText("");
         commentsText.setText("");
-        MobileApplication.getInstance().switchView(HOME_VIEW);
+        getApp().goHome();
     }
 
 }

@@ -26,13 +26,12 @@
  */
 package com.gluonhq.sqlite
 
-import com.gluonhq.charm.down.common.JavaFXPlatform
+import com.gluonhq.charm.down.Platform
 import com.gluonhq.charm.glisten.application.MobileApplication
 import com.gluonhq.charm.glisten.visual.Swatch
 import javafx.scene.Scene
 import javafx.scene.image.Image
 import javafx.stage.Stage
-import com.gluonhq.sqlite._
 
 class GluonSQLite extends MobileApplication {
 
@@ -46,7 +45,7 @@ class GluonSQLite extends MobileApplication {
         Swatch.RED.assignTo(scene)
         val stage = scene.getWindow.asInstanceOf[Stage]
         stage.getIcons.add(new Image(classOf[GluonSQLite].getResourceAsStream("/icon.png")))
-        if (System.getProperty("os.arch").toUpperCase.contains("ARM") && !JavaFXPlatform.isIOS && !JavaFXPlatform.isAndroid) {
+        if (System.getProperty("os.arch").toUpperCase.contains("ARM") && !Platform.isIOS && !Platform.isAndroid) {
             stage.setFullScreen(true)
             stage.setFullScreenExitHint("")
         }

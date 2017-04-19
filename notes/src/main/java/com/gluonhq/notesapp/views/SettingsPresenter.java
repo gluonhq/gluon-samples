@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, Gluon
+ * Copyright (c) 2016, 2017 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,8 +26,9 @@
  */
 package com.gluonhq.notesapp.views;
 
+import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
+import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInUpTransition;
-import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.SettingsPane;
 import com.gluonhq.charm.glisten.control.settings.DefaultOption;
@@ -51,7 +52,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Slider;
 import javax.inject.Inject;
 
-public class SettingsPresenter {
+public class SettingsPresenter extends GluonPresenter<NotesApp> {
 
     @Inject private Service service;
     private Settings config;
@@ -64,11 +65,11 @@ public class SettingsPresenter {
         settings.setShowTransitionFactory(BounceInUpTransition::new);
         settings.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
-                AppBar appBar = MobileApplication.getInstance().getAppBar();
+                AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        MobileApplication.getInstance().showLayer(NotesApp.MENU_LAYER)));
+                        getApp().showLayer(DRAWER_LAYER)));
                 appBar.setTitleText("Settings");
-                appBar.getActionItems().add(MaterialDesignIcon.CLOSE.button(e -> MobileApplication.getInstance().goHome()));
+                appBar.getActionItems().add(MaterialDesignIcon.CLOSE.button(e -> getApp().goHome()));
             }
         });
         
@@ -110,7 +111,7 @@ public class SettingsPresenter {
         newConfig.setFontSize(this.config.getFontSize());
         newConfig.setSorting(this.config.getSorting());
         newConfig.setAscending(this.config.isAscending());
-        
+
         service.settingsProperty().set(newConfig);        
         service.storeSettings();
     }

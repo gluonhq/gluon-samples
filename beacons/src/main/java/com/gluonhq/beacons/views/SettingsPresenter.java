@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, Gluon
+ * Copyright (c) 2016, 2017 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,8 +30,9 @@ import javax.inject.Inject;
 
 import com.gluonhq.beacons.Beacons;
 import com.gluonhq.beacons.settings.Settings;
+import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
+import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
-import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.SettingsPane;
 import com.gluonhq.charm.glisten.control.settings.DefaultOption;
@@ -44,7 +45,7 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
 
-public class SettingsPresenter {
+public class SettingsPresenter extends GluonPresenter<Beacons> {
 
     @FXML
     private View settings;
@@ -68,12 +69,13 @@ public class SettingsPresenter {
         
         settings.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
-                AppBar appBar = MobileApplication.getInstance().getAppBar();
+                AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        MobileApplication.getInstance().showLayer(Beacons.MENU_LAYER)));
+                        getApp().showLayer(DRAWER_LAYER)));
                 appBar.setTitleText("Settings");
                 appBar.getActionItems().add(MaterialDesignIcon.SYNC.button(e -> config.setUuid(Settings.UUID)));
             }
         });
     }
 }
+

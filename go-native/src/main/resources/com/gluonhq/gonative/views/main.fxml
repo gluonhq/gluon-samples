@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--
 
-    Copyright (c) 2016, Gluon
+    Copyright (c) 2016, 2017 Gluon
     All rights reserved.
 
     Redistribution and use in source and binary forms, with or without
@@ -32,29 +33,18 @@
 <?import com.gluonhq.charm.glisten.mvc.View?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<View fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.gonative.views.MainPresenter">
+<View fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.gonative.views.MainPresenter">
    <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" spacing="15.0">
          <children>
-            <Label fx:id="label" text="Native Services" id="title" />
-            <Button fx:id="picturesButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Pictures Service">
+            <Button fx:id="logButton" mnemonicParsing="false" text="Log Service">
                <graphic>
-                  <Icon content="PHOTO_CAMERA" />
+                  <Icon content="INFO_OUTLINE" />
                </graphic>
             </Button>
-            <Button fx:id="accelButton" layoutX="98.0" layoutY="308.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="200.0" text="Accelerometer">
-               <graphic>
-                  <Icon content="LEAK_ADD" />
-               </graphic>
-            </Button>
-            <Button fx:id="vibrationButton" layoutX="98.0" layoutY="334.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="200.0" text="Vibration">
-               <graphic>
-                  <Icon content="VIBRATION" />
-               </graphic>
-            </Button>
+            <Label id="title" fx:id="messageLabel" text="" />
          </children>
       </VBox>
    </center>

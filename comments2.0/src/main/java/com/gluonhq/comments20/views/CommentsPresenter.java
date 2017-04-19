@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, Gluon
+ * Copyright (c) 2016, 2017 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,17 +26,19 @@
  */
 package com.gluonhq.comments20.views;
 
-import com.gluonhq.charm.glisten.application.MobileApplication;
+import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
+import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.control.Alert;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.LifecycleEvent;
 import com.gluonhq.charm.glisten.layout.layer.FloatingActionButton;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
+import com.gluonhq.cloudlink.client.user.User;
 import com.gluonhq.comments20.Comments20;
 import com.gluonhq.comments20.cloud.Service;
 import com.gluonhq.comments20.model.Comment;
-import com.gluonhq.connect.gluoncloud.User;
+import static com.gluonhq.comments20.views.AppViewManager.EDITION_VIEW;
 import java.util.Optional;
 import javafx.beans.binding.When;
 import javafx.beans.property.BooleanProperty;
@@ -50,9 +52,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.ScrollEvent;
 import javax.inject.Inject;
-import static com.gluonhq.comments20.Comments20.EDITION_VIEW;
 
-public class CommentsPresenter {
+public class CommentsPresenter extends GluonPresenter<Comments20> {
 
     @Inject 
     private Service service;
@@ -76,9 +77,9 @@ public class CommentsPresenter {
     public void initialize() {
         comments.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
-                AppBar appBar = MobileApplication.getInstance().getAppBar();
+                AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        MobileApplication.getInstance().showLayer(Comments20.MENU_LAYER)));
+                        getApp().showLayer(DRAWER_LAYER)));
                 appBar.setTitleText("Comments");
             }
         });
@@ -91,7 +92,7 @@ public class CommentsPresenter {
             if (service.getUser() == null) { 
                 service.retrieveComments();
             } else {
-                MobileApplication.getInstance().switchView(EDITION_VIEW);
+                EDITION_VIEW.switchView();
             }
         });
         
@@ -109,7 +110,7 @@ public class CommentsPresenter {
                     // right button: edit comment, everybody can view it, only author can edit it
                     c -> {
                        service.activeCommentProperty().set(c);
-                       MobileApplication.getInstance().switchView(Comments20.EDITION_VIEW);
+                       EDITION_VIEW.switchView();
                     });
             
             // notify view that cell is sliding

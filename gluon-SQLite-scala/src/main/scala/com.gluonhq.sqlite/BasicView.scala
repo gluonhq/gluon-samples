@@ -33,19 +33,20 @@ import javafx.geometry.{Insets, Pos}
 import javafx.scene.control.{Label, ListCell, ListView}
 import javafx.scene.layout.VBox
 
-import com.gluonhq.charm.down.common.{JavaFXPlatform, PlatformFactory}
+import com.gluonhq.charm.down.{Platform, Services}
+import com.gluonhq.charm.down.plugins.StorageService
 import com.gluonhq.charm.glisten.control.AppBar
 import com.gluonhq.charm.glisten.mvc.View
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon
-import com.gluonhq.sqlite._
 import com.gluonhq.sqlite.model.Person
+import scala.compat.java8.OptionConverters._
 
 class BasicView(val name: String) extends View(name) {
 
-    import JavaFXPlatform._
+    import Platform._
 
     try {
-        JavaFXPlatform.getCurrent match {
+        Platform.getCurrent match {
             case ANDROID => Class.forName("org.sqldroid.SQLDroidDriver")
             case IOS => Class.forName("SQLite.JDBCDriver")
             case DESKTOP => Class.forName("org.sqlite.JDBC")
@@ -111,8 +112,9 @@ class BasicView(val name: String) extends View(name) {
 
         status.getItems.add("Creating a Database with SQLite")
         val dbUrl = try {
-            val dir = PlatformFactory.getPlatform.getPrivateStorage
-            val db = new File(dir, DB_NAME)
+            val dir = Services.get(classOf[StorageService]).asScala
+                        .flatMap(s => s.getPrivateStorage).get
+            val db: File = new File(dir, DB_NAME)
             "jdbc:sqlite:" + db.getAbsolutePath
         }
         catch {
@@ -147,11 +149,12 @@ class BasicView(val name: String) extends View(name) {
 
     private def readDB(): Unit = {
         setStatus("Reading an existing Database with SQLite")
-        val dbUrl = "jdbc:sqlite:" + ( if (JavaFXPlatform.isDesktop) {
+        val dbUrl = "jdbc:sqlite:" + ( if (Platform.isDesktop) {
             ":resource:" + classOf[GluonSQLite].getResource(s"/databases/$DB_NAME").toExternalForm
         } else {
             try {
-                val dir = PlatformFactory.getPlatform.getPrivateStorage
+                val dir = Services.get(classOf[StorageService]).asScala
+                            .flatMap(s => s.getPrivateStorage).get
                 val db: File = new File(dir, DB_NAME)
                 setStatus(s"Copying database $DB_NAME to private storage")
                 DBUtils.copyDatabase("/databases/", dir.getAbsolutePath, DB_NAME)

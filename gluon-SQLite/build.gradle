@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:1.1.1'
+        classpath 'org.javafxports:jfxmobile-plugin:1.3.5'
     }
 }
 
@@ -23,7 +23,7 @@ repositories {
 mainClassName = 'com.gluonhq.sqlite.GluonSQLite'
 
 dependencies {
-    compile 'com.gluonhq:charm:4.1.0'
+    compile 'com.gluonhq:charm:4.3.3'
 
     // Desktop SQL -> https://github.com/xerial/sqlite-jdbc
     desktopRuntime 'org.xerial:sqlite-jdbc:3.8.11.2'
@@ -39,7 +39,7 @@ dependencies {
 
 jfxmobile {
     downConfig {
-        version = '3.0.0'
+        version = '3.2.4'
         plugins 'display', 'lifecycle', 'statusbar', 'storage'
     }
     android {

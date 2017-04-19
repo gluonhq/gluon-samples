@@ -26,6 +26,9 @@
  */
 package com.gluonhq.samples.connect.rest;
 
+import com.gluonhq.charm.down.Platform;
+import com.gluonhq.charm.down.Services;
+import com.gluonhq.charm.down.plugins.BrowserService;
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
@@ -34,9 +37,15 @@ import com.gluonhq.connect.GluonObservableObject;
 import com.gluonhq.connect.converter.InputStreamInputConverter;
 import com.gluonhq.connect.provider.DataProvider;
 import com.gluonhq.connect.provider.RestClient;
+import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class RestObjectView extends View {
 
@@ -45,13 +54,37 @@ public class RestObjectView extends View {
 
         Label lbQuestionId = new Label();
         Label lbTitle = new Label();
-        Label lbLink = new Label();
+        Hyperlink hlLink = new Hyperlink();
 
         GridPane gridPane = new GridPane();
+        gridPane.setVgap(5.0);
+        gridPane.setHgap(5.0);
+        gridPane.setPadding(new Insets(5.0));
         gridPane.addRow(0, new Label("Question ID:"), lbQuestionId);
         gridPane.addRow(1, new Label("Title:"), lbTitle);
-        gridPane.addRow(2, new Label("Link:"), lbLink);
+        gridPane.addRow(2, new Label("Link:"), hlLink);
         gridPane.getColumnConstraints().add(new ColumnConstraints(75));
+
+        lbQuestionId.setWrapText(true);
+        lbTitle.setWrapText(true);
+        hlLink.setWrapText(true);
+
+        hlLink.setOnAction(e -> {
+            if (Platform.isDesktop()) {
+                getApplication().getHostServices().showDocument(hlLink.getText());
+            } else {
+                Services.get(BrowserService.class).ifPresent(service -> {
+                    try {
+                        service.launchExternalBrowser(hlLink.getText());
+                    } catch (IOException | URISyntaxException ex) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Failed to open URL");
+                        alert.setContentText("Failed to open URL. Reason: " + ex.getMessage());
+                        alert.showAndWait();
+                    }
+                });
+            }
+        });
 
         setCenter(gridPane);
 
@@ -75,7 +108,7 @@ public class RestObjectView extends View {
             if (newValue) {
                 lbQuestionId.textProperty().bind(question.get().questionIdProperty().asString());
                 lbTitle.textProperty().bind(question.get().titleProperty());
-                lbLink.textProperty().bind(question.get().linkProperty());
+                hlLink.textProperty().bind(question.get().linkProperty());
             }
         });
     }

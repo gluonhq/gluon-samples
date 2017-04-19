@@ -1,0 +1,22 @@
+.view {
+
+}
+
+.list-cell.header-cell {
+    -fx-background-color: -primary-swatch-200;
+}
+
+.label.title {
+    -fx-font-size: 1.2em;
+    -fx-text-fill: -primary-swatch-700;
+    -fx-border-color: -primary-swatch-700;
+    -fx-border-width: 0 0 2 0;
+}
+
+.icon.up > .label {
+    -fx-text-fill: green;
+}
+
+.icon.down > .label {
+    -fx-text-fill: red;
+}
