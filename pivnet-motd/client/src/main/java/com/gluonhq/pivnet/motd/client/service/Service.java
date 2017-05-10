@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017 Gluon
+ * Copyright (c) 2017, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,46 +24,38 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.functionmapper.service;
+package com.gluonhq.pivnet.motd.client.service;
 
 import com.gluonhq.cloudlink.client.data.DataClient;
 import com.gluonhq.cloudlink.client.data.DataClientBuilder;
 import com.gluonhq.cloudlink.client.data.OperationMode;
-import com.gluonhq.cloudlink.client.data.RemoteFunction;
-import com.gluonhq.cloudlink.client.data.RemoteFunctionBuilder;
+import com.gluonhq.cloudlink.client.data.SyncFlag;
 import com.gluonhq.connect.GluonObservableObject;
 import com.gluonhq.connect.provider.DataProvider;
 import javax.annotation.PostConstruct;
 
-public class RemoteService {
-
-    private DataClient cloudDataClient;
-
+public class Service {
+    
+    private static final String MOTD = "motd-v1";
+    
+    private DataClient dataClient;
+    
     @PostConstruct
     public void postConstruct() {
-        cloudDataClient = DataClientBuilder.create()
-            .operationMode(OperationMode.CLOUD_FIRST)
-            .build();
+        dataClient = DataClientBuilder.create()
+                .operationMode(OperationMode.CLOUD_FIRST)
+                .build();
     }
     
-    public <T> GluonObservableObject<T> answersStackOverflow(Class<T> clazz, String value) {
-        RemoteFunction function = RemoteFunctionBuilder
-                .create("answersStackOverflow")
-                .param("questionID", value)
-                .build();
-        GluonObservableObject<T> answer = DataProvider.retrieveObject(
-            cloudDataClient.createObjectDataReader(function, clazz));
-        return answer;
+    public GluonObservableObject<String> retrieveMOTD() {
+        GluonObservableObject<String> motd = DataProvider
+                .retrieveObject(dataClient.createObjectDataReader(MOTD, String.class, SyncFlag.OBJECT_READ_THROUGH));
+        motd.initializedProperty().addListener((obs, ov, nv) -> {
+            if (nv && motd.get() == null) {
+                motd.set("This is the first Message of the Day!");
+            }
+        });
+        return motd;
     }
-
-    public <T> GluonObservableObject<T> searchStackOverflow(Class<T> clazz, String value) {
-        RemoteFunction function = RemoteFunctionBuilder
-                .create("searchStackOverflow")
-                .param("tagged", value)
-                .build();
-        GluonObservableObject<T> answer = DataProvider.retrieveObject(
-            cloudDataClient.createObjectDataReader(function, clazz));
-        return answer;
-    }
+    
 }
-
