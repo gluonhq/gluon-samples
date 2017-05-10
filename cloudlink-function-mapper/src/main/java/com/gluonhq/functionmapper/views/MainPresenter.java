@@ -49,11 +49,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javax.inject.Inject;
 
 public class MainPresenter extends GluonPresenter<FunctionMapper> {
 
     private static final List<String> TAGS = Arrays.asList(new String[] { "gluon", "gluon-mobile", "javafxports", "javafx", "scenebuilder" });
   
+    @Inject
+    private RemoteService remoteService;
+    
     @FXML
     private View main;
 
@@ -142,7 +146,7 @@ public class MainPresenter extends GluonPresenter<FunctionMapper> {
     
     private void search(String tag) {
         charmListView.setItems(FXCollections.emptyObservableList());
-        GluonObservableObject<StackResponse> searchStackOverflow = new RemoteService().searchStackOverflow(StackResponse.class, tag);
+        GluonObservableObject<StackResponse> searchStackOverflow = remoteService.searchStackOverflow(StackResponse.class, tag);
         searchStackOverflow.initializedProperty().addListener((obs, ov, nv) -> {
             if (nv) {
                 charmListView.setItems(FXCollections.observableArrayList(searchStackOverflow.get().getItems()));

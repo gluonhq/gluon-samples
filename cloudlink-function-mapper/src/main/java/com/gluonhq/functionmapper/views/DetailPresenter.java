@@ -50,9 +50,13 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javax.inject.Inject;
 
 public class DetailPresenter extends GluonPresenter<FunctionMapper> {
 
+    @Inject
+    private RemoteService remoteService;
+    
     @FXML
     private View detail;
     
@@ -157,7 +161,7 @@ public class DetailPresenter extends GluonPresenter<FunctionMapper> {
 
     private void search(String questionId) {
         charmListView.setItems(FXCollections.emptyObservableList());
-        GluonObservableObject<StackResponse> answersStackOverflow = new RemoteService().answersStackOverflow(StackResponse.class, questionId);
+        GluonObservableObject<StackResponse> answersStackOverflow = remoteService.answersStackOverflow(StackResponse.class, questionId);
         answersStackOverflow.initializedProperty().addListener((obs, ov, nv) -> {
             if (nv) {
                 charmListView.setItems(FXCollections.observableArrayList(answersStackOverflow.get().getItems()));

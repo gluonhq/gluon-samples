@@ -24,7 +24,7 @@ mainClassName = 'com.gluonhq.functionmapper.FunctionMapper'
 
 dependencies {
     compile 'com.gluonhq:glisten-afterburner:1.2.0'
-    compile 'com.gluonhq:charm-cloudlink-client:4.3.3'
+    compile 'com.gluonhq:charm-cloudlink-client:4.3.4'
 }
 
 jfxmobile {

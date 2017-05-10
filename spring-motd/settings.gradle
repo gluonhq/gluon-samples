@@ -1,0 +1,4 @@
+include 'server'
+include 'client'
+
+rootProject.name = 'Spring-MOTD'
