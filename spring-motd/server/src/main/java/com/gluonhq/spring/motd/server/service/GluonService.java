@@ -26,71 +26,34 @@
  */
 package com.gluonhq.spring.motd.server.service;
 
-import java.io.StringReader;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import com.gluonhq.cloudlink.client.enterprise.CloudLinkClient;
+import com.gluonhq.cloudlink.client.enterprise.domain.ObjectData;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonReader;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
 @Service
 public class GluonService {
 
-    private static final String GCL_ENDPOINT = "https://cloud.gluonhq.com/3/data/enterprise/object/";
-    private static final String GCL_SERVER_KEY = "<SERVER KEY FROM GLUON DASHBOARD>";
+    private final CloudLinkClient gclClient;
+
+    public GluonService( @Autowired CloudLinkClient cloudLinkClient ) {
+        this.gclClient = cloudLinkClient;
+    }
 
     @Async
     public String getMessage(String objectIdentifier) {
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> exchange = restTemplate.exchange(GCL_ENDPOINT + objectIdentifier,
-                HttpMethod.GET, getHeaders(null), String.class);
-
-        String response = exchange.getBody();
-        try (JsonReader jsonReader = Json.createReader(new StringReader(response))) {
-            JsonObject jsonObject = jsonReader.readObject();
-            if (!jsonObject.containsKey("uid")) {
-                // create object
-                return addMessage(objectIdentifier);
-            }
+        String object = gclClient.getObject(objectIdentifier, ObjectData::getPayload);
+        if (object != null) {
+            return object;
+        } else {
+            return gclClient.addObject(objectIdentifier, "");
         }
-        
-        return response;
     }
-    
+
     @Async
     public String updateMessage(String objectIdentifier, String message) {
-        JsonObject payload = Json.createObjectBuilder()
-                .add("v", message)
-                .build();
-        
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForObject(GCL_ENDPOINT + objectIdentifier + "/update",
-                    getHeaders(payload.toString()), String.class);
-    }
-    
-    private String addMessage(String objectIdentifier) {
-        JsonObject payload = Json.createObjectBuilder()
-                .add("v", "")
-                .build();
-        
-        RestTemplate restTemplate = new RestTemplate();
-        return restTemplate.postForObject(GCL_ENDPOINT + objectIdentifier + "/add",
-                getHeaders(payload.toString()), String.class);
+        return gclClient.updateObject( objectIdentifier, message );
     }
 
-    private HttpEntity<String> getHeaders(String payload) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
-        headers.set("Authorization", "Gluon " + GCL_SERVER_KEY);
-        
-        return new HttpEntity<>(payload, headers);
-    }
-    
 }
