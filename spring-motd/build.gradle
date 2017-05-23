@@ -15,8 +15,17 @@ plugins {
 
 apply plugin: 'base'
 
+
 subprojects {
     apply plugin: 'com.github.hierynomus.license'
+
+
+    repositories {
+        jcenter()
+        maven {
+            url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
+        }
+    }
 
     license {
         header = rootProject.file('LICENSE')
@@ -25,7 +34,7 @@ subprojects {
             java = 'SLASHSTAR_STYLE'
             fxml = 'XML_STYLE'
         }
-        excludes(['**/*.yml'])
+        excludes(['**/*.yml', '**/*.png', '**/*.properties'])
     }
 }
 
@@ -33,16 +42,17 @@ configure([project(':server')]) {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
 
-    repositories {
-        jcenter()
-    }
-    
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+
     dependencies {
+
+        // Gluon CloudLink Enterprise Client
+        compile 'com.gluonhq:cloudlink-client-enterprise-feign:1.0.0'
+
         // Spring Boot
         compile 'org.springframework.boot:spring-boot-starter-web'
-
-        // JSON
-        compile 'org.glassfish:javax.json:1.0.4'
 
         // Webjars
         compile "org.webjars:bootstrap:3.3.7-1"
@@ -57,26 +67,25 @@ configure([project(':server')]) {
 }
 
 configure([project(':client')]) {
+
+
     apply plugin: 'org.javafxports.jfxmobile'
     applicationName = 'MessageOfTheDay'
 
-    repositories {
-        jcenter()
-        maven {
-            url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
-        }
-    }
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
 
     dependencies {
         compile 'com.gluonhq:glisten-afterburner:1.2.0'
-        compile 'com.gluonhq:charm-cloudlink-client:4.3.3'
+        compile 'com.gluonhq:charm-cloudlink-client:4.3.5'
     }
 
     mainClassName = 'com.gluonhq.spring.motd.client.MessageOfTheDay'
 
     jfxmobile {
         downConfig {
-            version = '3.2.4'
+            version = '3.3.0'
             plugins 'display', 'lifecycle', 'statusbar', 'storage'
         }
         android {
