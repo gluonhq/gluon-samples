@@ -26,15 +26,9 @@
  */
 package com.gluonhq.spring.motd.server;
 
-import com.gluonhq.cloudlink.client.enterprise.CloudLinkClient;
-import com.gluonhq.cloudlink.client.enterprise.CloudLinkConfig;
-import com.gluonhq.cloudlink.client.enterprise.feign.FeignCloudLinkClient;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 @SpringBootApplication
 public class MotdApplication extends SpringBootServletInitializer {
@@ -43,23 +37,6 @@ public class MotdApplication extends SpringBootServletInitializer {
         new SpringApplicationBuilder(MotdApplication.class)
                 .application()
                 .run(args);
-    }
-
-}
-
-@Configuration
-class MotdConfig {
-
-    @Value("${gcl.endpoint}")
-    private String gcl_endpoint;
-
-    @Value("${gcl.key}")
-    private String gcl_key;
-
-    @Bean
-    public CloudLinkClient cloudLinkClient() {
-        return new FeignCloudLinkClient( new CloudLinkConfig( gcl_endpoint, gcl_key ));
-
     }
 
 }

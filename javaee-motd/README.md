@@ -1,10 +1,10 @@
 
-Spring - Message Of The Day
+JavaEE - Message Of The Day
 ===========
 
 This is a sample application demonstrating how to extend an existing web application with a mobile application
- component. The web application uses [Gluon CloudLink](http://gluonhq.com/products/cloudlink), the
- [Spring Framework](http://spring.io) and [Spring Boot](http://projects.spring.io/spring-boot/).
+ component. The web application uses [Gluon CloudLink](http://gluonhq.com/products/cloudlink) and the
+ JavaEE Framework.
 
 ## Application components
 
@@ -21,19 +21,19 @@ Dashboard.
 
 Open the [Gluon Dashboard](https://gluon.io) in your browser and sign in using the Gluon account credentials
 provided above. Go to the Credentials link, and under the Client tab you will find a pair of key/secret tokens. 
-Download the file `gluoncloudlink_config.json` and store it in the `client` project under the
- `src/main/resources/` folder. 
+Download the file `gluoncloudlink_config.json` and store it in the `client` project under the `src/main/resources/`
+folder. 
 
 Also from the Credentials link, Server tab, you'll find the `Server Key` that is required below.
 
 ### Running the server application locally
 
-Update the `gluon.cloudlink.serverKey` spring application property with the `Server Key` of your Gluon CloudLink
+Update the `GLUON_SERVER_KEY` variable in the `GluonService` class with the `Server Key` of your Gluon CloudLink
 application and start the server:
 
-./gradlew :server:bootRun
+./gradlew :server:run
 
-You can now navigate with a browser to http://localhost:8080
+You can now navigate with a browser to http://localhost:8080/motd-server
 
 #### Run the mobile application
 
@@ -49,5 +49,5 @@ To run the mobile application on your desktop, use the following command:
 Documentation
 -------------
 
-Read how to create this sample step by step [here](http://docs.gluonhq.com/samples/springmotd/)
+Read how to create this sample step by step [here](http://docs.gluonhq.com/samples/javaeemotd/)
 

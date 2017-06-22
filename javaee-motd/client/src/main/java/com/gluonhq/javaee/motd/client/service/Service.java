@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017, Gluon
  * All rights reserved.
  *
@@ -24,32 +24,38 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.spring.motd.server.handler;
+package com.gluonhq.javaee.motd.client.service;
 
-import com.gluonhq.spring.motd.server.service.GluonService;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.gluonhq.cloudlink.client.data.DataClient;
+import com.gluonhq.cloudlink.client.data.DataClientBuilder;
+import com.gluonhq.cloudlink.client.data.OperationMode;
+import com.gluonhq.cloudlink.client.data.SyncFlag;
+import com.gluonhq.connect.GluonObservableObject;
+import com.gluonhq.connect.provider.DataProvider;
+import javax.annotation.PostConstruct;
 
-@RestController
-@RequestMapping("front")
-public class FrontHandler {
-
-    private static final String CHARSET = "charset=UTF-8";
-
-    @Autowired
-    private GluonService gluonService;
-
-    @RequestMapping(value = "motd", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE + "; " + CHARSET)
-    public String getMessage(@RequestParam("object") String object) {
-        return gluonService.getMessage(object);
+public class Service {
+    
+    private static final String MOTD = "javaee-motd-v1";
+    
+    private DataClient dataClient;
+    
+    @PostConstruct
+    public void postConstruct() {
+        dataClient = DataClientBuilder.create()
+                .operationMode(OperationMode.CLOUD_FIRST)
+                .build();
     }
     
-    @RequestMapping(value = "motd", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE + "; " + CHARSET)
-    public String updateMessage(@RequestParam("object") String object, @RequestParam("message") String message) {
-        return gluonService.updateMessage(object, message);
+    public GluonObservableObject<String> retrieveMOTD() {
+        GluonObservableObject<String> motd = DataProvider
+                .retrieveObject(dataClient.createObjectDataReader(MOTD, String.class, SyncFlag.OBJECT_READ_THROUGH));
+        motd.initializedProperty().addListener((obs, ov, nv) -> {
+            if (nv && motd.get() == null) {
+                motd.set("This is the first Message of the Day!");
+            }
+        });
+        return motd;
     }
+    
 }
