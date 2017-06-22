@@ -27,7 +27,6 @@
 package com.gluonhq.spring.motd.server.service;
 
 import com.gluonhq.cloudlink.client.enterprise.CloudLinkClient;
-import com.gluonhq.cloudlink.client.enterprise.domain.ObjectData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -37,16 +36,18 @@ public class GluonService {
 
     private final CloudLinkClient gclClient;
 
-    public GluonService( @Autowired CloudLinkClient cloudLinkClient ) {
+    @Autowired
+    public GluonService(CloudLinkClient cloudLinkClient) {
         this.gclClient = cloudLinkClient;
     }
 
     @Async
     public String getMessage(String objectIdentifier) {
-        String object = gclClient.getObject(objectIdentifier, ObjectData::getPayload);
+        String object = gclClient.getObject(objectIdentifier, String.class);
         if (object != null) {
             return object;
         } else {
+            // object does not yet exist, initialize with empty string
             return gclClient.addObject(objectIdentifier, "");
         }
     }

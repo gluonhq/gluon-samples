@@ -30,11 +30,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" class="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="description" content="Gluon CloudLink demo for Spring - Message of the Day">
-        <meta name="title" content="Gluon Spring MOTD">
-        <title>Spring-Boot Message of the Day</title>
-        
-        <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
+        <meta name="description" content="Gluon CloudLink demo for Java EE - Message of the Day">
+        <meta name="title" content="Gluon Java EE MOTD">
+        <title>Java EE Message of the Day</title>
+
+        <link rel="stylesheet" type="text/css" href="/motd-server/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css">
     </head>
 
     <body>
@@ -42,37 +42,34 @@
             <div id="body" class="row">
                 <div class="page-header">
                     <h1>Message of the Day</h1>
-                    <h4>An application demonstrating Gluon CloudLink and Spring Boot.</h4>
+                    <h4>An application demonstrating Gluon CloudLink and Java EE.</h4>
                 </div>
-                    <div class="row">
+                <div id="messages" class="row hide">
+                    <div role="alert">
+                        <button type="button" class="close" data-hide="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <div id="messages_content"></div>
+                    </div>
+                </div>
+                <div class="row">
                     <form id="add-form" class="form-inline">
-                        <div class="form-group" style="width: 60%;">
-                            <input type="hidden"  id="object" name="object" value="spring-motd-v1"/>
-                            <input type="text" class="form-control" placeholder="Type a message" name="message" id="message" style="width: 100%;"/>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Type a message" value="${model}" name="motd" id="motd" style="width: 100%;"/>
                         </div>
                         <button type="button" class="btn btn-default" id="add-item">Update Message</button>
                     </form>
                 </div>
-                <div id="messages" class="hide" role="alert" style="width: 60%;">
-                    <button type="button" class="close" data-hide="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <div id="messages_content"></div>
-              </div>
             </div>
         </div>
-        <script type="text/javascript" src="/webjars/jquery/3.1.1/jquery.min.js"></script>
-        <script type="text/javascript" src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/motd-server/webjars/jquery/3.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="/motd-server/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
         <script type="text/javascript">
             $(function() {
-                $.get("front/motd", {object: $("#object").val()}, function(data) {
-                    $("#message").val(data);
-                });
-
                 $('#add-item').click(function(e) {
-                    $.post("front/motd", {object: $("#object").val(), message: $("#message").val()}, function(data) {
-                        $('#messages').removeClass('hide').addClass('alert alert-success alert-dismissible').slideDown().show();
+                    $.post("/motd-server/jaxrs/front", { motd: $("#motd").val()}, function(data) {
                         $('#messages_content').html('<h4>Message updated: ' + data + '</h4>');
+                        $('#messages').children().first().addClass('alert alert-success alert-dismissable');
+                        $('#messages').removeClass('hide').slideDown().show();
 
-                        $('#modal').modal('show');
                         e.preventDefault();
                     });
                 });

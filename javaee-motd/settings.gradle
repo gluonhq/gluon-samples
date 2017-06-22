@@ -1,0 +1,4 @@
+include 'client'
+include 'server'
+
+rootProject.name = 'JavaEE-MOTD'

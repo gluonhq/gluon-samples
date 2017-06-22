@@ -24,7 +24,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.spring.motd.client.views;
+package com.gluonhq.javaee.motd.client.views;
 
 import com.gluonhq.charm.glisten.afterburner.AppView;
 import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.HOME_VIEW;
@@ -37,7 +37,7 @@ import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.Avatar;
 import com.gluonhq.charm.glisten.control.NavigationDrawer;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.spring.motd.client.MessageOfTheDay;
+import com.gluonhq.javaee.motd.client.MessageOfTheDay;
 import javafx.scene.image.Image;
 import java.util.Locale;
 
@@ -61,7 +61,7 @@ public class AppViewManager {
         }
 
         NavigationDrawer.Header header = new NavigationDrawer.Header("Gluon Mobile",
-                "Spring-MOTD Project",
+                "JavaEE-MOTD Project",
                 new Avatar(21, new Image(MessageOfTheDay.class.getResourceAsStream("/icon.png"))));
 
         DefaultDrawerManager drawerManager = new DefaultDrawerManager(app, header, REGISTRY.getViews()); 

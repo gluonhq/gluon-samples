@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017, Gluon
  * All rights reserved.
  *
@@ -24,32 +24,26 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.spring.motd.server.handler;
+package com.gluonhq.javaee.motd.client;
 
-import com.gluonhq.spring.motd.server.service.GluonService;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.visual.Swatch;
+import com.gluonhq.javaee.motd.client.views.AppViewManager;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
-@RestController
-@RequestMapping("front")
-public class FrontHandler {
+public class MessageOfTheDay extends MobileApplication {
 
-    private static final String CHARSET = "charset=UTF-8";
-
-    @Autowired
-    private GluonService gluonService;
-
-    @RequestMapping(value = "motd", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE + "; " + CHARSET)
-    public String getMessage(@RequestParam("object") String object) {
-        return gluonService.getMessage(object);
+    @Override
+    public void init() {
+        AppViewManager.registerViewsAndDrawer(this);
     }
-    
-    @RequestMapping(value = "motd", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE + "; " + CHARSET)
-    public String updateMessage(@RequestParam("object") String object, @RequestParam("message") String message) {
-        return gluonService.updateMessage(object, message);
+
+    @Override
+    public void postInit(Scene scene) {
+        Swatch.BLUE.assignTo(scene);
+
+        ((Stage) scene.getWindow()).getIcons().add(new Image(MessageOfTheDay.class.getResourceAsStream("/icon.png")));
     }
 }

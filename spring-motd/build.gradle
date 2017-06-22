@@ -34,7 +34,7 @@ subprojects {
             java = 'SLASHSTAR_STYLE'
             fxml = 'XML_STYLE'
         }
-        excludes(['**/*.yml', '**/*.png', '**/*.properties'])
+        excludes(['**/*.yml', '**/*.png', '**/*.properties', '**/*.json'])
     }
 }
 
@@ -49,7 +49,7 @@ configure([project(':server')]) {
     dependencies {
 
         // Gluon CloudLink Enterprise Client
-        compile 'com.gluonhq:cloudlink-client-enterprise-feign:1.0.0'
+        compile 'com.gluonhq:cloudlink-enterprise-client-spring:1.0.0'
 
         // Spring Boot
         compile 'org.springframework.boot:spring-boot-starter-web'

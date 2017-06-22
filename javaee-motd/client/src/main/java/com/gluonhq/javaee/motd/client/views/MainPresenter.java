@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2017, Gluon
  * All rights reserved.
  *
@@ -24,32 +24,43 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.spring.motd.server.handler;
+package com.gluonhq.javaee.motd.client.views;
 
-import com.gluonhq.spring.motd.server.service.GluonService;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.beans.factory.annotation.Autowired;
+import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
+import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
+import com.gluonhq.charm.glisten.control.AppBar;
+import com.gluonhq.charm.glisten.mvc.View;
+import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
+import com.gluonhq.javaee.motd.client.MessageOfTheDay;
+import com.gluonhq.javaee.motd.client.service.Service;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javax.inject.Inject;
 
-@RestController
-@RequestMapping("front")
-public class FrontHandler {
+public class MainPresenter extends GluonPresenter<MessageOfTheDay> {
 
-    private static final String CHARSET = "charset=UTF-8";
+    @Inject
+    private Service service;
 
-    @Autowired
-    private GluonService gluonService;
+    @FXML
+    private View main;
 
-    @RequestMapping(value = "motd", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE + "; " + CHARSET)
-    public String getMessage(@RequestParam("object") String object) {
-        return gluonService.getMessage(object);
-    }
+    @FXML
+    private Label lblMotd;
+
+    @FXML
+    private ResourceBundle resources;
     
-    @RequestMapping(value = "motd", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE + "; " + CHARSET)
-    public String updateMessage(@RequestParam("object") String object, @RequestParam("message") String message) {
-        return gluonService.updateMessage(object, message);
+    public void initialize() {
+        main.showingProperty().addListener((obs, oldValue, newValue) -> {
+            if (newValue) {
+                AppBar appBar = getApp().getAppBar();
+                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
+                        getApp().showLayer(DRAWER_LAYER)));
+                appBar.setTitleText(resources.getString("message.text"));
+            }
+        });
+        lblMotd.textProperty().bind(service.retrieveMOTD());
     }
 }
