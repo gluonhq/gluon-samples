@@ -48,7 +48,7 @@ configure([project(':server')]) {
 
     dependencies {
 
-        // Gluon CloudLink Enterprise Client
+        // Gluon CloudLink Enterprise SDK
         compile 'com.gluonhq:cloudlink-enterprise-sdk-spring:1.1.0'
 
         // Spring Boot
