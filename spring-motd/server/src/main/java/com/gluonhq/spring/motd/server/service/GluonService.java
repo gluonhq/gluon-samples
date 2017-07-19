@@ -26,7 +26,7 @@
  */
 package com.gluonhq.spring.motd.server.service;
 
-import com.gluonhq.cloudlink.client.enterprise.CloudLinkClient;
+import com.gluonhq.cloudlink.enterprise.sdk.base.CloudLinkClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;

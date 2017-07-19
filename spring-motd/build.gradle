@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:1.3.5'
+        classpath 'org.javafxports:jfxmobile-plugin:1.3.6'
         classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE'
     }
 }
@@ -49,7 +49,7 @@ configure([project(':server')]) {
     dependencies {
 
         // Gluon CloudLink Enterprise Client
-        compile 'com.gluonhq:cloudlink-enterprise-client-spring:1.0.0'
+        compile 'com.gluonhq:cloudlink-enterprise-sdk-spring:1.1.0'
 
         // Spring Boot
         compile 'org.springframework.boot:spring-boot-starter-web'

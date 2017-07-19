@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:1.3.5'
+        classpath 'org.javafxports:jfxmobile-plugin:1.3.6'
     }
 }
 
@@ -33,8 +33,8 @@ configure([project(':server')]) {
         providedCompile 'javax:javaee-api:7.0'
 
         // Gluon CloudLink Enterprise Client
-        compile 'com.gluonhq:cloudlink-enterprise-client-javaee:1.0.0'
-        runtime 'org.eclipse:yasson:1.0.0-M2'
+        compile 'com.gluonhq:cloudlink-enterprise-sdk-javaee:1.1.0'
+        runtime 'org.eclipse:yasson:1.0'
 
         // jersey framework
         providedCompile 'org.glassfish.jersey.containers:jersey-container-servlet:2.22.2'
@@ -46,7 +46,7 @@ configure([project(':server')]) {
         runtime "org.webjars:jquery:3.1.1"
 
         payara 'fish.payara.extras:payara-micro:4.1.2.172'
-        payara 'org.eclipse:yasson:1.0.0-M2'
+        payara 'org.eclipse:yasson:1.0'
         payara 'org.glassfish:javax.json:1.1'
     }
 
