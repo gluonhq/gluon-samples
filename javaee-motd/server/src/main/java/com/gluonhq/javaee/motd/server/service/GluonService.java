@@ -1,6 +1,6 @@
 package com.gluonhq.javaee.motd.server.service;
 
-import com.gluonhq.cloudlink.enterprise.sdk.base.CloudLinkClient;
+import com.gluonhq.cloudlink.enterprise.sdk.javaee.CloudLinkClient;
 import com.gluonhq.cloudlink.enterprise.sdk.javaee.CloudLinkConfig;
 
 import javax.enterprise.context.ApplicationScoped;
