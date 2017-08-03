@@ -50,8 +50,11 @@ jfxmobile {
 }
 
 license {
-    skipExistingHeaders
+    header = rootProject.file('LICENSE')
+    skipExistingHeaders = false
     mapping {
+        java = 'SLASHSTAR_STYLE'
         fxml = 'XML_STYLE'
     }
+    excludes(['**/*.png', '**/*.css'])
 }
