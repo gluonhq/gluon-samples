@@ -24,33 +24,27 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.functionmapper.views;
+package com.gluonhq.functionmapperawslambda;
 
-import com.gluonhq.charm.down.Services;
-import com.gluonhq.charm.down.plugins.Cache;
-import com.gluonhq.charm.down.plugins.CacheService;
-import java.time.format.DateTimeFormatter;
+import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.visual.Swatch;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
-public class Util {
-    
-    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MMM/yyyy");
-  
-    private static final Cache<String, Image> CACHE = Services.get(CacheService.class)
-            .map(cache -> cache.<String, Image>getCache("images"))
-            .orElseThrow(() -> new RuntimeException("No cache service"));
-  
-    
-    public static Image getImage(String imageName) {
-        if ((imageName == null) || (imageName.isEmpty())) {
-            return null;
-        }
-        Image image = CACHE.get(imageName);
-        if (image == null) {
-            image = new Image(imageName, 36.0, 36.0, true, true, true);
-            CACHE.put(imageName, image);
-        }
-        return image;
+public class FunctionMapperAwsLambda extends MobileApplication {
+
+    public static final String BASIC_VIEW = HOME_VIEW;
+
+    @Override
+    public void init() {
+        addViewFactory(BASIC_VIEW, () -> new BasicView(BASIC_VIEW));
     }
-    
+
+    @Override
+    public void postInit(Scene scene) {
+        Swatch.BLUE.assignTo(scene);
+
+        ((Stage) scene.getWindow()).getIcons().add(new Image(FunctionMapperAwsLambda.class.getResourceAsStream("/icon.png")));
+    }
 }
