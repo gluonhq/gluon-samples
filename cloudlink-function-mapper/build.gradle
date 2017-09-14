@@ -14,7 +14,6 @@ plugins {
 apply plugin: 'org.javafxports.jfxmobile'
 
 repositories {
-    mavenLocal()
     jcenter()
     maven {
         url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
@@ -24,8 +23,8 @@ repositories {
 mainClassName = 'com.gluonhq.functionmapper.FunctionMapper'
 
 dependencies {
-    compile 'com.gluonhq:glisten-afterburner:1.3.0-SNAPSHOT'
-    compile 'com.gluonhq:charm-cloudlink-client:4.4.0-SNAPSHOT'
+    compile 'com.gluonhq:glisten-afterburner:1.2.0'
+    compile 'com.gluonhq:charm-cloudlink-client:4.3.4'
 }
 
 jfxmobile {
