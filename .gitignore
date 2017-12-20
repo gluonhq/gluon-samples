@@ -1,7 +1,14 @@
-/.nb-gradle/
-/.idea/
+### Gradle
 build/
+.gradle/
+
+### IntelliJ IDEA
+.idea/
+out/
 *.iml
-/fifty-states/.nb-gradle/
-/gluon-connect-rest-provider/.nb-gradle/
-/rubiks-cube/.nb-gradle/
+
+### Netbeans
+.nb-gradle/
+
+### Gluon
+gluoncloudlink_config.json
