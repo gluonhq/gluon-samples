@@ -1,0 +1,13 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="page">
+    <Page.actionBar>
+        <ActionBar title="Comments" class="action-bar">
+            <ActionItem tap="onCreate" ios.systemIcon="4" ios.position="right" text="create" android.systemIcon="ic_input_add" android.position="actionBar"></ActionItem>
+        </ActionBar>
+    </Page.actionBar>
+
+    <ListView items="{{ comments }}">
+        <ListView.itemTemplate>
+            <Label style="padding: 10" text="{{ author + ' said: ' + content }}" horizontalAlignment="left" verticalAlignment="center"/>
+        </ListView.itemTemplate>>
+    </ListView>
+</Page>
