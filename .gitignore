@@ -5,3 +5,5 @@ build/
 /fifty-states/.nb-gradle/
 /gluon-connect-rest-provider/.nb-gradle/
 /rubiks-cube/.nb-gradle/
+/commentsjs/node_modules/
+/commentsjs/platforms/

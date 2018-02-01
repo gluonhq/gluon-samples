@@ -1,0 +1,25 @@
+{
+	"description": "Gluon Comments Sample JavaScript",
+	"license": "SEE LICENSE IN <your-license-filename>",
+	"readme": "Gluon Comments Sample JavaScript",
+	"repository": "https://github.com/gluonhq/gluon-samples.git",
+	"nativescript": {
+		"id": "com.gluonhq.commentsjs",
+		"tns-android": {
+			"version": "3.4.1"
+		}
+	},
+	"dependencies": {
+		"crypto-js": "^3.1.9-1",
+		"nativescript-theme-core": "~1.0.4",
+		"oauth-1.0a": "^2.2.4",
+		"qs": "^6.5.1",
+		"tns-core-modules": "~3.4.0"
+	},
+	"devDependencies": {
+		"babel-traverse": "6.26.0",
+		"babel-types": "6.26.0",
+		"babylon": "6.18.0",
+		"lazy": "1.0.11"
+	}
+}
