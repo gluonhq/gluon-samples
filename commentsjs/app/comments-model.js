@@ -8,7 +8,7 @@ var Observable = require("data/observable").Observable;
 var ObservableArray = require("data/observable-array").ObservableArray;
 
 const commentsIdentifier = "comments";
-var config = fs.knownFolders.currentApp().getFile("gluoncloudlink-config.json");
+var config = fs.knownFolders.currentApp().getFile("gluoncloudlink_config.json");
 
 var oauth;
 var gluonConfig = {};
