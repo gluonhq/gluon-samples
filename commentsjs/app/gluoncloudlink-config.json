@@ -1,9 +1,0 @@
-{
-  "host_": "http://192.168.0.135",
-  "gluonCredentials": {
-    "applicationKey_": "7ba80109-728a-11e7-8417-0242ac130003",
-    "applicationSecret_": "7ba80120-728a-11e7-8417-0242ac130003",
-    "applicationKey": "0dffd8eb-0c8a-4baa-9d29-61ed5a641dc4",
-    "applicationSecret": "c90f6898-aaaf-46e0-b446-9c6dc36f251a"
-  }
-}

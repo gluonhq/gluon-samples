@@ -1,21 +1,23 @@
+var frameModule = require("ui/frame");
 var observableModule = require("data/observable");
-var CommentsModel = require("../../model/comments-model");
-
-var timer = require("timer");
+var CommentsModel = require("./comments-model");
 
 var comments = new CommentsModel([]);
 var pageData = new observableModule.fromObject({
     comments: comments
-})
+});
 
 function onNavigatingTo(args) {
     var page = args.object;
     page.bindingContext = pageData;
 
     comments.empty();
-    const id = timer.setTimeout(() => {
-        comments.load();
-    }, 2000);
+    comments.load();
+}
+
+function onCreate(args) {
+    frameModule.topmost().navigate("create");
 }
 
 exports.onNavigatingTo = onNavigatingTo;
+exports.onCreate = onCreate;

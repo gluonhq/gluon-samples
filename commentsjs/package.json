@@ -11,10 +11,14 @@
 	},
 	"dependencies": {
 		"crypto-js": "^3.1.9-1",
+		"nativescript-nodeify": "^0.6.0",
+		"nativescript-randombytes": "^1.0.0",
 		"nativescript-theme-core": "~1.0.4",
+		"nativescript-toast": "^1.4.6",
 		"oauth-1.0a": "^2.2.4",
 		"qs": "^6.5.1",
-		"tns-core-modules": "~3.4.0"
+		"tns-core-modules": "~3.4.0",
+		"uuid": "^3.2.1"
 	},
 	"devDependencies": {
 		"babel-traverse": "6.26.0",
