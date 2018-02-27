@@ -9,7 +9,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:2.0.11'
+        classpath 'org.javafxports:jfxmobile-plugin:2.0.12'
     }
 }
 
@@ -119,7 +119,7 @@ jfxmobile {
     ios {
         infoPList = file('src/ios/Default-Info.plist')
         runtimeModules = ["java.xml", "java.sql"]
-        ignoreNativeLibs = ["libopenblas_atomp-r0.2.20.a","libopenblas_armv8p-r0.2.20.a"]
+        ignoreNativeLibs = ["libopenblas.a","libopenblas_atomp-r0.2.20.a","libopenblas_armv8p-r0.2.20.a"]
         forceLinkClasses = [
                 'com.gluonhq.**.*',
                 'javax.annotations.**.*',
