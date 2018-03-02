@@ -7,7 +7,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:2.0.0'
+        classpath 'org.javafxports:jfxmobile-plugin:2.0.12'
     }
 }
 
@@ -26,12 +26,8 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    if (JavaVersion.current() == JavaVersion.VERSION_1_9) {
-        compile 'com.gluonhq:charm:4.4.0-jdk9'
-        androidRuntime 'com.gluonhq:charm:4.4.1'
-    } else {
-        compile 'com.gluonhq:charm:4.4.1'
-    }
+    compile 'com.gluonhq:charm:4.4.0-jdk9'
+    androidRuntime 'com.gluonhq:charm:4.4.1'
 }
 
 jfxmobile {
