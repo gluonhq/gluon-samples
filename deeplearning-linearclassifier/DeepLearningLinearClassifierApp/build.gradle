@@ -1,0 +1,134 @@
+import org.gradle.internal.os.OperatingSystem
+
+buildscript {
+    repositories {
+        jcenter()
+        google()
+        maven {
+            url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
+        }
+    }
+    dependencies {
+        classpath 'org.javafxports:jfxmobile-plugin:2.0.12'
+    }
+}
+
+apply plugin: 'org.javafxports.jfxmobile'
+
+repositories {
+    jcenter()
+    maven {
+        url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
+    }
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+}
+
+mainClassName = 'com.gluonhq.deeplearning.linear.Main'
+
+ext {
+    dl4jVersion = '0.9.2-SNAPSHOT'
+    openblasVersion = '0.2.20-1.4'
+    openblasSnapshotVersion = '0.2.20-1.4.1-SNAPSHOT'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    // gluon mobile
+    compile 'com.gluonhq:charm:4.4.0-jdk9'
+    androidRuntime 'com.gluonhq:charm:4.4.1'
+
+    // dl4j and nd4j
+    compile 'org.slf4j:slf4j-nop:1.7.12'
+    compile("org.deeplearning4j:deeplearning4j-core:$dl4jVersion") {
+        exclude group: 'org.bytedeco.javacpp-presets', module: 'hdf5'
+        exclude group: 'org.bytedeco.javacpp-presets', module: 'leptonica'
+        exclude group: 'org.bytedeco.javacpp-presets', module: 'openblas'
+        exclude group: 'org.bytedeco.javacpp-presets', module: 'opencv'
+        exclude group: 'org.datavec', module: 'datavec-data-image'
+    }
+    compile ("org.nd4j:nd4j-native:$dl4jVersion") {
+        exclude group: 'org.bytedeco.javacpp-presets', module: 'openblas'
+        exclude group: 'org.bytedeco.javacpp-presets', module: 'mkl'
+    }
+
+    // desktop
+    if (OperatingSystem.current().linux) {
+        desktopRuntime snapshotLocal("org.nd4j:nd4j-native:${dl4jVersion}:linux-x86_64")
+        desktopRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:linux-x86_64"
+    }
+    if (OperatingSystem.current().macOsX) {
+        desktopRuntime snapshotLocal("org.nd4j:nd4j-native:${dl4jVersion}:macosx-x86_64")
+        desktopRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:macosx-x86_64"
+    }
+    if (OperatingSystem.current().windows) {
+        desktopRuntime snapshotLocal("org.nd4j:nd4j-native:${dl4jVersion}:windows-x86_64")
+        desktopRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:windows-x86_64"
+    }
+    desktopRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}"
+
+    // android
+    androidRuntime snapshotLocal("org.nd4j:nd4j-native:$dl4jVersion:android-arm")
+    androidRuntime snapshotLocal("org.nd4j:nd4j-native:$dl4jVersion:android-x86")
+    androidRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}"
+    androidRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:android-arm"
+    androidRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:android-x86"
+
+    // ios
+    iosRuntime snapshotLocal("org.nd4j:nd4j-native:$dl4jVersion:ios-x86_64")
+    iosRuntime snapshotLocal("org.nd4j:nd4j-native:$dl4jVersion:ios-arm64")
+    iosRuntime snapshotLocal("org.bytedeco.javacpp-presets:openblas:${openblasSnapshotVersion}")
+    iosRuntime snapshotLocal("org.bytedeco.javacpp-presets:openblas:${openblasSnapshotVersion}:ios-x86_64")
+    iosRuntime snapshotLocal("org.bytedeco.javacpp-presets:openblas:${openblasSnapshotVersion}:ios-arm64")
+}
+
+jfxmobile {
+    downConfig {
+        version = '3.7.0'
+        // Do not edit the line below. Use Gluon Mobile Settings in your project context menu instead
+        plugins 'display', 'lifecycle', 'statusbar', 'storage'
+    }
+    android {
+        manifest = 'src/android/AndroidManifest.xml'
+        dexOptions {
+            additionalParameters = ['--minimal-main-dex']
+            keepRuntimeAnnotatedClasses = false
+            javaMaxHeapSize = '4g'
+        }
+        packagingOptions {
+            exclude 'META-INF/DEPENDENCIES'
+            exclude 'META-INF/DEPENDENCIES.txt'
+            exclude 'META-INF/LICENSE'
+            exclude 'META-INF/LICENSE.txt'
+            exclude 'META-INF/license.txt'
+            exclude 'META-INF/NOTICE'
+            exclude 'META-INF/NOTICE.txt'
+            exclude 'META-INF/notice.txt'
+            exclude 'META-INF/INDEX.LIST'
+            exclude 'META-INF/services/javax.imageio.spi.ImageReaderSpi'
+            exclude 'META-INF/services/javax.imageio.spi.ImageWriterSpi'
+            exclude 'assets/org/apache/commons/math3/exception/util/LocalizedFormats_fr.properties'
+            exclude 'assets/org/apache/commons/math3/random/new-joe-kuo-6.1000'
+            pickFirst 'META-INF/services/org.nd4j.linalg.factory.Nd4jBackend'
+            pickFirst 'nd4j-native.properties'
+        }
+    }
+    ios {
+        infoPList = file('src/ios/Default-Info.plist')
+        runtimeModules = ["java.xml", "java.sql"]
+        ignoreNativeLibs = ["libopenblas.a","libopenblas_atomp-r0.2.20.a","libopenblas_armv8p-r0.2.20.a"]
+        forceLinkClasses = [
+                'com.gluonhq.**.*',
+                'javax.annotations.**.*',
+                'javax.inject.**.*',
+                'javax.json.**.*',
+                'org.glassfish.json.**.*',
+                'org.slf4j.**.*',
+                'org.bytedeco.**.*',
+                'org.nd4j.**.*'
+        ]
+    }
+}
