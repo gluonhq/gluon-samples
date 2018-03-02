@@ -21,11 +21,13 @@ Android prerequisites:
 iOS prerequisites:
 
 - A Mac with MacOS X 10.11.5 or superior
-- Xcode 8.x or superior
+- Xcode 9.2 or superior
 
 Both iOS simulator from Xcode or a real iOS device can be used. For the latter, credentials from the Apple Developer program 
 will be required to sign the app, with a valid provisioning profile (`iosProvisioningProfile`) and a valid signing identity (`iosSignIdentity`). 
 For more details, see the related [documentation](http://docs.gluonhq.com/javafxports/#_building_and_running).
+This project will use Gluon VM, which is in Developer Preview. In case you run into issues, have a look at
+[the status page](http://docs.gluonhq.com/gluonvm/)
 
 ## Clone the project
 
