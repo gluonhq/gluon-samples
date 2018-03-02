@@ -1,0 +1,40 @@
+.root {
+    -map-marker-color: -lighter-black;
+}
+
+/********************** Gluon Map Marker ***********************/
+
+.container {
+    -fx-alignment: top-center;
+}
+
+.container > .marker-container > .marker {
+    -fx-font-size: 3em;
+    -fx-text-fill: -map-marker-color;
+    /*Add padding to bottom to place marker bottom as center*/
+    -fx-padding: 0em 0em 1.5em 0em;
+    -fx-effect: -elevation-z2;
+}
+
+.container > .text {
+    -fx-font-weigth: 100;
+    -fx-font-size: 1.2em;
+    -fx-stroke: -map-marker-color;
+    -fx-fill: -map-marker-color;
+}
+
+.container.red {
+    -map-marker-color: #ff7534;
+}
+
+.container.blue {
+    -map-marker-color: #994fff;
+}
+
+.container.green {
+    -map-marker-color: #3b8060;
+}
+
+.container.yellow {
+    -map-marker-color: #fcff4a;
+}

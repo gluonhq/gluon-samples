@@ -1,0 +1,9 @@
+.container {
+    -fx-alignment: center;
+    -fx-spacing: 10;
+    -fx-padding: 10;
+}
+
+.text-container {
+    -fx-alignment: center-left;
+}
