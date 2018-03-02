@@ -2,7 +2,7 @@
 
 This sample is a Java app that runs on desktop, Android and iOS devices and performs neural network training, based on [Deeplearning4j](https://github.com/deeplearning4j/deeplearning4j).
 
-The sample is based on [this](https://deeplearning4j.org/android) one.
+The sample is based on [this](https://github.com/deeplearning4j/dl4j-examples/blob/master/dl4j-examples/src/main/java/org/deeplearning4j/examples/feedforward/classification/MLPClassifierLinear.java) one.
 
 ## Prerequisites
 
