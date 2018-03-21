@@ -9,7 +9,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:2.0.12'
+        classpath 'org.javafxports:jfxmobile-plugin:2.0.18'
     }
 }
 
@@ -87,7 +87,7 @@ dependencies {
 
 jfxmobile {
     downConfig {
-        version = '3.7.0'
+        version = '3.7.1'
         // Do not edit the line below. Use Gluon Mobile Settings in your project context menu instead
         plugins 'display', 'lifecycle', 'statusbar', 'storage'
     }
@@ -121,6 +121,7 @@ jfxmobile {
         runtimeModules = ["java.xml", "java.sql"]
         ignoreNativeLibs = ["libopenblas.a","libopenblas_atomp-r0.2.20.a","libopenblas_armv8p-r0.2.20.a"]
         forceLinkClasses = [
+                'org.eclipse.collections.**.*',
                 'com.gluonhq.**.*',
                 'javax.annotations.**.*',
                 'javax.inject.**.*',
