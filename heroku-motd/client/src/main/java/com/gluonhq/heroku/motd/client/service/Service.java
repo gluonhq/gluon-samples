@@ -29,48 +29,33 @@ package com.gluonhq.heroku.motd.client.service;
 import com.gluonhq.cloudlink.client.data.DataClient;
 import com.gluonhq.cloudlink.client.data.DataClientBuilder;
 import com.gluonhq.cloudlink.client.data.OperationMode;
-import com.gluonhq.cloudlink.client.data.SyncFlag;
+import com.gluonhq.cloudlink.client.data.RemoteFunctionBuilder;
+import com.gluonhq.cloudlink.client.data.RemoteFunctionObject;
 import com.gluonhq.connect.GluonObservableObject;
-import com.gluonhq.connect.provider.DataProvider;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javax.annotation.PostConstruct;
 
 public class Service {
-    
+
     private static final String MOTD = "heroku-motd-v1";
-    
+
     private DataClient dataClient;
-    
+
     @PostConstruct
     public void postConstruct() {
         dataClient = DataClientBuilder.create()
-                .operationMode(OperationMode.CLOUD_FIRST)
-                .build();
+            .operationMode(OperationMode.CLOUD_FIRST)
+            .build();
     }
-    
+
     public SimpleObjectProperty<String> retrieveMOTD() {
-        return retrieveMOTDURL();
-        
-//     
-//        
-//        GluonObservableObject<String> motd = DataProvider
-//                .retrieveObject(dataClient.createObjectDataReader(MOTD, String.class, SyncFlag.OBJECT_READ_THROUGH));
-//        motd.initializedProperty().addListener((obs, ov, nv) -> {
-//            if (nv && motd.get() == null) {
-//                motd.set("This is the first Message of the Day!");
-//            }
-//        });
-//        return motd;
+        return retrieveMOTDGCL();
     }
-    
+
     private SimpleObjectProperty<String> retrieveMOTDURL() {
         String motd = "Our first local message";
         try {
@@ -84,6 +69,24 @@ public class Service {
         }
         SimpleObjectProperty<String> ssp = new SimpleObjectProperty(motd);
         return ssp;
+    }
+
+    private SimpleObjectProperty<String> retrieveMOTDGCL() {
+        RemoteFunctionObject f = RemoteFunctionBuilder.create("motd").object();
+        GluonObservableObject<String> answer = f.call(String.class);
+        return answer;
+    }
+
+    private SimpleObjectProperty<String> retrieveMOTDGCLData() {
+        //        GluonObservableObject<String> motd = DataProvider
+//                .retrieveObject(dataClient.createObjectDataReader(MOTD, String.class, SyncFlag.OBJECT_READ_THROUGH));
+//        motd.initializedProperty().addListener((obs, ov, nv) -> {
+//            if (nv && motd.get() == null) {
+//                motd.set("This is the first Message of the Day!");
+//            }
+//        });
+//        return motd;
+        return null;
     }
 
 }
