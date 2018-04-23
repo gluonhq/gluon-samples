@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,7 +28,7 @@ package com.carlfx;
 
 import com.gluonhq.charm.down.Platform;
 import com.gluonhq.charm.glisten.control.AppBar;
-import com.gluonhq.charm.glisten.layout.layer.FloatingActionButton;
+import com.gluonhq.charm.glisten.control.FloatingActionButton;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import javafx.animation.KeyFrame;
@@ -172,11 +172,8 @@ public class DoodleTrace extends View {
 
     /**
      * Constructor taking the application's name.
-     * @param name The title of the application.
      */
-    public DoodleTrace(String name) {
-        // Set title
-        super(name);
+    public DoodleTrace() {
 
         // Create the drawing surface
         Pane drawSurface = new Pane();
@@ -276,14 +273,14 @@ public class DoodleTrace extends View {
                 MaterialDesignIcon.PLAY_ARROW.text, animAction);
         animateButton.setFloatingActionButtonHandler(
                 FloatingActionButton.BOTTOM_CENTER);
-        getLayers().add(animateButton.getLayer());
+        animateButton.showOn(this);
 
         // Clear Button (Botton Right)
         FloatingActionButton clearButton = new FloatingActionButton(
                 MaterialDesignIcon.REFRESH.text, clearAction);
         clearButton.setFloatingActionButtonHandler(
                 FloatingActionButton.BOTTOM_RIGHT);
-        getLayers().add(clearButton.getLayer());
+        clearButton.showOn(this);
 
         //===================
         // Menu Items
@@ -291,9 +288,14 @@ public class DoodleTrace extends View {
         // Checkbox Menu item to show or hide floating button controls
         CheckMenuItem showControlsMenuItem = new CheckMenuItem("Show/Hide Controls");
         showControlsMenuItem.setSelected(true);
-        showControlsMenuItem.setOnAction(showAction -> {
-            animateButton.setVisible(showControlsMenuItem.isSelected());
-            clearButton.setVisible(showControlsMenuItem.isSelected());
+        showControlsMenuItem.selectedProperty().addListener((obv, ov, nv) -> {
+            if (nv) {
+                animateButton.show();
+                clearButton.show();
+            } else {
+                animateButton.hide();
+                clearButton.hide();
+            }
         });
 
         // Menu item to animate

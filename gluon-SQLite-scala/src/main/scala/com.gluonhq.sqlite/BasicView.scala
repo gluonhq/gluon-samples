@@ -41,7 +41,7 @@ import com.gluonhq.charm.glisten.visual.MaterialDesignIcon
 import com.gluonhq.sqlite.model.Person
 import scala.compat.java8.OptionConverters._
 
-class BasicView(val name: String) extends View(name) {
+class BasicView() extends View {
 
     import Platform._
 

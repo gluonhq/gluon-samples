@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2017 Gluon
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,24 +26,24 @@
  */
 package com.gluonhq.cloudlink.sample.whiteboard.views;
 
-import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInLeftTransition;
 import com.gluonhq.charm.glisten.control.AppBar;
-import com.gluonhq.charm.glisten.layout.layer.FloatingActionButton;
+import com.gluonhq.charm.glisten.control.FloatingActionButton;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.cloudlink.sample.whiteboard.Whiteboard;
 import com.gluonhq.cloudlink.sample.whiteboard.model.Item;
 import com.gluonhq.cloudlink.sample.whiteboard.model.Model;
 import com.gluonhq.cloudlink.sample.whiteboard.service.Service;
-import static com.gluonhq.cloudlink.sample.whiteboard.views.AppViewManager.EDITION_VIEW;
 import com.gluonhq.connect.GluonObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 import javax.inject.Inject;
+
+import static com.gluonhq.cloudlink.sample.whiteboard.views.AppViewManager.EDITION_VIEW;
 
 public class BoardPresenter extends GluonPresenter<Whiteboard> {
 
@@ -59,14 +59,14 @@ public class BoardPresenter extends GluonPresenter<Whiteboard> {
         board.showingProperty().addListener((obs, ov, nv) -> {
             if (nv) {
                 AppBar appBar = getApp().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.MENU.button(event -> getApp().showLayer(DRAWER_LAYER)));
+                appBar.setNavIcon(MaterialDesignIcon.MENU.button(event -> getApp().getDrawer().open()));
                 appBar.setTitleText("Whiteboard");
             }
         });
 
         final FloatingActionButton floatingActionButton = new FloatingActionButton();
         floatingActionButton.setOnAction(e -> edit(null));
-        board.getLayers().add(floatingActionButton.getLayer());
+        floatingActionButton.showOn(board);
 
         GluonObservableList<Item> items = service.retrieveItems();
         lstItems.setItems(items);

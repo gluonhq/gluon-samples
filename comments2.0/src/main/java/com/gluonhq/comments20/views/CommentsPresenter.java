@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, 2017 Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,20 +26,17 @@
  */
 package com.gluonhq.comments20.views;
 
-import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.control.Alert;
 import com.gluonhq.charm.glisten.control.AppBar;
+import com.gluonhq.charm.glisten.control.FloatingActionButton;
 import com.gluonhq.charm.glisten.control.LifecycleEvent;
-import com.gluonhq.charm.glisten.layout.layer.FloatingActionButton;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.cloudlink.client.user.User;
 import com.gluonhq.comments20.Comments20;
 import com.gluonhq.comments20.cloud.Service;
 import com.gluonhq.comments20.model.Comment;
-import static com.gluonhq.comments20.views.AppViewManager.EDITION_VIEW;
-import java.util.Optional;
 import javafx.beans.binding.When;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
@@ -51,7 +48,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.ScrollEvent;
+
 import javax.inject.Inject;
+import java.util.Optional;
+
+import static com.gluonhq.comments20.views.AppViewManager.EDITION_VIEW;
 
 public class CommentsPresenter extends GluonPresenter<Comments20> {
 
@@ -79,7 +80,7 @@ public class CommentsPresenter extends GluonPresenter<Comments20> {
             if (newValue) {
                 AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().showLayer(DRAWER_LAYER)));
+                        getApp().getDrawer().open()));
                 appBar.setTitleText("Comments");
             }
         });
@@ -96,7 +97,7 @@ public class CommentsPresenter extends GluonPresenter<Comments20> {
             }
         });
         
-        comments.getLayers().add(floatingActionButton.getLayer());
+        floatingActionButton.showOn(comments);
         
         commentsList.setCellFactory(cell -> { 
             final CommentListCell commentListCell = new CommentListCell(
@@ -145,7 +146,7 @@ public class CommentsPresenter extends GluonPresenter<Comments20> {
     
     /**
      * Create a Dialog for getting deletion confirmation
-     * @param item 
+     * @param item Item to be deleted
      */
     private void showDialog(Comment item) {
         Alert alert = new Alert(javafx.scene.control.Alert.AlertType.CONFIRMATION);

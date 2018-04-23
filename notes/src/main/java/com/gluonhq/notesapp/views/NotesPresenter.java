@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, 2017 Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,13 +26,12 @@
  */
 package com.gluonhq.notesapp.views;
 
-import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.afterburner.GluonView;
 import com.gluonhq.charm.glisten.animation.BounceInLeftTransition;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.CharmListView;
-import com.gluonhq.charm.glisten.layout.layer.FloatingActionButton;
+import com.gluonhq.charm.glisten.control.FloatingActionButton;
 import com.gluonhq.charm.glisten.layout.layer.SidePopupView;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
@@ -41,13 +40,14 @@ import com.gluonhq.notesapp.model.Model;
 import com.gluonhq.notesapp.model.Note;
 import com.gluonhq.notesapp.model.Settings;
 import com.gluonhq.notesapp.service.Service;
-import java.time.LocalDate;
 import javafx.collections.ListChangeListener;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
 import javafx.scene.control.Label;
+
 import javax.inject.Inject;
+import java.time.LocalDate;
 
 public class NotesPresenter extends GluonPresenter<NotesApp> {
 
@@ -67,7 +67,7 @@ public class NotesPresenter extends GluonPresenter<NotesApp> {
             if (newValue) {
                 AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().showLayer(DRAWER_LAYER)));
+                        getApp().getDrawer().open()));
                 appBar.setTitleText("Notes");
                 appBar.getActionItems().add(MaterialDesignIcon.FILTER_LIST.button(e -> {
                     getApp().showLayer(NotesApp.POPUP_FILTER_NOTES);
@@ -88,7 +88,7 @@ public class NotesPresenter extends GluonPresenter<NotesApp> {
         
         final FloatingActionButton floatingActionButton = new FloatingActionButton();
         floatingActionButton.setOnAction(e -> edit(null));
-        notes.getLayers().add(floatingActionButton.getLayer());
+        floatingActionButton.showOn(notes);
         
         getApp().addLayerFactory(NotesApp.POPUP_FILTER_NOTES, () -> { 
             GluonView filterView = new GluonView(FilterPresenter.class);

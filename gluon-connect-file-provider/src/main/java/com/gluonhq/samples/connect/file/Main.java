@@ -30,7 +30,6 @@ import com.gluonhq.charm.down.Services;
 import com.gluonhq.charm.down.plugins.StorageService;
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.NavigationDrawer;
-import com.gluonhq.charm.glisten.layout.layer.SidePopupView;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.charm.glisten.visual.Swatch;
 import javafx.scene.Scene;
@@ -51,9 +50,8 @@ public class Main extends MobileApplication {
                     .orElseThrow(() -> new RuntimeException("Error retrieving private storage"));
     }
     
-    public static final String FILELIST_VIEW = HOME_VIEW;
-    public static final String FILEOBJECT_VIEW = "FileObjectView";
-    public static final String MENU_LAYER = "SideMenu";
+    private static final String FILELIST_VIEW = HOME_VIEW;
+    private static final String FILEOBJECT_VIEW = "FileObjectView";
 
     public Main() {
         try {
@@ -89,7 +87,7 @@ public class Main extends MobileApplication {
     public void init() {
         addViewFactory(FILELIST_VIEW, () -> {
             try {
-                return new FileListView(FILELIST_VIEW);
+                return new FileListView();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -97,27 +95,24 @@ public class Main extends MobileApplication {
         });
         addViewFactory(FILEOBJECT_VIEW, () -> {
             try {
-                return new FileObjectView(FILEOBJECT_VIEW);
+                return new FileObjectView();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             return null;
         });
 
-        NavigationDrawer navigationDrawer = new NavigationDrawer();
+        NavigationDrawer navigationDrawer = getDrawer();
         NavigationDrawer.Item listItem = new NavigationDrawer.Item("List Viewer", MaterialDesignIcon.VIEW_LIST.graphic());
         NavigationDrawer.Item objectItem = new NavigationDrawer.Item("Object Viewer", MaterialDesignIcon.INSERT_DRIVE_FILE.graphic());
         navigationDrawer.getItems().addAll(listItem, objectItem);
         navigationDrawer.selectedItemProperty().addListener((obs, oldItem, newItem) -> {
-            hideLayer(MENU_LAYER);
             if (newItem.equals(listItem)) {
                 switchView(FILELIST_VIEW);
             } else if (newItem.equals(objectItem)) {
                 switchView(FILEOBJECT_VIEW);
             }
         });
-
-        addLayerFactory(MENU_LAYER, () -> new SidePopupView(navigationDrawer));
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Gluon
+ * Copyright (c) 2017, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,12 +33,10 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class FunctionMapperAwsLambda extends MobileApplication {
-
-    public static final String BASIC_VIEW = HOME_VIEW;
-
+    
     @Override
     public void init() {
-        addViewFactory(BASIC_VIEW, () -> new BasicView(BASIC_VIEW));
+        addViewFactory(HOME_VIEW, () -> new BasicView());
     }
 
     @Override

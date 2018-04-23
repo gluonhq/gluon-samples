@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Gluon
+ * Copyright (c) 2017, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,13 +26,7 @@
  */
 package com.gluonhq.functionmapper.views;
 
-import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
-import com.gluonhq.charm.glisten.control.AppBar;
-import com.gluonhq.charm.glisten.control.CharmListCell;
-import com.gluonhq.charm.glisten.control.CharmListView;
-import com.gluonhq.charm.glisten.control.Icon;
-import com.gluonhq.charm.glisten.control.ListTile;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.connect.GluonObservableObject;
@@ -40,16 +34,17 @@ import com.gluonhq.functionmapper.FunctionMapper;
 import com.gluonhq.functionmapper.model.StackEntry;
 import com.gluonhq.functionmapper.model.StackResponse;
 import com.gluonhq.functionmapper.service.RemoteService;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.Arrays;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+
 import javax.inject.Inject;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainPresenter extends GluonPresenter<FunctionMapper> {
 
@@ -138,7 +133,7 @@ public class MainPresenter extends GluonPresenter<FunctionMapper> {
         main.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
                 AppBar appBar = getApp().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getApp().showLayer(DRAWER_LAYER)));
+                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getApp().getDrawer().open()));
                 appBar.setTitleText("StackOverflow questions");
             }
         });

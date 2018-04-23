@@ -23,13 +23,13 @@ repositories {
 mainClassName = 'com.gluonhq.combinedstorage.CombinedStorage'
 
 dependencies {
-    compile 'com.gluonhq:glisten-afterburner:1.2.0'
+    compile 'com.gluonhq:glisten-afterburner:1.4.0'
     compile 'com.gluonhq:charm-cloudlink-client:4.3.3'
 }
 
 jfxmobile {
     downConfig {
-        version = '3.2.4'
+        version = '3.8.0'
         // Do not edit the line below. Use Gluon Mobile Settings in your project context menu instead
         plugins 'display', 'lifecycle', 'statusbar', 'storage'
     }

@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2017 Gluon
+/*
+ * Copyright (c) 2017, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -37,8 +37,7 @@ import javafx.scene.layout.VBox;
 
 public class BasicView extends View {
 
-    public BasicView(String name) {
-        super(name);
+    public BasicView() {
         
         Label label = new Label("Hello JavaFX World!");
 

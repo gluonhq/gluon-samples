@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017, Gluon
+ * Copyright (c) 2017, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,23 +26,23 @@
  */
 package com.gluonhq.combinedstorage.views;
 
-import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInLeftTransition;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.CharmListView;
-import com.gluonhq.charm.glisten.layout.layer.FloatingActionButton;
+import com.gluonhq.charm.glisten.control.FloatingActionButton;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.combinedstorage.CombinedStorage;
 import com.gluonhq.combinedstorage.model.Model;
 import com.gluonhq.combinedstorage.model.Note;
 import com.gluonhq.combinedstorage.service.Service;
-import java.time.LocalDate;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+
 import javax.inject.Inject;
+import java.time.LocalDate;
+import java.util.ResourceBundle;
 
 public class NotesPresenter extends GluonPresenter<CombinedStorage> {
 
@@ -62,7 +62,7 @@ public class NotesPresenter extends GluonPresenter<CombinedStorage> {
             if (newValue) {
                 AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().showLayer(DRAWER_LAYER)));
+                        getApp().getDrawer().open()));
                 appBar.setTitleText(resources.getString("appbar.notes"));
             }
         });
@@ -76,7 +76,7 @@ public class NotesPresenter extends GluonPresenter<CombinedStorage> {
         
         final FloatingActionButton floatingActionButton = new FloatingActionButton();
         floatingActionButton.setOnAction(e -> edit(null));
-        notes.getLayers().add(floatingActionButton.getLayer());
+        floatingActionButton.showOn(notes);
         
         lstNotes.setItems(service.getNotes());
     }

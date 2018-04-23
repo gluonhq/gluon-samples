@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, 2017 Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,6 @@
  */
 package com.gluonhq.notesapp.views;
 
-import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInUpTransition;
 import com.gluonhq.charm.glisten.control.AppBar;
@@ -41,8 +40,6 @@ import com.gluonhq.notesapp.NotesApp;
 import com.gluonhq.notesapp.model.Settings;
 import com.gluonhq.notesapp.model.Settings.SORTING;
 import com.gluonhq.notesapp.service.Service;
-import java.util.Optional;
-import java.util.function.Function;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -50,7 +47,10 @@ import javafx.beans.property.Property;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Slider;
+
 import javax.inject.Inject;
+import java.util.Optional;
+import java.util.function.Function;
 
 public class SettingsPresenter extends GluonPresenter<NotesApp> {
 
@@ -67,7 +67,7 @@ public class SettingsPresenter extends GluonPresenter<NotesApp> {
             if (newValue) {
                 AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().showLayer(DRAWER_LAYER)));
+                        getApp().getDrawer().open()));
                 appBar.setTitleText("Settings");
                 appBar.getActionItems().add(MaterialDesignIcon.CLOSE.button(e -> getApp().goHome()));
             }

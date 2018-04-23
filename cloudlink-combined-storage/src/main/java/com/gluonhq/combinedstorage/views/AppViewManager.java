@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017, Gluon
+ * Copyright (c) 2017, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,19 +27,19 @@
 package com.gluonhq.combinedstorage.views;
 
 import com.gluonhq.charm.glisten.afterburner.AppView;
-import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.HOME_VIEW;
-import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.SHOW_IN_DRAWER;
-import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.SKIP_VIEW_STACK;
 import com.gluonhq.charm.glisten.afterburner.AppViewRegistry;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
-import com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager;
+import com.gluonhq.charm.glisten.afterburner.Utils;
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.Avatar;
 import com.gluonhq.charm.glisten.control.NavigationDrawer;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import javafx.scene.image.Image;
-import java.util.Locale;
 import com.gluonhq.combinedstorage.CombinedStorage;
+import javafx.scene.image.Image;
+
+import java.util.Locale;
+
+import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.*;
 
 public class AppViewManager {
 
@@ -64,8 +64,6 @@ public class AppViewManager {
         NavigationDrawer.Header header = new NavigationDrawer.Header("Gluon Mobile",
                 "Combined Storage App",
                 new Avatar(21, new Image(CombinedStorage.class.getResourceAsStream("/icon.png"))));
-
-        DefaultDrawerManager drawerManager = new DefaultDrawerManager(app, header, REGISTRY.getViews()); 
-        drawerManager.installDrawer();
+        Utils.buildDrawer(app.getDrawer(), header, REGISTRY.getViews()); 
     }
 }

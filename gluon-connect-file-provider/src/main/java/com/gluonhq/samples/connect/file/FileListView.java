@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,6 @@
  */
 package com.gluonhq.samples.connect.file;
 
-import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
@@ -35,17 +34,17 @@ import com.gluonhq.connect.converter.InputStreamIterableInputConverter;
 import com.gluonhq.connect.converter.JsonIterableInputConverter;
 import com.gluonhq.connect.provider.DataProvider;
 import com.gluonhq.connect.provider.FileClient;
-import static com.gluonhq.samples.connect.file.Main.ROOT_DIR;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 
 import java.io.File;
 import java.io.IOException;
 
+import static com.gluonhq.samples.connect.file.Main.ROOT_DIR;
+
 public class FileListView extends View {
 
-    public FileListView(String name) throws IOException {
-        super(name);
+    public FileListView() throws IOException {
 
         File languagesFile = new File(ROOT_DIR, "languages.json");
 
@@ -78,7 +77,7 @@ public class FileListView extends View {
 
     @Override
     protected void updateAppBar(AppBar appBar) {
-        appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> MobileApplication.getInstance().showLayer(Main.MENU_LAYER)));
+        appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getApplication().getDrawer().open()));
         appBar.setTitleText("File List Viewer");
     }
 
