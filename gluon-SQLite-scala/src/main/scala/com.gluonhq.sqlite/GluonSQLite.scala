@@ -38,7 +38,7 @@ class GluonSQLite extends MobileApplication {
     import MobileApplication._
 
     override def init(): Unit = {
-        addViewFactory(HOME_VIEW, new BasicView(HOME_VIEW))
+        addViewFactory(HOME_VIEW, new BasicView())
     }
 
     override def postInit(scene: Scene) {

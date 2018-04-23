@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,6 @@
  */
 package com.gluonhq.samples.connect.rest;
 
-import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
@@ -39,8 +38,7 @@ import javafx.scene.control.ListView;
 
 public class RestListView extends View {
 
-    public RestListView(String name) {
-        super(name);
+    public RestListView() {
 
         // create a RestClient to the specific URL
         RestClient restClient = RestClient.create()
@@ -74,7 +72,7 @@ public class RestListView extends View {
 
     @Override
     protected void updateAppBar(AppBar appBar) {
-        appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> MobileApplication.getInstance().showLayer(Main.MENU_LAYER)));
+        appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getApplication().getDrawer().open()));
         appBar.setTitleText("Rest List Viewer");
     }
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, Gluon
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -57,8 +57,7 @@ public class BasicView extends View {
     private Statement stmt;
     private ResultSet rs;
 
-    public BasicView(String name) {
-        super(name);
+    public BasicView() {
 
         try {
             Class c = null;

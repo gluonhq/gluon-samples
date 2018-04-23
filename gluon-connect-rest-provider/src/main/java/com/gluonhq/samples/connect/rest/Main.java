@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,7 +28,6 @@ package com.gluonhq.samples.connect.rest;
 
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.NavigationDrawer;
-import com.gluonhq.charm.glisten.layout.layer.SidePopupView;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.charm.glisten.visual.Swatch;
 import javafx.scene.Scene;
@@ -37,29 +36,25 @@ import javafx.stage.Stage;
 
 public class Main extends MobileApplication {
 
-    public static final String RESTLIST_VIEW = HOME_VIEW;
-    public static final String RESTOBJECT_VIEW = "RestObjectView";
-    public static final String MENU_LAYER = "SideMenu";
+    private static final String RESTLIST_VIEW = HOME_VIEW;
+    private static final String RESTOBJECT_VIEW = "RestObjectView";
     
     @Override
     public void init() {
-        addViewFactory(RESTLIST_VIEW, () -> new RestListView(RESTLIST_VIEW));
-        addViewFactory(RESTOBJECT_VIEW, () -> new RestObjectView(RESTOBJECT_VIEW));
+        addViewFactory(RESTLIST_VIEW, () -> new RestListView());
+        addViewFactory(RESTOBJECT_VIEW, () -> new RestObjectView());
 
-        NavigationDrawer navigationDrawer = new NavigationDrawer();
+        NavigationDrawer navigationDrawer = getDrawer();
         NavigationDrawer.Item listItem = new NavigationDrawer.Item("List Viewer", MaterialDesignIcon.VIEW_LIST.graphic());
         NavigationDrawer.Item objectItem = new NavigationDrawer.Item("Object Viewer", MaterialDesignIcon.INSERT_DRIVE_FILE.graphic());
         navigationDrawer.getItems().addAll(listItem, objectItem);
         navigationDrawer.selectedItemProperty().addListener((obs, oldItem, newItem) -> {
-            hideLayer(MENU_LAYER);
             if (newItem.equals(listItem)) {
                 switchView(RESTLIST_VIEW);
             } else if (newItem.equals(objectItem)) {
                 switchView(RESTOBJECT_VIEW);
             }
         });
-
-        addLayerFactory(MENU_LAYER, () -> new SidePopupView(navigationDrawer));
     }
 
     @Override

@@ -26,7 +26,6 @@
  */
 package com.gluonhq.pushnotes.views;
 
-import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
 import com.gluonhq.charm.glisten.control.AppBar;
@@ -36,13 +35,14 @@ import com.gluonhq.pushnotes.PushNotes;
 import com.gluonhq.pushnotes.model.Model;
 import com.gluonhq.pushnotes.model.Note;
 import com.gluonhq.pushnotes.service.Service;
-import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
 import javax.inject.Inject;
+import java.util.ResourceBundle;
 
 public class EditionPresenter extends GluonPresenter<PushNotes> {
 
@@ -96,7 +96,7 @@ public class EditionPresenter extends GluonPresenter<PushNotes> {
                  
                 AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().showLayer(DRAWER_LAYER)));
+                        getApp().getDrawer().open()));
                 appBar.setTitleText(editMode ? "Edit Note" : "Add Note");
             } else {
                 title.clear();

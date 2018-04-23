@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2017 Gluon
+/*
+ * Copyright (c) 2017, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,22 +27,22 @@
 package com.gluonhq.gonative.views;
 
 import com.gluonhq.charm.glisten.afterburner.AppView;
-import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.HOME_VIEW;
-import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.SHOW_IN_DRAWER;
-import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.SKIP_VIEW_STACK;
 import com.gluonhq.charm.glisten.afterburner.AppViewRegistry;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
-import com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager;
+import com.gluonhq.charm.glisten.afterburner.Utils;
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.Avatar;
 import com.gluonhq.charm.glisten.control.NavigationDrawer;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import javafx.scene.image.Image;
+
 import java.util.Locale;
+
+import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.*;
 
 public class AppViewManager {
 
-    public static final AppViewRegistry REGISTRY = new AppViewRegistry();
+    private static final AppViewRegistry REGISTRY = new AppViewRegistry();
 
     public static final AppView MAIN_VIEW = view("Home", MainPresenter.class, MaterialDesignIcon.HOME, SHOW_IN_DRAWER, HOME_VIEW, SKIP_VIEW_STACK);
     
@@ -63,7 +63,6 @@ public class AppViewManager {
                 "Native Services",
                 new Avatar(21, new Image(AppViewManager.class.getResourceAsStream("/icon.png"))));
 
-        DefaultDrawerManager drawerManager = new DefaultDrawerManager(app, header, REGISTRY.getViews()); 
-        drawerManager.installDrawer();
+        Utils.buildDrawer(app.getDrawer(), header, REGISTRY.getViews()); 
     }
 }

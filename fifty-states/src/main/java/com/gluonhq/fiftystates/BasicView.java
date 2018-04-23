@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -53,8 +53,7 @@ public class BasicView extends View {
     private final CharmListView<USState, DENSITY> charmListView;
     private boolean ascending = true;
 
-    public BasicView(String name) {
-        super(name);
+    public BasicView() {
 
         filteredList = new FilteredList<>(USStates.statesList, getStatePredicate(null));
         charmListView = new CharmListView<>(filteredList);

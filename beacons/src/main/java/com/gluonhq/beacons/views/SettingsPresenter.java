@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, 2017 Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,11 +26,8 @@
  */
 package com.gluonhq.beacons.views;
 
-import javax.inject.Inject;
-
 import com.gluonhq.beacons.Beacons;
 import com.gluonhq.beacons.settings.Settings;
-import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
 import com.gluonhq.charm.glisten.control.AppBar;
@@ -40,10 +37,11 @@ import com.gluonhq.charm.glisten.control.settings.Option;
 import com.gluonhq.charm.glisten.control.settings.OptionBase;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
+
+import javax.inject.Inject;
 
 public class SettingsPresenter extends GluonPresenter<Beacons> {
 
@@ -70,8 +68,7 @@ public class SettingsPresenter extends GluonPresenter<Beacons> {
         settings.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
                 AppBar appBar = getApp().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().showLayer(DRAWER_LAYER)));
+                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getApp().getDrawer().open()));
                 appBar.setTitleText("Settings");
                 appBar.getActionItems().add(MaterialDesignIcon.SYNC.button(e -> config.setUuid(Settings.UUID)));
             }

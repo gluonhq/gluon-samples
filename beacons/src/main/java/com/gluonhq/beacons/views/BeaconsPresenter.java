@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, 2017 Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,14 +26,6 @@
  */
 package com.gluonhq.beacons.views;
 
-import com.gluonhq.charm.glisten.control.AppBar;
-import com.gluonhq.charm.glisten.mvc.View;
-import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-
-import java.util.function.Consumer;
-
-import javax.inject.Inject;
-
 import com.gluonhq.beacons.Beacons;
 import com.gluonhq.beacons.settings.Settings;
 import com.gluonhq.charm.down.Services;
@@ -41,9 +33,10 @@ import com.gluonhq.charm.down.plugins.BleService;
 import com.gluonhq.charm.down.plugins.ble.Configuration;
 import com.gluonhq.charm.down.plugins.ble.Proximity;
 import com.gluonhq.charm.down.plugins.ble.ScanDetection;
-import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
-
+import com.gluonhq.charm.glisten.control.AppBar;
+import com.gluonhq.charm.glisten.mvc.View;
+import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.When;
 import javafx.beans.property.ObjectProperty;
@@ -54,6 +47,9 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+
+import javax.inject.Inject;
+import java.util.function.Consumer;
 
 public class BeaconsPresenter extends GluonPresenter<Beacons> {
 
@@ -162,7 +158,7 @@ public class BeaconsPresenter extends GluonPresenter<Beacons> {
 
                     AppBar appBar = getApp().getAppBar();
                     appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                            getApp().showLayer(DRAWER_LAYER)));
+                            getApp().getDrawer().open()));
                     appBar.setTitleText("Beacons");
                     appBar.getActionItems().addAll(buttonScan, buttonStop);
                 }
@@ -172,7 +168,7 @@ public class BeaconsPresenter extends GluonPresenter<Beacons> {
             beacons.showingProperty().addListener((obs, oldValue, newValue) -> {
                 AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().showLayer(DRAWER_LAYER)));
+                        getApp().getDrawer().open()));
                 appBar.setTitleText("Beacons");
             });
             return null;

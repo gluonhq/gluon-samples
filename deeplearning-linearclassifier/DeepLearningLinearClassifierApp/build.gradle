@@ -28,7 +28,7 @@ repositories {
 mainClassName = 'com.gluonhq.deeplearning.linear.Main'
 
 ext {
-    dl4jVersion = '0.9.2-SNAPSHOT'
+    dl4jVersion = '1.0.0-alpha'
     openblasVersion = '0.2.20-1.4'
     openblasSnapshotVersion = '0.2.20-1.4.1-SNAPSHOT'
 }
@@ -38,8 +38,8 @@ targetCompatibility = 1.8
 
 dependencies {
     // gluon mobile
-    compile 'com.gluonhq:charm:4.4.0-jdk9'
-    androidRuntime 'com.gluonhq:charm:4.4.1'
+    compile 'com.gluonhq:charm:5.0.0-jdk9'
+    androidRuntime 'com.gluonhq:charm:5.0.0'
 
     // dl4j and nd4j
     compile 'org.slf4j:slf4j-nop:1.7.12'
@@ -87,7 +87,7 @@ dependencies {
 
 jfxmobile {
     downConfig {
-        version = '3.7.2'
+        version = '3.8.0'
         // Do not edit the line below. Use Gluon Mobile Settings in your project context menu instead
         plugins 'display', 'lifecycle', 'statusbar', 'storage'
     }

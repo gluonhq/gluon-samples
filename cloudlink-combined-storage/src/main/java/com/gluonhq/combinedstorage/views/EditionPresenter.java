@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017, Gluon
+ * Copyright (c) 2017, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,6 @@
  */
 package com.gluonhq.combinedstorage.views;
 
-import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
 import com.gluonhq.charm.glisten.control.AppBar;
@@ -36,13 +35,14 @@ import com.gluonhq.combinedstorage.CombinedStorage;
 import com.gluonhq.combinedstorage.model.Model;
 import com.gluonhq.combinedstorage.model.Note;
 import com.gluonhq.combinedstorage.service.Service;
-import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
 import javax.inject.Inject;
+import java.util.ResourceBundle;
 
 public class EditionPresenter extends GluonPresenter<CombinedStorage> {
 
@@ -95,9 +95,11 @@ public class EditionPresenter extends GluonPresenter<CombinedStorage> {
                 }
                  
                 AppBar appBar = getApp().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().showLayer(DRAWER_LAYER)));
-                appBar.setTitleText(editMode ? resources.getString("appbar.edit.note") :  resources.getString("appbar.add.note"));
+                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getApp().getDrawer().open()));
+                appBar.setTitleText(
+                        editMode ? 
+                        resources.getString("appbar.edit.note") : 
+                        resources.getString("appbar.add.note"));
             } else {
                 title.clear();
                 comment.clear();

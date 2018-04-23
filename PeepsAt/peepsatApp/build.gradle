@@ -19,14 +19,14 @@ repositories {
 mainClassName = 'com.gluonhq.peepsat.PeepsAt'
 
 dependencies {
-    compile 'com.gluonhq:charm:4.4.1'
-    compile 'com.gluonhq:glisten-afterburner:1.2.1'
+    compile 'com.gluonhq:charm:5.0.0'
+    compile 'com.gluonhq:glisten-afterburner:1.4.0'
     compile 'com.gluonhq:maps:1.0.1'
 }
 
 jfxmobile {
     downConfig {
-        version = '3.7.0'
+        version = '3.8.0'
         // Do not edit the line below. Use Gluon Mobile Settings in your project context menu instead
         plugins 'display', 'lifecycle', 'position', 'settings', 'statusbar', 'storage'
     }

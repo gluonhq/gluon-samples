@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, 2017 Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,6 @@
  */
 package com.gluonhq.comments.views;
 
-import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
 import com.gluonhq.charm.glisten.control.AppBar;
@@ -67,7 +66,7 @@ public class EditionPresenter extends GluonPresenter<Comments> {
             if (newValue) {
                 AppBar appBar = getApp().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().showLayer(DRAWER_LAYER)));
+                        getApp().getDrawer().open()));
                 appBar.setTitleText("Edition");
             }
         });

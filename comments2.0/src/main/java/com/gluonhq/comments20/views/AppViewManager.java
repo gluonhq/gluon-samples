@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2017 Gluon
+/*
+ * Copyright (c) 2017, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,26 +30,25 @@ import com.airhacks.afterburner.injection.Injector;
 import com.gluonhq.charm.down.Services;
 import com.gluonhq.charm.down.plugins.DisplayService;
 import com.gluonhq.charm.glisten.afterburner.AppView;
-import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.HOME_VIEW;
-import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.SHOW_IN_DRAWER;
-import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.SKIP_VIEW_STACK;
 import com.gluonhq.charm.glisten.afterburner.AppViewRegistry;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
-import com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager;
+import com.gluonhq.charm.glisten.afterburner.Utils;
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.Avatar;
 import com.gluonhq.charm.glisten.control.NavigationDrawer;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.comments20.cloud.Service;
-import java.util.Collection;
-import javafx.scene.image.Image;
-import java.util.Locale;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
+
+import java.util.Collection;
+import java.util.Locale;
+
+import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.*;
 
 public class AppViewManager {
 
     public static final AppViewRegistry REGISTRY = new AppViewRegistry();
-    private static DrawerManager drawerManager;
     private static Avatar avatar;
     
     public static final AppView COMMENTS_VIEW = view("Comments", CommentsPresenter.class, MaterialDesignIcon.COMMENT, SHOW_IN_DRAWER, HOME_VIEW, SKIP_VIEW_STACK);
@@ -77,21 +76,18 @@ public class AppViewManager {
         
         NavigationDrawer.Header header = new NavigationDrawer.Header("Gluon Mobile",
                 "The Comments App", avatar);
-
-        drawerManager = new DrawerManager(app, header, REGISTRY.getViews()); 
-        drawerManager.installDrawer();
+        DrawerManager.buildDrawer(app, header, REGISTRY.getViews()); 
     }
     
-    private static class DrawerManager extends DefaultDrawerManager {
+    private static class DrawerManager {
         
-        private final Service service;
-        
-        public DrawerManager(MobileApplication app, Node header, Collection<AppView> views) {
-            super(app, header, views);
+        static void buildDrawer(MobileApplication app, NavigationDrawer.Header header, Collection<AppView> views) {
+            final NavigationDrawer drawer = app.getDrawer();
+            Utils.buildDrawer(drawer, header, views);
+
+            final Service service = Injector.instantiateModelOrService(Service.class);
             
-            service = Injector.instantiateModelOrService(Service.class);
-            
-            for (Node item : getDrawer().getItems()) {
+            for (Node item : drawer.getItems()) {
                 if (item instanceof NavigationDrawer.ViewItem && 
                         ((NavigationDrawer.ViewItem) item).getViewName().equals(EDITION_VIEW.getId())) {
                     item.disableProperty().bind(service.userProperty().isNull());
@@ -99,17 +95,15 @@ public class AppViewManager {
                 }
             }
             
-            service.userProperty().addListener((obs, ov, nv) -> avatar.setImage(getAvatarImage()));
-            avatar.setImage(getAvatarImage());
+            service.userProperty().addListener((obs, ov, nv) -> avatar.setImage(getAvatarImage(service)));
+            avatar.setImage(getAvatarImage(service));
         }
         
-        private Image getAvatarImage() {
+        private static Image getAvatarImage(Service service) {
             if (service != null && service.userProperty().get() != null) {
                 return Service.getUserImage(service.userProperty().get().getPicture());
             } 
             return new Image(AppViewManager.class.getResourceAsStream("/icon.png"));
         }
-        
     }
-    
 }

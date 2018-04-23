@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,7 +29,6 @@ package com.gluonhq.samples.connect.rest;
 import com.gluonhq.charm.down.Platform;
 import com.gluonhq.charm.down.Services;
 import com.gluonhq.charm.down.plugins.BrowserService;
-import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
@@ -49,8 +48,7 @@ import java.net.URISyntaxException;
 
 public class RestObjectView extends View {
 
-    public RestObjectView(String name) {
-        super(name);
+    public RestObjectView() {
 
         Label lbQuestionId = new Label();
         Label lbTitle = new Label();
@@ -115,7 +113,7 @@ public class RestObjectView extends View {
 
     @Override
     protected void updateAppBar(AppBar appBar) {
-        appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> MobileApplication.getInstance().showLayer(Main.MENU_LAYER)));
+        appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getApplication().getDrawer().open()));
         appBar.setTitleText("Rest Object Viewer");
     }
 

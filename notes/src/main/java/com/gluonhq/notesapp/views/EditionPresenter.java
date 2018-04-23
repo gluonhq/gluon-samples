@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, 2017 Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,6 @@
  */
 package com.gluonhq.notesapp.views;
 
-import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
 import com.gluonhq.charm.glisten.control.AppBar;
@@ -41,6 +40,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
 import javax.inject.Inject;
 
 public class EditionPresenter extends GluonPresenter<NotesApp> {
@@ -92,8 +92,7 @@ public class EditionPresenter extends GluonPresenter<NotesApp> {
                 }
                  
                 AppBar appBar = getApp().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().showLayer(DRAWER_LAYER)));
+                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getApp().getDrawer().open()));
                 appBar.setTitleText(editMode ? "Edit Note" : "Add Note");
             } else {
                 title.clear();

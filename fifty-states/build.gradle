@@ -23,12 +23,12 @@ repositories {
 mainClassName = 'com.gluonhq.fiftystates.FiftyStates'
 
 dependencies {
-    compile 'com.gluonhq:charm:4.3.3'
+    compile 'com.gluonhq:charm:5.0.0'
 }
 
 jfxmobile {
     downConfig {
-        version = '3.2.4'
+        version = '3.8.0'
         plugins 'cache', 'display', 'lifecycle', 'statusbar', 'storage'
     }
     android {

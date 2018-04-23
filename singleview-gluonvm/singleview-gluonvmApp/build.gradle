@@ -26,13 +26,13 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile 'com.gluonhq:charm:4.4.0-jdk9'
-    androidRuntime 'com.gluonhq:charm:4.4.1'
+    compile 'com.gluonhq:charm:5.0.0-jdk9'
+    androidRuntime 'com.gluonhq:charm:5.0.0'
 }
 
 jfxmobile {
     downConfig {
-        version = '3.7.0'
+        version = '3.8.0'
         // Do not edit the line below. Use Gluon Mobile Settings in your project context menu instead
         plugins 'display', 'lifecycle', 'statusbar', 'storage'
     }

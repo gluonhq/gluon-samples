@@ -28,7 +28,7 @@ dependencies {
 
     compile 'org.scala-lang:scala-library:2.12.2'
 
-    compile 'com.gluonhq:charm:4.3.3'
+    compile 'com.gluonhq:charm:5.0.0'
 
     // Desktop SQL -> https://github.com/xerial/sqlite-jdbc
     desktopRuntime 'org.xerial:sqlite-jdbc:3.8.11.2'
@@ -44,7 +44,7 @@ dependencies {
 
 jfxmobile {
     downConfig {
-        version = '3.2.4'
+        version = '3.8.0'
         plugins 'display', 'lifecycle', 'statusbar', 'storage'
     }
     android {

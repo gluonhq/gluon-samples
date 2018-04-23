@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, Gluon
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -35,11 +35,9 @@ import javafx.stage.Stage;
 
 public class GluonSQLite extends MobileApplication {
 
-    public static final String BASIC_VIEW = HOME_VIEW;
-
     @Override
     public void init() {
-        addViewFactory(BASIC_VIEW, () -> new BasicView(BASIC_VIEW));
+        addViewFactory(HOME_VIEW, BasicView::new);
     }
 
     @Override

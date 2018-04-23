@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2017 Gluon
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,6 @@
  */
 package com.gluonhq.cloudlink.sample.whiteboard.views;
 
-import static com.gluonhq.charm.glisten.afterburner.DefaultDrawerManager.DRAWER_LAYER;
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
 import com.gluonhq.charm.glisten.control.AppBar;
@@ -65,7 +64,7 @@ public class EditPresenter extends GluonPresenter<Whiteboard> {
                 }
 
                 AppBar appBar = getApp().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.MENU.button(event -> getApp().showLayer(DRAWER_LAYER)));
+                appBar.setNavIcon(MaterialDesignIcon.MENU.button(event -> getApp().getDrawer().open()));
                 appBar.setTitleText(model.activeItem().get() == null ? "Add Item" : "Edit Item");
             }
         });
@@ -86,7 +85,6 @@ public class EditPresenter extends GluonPresenter<Whiteboard> {
     private void close() {
         title.clear();
         model.activeItem().set(null);
-
         getApp().goHome();
     }
 }

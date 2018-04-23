@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Gluon
+ * Copyright (c) 2017, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,44 +26,26 @@
  */
 package com.gluonhq.functionmapper.service;
 
-import com.gluonhq.cloudlink.client.data.DataClient;
-import com.gluonhq.cloudlink.client.data.DataClientBuilder;
-import com.gluonhq.cloudlink.client.data.OperationMode;
-import com.gluonhq.cloudlink.client.data.RemoteFunction;
 import com.gluonhq.cloudlink.client.data.RemoteFunctionBuilder;
+import com.gluonhq.cloudlink.client.data.RemoteFunctionObject;
 import com.gluonhq.connect.GluonObservableObject;
-import com.gluonhq.connect.provider.DataProvider;
-import javax.annotation.PostConstruct;
 
 public class RemoteService {
-
-    private DataClient cloudDataClient;
-
-    @PostConstruct
-    public void postConstruct() {
-        cloudDataClient = DataClientBuilder.create()
-            .operationMode(OperationMode.CLOUD_FIRST)
-            .build();
-    }
     
     public <T> GluonObservableObject<T> answersStackOverflow(Class<T> clazz, String value) {
-        RemoteFunction function = RemoteFunctionBuilder
+        RemoteFunctionObject function = RemoteFunctionBuilder
                 .create("answersStackOverflow")
                 .param("questionID", value)
-                .build();
-        GluonObservableObject<T> answer = DataProvider.retrieveObject(
-            cloudDataClient.createObjectDataReader(function, clazz));
-        return answer;
+                .object();
+        return function.call(clazz);
     }
 
     public <T> GluonObservableObject<T> searchStackOverflow(Class<T> clazz, String value) {
-        RemoteFunction function = RemoteFunctionBuilder
+        RemoteFunctionObject function = RemoteFunctionBuilder
                 .create("searchStackOverflow")
                 .param("tagged", value)
-                .build();
-        GluonObservableObject<T> answer = DataProvider.retrieveObject(
-            cloudDataClient.createObjectDataReader(function, clazz));
-        return answer;
+                .object();
+        return function.call(clazz);
     }
 }
 

@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2017 Gluon
+/*
+ * Copyright (c) 2017, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,22 +27,17 @@
 package com.gluonhq.cloudlinkmedia;
 
 import com.gluonhq.charm.glisten.control.AppBar;
-import com.gluonhq.charm.glisten.control.Icon;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 public class BasicView extends View {
 
-    public BasicView(String name) {
-        super(name);
+    public BasicView() {
         
         Label label = new Label("CloudLink Media displayed below");
-
-
         VBox controls = new VBox(15.0, label);
         controls.setAlignment(Pos.CENTER);
         

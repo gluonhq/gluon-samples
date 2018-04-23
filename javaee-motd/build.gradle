@@ -73,7 +73,7 @@ configure([project(':client')]) {
     }
 
     dependencies {
-        compile 'com.gluonhq:glisten-afterburner:1.2.0'
+        compile 'com.gluonhq:glisten-afterburner:1.4.0'
         compile 'com.gluonhq:charm-cloudlink-client:4.3.5'
     }
 
@@ -81,7 +81,7 @@ configure([project(':client')]) {
 
     jfxmobile {
         downConfig {
-            version = '3.3.0'
+            version = '3.8.0'
             plugins 'display', 'lifecycle', 'statusbar', 'storage'
         }
         android {

@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -43,8 +43,7 @@ import javafx.scene.control.ListView;
 
 public class BasicListView extends View {
 
-    public BasicListView(String name) {
-        super(name);
+    public BasicListView() {
 
         // create a DataSource that loads data from a classpath resource
         InputDataSource dataSource = new BasicInputDataSource(Main.class.getResourceAsStream("/languages.json"));

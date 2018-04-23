@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Gluon
+ * Copyright (c) 2017, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,13 +32,10 @@ import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.Icon;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.cloudlink.client.data.DataClient;
-import com.gluonhq.cloudlink.client.data.DataClientBuilder;
-import com.gluonhq.cloudlink.client.data.RemoteFunction;
 import com.gluonhq.cloudlink.client.data.RemoteFunctionBuilder;
+import com.gluonhq.cloudlink.client.data.RemoteFunctionObject;
 import com.gluonhq.connect.ConnectState;
 import com.gluonhq.connect.GluonObservableObject;
-import com.gluonhq.connect.provider.DataProvider;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -51,8 +48,7 @@ import java.io.IOException;
 
 public class BasicView extends View {
 
-    public BasicView(String name) {
-        super(name);
+    public BasicView() {
 
         AudioRecordingService audioRecordingService = Services.get(AudioRecordingService.class)
                 .orElseThrow(() -> new RuntimeException("Could not find Audio Recording service."));
@@ -67,8 +63,6 @@ public class BasicView extends View {
         Button stop = new Button("Stop Recording", new Icon(MaterialDesignIcon.STOP));
         stop.setOnAction(e -> audioRecordingService.stopRecording());
         stop.disableProperty().bind(audioRecordingService.recordingProperty().not());
-
-        DataClient dataClient = DataClientBuilder.create().build();
 
         TextArea responseDebug = new TextArea();
 
@@ -85,12 +79,12 @@ public class BasicView extends View {
                         baos.write(bytes, 0, bytesRead);
                     }
 
-                    RemoteFunction storeAudio = RemoteFunctionBuilder.create("storeAudio")
+                    RemoteFunctionObject storeAudio = RemoteFunctionBuilder.create("storeAudio")
                             .param("s3Key", audioChunk)
                             .rawBody(baos.toByteArray())
-                            .build();
+                            .object();
 
-                    GluonObservableObject<String> response = DataProvider.retrieveObject(dataClient.createObjectDataReader(storeAudio, String.class));
+                    GluonObservableObject<String> response = storeAudio.call(String.class);
                     response.stateProperty().addListener((obs, ov, nv) -> {
                         if (nv == ConnectState.FAILED) {
                             response.getException().printStackTrace();

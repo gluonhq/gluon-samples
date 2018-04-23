@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,12 +30,13 @@ import com.gluonhq.charm.glisten.control.Alert;
 import com.gluonhq.charm.glisten.control.ListTile;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.comments.model.Comment;
-import java.util.Optional;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.VBox;
+
+import java.util.Optional;
 
 /**
  * Custom format for ListCells on the ListView control
@@ -55,7 +56,7 @@ public class CommentListCell extends ListCell<Comment> {
     /**
      * Add a ListTile control to not empty cells
      * @param item the comment on the cell
-     * @param empty 
+     * @param empty empty cell
      */
     @Override
     protected void updateItem(Comment item, boolean empty) {
@@ -74,7 +75,7 @@ public class CommentListCell extends ListCell<Comment> {
     
     /**
      * Create a Dialog for getting deletion confirmation
-     * @param item 
+     * @param item Item to be deleted
      */
     private void showDialog(Comment item) {
         Alert alert = new Alert(AlertType.CONFIRMATION);

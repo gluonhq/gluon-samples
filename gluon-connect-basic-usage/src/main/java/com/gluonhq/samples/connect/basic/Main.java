@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -43,8 +43,8 @@ public class Main extends MobileApplication {
 
     @Override
     public void init() {
-        addViewFactory(LIST_VIEW, () -> new BasicListView(LIST_VIEW));
-        addViewFactory(OBJECT_VIEW, () -> new BasicObjectView(OBJECT_VIEW));
+        addViewFactory(LIST_VIEW, () -> new BasicListView());
+        addViewFactory(OBJECT_VIEW, () -> new BasicObjectView());
 
         NavigationDrawer navigationDrawer = new NavigationDrawer();
         NavigationDrawer.Item listItem = new NavigationDrawer.Item("List Viewer", MaterialDesignIcon.VIEW_LIST.graphic());

@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -43,7 +43,7 @@ public class GluonRubik extends MobileApplication {
 
     @Override
     public void init() {
-        addViewFactory(HOME_VIEW, () -> new RubikView(HOME_VIEW));
+        addViewFactory(HOME_VIEW, RubikView::new);
         addViewFactory(SPLASH_VIEW, () -> new SplashView(null, new Splash(), Duration.seconds(3)));
     }
 

@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, Gluon
+/*
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -44,8 +44,7 @@ import javafx.scene.layout.GridPane;
 
 public class BasicObjectView extends View {
 
-    public BasicObjectView(String name) {
-        super(name);
+    public BasicObjectView() {
 
         Label lbName = new Label();
         CheckBox cbSubscribed = new CheckBox("Subscribed?");

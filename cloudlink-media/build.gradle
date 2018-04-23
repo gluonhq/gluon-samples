@@ -19,12 +19,12 @@ repositories {
 mainClassName = 'com.gluonhq.cloudlinkmedia.CloudLinkMedia'
 
 dependencies {
-    compile 'com.gluonhq:charm:4.3.3'
+    compile 'com.gluonhq:charm:5.0.0'
 }
 
 jfxmobile {
     downConfig {
-        version = '3.2.4'
+        version = '3.8.0'
         // Do not edit the line below. Use Gluon Mobile Settings in your project context menu instead
         plugins 'browser', 'display', 'lifecycle', 'statusbar', 'storage'
     }
