@@ -1,0 +1,60 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.javafxports:jfxmobile-plugin:1.3.10'
+    }
+}
+
+apply plugin: 'org.javafxports.jfxmobile'
+
+repositories {
+    jcenter()
+    maven {
+        url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
+    }
+}
+
+mainClassName = 'com.gluonhq.awsmobilehub.AwsMobileHub'
+
+dependencies {
+    compile 'com.gluonhq:charm:5.0.0'
+    compile 'com.gluonhq:aws-java-sdk-core:2.6.19'
+    compile 'com.gluonhq:aws-java-sdk-auth-core:2.6.19'
+    compile 'com.gluonhq:aws-java-sdk-mobile-client:2.6.19'
+    compile 'com.gluonhq:aws-java-sdk-s3:2.6.19'
+}
+
+jfxmobile {
+    downConfig {
+        version = '3.8.0'
+        // Do not edit the line below. Use Gluon Mobile Settings in your project context menu instead
+        plugins 'display', 'lifecycle', 'settings', 'statusbar', 'storage'
+    }
+    android {
+        manifest = 'src/android/AndroidManifest.xml'
+        packagingOptions {
+            exclude 'META-INF/MANIFEST.MF'
+            exclude 'META-INF/DEPENDENCIES'
+            exclude 'META-INF/LICENSE'
+            exclude 'META-INF/LICENSE.txt'
+            exclude 'META-INF/NOTICE'
+            exclude 'META-INF/NOTICE.txt'
+        }
+    }
+    ios {
+        infoPList = file('src/ios/Default-Info.plist')
+        forceLinkClasses = [
+                'com.gluonhq.**.*',
+                'javax.annotations.**.*',
+                'javax.inject.**.*',
+                'javax.json.**.*',
+                'org.glassfish.json.**.*',
+                'com.amazonaws.**.*',
+                'org.apache.**.*',
+                'com.google.**.*',
+                'org.json.**.*'
+        ]
+    }
+}
