@@ -1,0 +1,19 @@
+ext {
+    dl4j_version = "1.0.0-beta"
+}
+
+apply plugin: "application"
+
+repositories {
+    mavenCentral()
+}
+
+mainClassName = "com.gluonhq.dl.mnist.logic.Main"
+
+dependencies {
+    compile "org.deeplearning4j:deeplearning4j-core:${dl4j_version}"
+    compile "org.nd4j:nd4j-native-platform:${dl4j_version}"
+    compile "org.apache.httpcomponents:httpclient:4.3.5"
+    compile "org.slf4j:slf4j-simple:1.7.25"
+    compile "org.slf4j:slf4j-api:1.7.25"
+}
