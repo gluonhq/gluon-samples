@@ -1,0 +1,20 @@
+.root {
+    -alternate-swatch-200:#f9683a;
+    -alternate-swatch-400:#bf360c;
+    -alternate-swatch-700:#870000;
+    -subtitle-background: #eeeeee;
+}
+
+.button {
+    -fx-background-color: -alternate-swatch-400;
+}
+
+.button:hover {
+    -fx-background-color: -alternate-swatch-700;
+}
+
+.subtitle,
+.subtitle > .label {
+    -fx-font-size: 1.4em;
+    -fx-background-color: -subtitle-background
+}

@@ -1,0 +1,13 @@
+.toggle-button {
+    -fx-font-size: 1.4em;
+    -fx-font-style: bold;
+}
+
+
+.toggle-button:selected{
+    -fx-background-color: -alternate-swatch-400;
+}
+
+.toggle-button:hover{
+    -fx-background-color: -alternate-swatch-700;
+}
