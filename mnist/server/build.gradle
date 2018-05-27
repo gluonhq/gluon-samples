@@ -1,0 +1,19 @@
+plugins {
+    id 'war'
+}
+
+configurations {
+    payara
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':logic')
+    providedCompile 'org.glassfish.jersey.core:jersey-common:2.25@jar'
+    providedCompile 'org.glassfish.jersey.core:jersey-server:2.25@jar'
+    providedCompile 'javax:javaee-api:7.0'
+    payara 'fish.payara.extras:payara-micro:4.1.2.181'
+}
