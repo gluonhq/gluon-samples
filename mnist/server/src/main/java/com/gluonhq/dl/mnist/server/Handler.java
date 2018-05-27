@@ -30,8 +30,8 @@ public class Handler {
     @Path("classifyImage")
     public String classifyImage(@HeaderParam("authorization") String authorizationHeader, byte[] rawData) {
         try {
-            INDArray answer = service.predict(rawData);
-            return answer.toString();
+            String answer = service.predict(rawData);
+            return answer;
         } catch (Exception e) {
             System.out.println("oops ");
             e.printStackTrace();

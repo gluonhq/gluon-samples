@@ -241,6 +241,27 @@ public class ModelUtils {
         return output;
     }
     
+    public String predict(MultiLayerNetwork model, InputStream is) throws IOException {
+        NativeImageLoader loader = new NativeImageLoader(width, height, channels);
+        INDArray nd = loader.asRowVector(is);
+        return predict(model, nd);
+    }
+
+    public String predict(MultiLayerNetwork model, String f) throws IOException {
+        NativeImageLoader loader = new NativeImageLoader(width, height, channels);
+        INDArray nd = loader.asRowVector(new File(f));
+        return predict(model, nd);
+    }
+
+    private String predict(MultiLayerNetwork model, INDArray nd) {
+        // invert black-white 
+        DataNormalization scaler = new ImagePreProcessingScaler(1,0);
+        scaler.transform(nd);
+        preprocess(nd);
+        int p = model.predict(nd)[0];
+        System.out.println("prediction = "+model.predict(nd)[0]);
+        return String.valueOf(p);
+    }
     
     public static void downloadData() throws Exception {
         //Create directory if required

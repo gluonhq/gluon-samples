@@ -50,8 +50,8 @@ public class ModelService {
         return baos.toByteArray();
     }
 
-    public INDArray predict (byte[] raw) throws IOException {
-        return utils.output(model, new ByteArrayInputStream(raw));         
+    public String predict (byte[] raw) throws IOException {
+        return utils.predict(model, new ByteArrayInputStream(raw));         
     }
     
 }
