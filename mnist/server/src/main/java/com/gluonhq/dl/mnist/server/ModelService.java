@@ -8,10 +8,14 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.util.ModelSerializer;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
+@Startup
+@Singleton
 public class ModelService {
          private static final Logger LOGGER = Logger.getLogger(ModelService.class.getName());
              private static final String MODEL_LOCATION = System.getProperty("modelFile", "/tmp/model.zip");
