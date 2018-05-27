@@ -1,7 +1,9 @@
 package com.gluonhq.dl.mnist.server;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 import javax.inject.Inject;
+import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -15,7 +17,14 @@ public class Handler {
     @Inject
     private ModelService service;
     private static final Logger LOGGER = Logger.getLogger(Handler.class.getName());
-
+  
+    @GET
+    @Path("model")
+    @Produces(MediaType.APPLICATION_OCTET_STREAM)
+    public byte[] retrieveModel() throws IOException {
+        return service.getModel();
+    }
+    
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("classifyImage")

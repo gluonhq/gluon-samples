@@ -2,6 +2,7 @@ package com.gluonhq.dl.mnist.server;
 
 import com.gluonhq.dl.mnist.logic.ModelUtils;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -37,6 +38,12 @@ public class ModelService {
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Failed to load model.", e);
         }
+    }
+
+    public byte[] getModel() throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(1024 * 512);
+        ModelSerializer.writeModel(model, baos, false);
+        return baos.toByteArray();
     }
 
     public INDArray predict (byte[] raw) throws IOException {
