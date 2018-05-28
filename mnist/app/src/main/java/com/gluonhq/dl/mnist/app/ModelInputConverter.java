@@ -15,11 +15,15 @@ public class ModelInputConverter extends InputStreamInputConverter<MultiLayerNet
 
     @Override
     public MultiLayerNetwork read() {
-        try (InputStream is = getInputStream()) {
-            return ModelSerializer.restoreMultiLayerNetwork(is);
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Something went wrong while reading model from InputStream.", e);
-            throw new RuntimeException(e);
+        try {
+            InputStream is = getInputStream();
+            MultiLayerNetwork network = ModelSerializer.restoreMultiLayerNetwork(is);
+            is.close();
+            return network;
+        } catch (Throwable t) {
+            LOGGER.log(Level.SEVERE, "Something went wrong while reading model from InputStream.", t);
+            t.printStackTrace();
         }
+        return null;
     }
 }
