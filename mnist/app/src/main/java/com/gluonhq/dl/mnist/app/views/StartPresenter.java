@@ -39,7 +39,10 @@ public class StartPresenter extends GluonPresenter<GluonMnistDL> {
     private Button buttonLoadImage;
 
     @FXML
-    private Button buttonRunModel;
+    private Button buttonRunCloud;
+    
+    @FXML
+    private Button buttonRunLocal;
 
     @FXML
     private Label labelStatus;
@@ -60,8 +63,7 @@ public class StartPresenter extends GluonPresenter<GluonMnistDL> {
 
         main.setShowTransitionFactory(BounceInDownTransition::new);
 
-        buttonLoadImage.disableProperty().bind(model.nnModelProperty().isNull());
-        buttonRunModel.disableProperty().bind(model.nnModelProperty().isNull());
+        buttonRunLocal.disableProperty().bind(model.nnModelProperty().isNull());
 
         main.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
@@ -158,6 +160,7 @@ public class StartPresenter extends GluonPresenter<GluonMnistDL> {
         InputStream sixStream = StartPresenter.class.getResourceAsStream("/six.png");
         Image im = new Image(sixStream);
         imageView.updateImage(main, im);
+        model.setCurrentImageFile(imageView.getImageFile());
     }
     
     private void retrievePicture() {
@@ -168,6 +171,7 @@ public class StartPresenter extends GluonPresenter<GluonMnistDL> {
         } else {
             loadImageFile().ifPresent(photo -> imageView.updateImage(main, photo));
         }
+        model.setCurrentImageFile(imageView.getImageFile());
     }
 
     private Optional<Image> loadImageFile() {

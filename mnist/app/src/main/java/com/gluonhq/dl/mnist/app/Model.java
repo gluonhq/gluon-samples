@@ -3,6 +3,7 @@ package com.gluonhq.dl.mnist.app;
 import com.gluonhq.cloudlink.client.data.RemoteFunctionBuilder;
 import com.gluonhq.cloudlink.client.data.RemoteFunctionObject;
 import com.gluonhq.connect.GluonObservableObject;
+import java.io.File;
 import java.util.logging.Logger;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -10,8 +11,23 @@ import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 
 public class Model {
 
+    /**
+     * @return the currentImageFile
+     */
+    public File getCurrentImageFile() {
+        return currentImageFile;
+    }
+
+    /**
+     * @param currentImageFile the currentImageFile to set
+     */
+    public void setCurrentImageFile(File currentImageFile) {
+        this.currentImageFile = currentImageFile;
+    }
+
     private final Logger LOGGER = Logger.getLogger(Model.class.getName());
     private final ObjectProperty<MultiLayerNetwork> nnModel;
+    private File currentImageFile;
 
     public Model() {
         nnModel = new SimpleObjectProperty<>();

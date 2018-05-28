@@ -21,6 +21,7 @@ import javax.inject.Inject;
 import java.util.ResourceBundle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 
 public class IncorrectMatchPresenter extends GluonPresenter<GluonMnistDL> {
 
@@ -69,32 +70,14 @@ public class IncorrectMatchPresenter extends GluonPresenter<GluonMnistDL> {
 
     @FXML
     public void submitResults() {
-        throw new RuntimeException ("don't submit results yet");
-//
-//        int correctedNumber = Integer.parseInt(((ToggleButton) toggleGroup.getSelectedToggle()).getText());
-//
-//        FileUtils
-//            .getImageFile(model.getFilteredImage(), String.valueOf(correctedNumber))
-//            .ifPresent( imageFile -> {
-//                try {
-//                    service.singleTrain(model, imageFile.getParentFile());
-//                } catch (IOException ex) {
-//                    System.out.println("Error " + ex);
-//                }
-//            });
 
-//        File imageFile = FileUtils.getImageFile(model.getFilteredImage(), String.valueOf(correctedNumber));
-//            if (imageFile != null) {
-//                try {
-//                    service.singleTrain(model, imageFile.getParentFile());
-//                } catch (IOException ex) {
-//                    System.out.println("Error " + ex);
-//                }
-//            }
+        int correctedNumber = Integer.parseInt(((ToggleButton) toggleGroup.getSelectedToggle()).getText());
+        MultiLayerNetwork network = model.getNnModel();
+        service.updateModel(model, model.getCurrentImageFile(), correctedNumber);
         //then switch to home
 
-//        getApp().goHome();
-//        getApp().showMessage("Model was corrected and updated" );
+        getApp().goHome();
+        getApp().showMessage("Model was corrected and updated" );
 
     }
 
