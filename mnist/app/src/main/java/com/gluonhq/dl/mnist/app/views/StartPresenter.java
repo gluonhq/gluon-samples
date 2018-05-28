@@ -39,7 +39,10 @@ public class StartPresenter extends GluonPresenter<GluonMnistDL> {
     private Button buttonLoadImage;
 
     @FXML
-    private Button buttonRunModel;
+    private Button buttonRunCloud;
+    
+    @FXML
+    private Button buttonRunLocal;
 
     @FXML
     private Label labelStatus;
@@ -60,8 +63,7 @@ public class StartPresenter extends GluonPresenter<GluonMnistDL> {
 
         main.setShowTransitionFactory(BounceInDownTransition::new);
 
-        buttonLoadImage.disableProperty().bind(model.nnModelProperty().isNull());
-        buttonRunModel.disableProperty().bind(model.nnModelProperty().isNull());
+        buttonRunLocal.disableProperty().bind(model.nnModelProperty().isNull());
 
         main.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {

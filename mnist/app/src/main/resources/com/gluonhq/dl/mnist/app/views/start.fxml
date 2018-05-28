@@ -37,7 +37,7 @@
                               <Icon content="CLOUD_DOWNLOAD" />
                           </graphic>
                       </Button>
-                  <Button fx:id="buttonRunModel" mnemonicParsing="false" onAction="#runModel" text="%button.run.text">
+                  <Button fx:id="buttonRunCloud" mnemonicParsing="false" onAction="#runModel" text="%button.run.text">
                      <graphic>
                         <Icon content="PLAY_CIRCLE_FILLED" />
                      </graphic>
