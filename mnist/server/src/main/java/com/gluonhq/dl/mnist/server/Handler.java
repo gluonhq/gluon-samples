@@ -10,6 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.factory.Nd4j;
 
 @Path("handler")
 public class Handler {
@@ -37,6 +38,13 @@ public class Handler {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    @POST
+    @Path("publishGradient")
+    public void publishGradient(byte[] clientGradient) throws IOException {
+        System.out.println("publish gradient");
+        service.publishGradient(clientGradient);
     }
 
 }

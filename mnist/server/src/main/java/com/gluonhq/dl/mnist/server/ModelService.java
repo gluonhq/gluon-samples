@@ -10,9 +10,11 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import org.deeplearning4j.nn.gradient.Gradient;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.util.ModelSerializer;
 import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.factory.Nd4j;
 
 @Startup
 @Singleton
@@ -52,6 +54,13 @@ public class ModelService {
 
     public String predict (byte[] raw) throws IOException {
         return utils.predict(model, new ByteArrayInputStream(raw));         
+    }
+    
+    public void publishGradient(byte[] clientGradient) throws IOException {
+        INDArray updateGradient = Nd4j.fromByteArray(clientGradient);
+        Gradient gradient = model.gradient();
+        // do some smart merging
+        System.out.println("Thanks for the update, our model just became better");
     }
     
 }
