@@ -1,9 +1,12 @@
 package com.gluonhq.dl.mnist.app;
 
 import com.gluonhq.charm.down.Platform;
+import com.gluonhq.charm.down.Services;
+import com.gluonhq.charm.down.plugins.StorageService;
 import com.gluonhq.charm.glisten.control.Toast;
 import com.gluonhq.charm.glisten.mvc.View;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -177,13 +180,18 @@ public class MnistImageView extends ImageView {
         return value < min ? min : (value > minMax ? minMax : value);
     }
     
-    public File getImageFile() {
+    public File getImageFile() throws FileNotFoundException {
+        File privateStorage = Services.get(StorageService.class)
+                .flatMap(StorageService::getPrivateStorage)
+                .orElseThrow(() -> new FileNotFoundException ("Could not access private storage"));
+       
+    
         Image image = this.getImage();
 
         PngEncoderFX encoder = new PngEncoderFX(image, true);
         byte[] bytes = encoder.pngEncode();
 
-        File file = new File("Image-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("uuuuMMdd-HHmmss")) + ".png");
+        File file = new File(privateStorage, "Image-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("uuuuMMdd-HHmmss")) + ".png");
         try (FileOutputStream fos = new FileOutputStream(file)) {
             fos.write(bytes);
             return file;

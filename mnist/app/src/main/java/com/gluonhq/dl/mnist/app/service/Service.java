@@ -49,15 +49,10 @@ public class Service {
         INDArray row = null;
         if (!ios) {
             try {
-                System.out.println("p2");
                 NativeImageLoader loader = new NativeImageLoader(width, height, channels, true);
-                System.out.println("p3");
                 ImagePreProcessingScaler scaler = new ImagePreProcessingScaler(1, 0);
-                System.out.println("p4");
                 row = loader.asRowVector(image);
-                System.out.println("row before scalar = " + row);
                 scaler.transform(row);
-                System.out.println("row after scalar = " + row);
             } catch (Throwable t) {
                 t.printStackTrace();
             }
