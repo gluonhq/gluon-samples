@@ -21,8 +21,11 @@ import com.gluonhq.dl.mnist.app.MnistImageView;
 import com.gluonhq.dl.mnist.app.service.Service;
 import static com.gluonhq.dl.mnist.app.views.AppViewManager.*;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.StringProperty;
@@ -160,7 +163,11 @@ public class StartPresenter extends GluonPresenter<GluonMnistDL> {
         InputStream sixStream = StartPresenter.class.getResourceAsStream("/six.png");
         Image im = new Image(sixStream);
         imageView.updateImage(main, im);
-        model.setCurrentImageFile(imageView.getImageFile());
+        try {
+            model.setCurrentImageFile(imageView.getImageFile());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(StartPresenter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private void retrievePicture() {
@@ -171,7 +178,11 @@ public class StartPresenter extends GluonPresenter<GluonMnistDL> {
         } else {
             loadImageFile().ifPresent(photo -> imageView.updateImage(main, photo));
         }
-        model.setCurrentImageFile(imageView.getImageFile());
+        try {
+            model.setCurrentImageFile(imageView.getImageFile());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(StartPresenter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private Optional<Image> loadImageFile() {

@@ -50,26 +50,30 @@ public class Model {
     
     private void loadModelRemote() {
         System.out.println("******LOAD TRAINED MODEL (remote)******");
+        try {
+            RemoteFunctionObject rf = RemoteFunctionBuilder.create("fetchModel")
+                    .cachingEnabled(false)
+                    .object();
 
-        RemoteFunctionObject rf = RemoteFunctionBuilder.create("fetchModel")
-                .cachingEnabled(false)
-                .object();
+            GluonObservableObject<MultiLayerNetwork> rfObject = rf.call(new ModelInputConverter());
 
-        GluonObservableObject<MultiLayerNetwork> rfObject = rf.call(new ModelInputConverter());
-
-        rfObject.stateProperty().addListener((obs, ov, nv) -> {
-            switch (nv) {
-                case SUCCEEDED:
-                    nnModel.set(rfObject.get());
-                    System.out.println("******RETRIEVED TRAINED MODEL REMOTELY******");
-                    System.out.println("model = " + nnModel.get());
-                    System.out.println("bs = " + nnModel.get().summary());
-                    break;
-                case FAILED:
-                    rfObject.getException().printStackTrace();
-                    break;
-            }
-        });
+            rfObject.stateProperty().addListener((obs, ov, nv) -> {
+                System.out.println("LOADMODELREOTE, status = " + nv);
+                switch (nv) {
+                    case SUCCEEDED:
+                        nnModel.set(rfObject.get());
+                        System.out.println("******RETRIEVED TRAINED MODEL REMOTELY******");
+                        System.out.println("model = " + nnModel.get());
+                        System.out.println("bs = " + nnModel.get().summary());
+                        break;
+                    case FAILED:
+                        rfObject.getException().printStackTrace();
+                        break;
+                }
+            });
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
     }
 
 }
