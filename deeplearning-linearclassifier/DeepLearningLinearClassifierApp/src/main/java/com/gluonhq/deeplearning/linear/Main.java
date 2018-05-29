@@ -31,6 +31,7 @@ import com.gluonhq.charm.glisten.visual.Swatch;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import static org.nd4j.versioncheck.VersionCheck.VERSION_CHECK_PROPERTY;
 
 public class Main extends MobileApplication {
 
@@ -42,6 +43,8 @@ public class Main extends MobileApplication {
 
         System.setProperty("java.vm.name", "gluonvm");
         System.setProperty("sun.arch.data.model", "64");
+        System.setProperty(VERSION_CHECK_PROPERTY, "false");
+
     }
 
     @Override

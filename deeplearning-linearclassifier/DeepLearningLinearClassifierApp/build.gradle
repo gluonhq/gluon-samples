@@ -29,8 +29,7 @@ mainClassName = 'com.gluonhq.deeplearning.linear.Main'
 
 ext {
     dl4jVersion = '1.0.0-beta'
-    openblasVersion = '0.2.20-1.4'
-    openblasSnapshotVersion = '0.2.20-1.4.1-SNAPSHOT'
+    openblasVersion = '0.2.20-1.4.1'
 }
 
 sourceCompatibility = 1.8
@@ -48,32 +47,22 @@ dependencies {
     }
 
     // dl4j and nd4j
-    compile 'org.slf4j:slf4j-nop:1.7.12'
+    compile 'org.slf4j:slf4j-nop:1.7.25'
     compile("org.deeplearning4j:deeplearning4j-core:$dl4jVersion") {
         exclude group: 'org.bytedeco.javacpp-presets', module: 'hdf5'
         exclude group: 'org.bytedeco.javacpp-presets', module: 'leptonica'
-        exclude group: 'org.bytedeco.javacpp-presets', module: 'openblas'
         exclude group: 'org.bytedeco.javacpp-presets', module: 'opencv'
-        exclude group: 'org.datavec', module: 'datavec-data-image'
     }
-    compile ("org.nd4j:nd4j-native:$dl4jVersion") {
-        exclude group: 'org.bytedeco.javacpp-presets', module: 'openblas'
-        exclude group: 'org.bytedeco.javacpp-presets', module: 'mkl'
-    }
+    compile "org.nd4j:nd4j-native:$dl4jVersion"
+    compile "org.bytedeco.javacpp-presets:openblas:${openblasVersion}"
 
     // desktop
-    if (OperatingSystem.current().linux) {
-        desktopRuntime snapshotLocal("org.nd4j:nd4j-native:${dl4jVersion}:linux-x86_64")
-        desktopRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:linux-x86_64"
-    }
-    if (OperatingSystem.current().macOsX) {
-        desktopRuntime snapshotLocal("org.nd4j:nd4j-native:${dl4jVersion}:macosx-x86_64")
-        desktopRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:macosx-x86_64"
-    }
-    if (OperatingSystem.current().windows) {
-        desktopRuntime snapshotLocal("org.nd4j:nd4j-native:${dl4jVersion}:windows-x86_64")
-        desktopRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:windows-x86_64"
-    }
+    desktopRuntime "org.nd4j:nd4j-native:${dl4jVersion}:linux-x86_64"
+    desktopRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:linux-x86_64"
+    desktopRuntime "org.nd4j:nd4j-native:${dl4jVersion}:macosx-x86_64"
+    desktopRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:macosx-x86_64"
+    desktopRuntime "org.nd4j:nd4j-native:${dl4jVersion}:windows-x86_64"
+    desktopRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:windows-x86_64"
     desktopRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}"
 
     // android
@@ -85,10 +74,10 @@ dependencies {
 
     // ios
     iosRuntime snapshotLocal("org.nd4j:nd4j-native:$dl4jVersion:ios-x86_64")
-    iosRuntime snapshotLocal("org.nd4j:nd4j-native:$dl4jVersion:ios-arm64")
-    iosRuntime snapshotLocal("org.bytedeco.javacpp-presets:openblas:${openblasSnapshotVersion}")
-    iosRuntime snapshotLocal("org.bytedeco.javacpp-presets:openblas:${openblasSnapshotVersion}:ios-x86_64")
-    iosRuntime snapshotLocal("org.bytedeco.javacpp-presets:openblas:${openblasSnapshotVersion}:ios-arm64")
+    // iosRuntime snapshotLocal("org.nd4j:nd4j-native:$dl4jVersion:ios-arm64")
+    iosRuntime snapshotLocal("org.bytedeco.javacpp-presets:openblas:${openblasVersion}")
+    iosRuntime snapshotLocal("org.bytedeco.javacpp-presets:openblas:${openblasVersion}:ios-x86_64")
+    // iosRuntime snapshotLocal("org.bytedeco.javacpp-presets:openblas:${openblasVersion}:ios-arm64")
 }
 
 jfxmobile {

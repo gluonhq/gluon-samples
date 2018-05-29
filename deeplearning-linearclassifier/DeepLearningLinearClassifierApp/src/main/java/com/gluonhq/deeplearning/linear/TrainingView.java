@@ -86,7 +86,8 @@ public class TrainingView extends View {
         Task task = new Task() {
 
             @Override
-            protected Object call() throws Exception {
+            protected Object call() {
+              try {
                 int batchSize = 50;
                 int evalSize = 50;
 
@@ -152,6 +153,9 @@ public class TrainingView extends View {
                 }
 
                 Platform.runLater(() -> label.setText("model evaluation result:\n" + evaluation.stats()));
+              } catch (Throwable t) {
+t.printStackTrace();
+              }
 
                 return null;
             }
