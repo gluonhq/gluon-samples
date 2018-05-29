@@ -47,6 +47,7 @@ import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.nn.weights.WeightInit;
 import org.deeplearning4j.optimize.api.IterationListener;
+import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.DataSet;
@@ -132,9 +133,8 @@ public class TrainingView extends View {
 
                 MultiLayerNetwork network = new MultiLayerNetwork(conf);
                 network.init();
-                network.setListeners((IterationListener) (model, iteration, epoch) -> {
-                    Platform.runLater(() -> label.setText("Running iteration #" + iteration));
-                });
+                network.setListeners(new ScoreIterationListener(100));
+      
 
                 Platform.runLater(() -> label.setText("training model..."));
                 for (int n = 0; n < numEpochs; n++) {
