@@ -161,6 +161,8 @@ public class ModelUtils {
         // output to show how well the network is training
         model.setListeners(new ScoreIterationListener(100));
 
+        INDArray oldParameters = model.params().dup();
+
         LOGGER.info("*****TRAIN MODEL********");
         for (int i = 0; i < numEpochs || customData[0] != null; i++) {
             model.fit(dataIter);
@@ -173,6 +175,13 @@ public class ModelUtils {
                 }
             }
         }
+
+        INDArray newParameter = model.params().dup();
+        INDArray update = newParameter.sub(oldParameters);
+        System.out.println(update);
+
+        // We could then send the update over the network and apply it this way:
+        // model.setParams(model.params().add(update));
     }
     
     public void saveModel(MultiLayerNetwork model, String location) throws IOException {
