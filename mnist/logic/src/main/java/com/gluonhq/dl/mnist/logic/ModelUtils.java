@@ -43,6 +43,7 @@ import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.nd4j.linalg.dataset.api.preprocessor.DataNormalization;
 import org.nd4j.linalg.dataset.api.preprocessor.ImagePreProcessingScaler;
 import org.nd4j.linalg.learning.config.Nesterovs;
+import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 
 /**
@@ -102,8 +103,17 @@ public class ModelUtils {
         return answer;
     }
     
-    public void trainModel(MultiLayerNetwork model) throws Exception {
-        
+    public void trainModel(MultiLayerNetwork model, boolean invertColors, InputStream customImage, int customLabel) throws Exception {
+        final INDArray[] customData = {null, null};
+        if (customImage != null) {
+            NativeImageLoader loader = new NativeImageLoader(width, height, channels);
+            DataNormalization scaler = new ImagePreProcessingScaler(0, 1);
+            customData[0] = loader.asMatrix(customImage);
+            scaler.transform(customData[0]);
+            customData[1] = Nd4j.create(1, 10);
+            customData[1].putScalar(customLabel, 1.0);
+        }
+
         /*
         This class downloadData() downloads the data
         stores the data in java's tmpdir
@@ -129,10 +139,22 @@ public class ModelUtils {
         recordReader.initialize(train);
 
         // DataSet Iterator
-        DataSetIterator dataIter = new RecordReaderDataSetIterator(recordReader, batchSize, 1, outputNum);
+        DataSetIterator dataIter = new RecordReaderDataSetIterator(recordReader, batchSize, 1, outputNum) {
+            public DataSet next(int batchSize) {
+                DataSet ds = super.next(batchSize);
+                if (customData[0] != null) {
+                    // append our custom data to each batch
+                    INDArray features = ds.getFeatures();
+                    INDArray labels = ds.getLabels();
+                    return new DataSet(Nd4j.concat(0, features, customData[0]),
+                                       Nd4j.concat(0, labels,   customData[1]));
+                }
+                return ds;
+            }
+        };
 
         // Scale pixel values to 0-1
-        DataNormalization scaler = new ImagePreProcessingScaler(0, 1);
+        DataNormalization scaler = new ImagePreProcessingScaler(invertColors ? 1 : 0, invertColors ? 0 : 1);
         scaler.fit(dataIter);
         dataIter.setPreProcessor(scaler);
         // The Score iteration Listener will log
@@ -140,8 +162,16 @@ public class ModelUtils {
         model.setListeners(new ScoreIterationListener(100));
 
         LOGGER.info("*****TRAIN MODEL********");
-        for (int i = 0; i < numEpochs; i++) {
+        for (int i = 0; i < numEpochs || customData[0] != null; i++) {
             model.fit(dataIter);
+            if (customData[0] != null) {
+                // if we got custom data, iterate until the model gets it right
+                int p = model.predict(customData[0])[0];
+                System.out.println("custom feature " + customLabel + " predicted as " + p);
+                if (p == customLabel) {
+                    break;
+                }
+            }
         }
     }
     
@@ -160,7 +190,7 @@ public class ModelUtils {
         ModelSerializer.writeModel(model, locationToSave, saveUpdater);
     }
     
-    public void evaluateModel(MultiLayerNetwork model) throws IOException {
+    public void evaluateModel(MultiLayerNetwork model, boolean invertColors) throws IOException {
         LOGGER.info("******EVALUATE MODEL******");
 
         ParentPathLabelGenerator labelMaker = new ParentPathLabelGenerator();
@@ -178,7 +208,7 @@ public class ModelUtils {
         // test data of images the network has not seen
 
         recordReader.initialize(test);
-        DataNormalization scaler = new ImagePreProcessingScaler(0,1);
+        DataNormalization scaler = new ImagePreProcessingScaler(invertColors ? 1 : 0, invertColors ? 0 : 1);
         DataSetIterator testIter = new RecordReaderDataSetIterator(recordReader,batchSize,1,outputNum);
         scaler.fit(testIter);
         testIter.setPreProcessor(scaler);
@@ -232,12 +262,13 @@ public class ModelUtils {
 
     private INDArray output(MultiLayerNetwork model, INDArray nd) {
         // invert black-white 
-        DataNormalization scaler = new ImagePreProcessingScaler(1,0);
+        DataNormalization scaler = new ImagePreProcessingScaler(0,1);
         scaler.transform(nd);
-        preprocess(nd);
-        System.out.println("nd = "+nd);
+//        preprocess(nd);
+//        System.out.println("nd = "+nd);
         INDArray output = model.output(nd);
-        System.out.println("=== output = "+output+" -> prediction = "+model.predict(nd)[0]);
+//        System.out.println("=== output = "+output+" -> prediction = "+model.predict(nd)[0]);
+        System.out.println(" prediction = "+model.predict(nd)[0]);
         return output;
     }
     
@@ -255,7 +286,7 @@ public class ModelUtils {
 
     private String predict(MultiLayerNetwork model, INDArray nd) {
         // invert black-white 
-        DataNormalization scaler = new ImagePreProcessingScaler(1,0);
+        DataNormalization scaler = new ImagePreProcessingScaler(0,1);
         scaler.transform(nd);
         preprocess(nd);
         int p = model.predict(nd)[0];

@@ -19,17 +19,25 @@ public class Main {
 
         } else {
             model = utils.createModel();
-            utils.trainModel(model);
+            utils.trainModel(model, true, null, -1);
             utils.saveModel(model, savedModelLocation);
-            utils.evaluateModel(model);
+            utils.evaluateModel(model, true);
         }
         runTests(model);
     }
     
-    private static void runTests(MultiLayerNetwork model) throws IOException {
+    private static void runTests(MultiLayerNetwork model) throws Exception {
         InputStream sixa = Main.class.getResourceAsStream("/mytestdata/6a.png");
-        utils.output(model, sixa);
         InputStream sixb = Main.class.getResourceAsStream("/mytestdata/6b.png");
+        sixa.mark(Integer.MAX_VALUE);
+        sixb.mark(Integer.MAX_VALUE);
+
+        utils.trainModel(model, true, sixa, 6);
+        utils.trainModel(model, true, sixb, 6);
+
+        sixa.reset();
+        sixb.reset();
+        utils.output(model, sixa);
         utils.output(model, sixb);
     }
 
