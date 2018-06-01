@@ -5,7 +5,6 @@ buildscript {
         }
         google()
         jcenter()
-        mavenLocal()
     }
     dependencies {
         classpath 'org.javafxports:jfxmobile-plugin:2.0.24'
@@ -19,7 +18,7 @@ repositories {
     maven {
         url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
     }
-    mavenLocal()
+    // mavenLocal()
 }
 
 if (JavaVersion.current().isJava9Compatible()) {
@@ -80,11 +79,12 @@ dependencies {
     androidRuntime "org.bytedeco.javacpp-presets:opencv:${opencvVersion}:android-arm"
 
 // ios
-    iosRuntime snapshotLocal("org.nd4j:nd4j-native:$dl4jVersion:ios-arm64")
-    iosRuntime snapshotLocal("org.bytedeco.javacpp-presets:openblas:${openblasVersion}:ios-arm64")
+    // iosRuntime snapshotLocal("org.nd4j:nd4j-native:$dl4jVersion:ios-arm64")
+    // iosRuntime snapshotLocal("org.bytedeco.javacpp-presets:openblas:${openblasVersion}:ios-arm64")
 //    uncomment for simulator
-//    iosRuntime snapshotLocal("org.nd4j:nd4j-native:$dl4jVersion:ios-x86_64")
-//    iosRuntime snapshotLocal("org.bytedeco.javacpp-presets:openblas:${openblasSnapshotVersion}:ios-x86_64")
+    iosRuntime "org.nd4j:nd4j-native:$dl4jVersion:ios-x86_64"
+    iosRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:ios-x86_64"
+    iosRuntime "org.bytedeco.javacpp-presets:opencv:${opencvVersion}:ios-x86_64"
     
 }
 
@@ -125,6 +125,8 @@ jfxmobile {
     }
     ios {
         infoPList = file('src/ios/Default-Info.plist')
+smallIio=true
+ ignoreNativeLibs = ["libopenblas.a","libopenblas_atomp-r0.2.20.a","libopenblas_armv8p-r0.2.20.a"]
         forceLinkClasses = [
                 'com.gluonhq.**.*',
                 'javax.annotations.**.*',

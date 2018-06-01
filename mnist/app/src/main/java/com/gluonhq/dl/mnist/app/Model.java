@@ -4,10 +4,12 @@ import com.gluonhq.cloudlink.client.data.RemoteFunctionBuilder;
 import com.gluonhq.cloudlink.client.data.RemoteFunctionObject;
 import com.gluonhq.connect.GluonObservableObject;
 import java.io.File;
+import java.io.InputStream;
 import java.util.logging.Logger;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
+import org.deeplearning4j.util.ModelSerializer;
 
 public class Model {
 
@@ -33,6 +35,7 @@ public class Model {
         nnModel = new SimpleObjectProperty<>();
         try {
             loadModelRemote();
+            // loadModelLocal();
         } catch (Exception ex) {
             System.out.println("[JVDBG] ERROR LOADING MODEL");
             LOGGER.warning("error loading model");
@@ -75,5 +78,17 @@ public class Model {
             t.printStackTrace();
         }
     }
+    
+    private void loadModelLocal() {
+        System.out.println("******LOAD TRAINED MODEL (local)******");
+        try {
+            InputStream is = Model.class.getResourceAsStream("/mymodel.zip");
+            MultiLayerNetwork network = ModelSerializer.restoreMultiLayerNetwork(is);
+            is.close();
+            nnModel.set(network);
 
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+    }
 }

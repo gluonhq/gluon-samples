@@ -49,29 +49,21 @@ public class Service {
 
     public StringProperty predictLocal(Model model, File image) throws IOException {
         System.out.println("PREDICT aske1d, image = " + image);
-        // Scale pixel values to 0-1 -- not yet working on iOS due to opencv conflicts !!
-        INDArray row = null;
-        if (!ios) {
-            try {
-                NativeImageLoader loader = new NativeImageLoader(width, height, channels, true);
-                ImagePreProcessingScaler scaler = new ImagePreProcessingScaler(1, 0);
-                row = loader.asRowVector(image);
-                scaler.transform(row);
-            } catch (Throwable t) {
-                t.printStackTrace();
-            }
-        } else { //ios
-            float[] d = new float[28 * 28];
-            for (int i = 0; i < 28 * 28; i++) {
-                d[i] = (float) Math.random();
-            }
-            row = new NDArray(d);
-        }
+        String answer = "0";
+        try {
+            INDArray row = null;
+            NativeImageLoader loader = new NativeImageLoader(width, height, channels, true);
+            ImagePreProcessingScaler scaler = new ImagePreProcessingScaler(1, 0);
+            row = loader.asRowVector(image);
+            scaler.transform(row);
 
-        final MultiLayerNetwork nnModel = model.getNnModel();
-        INDArray predict = nnModel.output(row);
-        System.out.println("model prediciton = " + predict);
-        String answer = String.valueOf(nnModel.predict(row)[0]);
+            final MultiLayerNetwork nnModel = model.getNnModel();
+            INDArray predict = nnModel.output(row);
+            System.out.println("model prediciton = " + predict);
+            answer = String.valueOf(nnModel.predict(row)[0]);
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
         return new SimpleStringProperty(answer);
     }
 
