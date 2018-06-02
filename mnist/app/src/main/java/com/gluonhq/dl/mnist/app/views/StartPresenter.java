@@ -130,7 +130,9 @@ public class StartPresenter extends GluonPresenter<GluonMnistDL> {
     void runLocalModel() {
         try {
             Service service = new Service();
-            StringProperty answer = service.predictLocal(model, imageView.getImageFile());
+            StringProperty answer = service.predictLocal(model, model.getCurrentImageFile());
+        //            InputStream sixStream = StartPresenter.class.getResourceAsStream("/six.png");
+//StringProperty answer = service.predictLocalInputStream(model, sixStream);
             showResult(answer);
         } catch (Exception e) {
             e.printStackTrace();
@@ -161,7 +163,7 @@ public class StartPresenter extends GluonPresenter<GluonMnistDL> {
 
     private void retrieveFakePicture() {
         InputStream sixStream = StartPresenter.class.getResourceAsStream("/six.png");
-        Image im = new Image(sixStream);
+        Image im = new Image(sixStream);//, 28d,28d,true, true);
         imageView.updateImage(main, im);
         try {
             model.setCurrentImageFile(imageView.getImageFile());

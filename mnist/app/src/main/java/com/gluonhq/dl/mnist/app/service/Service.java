@@ -1,28 +1,26 @@
 package com.gluonhq.dl.mnist.app.service;
 
 import com.gluonhq.cloudlink.client.data.RemoteFunctionBuilder;
-import com.gluonhq.cloudlink.client.data.RemoteFunctionObject;
 import com.gluonhq.connect.ConnectState;
 import com.gluonhq.connect.GluonObservableObject;
 import com.gluonhq.connect.converter.VoidInputConverter;
 import com.gluonhq.dl.mnist.app.Model;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+import javafx.scene.paint.Color;
 import org.datavec.image.loader.NativeImageLoader;
 import org.deeplearning4j.nn.gradient.Gradient;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.cpu.nativecpu.NDArray;
 import org.nd4j.linalg.dataset.api.iterator.DataSetIterator;
 import org.nd4j.linalg.dataset.api.preprocessor.ImagePreProcessingScaler;
 import org.nd4j.linalg.factory.Nd4j;
@@ -52,10 +50,37 @@ public class Service {
         String answer = "0";
         try {
             INDArray row = null;
-            NativeImageLoader loader = new NativeImageLoader(width, height, channels, true);
-            ImagePreProcessingScaler scaler = new ImagePreProcessingScaler(1, 0);
-            row = loader.asRowVector(image);
-            scaler.transform(row);
+            Image im = new Image(image.toURI().toString(), width, height, true, true);
+            PixelReader pr = im.getPixelReader();
+            row = Nd4j.createUninitialized(width * height);
+            boolean bw = pr.getColor(0, 0).getBrightness() < .5;
+            System.out.println("bw = "+bw);
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
+                    int pixel = pr.getArgb(i, j);
+                    Color c = pr.getColor(i, j);
+                    // int red = ((pixel >> 16) & 0xff);
+                    //  int green = ((pixel >> 8) & 0xff);
+                    //  int blue = (pixel & 0xff);
+
+                    //   int grayLevel = (int) (0.2162 * (double) red + 0.7152 * (double) green + 0.0722 * (double) blue) / 3;
+                    //   grayLevel = (int)((red + green + blue)/3.);
+                    //   grayLevel = 255 - grayLevel; // Inverted the grayLevel value here.
+                    //  int gray = (grayLevel << 16) + (grayLevel << 8) + grayLevel;
+                    //    System.out.println("p[" + i + "][" + j + "]: " + pixel+" -> "+grayLevel+ "("+red+", "+green+", "+blue+")"+" -> "+c.getBrightness()+", "+c.getSaturation()+", "+c.getHue()+", "+c.getOpacity());
+                    row.putScalar(j * height + i, bw? c.getBrightness() : 1 - c.getBrightness());
+                }
+            }
+
+
+//            
+//            INDArray row = null;
+//            NativeImageLoader loader = new NativeImageLoader(width, height, channels, true);
+//            row = loader.asRowVector(image);
+//            ImagePreProcessingScaler scaler = new ImagePreProcessingScaler(1, 0);
+//            System.out.println("BEFORE SCALING, row = "+row);
+//            scaler.transform(row);
+//            System.out.println("AFTER SCALING, row = "+row);
 
             final MultiLayerNetwork nnModel = model.getNnModel();
             INDArray predict = nnModel.output(row);
