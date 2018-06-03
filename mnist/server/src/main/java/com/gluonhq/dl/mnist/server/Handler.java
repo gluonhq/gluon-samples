@@ -7,6 +7,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.nd4j.linalg.api.ndarray.INDArray;
@@ -38,6 +39,14 @@ public class Handler {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("correctImage/{label}")
+    public String correctImage(byte[] rawData, @PathParam("label") String label) {
+        String answer = service.correctImage(rawData, label);
+        return answer;
     }
     
     @POST
