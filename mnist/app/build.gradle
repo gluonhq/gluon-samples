@@ -56,7 +56,7 @@ dependencies {
 
     compile "org.nd4j:nd4j-native:${dl4jVersion}"
     compile "org.bytedeco.javacpp-presets:openblas:${openblasVersion}"
-    compile "org.bytedeco.javacpp-presets:opencv:${opencvVersion}"
+    // compile "org.bytedeco.javacpp-presets:opencv:${opencvVersion}"
 
     if (JavaVersion.current() == JavaVersion.VERSION_1_8) {
         compile 'com.gluonhq:charm:4.4.1'
@@ -70,7 +70,7 @@ dependencies {
     desktopRuntime "org.nd4j:nd4j-native:${dl4jVersion}:macosx-x86_64"
     desktopRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:linux-x86_64"
     desktopRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:macosx-x86_64"
-    desktopRuntime "org.bytedeco.javacpp-presets:opencv:${opencvVersion}:linux-x86_64"
+    // desktopRuntime "org.bytedeco.javacpp-presets:opencv:${opencvVersion}:linux-x86_64"
     desktopRuntime "org.bytedeco.javacpp-presets:opencv:${opencvVersion}:macosx-x86_64"
 
     androidRuntime "org.nd4j:nd4j-native:${dl4jVersion}:android-arm"
@@ -80,10 +80,9 @@ dependencies {
 // ios
     iosRuntime "org.nd4j:nd4j-native:$dl4jVersion:ios-arm64"
     iosRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:ios-arm64"
-    iosRuntime "org.bytedeco.javacpp-presets:opencv:${opencvVersion}:ios-arm64"
-//    uncomment for simulator
-    // iosRuntime "org.nd4j:nd4j-native:$dl4jVersion:ios-x86_64"
-    // iosRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:ios-x86_64"
+    // iosRuntime "org.bytedeco.javacpp-presets:opencv:${opencvVersion}:ios-arm64"
+    iosRuntime "org.nd4j:nd4j-native:$dl4jVersion:ios-x86_64"
+    iosRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:ios-x86_64"
     // iosRuntime "org.bytedeco.javacpp-presets:opencv:${opencvVersion}:ios-x86_64"
     
 }

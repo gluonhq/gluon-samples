@@ -49,29 +49,8 @@ public class Service {
         System.out.println("PREDICT aske1d, image = " + image);
         String answer = "0";
         try {
-            INDArray row = null;
-            Image im = new Image(image.toURI().toString(), width, height, true, true);
-            PixelReader pr = im.getPixelReader();
-            row = Nd4j.createUninitialized(width * height);
-            boolean bw = pr.getColor(0, 0).getBrightness() < .5;
-            System.out.println("bw = "+bw);
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
-                    int pixel = pr.getArgb(i, j);
-                    Color c = pr.getColor(i, j);
-                    // int red = ((pixel >> 16) & 0xff);
-                    //  int green = ((pixel >> 8) & 0xff);
-                    //  int blue = (pixel & 0xff);
-
-                    //   int grayLevel = (int) (0.2162 * (double) red + 0.7152 * (double) green + 0.0722 * (double) blue) / 3;
-                    //   grayLevel = (int)((red + green + blue)/3.);
-                    //   grayLevel = 255 - grayLevel; // Inverted the grayLevel value here.
-                    //  int gray = (grayLevel << 16) + (grayLevel << 8) + grayLevel;
-                    //    System.out.println("p[" + i + "][" + j + "]: " + pixel+" -> "+grayLevel+ "("+red+", "+green+", "+blue+")"+" -> "+c.getBrightness()+", "+c.getSaturation()+", "+c.getHue()+", "+c.getOpacity());
-                    row.putScalar(j * height + i, bw? c.getBrightness() : 1 - c.getBrightness());
-                }
-            }
-
+            INDArray row = fromImage(image);
+       
 
 //            
 //            INDArray row = null;
@@ -92,6 +71,33 @@ public class Service {
         return new SimpleStringProperty(answer);
     }
 
+    private INDArray fromImage(File image) {
+        System.out.println("FROMImage called for "+image);
+        Image im = new Image(image.toURI().toString(), width, height, false, true);
+        PixelReader pr = im.getPixelReader();
+        System.out.println("crated image, "+im.getWidth()+", "+im.getHeight());
+        INDArray row = Nd4j.createUninitialized(width * height);
+        boolean bw = pr.getColor(0, 0).getBrightness() < .5;
+        System.out.println("bw = " + bw);
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                int pixel = pr.getArgb(i, j);
+                Color c = pr.getColor(i, j);
+                // int red = ((pixel >> 16) & 0xff);
+                //  int green = ((pixel >> 8) & 0xff);
+                //  int blue = (pixel & 0xff);
+
+                //   int grayLevel = (int) (0.2162 * (double) red + 0.7152 * (double) green + 0.0722 * (double) blue) / 3;
+                //   grayLevel = (int)((red + green + blue)/3.);
+                //   grayLevel = 255 - grayLevel; // Inverted the grayLevel value here.
+                //  int gray = (grayLevel << 16) + (grayLevel << 8) + grayLevel;
+                //    System.out.println("p[" + i + "][" + j + "]: " + pixel+" -> "+grayLevel+ "("+red+", "+green+", "+blue+")"+" -> "+c.getBrightness()+", "+c.getSaturation()+", "+c.getHue()+", "+c.getOpacity());
+                row.putScalar(j * height + i, bw ? c.getBrightness() : 1 - c.getBrightness());
+            }
+        }
+        return row;
+    }
+    
     public StringProperty predictRemote(Model model, File image) throws IOException {
         byte[] rawBody = Files.readAllBytes(image.toPath());
         StringProperty answer = new SimpleStringProperty();
@@ -111,11 +117,12 @@ public class Service {
 
     public void updateModel(Model model, File image, int label) {
         try {
+//            NativeImageLoader loader = new NativeImageLoader(width, height, channels, true);
+//            ImagePreProcessingScaler scaler = new ImagePreProcessingScaler(1, 0);
+//            INDArray row = loader.asRowVector(image);
+//            scaler.transform(row);
             MultiLayerNetwork nnmodel = model.getNnModel();
-            NativeImageLoader loader = new NativeImageLoader(width, height, channels, true);
-            ImagePreProcessingScaler scaler = new ImagePreProcessingScaler(1, 0);
-            INDArray row = loader.asRowVector(image);
-            scaler.transform(row);
+            INDArray row = fromImage(image);
             INDArray labels = Nd4j.create(10);
             labels.putScalar(label, 1.0d);
             nnmodel.fit(row, labels);
