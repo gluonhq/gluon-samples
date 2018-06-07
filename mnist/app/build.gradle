@@ -70,7 +70,7 @@ dependencies {
     desktopRuntime "org.nd4j:nd4j-native:${dl4jVersion}:macosx-x86_64"
     desktopRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:linux-x86_64"
     desktopRuntime "org.bytedeco.javacpp-presets:openblas:${openblasVersion}:macosx-x86_64"
-    // desktopRuntime "org.bytedeco.javacpp-presets:opencv:${opencvVersion}:linux-x86_64"
+    desktopRuntime "org.bytedeco.javacpp-presets:opencv:${opencvVersion}:linux-x86_64"
     desktopRuntime "org.bytedeco.javacpp-presets:opencv:${opencvVersion}:macosx-x86_64"
 
     androidRuntime "org.nd4j:nd4j-native:${dl4jVersion}:android-arm"
@@ -124,8 +124,8 @@ jfxmobile {
     }
     ios {
         infoPList = file('src/ios/Default-Info.plist')
-smallIio=true
- ignoreNativeLibs = ["libopenblas.a","libopenblas_atomp-r0.2.20.a","libopenblas_armv8p-r0.2.20.a"]
+        smallIio=false
+        ignoreNativeLibs = ["libopenblas.a","libopenblas_atomp-r0.2.20.a","libopenblas_armv8p-r0.2.20.a"]
         forceLinkClasses = [
                 'com.gluonhq.**.*',
                 'javax.annotations.**.*',

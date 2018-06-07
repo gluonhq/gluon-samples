@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -37,6 +38,7 @@ public class Service {
     private final int channels = 1;
     private final int outputNum = 10;
     private boolean ios = false;
+    private boolean sendRawData = true;
 
     private DataSetIterator dataIter;
 
@@ -49,10 +51,12 @@ public class Service {
         System.out.println("PREDICT aske1d, image = " + image);
         String answer = "0";
         try {
+            // for now we use the JavaFX PixelReader to read images, due to an issue in NativeImageLoader 
+            // on Android that is fixed after 1.0.0-beta
             INDArray row = fromImage(image);
        
 
-//            
+            
 //            INDArray row = null;
 //            NativeImageLoader loader = new NativeImageLoader(width, height, channels, true);
 //            row = loader.asRowVector(image);
@@ -115,7 +119,17 @@ public class Service {
         return answer;
     }
 
+    /**
+     * Here, we can either update the local model and send a gradient to the cloud;
+     * or we can send the raw data + label to the cloud.
+     * @param model
+     * @param image
+     * @param label 
+     */
     public void updateModel(Model model, File image, int label) {
+        if (sendRawData) {
+        updateWithRawData(image, label);
+        } else {
         try {
 //            NativeImageLoader loader = new NativeImageLoader(width, height, channels, true);
 //            ImagePreProcessingScaler scaler = new ImagePreProcessingScaler(1, 0);
@@ -123,6 +137,7 @@ public class Service {
 //            scaler.transform(row);
             MultiLayerNetwork nnmodel = model.getNnModel();
             INDArray row = fromImage(image);
+            
             INDArray labels = Nd4j.create(10);
             labels.putScalar(label, 1.0d);
             nnmodel.fit(row, labels);
@@ -142,6 +157,21 @@ public class Service {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        }
+    }
+    
+    private void updateWithRawData(File image, int label) {
+        try {
+            byte[] rawBody = Files.readAllBytes(image.toPath());
+            GluonObservableObject<Void> function = RemoteFunctionBuilder.create("trainImage")
+                    .cachingEnabled(false)
+                    .param("label", String.valueOf(label))
+                    .rawBody(rawBody)
+                    .object().call(new VoidInputConverter());
+        } catch (IOException ex) {
+            Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
 }

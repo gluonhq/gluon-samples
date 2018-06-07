@@ -143,6 +143,7 @@ public class StartPresenter extends GluonPresenter<GluonMnistDL> {
           MATCH_VIEW.switchView();
             Optional<Object> presenter = MATCH_VIEW.getPresenter();
             MatchPresenter p = (MatchPresenter) presenter.get();
+            p.setResult(-1);
             answer.addListener(new InvalidationListener() {
                 @Override
                 public void invalidated(Observable o) {
