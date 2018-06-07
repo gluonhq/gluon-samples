@@ -28,13 +28,15 @@ public class Main {
     }
     
     private static void runTests(MultiLayerNetwork model) throws Exception {
+        InputStream five = Main.class.getResourceAsStream("/mytestdata/5599.png");
         InputStream sixa = Main.class.getResourceAsStream("/mytestdata/6a.png");
         InputStream sixb = Main.class.getResourceAsStream("/mytestdata/6b.png");
         sixa.mark(Integer.MAX_VALUE);
         sixb.mark(Integer.MAX_VALUE);
-
-        String p0 = utils.predict(model, sixa);
-        String p1 = utils.predict(model, sixb);
+        String f = utils.predict(model, five);
+        System.out.println("FIVE? "+f);
+        String p0 = utils.predict(model, sixa, true);
+        String p1 = utils.predict(model, sixb, true);
         System.out.println("p0 = "+p0+" and p1 = "+p1);
 
         if (!"6".equals(p0)) {
@@ -52,8 +54,8 @@ public class Main {
 
         sixa.reset();
         sixb.reset();
-        utils.output(model, sixa);
-        utils.output(model, sixb);
+        utils.output(model, sixa, true);
+        utils.output(model, sixb, true);
     }
 
 }
