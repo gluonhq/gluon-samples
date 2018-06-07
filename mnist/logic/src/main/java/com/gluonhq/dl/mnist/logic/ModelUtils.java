@@ -179,7 +179,7 @@ public class ModelUtils {
         INDArray newParameter = model.params().dup();
         INDArray update = newParameter.sub(oldParameters);
         System.out.println(update);
-
+        saveModel(model, Main.savedModelLocation);
         // We could then send the update over the network and apply it this way:
         // model.setParams(model.params().add(update));
     }

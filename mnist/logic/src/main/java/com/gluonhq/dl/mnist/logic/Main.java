@@ -8,13 +8,14 @@ import org.deeplearning4j.util.ModelSerializer;
 
 public class Main {
 
-    static String savedModelLocation = "trained_mnist_model.zip";
+    public static String savedModelLocation = "trained_mnist_model.zip";
     static ModelUtils utils = new ModelUtils();
 
     public static void main(String[] args) throws Exception {
         File f = new File(savedModelLocation);
         MultiLayerNetwork model = null;
         if (f.exists()) {
+            System.out.println("Model exists, restore it");
             model = ModelSerializer.restoreMultiLayerNetwork(savedModelLocation);
 
         } else {
@@ -32,8 +33,22 @@ public class Main {
         sixa.mark(Integer.MAX_VALUE);
         sixb.mark(Integer.MAX_VALUE);
 
-        utils.trainModel(model, true, sixa, 6);
-        utils.trainModel(model, true, sixb, 6);
+        String p0 = utils.predict(model, sixa);
+        String p1 = utils.predict(model, sixb);
+        System.out.println("p0 = "+p0+" and p1 = "+p1);
+
+        if (!"6".equals(p0)) {
+            System.out.println("Retrain for 6a");
+            sixa.reset();
+            utils.trainModel(model, true, sixa, 6);
+
+        }
+        if (!"6".equals(p1)) {
+            System.out.println("Retrain for 6b");
+            sixb.reset();
+            utils.trainModel(model, true, sixb, 6);
+
+        }
 
         sixa.reset();
         sixb.reset();
