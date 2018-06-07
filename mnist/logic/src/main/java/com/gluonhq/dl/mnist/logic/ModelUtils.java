@@ -107,7 +107,7 @@ public class ModelUtils {
         final INDArray[] customData = {null, null};
         if (customImage != null) {
             NativeImageLoader loader = new NativeImageLoader(width, height, channels);
-            DataNormalization scaler = new ImagePreProcessingScaler(0, 1);
+            DataNormalization scaler = invertColors? new ImagePreProcessingScaler(1,0) : new ImagePreProcessingScaler(0, 1);
             customData[0] = loader.asMatrix(customImage);
             scaler.transform(customData[0]);
             customData[1] = Nd4j.create(1, 10);
@@ -154,7 +154,8 @@ public class ModelUtils {
         };
 
         // Scale pixel values to 0-1
-        DataNormalization scaler = new ImagePreProcessingScaler(invertColors ? 1 : 0, invertColors ? 0 : 1);
+  //       DataNormalization scaler = new ImagePreProcessingScaler(invertColors ? 1 : 0, invertColors ? 0 : 1);
+        DataNormalization scaler = new ImagePreProcessingScaler(0, 1);
         scaler.fit(dataIter);
         dataIter.setPreProcessor(scaler);
         // The Score iteration Listener will log
@@ -258,20 +259,31 @@ public class ModelUtils {
      * @throws IOException 
      */
     public INDArray output(MultiLayerNetwork model, InputStream is) throws IOException {
+        return output(model, is, false);
+    }
+    /**
+     * Accept any input stream. Scale data to width*height size and each pixel to 0..1
+     * (or actually 1..0 since we invert)
+     * @param model
+     * @param is
+     * @return
+     * @throws IOException 
+     */
+    public INDArray output(MultiLayerNetwork model, InputStream is, boolean invert) throws IOException {
         NativeImageLoader loader = new NativeImageLoader(width, height, channels);
         INDArray nd = loader.asRowVector(is);
-        return output(model, nd);
+        return output(model, nd, invert);
     }
-
+    
     public INDArray output(MultiLayerNetwork model, String f) throws IOException {
         NativeImageLoader loader = new NativeImageLoader(width, height, channels);
         INDArray nd = loader.asRowVector(new File(f));
-        return output(model, nd);
+        return output(model, nd, false);
     }
 
-    private INDArray output(MultiLayerNetwork model, INDArray nd) {
+    private INDArray output(MultiLayerNetwork model, INDArray nd, boolean invert) {
         // invert black-white 
-        DataNormalization scaler = new ImagePreProcessingScaler(0,1);
+        DataNormalization scaler = new ImagePreProcessingScaler(invert? 1:0, invert? 0: 1);
         scaler.transform(nd);
 //        preprocess(nd);
 //        System.out.println("nd = "+nd);
@@ -282,9 +294,13 @@ public class ModelUtils {
     }
     
     public String predict(MultiLayerNetwork model, InputStream is) throws IOException {
+        return predict(model, is, false);
+    }
+    
+    public String predict(MultiLayerNetwork model, InputStream is, boolean invertColors) throws IOException {
         NativeImageLoader loader = new NativeImageLoader(width, height, channels);
         INDArray nd = loader.asRowVector(is);
-        return predict(model, nd);
+        return predict(model, nd, invertColors);
     }
 
     public String predict(MultiLayerNetwork model, String f) throws IOException {
@@ -294,10 +310,16 @@ public class ModelUtils {
     }
 
     private String predict(MultiLayerNetwork model, INDArray nd) {
+        return predict (model, nd, false);
+    }
+    
+    private String predict(MultiLayerNetwork model, INDArray nd, boolean invertColors) {
         // invert black-white 
-        DataNormalization scaler = new ImagePreProcessingScaler(0,1);
+        DataNormalization scaler = new ImagePreProcessingScaler(invertColors? 1 : 0, 
+        invertColors ? 0 :1);
         scaler.transform(nd);
         preprocess(nd);
+        System.out.println("I have to predict "+nd);
         int p = model.predict(nd)[0];
         System.out.println("prediction = "+model.predict(nd)[0]);
         return String.valueOf(p);
