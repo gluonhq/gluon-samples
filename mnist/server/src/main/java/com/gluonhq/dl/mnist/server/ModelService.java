@@ -56,7 +56,7 @@ public class ModelService {
     }
 
     public String predict (byte[] raw) throws IOException {
-        return utils.predict(model, new ByteArrayInputStream(raw));         
+        return utils.predict(model, new ByteArrayInputStream(raw), true);         
     }
 
     public String correctImage(byte[] raw, String label) {
