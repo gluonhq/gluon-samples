@@ -2,14 +2,16 @@ package com.gluonhq.dl.mnist.logic;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Logger;
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
@@ -61,7 +63,10 @@ public class ModelUtils {
     public final int batchSize = 128;
     public final int outputNum = 10;
     public final int numEpochs = 2;
-
+    
+    private final List<TrainRequest> trainRequests = new LinkedList<>();
+    private final AtomicBoolean inTraining = new AtomicBoolean(false);
+    
     private static final Logger LOGGER = Logger.getLogger(ModelUtils.class.getName());
 
     static {
@@ -102,18 +107,76 @@ public class ModelUtils {
         MultiLayerNetwork answer = new MultiLayerNetwork(conf);
         return answer;
     }
-    
+
+    public void train() {
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        List<TrainRequest> toProcess = new LinkedList<>();
+                        synchronized (trainRequests) {
+                            if (trainRequests.isEmpty()) {
+                                trainRequests.wait();
+                            }
+                            toProcess.addAll(trainRequests);
+                            trainRequests.clear();
+                        }
+                        List<INDArray> features = new ArrayList<>(toProcess.size());
+                        List<INDArray> labels = new ArrayList<>(toProcess.size());
+                        for (TrainRequest request : toProcess) {
+                            NativeImageLoader loader = new NativeImageLoader(width, height, channels);
+                            DataNormalization scaler = request.invert ? new ImagePreProcessingScaler(1, 0) : new ImagePreProcessingScaler(0, 1);
+                            INDArray f = loader.asMatrix(request.b);
+                            scaler.transform(f);
+                            features.add(f);
+                            INDArray l = Nd4j.create(1, 10);
+                            l.putScalar(Integer.valueOf(request.label), 1.0);
+                            labels.add(l);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        t.start();
+    }
+
     public void trainModel(MultiLayerNetwork model, boolean invertColors, InputStream customImage, int customLabel) throws Exception {
+        List<INDArray> extraFeatures = new LinkedList<>();
+        List<Integer> extraLabels = new LinkedList<>();
         final INDArray[] customData = {null, null};
         if (customImage != null) {
             NativeImageLoader loader = new NativeImageLoader(width, height, channels);
-            DataNormalization scaler = invertColors? new ImagePreProcessingScaler(1,0) : new ImagePreProcessingScaler(0, 1);
+            DataNormalization scaler = invertColors ? new ImagePreProcessingScaler(1, 0) : new ImagePreProcessingScaler(0, 1);
             customData[0] = loader.asMatrix(customImage);
             scaler.transform(customData[0]);
             customData[1] = Nd4j.create(1, 10);
             customData[1].putScalar(customLabel, 1.0);
+            extraFeatures.add(customData[0]);
+            extraLabels.add(customLabel);
         }
+        trainModel(model, extraFeatures, extraLabels);
+    }
 
+    public void trainModel(MultiLayerNetwork model, boolean invertColors, List<InputStream> customImage,
+            List<Integer> customLabel) throws Exception {
+
+        List<INDArray> extraFeatures = new LinkedList<>();
+        List<Integer> extraLabels = new LinkedList<>();
+        for (int i = 0; i < customImage.size(); i++) {
+            NativeImageLoader loader = new NativeImageLoader(width, height, channels);
+            DataNormalization scaler = invertColors ? new ImagePreProcessingScaler(1, 0) : new ImagePreProcessingScaler(0, 1);
+            INDArray feature = loader.asMatrix(customImage.get(i));
+            scaler.transform(feature);
+            extraFeatures.add(feature);
+            extraLabels.add(customLabel.get(i));
+        }
+        trainModel(model, extraFeatures, extraLabels);
+    }
+
+    private void trainModel(MultiLayerNetwork model, List<INDArray> extraFeatures, List<Integer> extraLabels) throws Exception {
         /*
         This class downloadData() downloads the data
         stores the data in java's tmpdir
@@ -123,7 +186,6 @@ public class ModelUtils {
         http://github.com/myleott/mnist_png/raw/master/mnist_png.tar.gz
          */
         ModelUtils.downloadData();
-
         // Define the File Paths
         File trainData = new File(DATA_PATH + "/mnist_png/training");
         System.out.println("abspath traindata = "+trainData.getAbsolutePath());
@@ -142,12 +204,18 @@ public class ModelUtils {
         DataSetIterator dataIter = new RecordReaderDataSetIterator(recordReader, batchSize, 1, outputNum) {
             public DataSet next(int batchSize) {
                 DataSet ds = super.next(batchSize);
-                if (customData[0] != null) {
+                if (extraFeatures.size() > 0) {
+//                 if (customData[0] != null) {
                     // append our custom data to each batch
                     INDArray features = ds.getFeatures();
                     INDArray labels = ds.getLabels();
-                    return new DataSet(Nd4j.concat(0, features, customData[0]),
-                                       Nd4j.concat(0, labels,   customData[1]));
+                    for (int i = 0; i < extraFeatures.size(); i++) {
+                        features = Nd4j.concat(0, features, extraFeatures.get(i));
+                        INDArray ln = Nd4j.create(1, 10);
+                        ln.putScalar(extraLabels.get(i), 1.0);
+                        labels = Nd4j.concat(0, labels, ln);
+                    }
+                    return new DataSet(features, labels);
                 }
                 return ds;
             }
@@ -165,13 +233,22 @@ public class ModelUtils {
         INDArray oldParameters = model.params().dup();
 
         LOGGER.info("*****TRAIN MODEL********");
-        for (int i = 0; i < numEpochs || customData[0] != null; i++) {
+        for (int i = 0; i < numEpochs || !extraFeatures.isEmpty(); i++) {
             model.fit(dataIter);
-            if (customData[0] != null) {
-                // if we got custom data, iterate until the model gets it right
-                int p = model.predict(customData[0])[0];
-                System.out.println("custom feature " + customLabel + " predicted as " + p);
-                if (p == customLabel) {
+            if (!extraFeatures.isEmpty()) {
+                boolean allgood = true;
+                for (int j = 0; j < extraFeatures.size(); j++) {
+                    int p = model.predict(extraFeatures.get(j))[0];
+                    int correct = extraLabels.get(j);
+                    System.out.println("custom feature " + correct + " predicted as " + p);
+                    if (p != correct) {
+                        allgood = false;
+                    }
+                }
+                if (allgood) break;
+                System.out.println("bummer, at least one prediction for extra data failed after try "+i+" with numEpochs "+numEpochs);
+                if (i > 2 *numEpochs) {
+                    System.out.println("No good result after "+i+" tries, bail");
                     break;
                 }
             }

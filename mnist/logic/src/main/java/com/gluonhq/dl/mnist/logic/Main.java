@@ -1,8 +1,9 @@
 package com.gluonhq.dl.mnist.logic;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
+import java.util.LinkedList;
+import java.util.List;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.util.ModelSerializer;
 
@@ -39,17 +40,30 @@ public class Main {
         String p1 = utils.predict(model, sixb, true);
         System.out.println("p0 = "+p0+" and p1 = "+p1);
 
-        if (!"6".equals(p0)) {
-            System.out.println("Retrain for 6a");
+        boolean single = false;
+        if (single) {
+            if (!"6".equals(p0)) {
+                System.out.println("Retrain for 6a");
+                sixa.reset();
+                utils.trainModel(model, true, sixa, 6);
+
+            }
+            if (!"6".equals(p1)) {
+                System.out.println("Retrain for 6b");
+                sixb.reset();
+                utils.trainModel(model, true, sixb, 6);
+
+            }
+        } else if (!"6".equals(p0) || (!"6".equals(p1))) {
             sixa.reset();
-            utils.trainModel(model, true, sixa, 6);
-
-        }
-        if (!"6".equals(p1)) {
-            System.out.println("Retrain for 6b");
             sixb.reset();
-            utils.trainModel(model, true, sixb, 6);
-
+            List<InputStream> is = new LinkedList<>();
+            is.add(sixa);
+            is.add(sixb);
+            List<Integer> labels = new LinkedList<>();
+            labels.add(6);
+            labels.add(6);
+            utils.trainModel(model, true, is, labels);
         }
 
         sixa.reset();
