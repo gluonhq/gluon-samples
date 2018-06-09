@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Consumer;
 import java.util.logging.Logger;
 import org.apache.commons.compress.archivers.tar.TarArchiveEntry;
 import org.apache.commons.compress.archivers.tar.TarArchiveInputStream;
@@ -55,26 +56,33 @@ import org.nd4j.linalg.lossfunctions.LossFunctions;
 public class ModelUtils {
 
     static String DATA_PATH;
-    public final int height = 28;
-    public final int width = 28;
-    public final int channels = 1;
-    public final int rngseed = 123;
-    public final Random randNumGen = new Random(rngseed);
-    public final int batchSize = 128;
-    public final int outputNum = 10;
-    public final int numEpochs = 2;
+    public static final int height = 28;
+    public static final int width = 28;
+    public static final int channels = 1;
+    public static final int rngseed = 123;
+    public static final Random randNumGen = new Random(rngseed);
+    public static final int batchSize = 128;
+    public static final int outputNum = 10;
+    public static final int numEpochs = 2;
     
-    private final List<TrainRequest> trainRequests = new LinkedList<>();
-    private final AtomicBoolean inTraining = new AtomicBoolean(false);
+    private static final List<TrainRequest> trainRequests = new LinkedList<>();
+    private static final AtomicBoolean inTraining = new AtomicBoolean(false);
+    
+    private static final Thread trainingThread;
+    private static MultiLayerNetwork latestModel;
     
     private static final Logger LOGGER = Logger.getLogger(ModelUtils.class.getName());
+    private static Consumer<MultiLayerNetwork> callback;
 
     static {
         String tmpDir = System.getProperty("user.home");
         DATA_PATH = tmpDir + File.separator + "mnist"+File.separator;
         System.out.println("datapath = "+DATA_PATH);
+        trainingThread = train();
     }
-
+public static void setCallback(Consumer<MultiLayerNetwork> consumer) {
+    callback = consumer;
+}
     public MultiLayerNetwork createModel() throws Exception {
 
 
@@ -108,7 +116,7 @@ public class ModelUtils {
         return answer;
     }
 
-    public void train() {
+    public static Thread train() {
         Thread t = new Thread() {
             @Override
             public void run() {
@@ -117,22 +125,30 @@ public class ModelUtils {
                         List<TrainRequest> toProcess = new LinkedList<>();
                         synchronized (trainRequests) {
                             if (trainRequests.isEmpty()) {
+                                System.out.println("Waiting for train requests...");
                                 trainRequests.wait();
+                                System.out.println("Got train requests...");
+
                             }
                             toProcess.addAll(trainRequests);
                             trainRequests.clear();
                         }
                         List<INDArray> features = new ArrayList<>(toProcess.size());
-                        List<INDArray> labels = new ArrayList<>(toProcess.size());
+                        List<Integer> labels = new ArrayList<>(toProcess.size());
                         for (TrainRequest request : toProcess) {
                             NativeImageLoader loader = new NativeImageLoader(width, height, channels);
                             DataNormalization scaler = request.invert ? new ImagePreProcessingScaler(1, 0) : new ImagePreProcessingScaler(0, 1);
                             INDArray f = loader.asMatrix(request.b);
                             scaler.transform(f);
                             features.add(f);
-                            INDArray l = Nd4j.create(1, 10);
-                            l.putScalar(Integer.valueOf(request.label), 1.0);
-                            labels.add(l);
+                            labels.add(request.label);
+                        }
+                        MultiLayerNetwork result = trainModel(latestModel, features, labels);
+                        if (callback != null) {
+                            // this is synchronous!
+                            System.out.println("invoking callback, Synchronous call!");
+                            callback.accept(result);
+                            System.out.println("invoked callback,");
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -141,8 +157,18 @@ public class ModelUtils {
             }
         };
         t.start();
+        return t;
     }
 
+    public void correctImage(MultiLayerNetwork model, boolean invert, InputStream customImage, int customLabel) throws Exception {
+        TrainRequest req = new TrainRequest(customImage, customLabel, invert);
+        latestModel = model;
+        synchronized (trainRequests) {
+            trainRequests.add(req);
+            trainRequests.notifyAll();
+        }
+    }
+    
     public void trainModel(MultiLayerNetwork model, boolean invertColors, InputStream customImage, int customLabel) throws Exception {
         List<INDArray> extraFeatures = new LinkedList<>();
         List<Integer> extraLabels = new LinkedList<>();
@@ -176,7 +202,7 @@ public class ModelUtils {
         trainModel(model, extraFeatures, extraLabels);
     }
 
-    private void trainModel(MultiLayerNetwork model, List<INDArray> extraFeatures, List<Integer> extraLabels) throws Exception {
+    private static MultiLayerNetwork trainModel(MultiLayerNetwork model, List<INDArray> extraFeatures, List<Integer> extraLabels) throws Exception {
         /*
         This class downloadData() downloads the data
         stores the data in java's tmpdir
@@ -258,11 +284,12 @@ public class ModelUtils {
         INDArray update = newParameter.sub(oldParameters);
         System.out.println(update);
         saveModel(model, Main.savedModelLocation);
+        return model;
         // We could then send the update over the network and apply it this way:
         // model.setParams(model.params().add(update));
     }
     
-    public void saveModel(MultiLayerNetwork model, String location) throws IOException {
+    public static void saveModel(MultiLayerNetwork model, String location) throws IOException {
         LOGGER.info("******SAVE TRAINED MODEL******");
         // Details
 

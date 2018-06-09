@@ -5,8 +5,12 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -21,8 +25,9 @@ import org.nd4j.linalg.factory.Nd4j;
 @Startup
 @Singleton
 public class ModelService {
-         private static final Logger LOGGER = Logger.getLogger(ModelService.class.getName());
-             private static final String MODEL_LOCATION = System.getProperty("modelFile", "/tmp/model.zip");
+    private static final Logger LOGGER = Logger.getLogger(ModelService.class.getName());
+    private static final String MODEL_LOCATION = System.getProperty("modelFile", "/tmp/model.zip");
+    private static final String correctedPath = "/tmp/corrected";
     private MultiLayerNetwork model;
     private ModelUtils utils;
     private ExecutorService executor = Executors.newFixedThreadPool(1); // synchronous for now 
@@ -44,6 +49,13 @@ public class ModelService {
             } else {
                 model = utils.createModel();
             }
+            Consumer<MultiLayerNetwork> consumer = m -> {
+                System.out.println("Got new model after training");
+                this.model = m;
+            };
+            ModelUtils.setCallback(consumer);
+            File corPath = new File(correctedPath);
+            corPath.mkdirs();
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Failed to load model.", e);
         }
@@ -51,6 +63,7 @@ public class ModelService {
 
     public byte[] getModel() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream(1024 * 512);
+        System.out.println("model asked by client");
         ModelSerializer.writeModel(model, baos, false);
         return baos.toByteArray();
     }
@@ -63,7 +76,10 @@ public class ModelService {
         Runnable r = () -> {
             try {
                 System.out.println("TRAIN "+raw.length+" bytes for label "+label);
-                utils.trainModel(model, true, new ByteArrayInputStream(raw), Integer.valueOf(label));
+                String name = label+"-"+System.currentTimeMillis();
+                Path path = Paths.get(correctedPath, name);
+                Files.write(path, raw);
+                utils.correctImage(model, true, new ByteArrayInputStream(raw), Integer.valueOf(label));
                 System.out.println("DONE TRAIN "+raw.length+" bytes for label "+label);
             } catch (Exception e) {
                 Logger.getLogger(ModelService.class.getName()).log(Level.SEVERE, null, e);

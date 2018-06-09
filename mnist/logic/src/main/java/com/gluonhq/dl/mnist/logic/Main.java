@@ -45,13 +45,13 @@ public class Main {
             if (!"6".equals(p0)) {
                 System.out.println("Retrain for 6a");
                 sixa.reset();
-                utils.trainModel(model, true, sixa, 6);
+                utils.correctImage(model, true, sixa, 6);
 
             }
             if (!"6".equals(p1)) {
                 System.out.println("Retrain for 6b");
                 sixb.reset();
-                utils.trainModel(model, true, sixb, 6);
+                utils.correctImage(model, true, sixb, 6);
 
             }
         } else if (!"6".equals(p0) || (!"6".equals(p1))) {
