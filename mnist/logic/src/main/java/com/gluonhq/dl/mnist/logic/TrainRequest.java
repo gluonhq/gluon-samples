@@ -17,7 +17,9 @@ public class TrainRequest {
         try {
             this.invert = invert;
             this.b = new byte[is.available()];
+            is.read(this.b);
             this.label = label;
+            System.out.println("created tr with "+this.b.length+" bytes, labeled "+this.label);
         } catch (IOException ex) {
             Logger.getLogger(TrainRequest.class.getName()).log(Level.SEVERE, null, ex);
         }
