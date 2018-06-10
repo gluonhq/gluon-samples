@@ -2,6 +2,7 @@ package com.gluonhq.dl.mnist.logic;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -138,7 +139,7 @@ public static void setCallback(Consumer<MultiLayerNetwork> consumer) {
                         for (TrainRequest request : toProcess) {
                             NativeImageLoader loader = new NativeImageLoader(width, height, channels);
                             DataNormalization scaler = request.invert ? new ImagePreProcessingScaler(1, 0) : new ImagePreProcessingScaler(0, 1);
-                            INDArray f = loader.asMatrix(request.b);
+                            INDArray f = loader.asMatrix(new ByteArrayInputStream(request.b));
                             scaler.transform(f);
                             features.add(f);
                             labels.add(request.label);

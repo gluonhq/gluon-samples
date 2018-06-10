@@ -1,5 +1,7 @@
 package com.gluonhq.dl.mnist.logic;
 
+import com.google.common.io.Files;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.util.LinkedList;
@@ -26,6 +28,8 @@ public class Main {
             utils.evaluateModel(model, true);
         }
         runTests(model);
+        byte[] b = Files.toByteArray(new File("/tmp/3-1528533059666"));
+        correctImage(model, b, 3);
     }
     
     private static void runTests(MultiLayerNetwork model) throws Exception {
@@ -72,4 +76,9 @@ public class Main {
         utils.output(model, sixb, true);
     }
 
+    private static void correctImage(MultiLayerNetwork model, byte[] raw, int label) throws Exception {
+        System.out.println("raw = "+raw);
+        utils.correctImage(model, true, new ByteArrayInputStream(raw), label);
+
+    }
 }
