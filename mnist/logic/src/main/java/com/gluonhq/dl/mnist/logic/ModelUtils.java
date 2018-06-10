@@ -232,8 +232,6 @@ public static void setCallback(Consumer<MultiLayerNetwork> consumer) {
             public DataSet next(int batchSize) {
                 DataSet ds = super.next(batchSize);
                 if (extraFeatures.size() > 0) {
-//                 if (customData[0] != null) {
-                    // append our custom data to each batch
                     INDArray features = ds.getFeatures();
                     INDArray labels = ds.getLabels();
                     for (int i = 0; i < extraFeatures.size(); i++) {
@@ -257,12 +255,13 @@ public static void setCallback(Consumer<MultiLayerNetwork> consumer) {
         // output to show how well the network is training
         model.setListeners(new ScoreIterationListener(100));
 
-        INDArray oldParameters = model.params().dup();
+    //    INDArray oldParameters = model.params().dup();
 
         LOGGER.info("*****TRAIN MODEL********");
         for (int i = 0; i < numEpochs || !extraFeatures.isEmpty(); i++) {
             model.fit(dataIter);
             if (!extraFeatures.isEmpty()) {
+                System.out.println("EXTRA NOT NULL");
                 boolean allgood = true;
                 for (int j = 0; j < extraFeatures.size(); j++) {
                     int p = model.predict(extraFeatures.get(j))[0];
@@ -281,9 +280,9 @@ public static void setCallback(Consumer<MultiLayerNetwork> consumer) {
             }
         }
 
-        INDArray newParameter = model.params().dup();
-        INDArray update = newParameter.sub(oldParameters);
-        System.out.println(update);
+//        INDArray newParameter = model.params().dup();
+//        INDArray update = newParameter.sub(oldParameters);
+//        System.out.println(update);
         saveModel(model, Main.savedModelLocation);
         return model;
         // We could then send the update over the network and apply it this way:
@@ -305,12 +304,16 @@ public static void setCallback(Consumer<MultiLayerNetwork> consumer) {
         ModelSerializer.writeModel(model, locationToSave, saveUpdater);
     }
     
+    public void evaluateModel(MultiLayerNetwork model) throws IOException {
+        evaluateModel(model, false);
+    }
+    
     public void evaluateModel(MultiLayerNetwork model, boolean invertColors) throws IOException {
         LOGGER.info("******EVALUATE MODEL******");
 
         ParentPathLabelGenerator labelMaker = new ParentPathLabelGenerator();
         ImageRecordReader recordReader = new ImageRecordReader(height,width,channels,labelMaker);
-        recordReader.setListeners(new LogRecordListener());
+//        recordReader.setListeners(new LogRecordListener());
 
         // Initialize the record reader
         // add a listener, to extract the name
@@ -424,7 +427,7 @@ public static void setCallback(Consumer<MultiLayerNetwork> consumer) {
         invertColors ? 0 :1);
         scaler.transform(nd);
         preprocess(nd);
-        System.out.println("I have to predict "+nd);
+//      System.out.println("I have to predict "+nd);
         int p = model.predict(nd)[0];
         System.out.println("prediction = "+model.predict(nd)[0]);
         return String.valueOf(p);

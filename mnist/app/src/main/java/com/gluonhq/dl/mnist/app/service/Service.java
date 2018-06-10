@@ -159,7 +159,7 @@ public class Service {
         }
         }
     }
-    
+
     private void updateWithRawData(File image, int label) {
         try {
             byte[] rawBody = Files.readAllBytes(image.toPath());
@@ -168,10 +168,16 @@ public class Service {
                     .param("label", String.valueOf(label))
                     .rawBody(rawBody)
                     .object().call(new VoidInputConverter());
+            function.stateProperty().addListener(new ChangeListener<ConnectState>() {
+                @Override
+                public void changed(ObservableValue<? extends ConnectState> ov, ConnectState t, ConnectState t1) {
+                    System.out.println("train state changed to " + t1);
+                }
+            });
         } catch (IOException ex) {
             Logger.getLogger(Service.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
 }
