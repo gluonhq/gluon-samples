@@ -46,7 +46,6 @@ import org.deeplearning4j.nn.conf.layers.DenseLayer;
 import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.nn.weights.WeightInit;
-import org.deeplearning4j.optimize.api.IterationListener;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.api.ndarray.INDArray;
@@ -91,22 +90,14 @@ public class TrainingView extends View {
                 int batchSize = 50;
                 int evalSize = 50;
 
-                // load training data
-                RecordReader rrTrain = new CSVRecordReader();
-                rrTrain.initialize(new InputStreamInputSplit(TrainingView.class.getResourceAsStream("/linear_data_train.csv")));
-                DataSetIterator iterTrain = new RecordReaderDataSetIterator(rrTrain, batchSize, 0, 2);
-
-                // load evaluation data
-                RecordReader rrEval = new CSVRecordReader();
-                rrEval.initialize(new InputStreamInputSplit(TrainingView.class.getResourceAsStream("/linear_data_eval.csv")));
-                DataSetIterator iterEval = new RecordReaderDataSetIterator(rrEval, evalSize, 0, 2);
-
                 long seed = 123L;
                 double learningRate = 0.01;
                 int numEpochs = 30;
                 int numInputs = 2;
                 int numHiddenNodes = 20;
                 int numOutputs = 2;
+                
+
 
                 MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
                         .seed(seed)
@@ -132,7 +123,16 @@ public class TrainingView extends View {
                 MultiLayerNetwork network = new MultiLayerNetwork(conf);
                 network.init();
                 network.setListeners(new ScoreIterationListener(100));
-      
+                      // load training data
+                RecordReader rrTrain = new CSVRecordReader();
+                rrTrain.initialize(new InputStreamInputSplit(TrainingView.class.getResourceAsStream("/linear_data_train.csv")));
+                DataSetIterator iterTrain = new RecordReaderDataSetIterator(rrTrain, batchSize, 0, 2);
+
+                // load evaluation data
+                RecordReader rrEval = new CSVRecordReader();
+                rrEval.initialize(new InputStreamInputSplit(TrainingView.class.getResourceAsStream("/linear_data_eval.csv")));
+                DataSetIterator iterEval = new RecordReaderDataSetIterator(rrEval, evalSize, 0, 2);
+
 
                 Platform.runLater(() -> label.setText("training model..."));
                 for (int n = 0; n < numEpochs; n++) {
