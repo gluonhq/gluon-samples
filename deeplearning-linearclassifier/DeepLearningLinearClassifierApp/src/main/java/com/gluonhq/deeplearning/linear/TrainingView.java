@@ -26,8 +26,15 @@
  */
 package com.gluonhq.deeplearning.linear;
 
+import com.gluonhq.charm.down.Services;
+import com.gluonhq.charm.down.plugins.StorageService;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.geometry.Pos;
@@ -36,9 +43,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import org.datavec.api.records.reader.RecordReader;
 import org.datavec.api.records.reader.impl.csv.CSVRecordReader;
+import org.datavec.api.split.FileSplit;
 import org.datavec.api.split.InputStreamInputSplit;
 import org.deeplearning4j.datasets.datavec.RecordReaderDataSetIterator;
 import org.deeplearning4j.eval.Evaluation;
+import org.deeplearning4j.nn.api.Model;
 import org.deeplearning4j.nn.api.OptimizationAlgorithm;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
@@ -122,10 +131,22 @@ public class TrainingView extends View {
 
                 MultiLayerNetwork network = new MultiLayerNetwork(conf);
                 network.init();
-                network.setListeners(new ScoreIterationListener(100));
-                      // load training data
+                network.setListeners(new ScoreIterationListener(10) {
+                    @Override
+                    public void iterationDone(Model model, int iteration, int epoch) {
+                        if (iteration%10 == 0)
+                        System.out.println("iteration "+iteration+" done, epoch = "+epoch+", score = "+model.score()); //To change body of generated methods, choose Tools | Templates.
+                    }
+                
+                });
+                
+                // load training data
                 RecordReader rrTrain = new CSVRecordReader();
-                rrTrain.initialize(new InputStreamInputSplit(TrainingView.class.getResourceAsStream("/linear_data_train.csv")));
+                StorageService storageService = Services.get(StorageService.class).get();
+                File storageDir = storageService.getPrivateStorage().get();
+                File trainsrc = getFile(storageDir, "linear_data_train.csv", TrainingView.class.getResourceAsStream("/linear_data_train.csv"));
+         //       rrTrain.initialize(new InputStreamInputSplit(TrainingView.class.getResourceAsStream("/linear_data_train.csv")));
+                rrTrain.initialize(new FileSplit(trainsrc));
                 DataSetIterator iterTrain = new RecordReaderDataSetIterator(rrTrain, batchSize, 0, 2);
 
                 // load evaluation data
@@ -164,5 +185,19 @@ t.printStackTrace();
         thread.start();
 
         return task;
+    }
+    
+    private File getFile(File dir, String name, InputStream is) throws IOException {
+        File answer = new File(dir, name);
+        FileOutputStream fos = new FileOutputStream(answer);
+        byte[] buff = new byte[4096];
+        int len = is.read(buff);
+        while (len > 0) {
+            fos.write(buff, 0, len);
+            len = is.read(buff);
+        }
+        fos.close();
+        is.close();
+        return answer;
     }
 }
