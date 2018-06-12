@@ -30,14 +30,20 @@ import com.gluonhq.charm.down.Services;
 import com.gluonhq.charm.down.plugins.StorageService;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.geometry.Pos;
+import javafx.scene.chart.Chart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.ScatterChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -66,6 +72,7 @@ import org.nd4j.linalg.lossfunctions.LossFunctions;
 public class TrainingView extends View {
 
     private final Label label;
+    private final Series<Integer, Double> series;
 
     public TrainingView() {
 
@@ -76,8 +83,11 @@ public class TrainingView extends View {
             Task task = train();
             button.disableProperty().bind(task.runningProperty());
         });
+        series = new Series();
+        series.setName("#iterations");
+        Chart chart = createChart(series);
 
-        VBox controls = new VBox(15.0, label, button);
+        VBox controls = new VBox(15.0, label, button, chart);
         controls.setAlignment(Pos.CENTER);
 
         setCenter(controls);
@@ -95,85 +105,86 @@ public class TrainingView extends View {
 
             @Override
             protected Object call() {
-              try {
-                int batchSize = 50;
-                int evalSize = 50;
+                try {
+                    int batchSize = 50;
+                    int evalSize = 50;
 
-                long seed = 123L;
-                double learningRate = 0.01;
-                int numEpochs = 30;
-                int numInputs = 2;
-                int numHiddenNodes = 20;
-                int numOutputs = 2;
-                
+                    long seed = 123L;
+                    double learningRate = 0.01;
+                    int numEpochs = 30;
+                    int numInputs = 2;
+                    int numHiddenNodes = 20;
+                    int numOutputs = 2;
 
+                    MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
+                            .seed(seed)
+                            .optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
+                            .updater(new Nesterovs(learningRate, 0.9))
+                            .list()
+                            .layer(0, new DenseLayer.Builder()
+                                    .nIn(numInputs)
+                                    .nOut(numHiddenNodes)
+                                    .weightInit(WeightInit.XAVIER)
+                                    .activation(Activation.RELU)
+                                    .build())
+                            .layer(1, new OutputLayer.Builder(LossFunctions.LossFunction.NEGATIVELOGLIKELIHOOD)
+                                    .nIn(numHiddenNodes)
+                                    .nOut(numOutputs)
+                                    .weightInit(WeightInit.XAVIER)
+                                    .activation(Activation.SOFTMAX)
+                                    .build())
+                            .pretrain(false)
+                            .backprop(true)
+                            .build();
 
-                MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
-                        .seed(seed)
-                        .optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
-                        .updater(new Nesterovs(learningRate,0.9))
-                        .list()
-                        .layer(0, new DenseLayer.Builder()
-                                .nIn(numInputs)
-                                .nOut(numHiddenNodes)
-                                .weightInit(WeightInit.XAVIER)
-                                .activation(Activation.RELU)
-                                .build())
-                        .layer(1, new OutputLayer.Builder(LossFunctions.LossFunction.NEGATIVELOGLIKELIHOOD)
-                                .nIn(numHiddenNodes)
-                                .nOut(numOutputs)
-                                .weightInit(WeightInit.XAVIER)
-                                .activation(Activation.SOFTMAX)
-                                .build())
-                        .pretrain(false)
-                        .backprop(true)
-                        .build();
+                    MultiLayerNetwork network = new MultiLayerNetwork(conf);
+                    network.init();
+                    network.setListeners(new ScoreIterationListener(10) {
+                        @Override
+                        public void iterationDone(Model model, int iteration, int epoch) {
+                            double s = model.score();
+                            Platform.runLater(() -> series.getData().add(new XYChart.Data<>(iteration, s)));
 
-                MultiLayerNetwork network = new MultiLayerNetwork(conf);
-                network.init();
-                network.setListeners(new ScoreIterationListener(10) {
-                    @Override
-                    public void iterationDone(Model model, int iteration, int epoch) {
-                        if (iteration%10 == 0)
-                        System.out.println("iteration "+iteration+" done, epoch = "+epoch+", score = "+model.score()); //To change body of generated methods, choose Tools | Templates.
+                            if (iteration % 10 == 0) {
+                                System.out.println("iteration " + iteration + " done, epoch = " + epoch + ", score = " + model.score()); //To change body of generated methods, choose Tools | Templates.
+                            }
+                        }
+
+                    });
+
+                    // load training data
+                    RecordReader rrTrain = new CSVRecordReader();
+                    StorageService storageService = Services.get(StorageService.class).get();
+                    File storageDir = storageService.getPrivateStorage().get();
+                    File trainsrc = getFile(storageDir, "linear_data_train.csv", TrainingView.class.getResourceAsStream("/linear_data_train.csv"));
+                    //       rrTrain.initialize(new InputStreamInputSplit(TrainingView.class.getResourceAsStream("/linear_data_train.csv")));
+                    rrTrain.initialize(new FileSplit(trainsrc));
+                    DataSetIterator iterTrain = new RecordReaderDataSetIterator(rrTrain, batchSize, 0, 2);
+
+                    // load evaluation data
+                    RecordReader rrEval = new CSVRecordReader();
+                    rrEval.initialize(new InputStreamInputSplit(TrainingView.class.getResourceAsStream("/linear_data_eval.csv")));
+                    DataSetIterator iterEval = new RecordReaderDataSetIterator(rrEval, evalSize, 0, 2);
+
+                    Platform.runLater(() -> label.setText("training model..."));
+                    for (int n = 0; n < numEpochs; n++) {
+                        network.fit(iterTrain);
                     }
-                
-                });
-                
-                // load training data
-                RecordReader rrTrain = new CSVRecordReader();
-                StorageService storageService = Services.get(StorageService.class).get();
-                File storageDir = storageService.getPrivateStorage().get();
-                File trainsrc = getFile(storageDir, "linear_data_train.csv", TrainingView.class.getResourceAsStream("/linear_data_train.csv"));
-         //       rrTrain.initialize(new InputStreamInputSplit(TrainingView.class.getResourceAsStream("/linear_data_train.csv")));
-                rrTrain.initialize(new FileSplit(trainsrc));
-                DataSetIterator iterTrain = new RecordReaderDataSetIterator(rrTrain, batchSize, 0, 2);
 
-                // load evaluation data
-                RecordReader rrEval = new CSVRecordReader();
-                rrEval.initialize(new InputStreamInputSplit(TrainingView.class.getResourceAsStream("/linear_data_eval.csv")));
-                DataSetIterator iterEval = new RecordReaderDataSetIterator(rrEval, evalSize, 0, 2);
+                    Platform.runLater(() -> label.setText("evaluating model..."));
+                    Evaluation evaluation = new Evaluation(numOutputs);
+                    while (iterEval.hasNext()) {
+                        DataSet dataSet = iterEval.next();
+                        INDArray features = dataSet.getFeatureMatrix();
+                        INDArray labels = dataSet.getLabels();
+                        INDArray predicted = network.output(features, false);
+                        evaluation.eval(labels, predicted);
+                    }
 
-
-                Platform.runLater(() -> label.setText("training model..."));
-                for (int n = 0; n < numEpochs; n++) {
-                    network.fit(iterTrain);
+                    Platform.runLater(() -> label.setText("model evaluation result:\n" + evaluation.stats()));
+                } catch (Throwable t) {
+                    t.printStackTrace();
                 }
-
-                Platform.runLater(() -> label.setText("evaluating model..."));
-                Evaluation evaluation = new Evaluation(numOutputs);
-                while (iterEval.hasNext()) {
-                    DataSet dataSet = iterEval.next();
-                    INDArray features = dataSet.getFeatureMatrix();
-                    INDArray labels = dataSet.getLabels();
-                    INDArray predicted = network.output(features, false);
-                    evaluation.eval(labels, predicted);
-                }
-
-                Platform.runLater(() -> label.setText("model evaluation result:\n" + evaluation.stats()));
-              } catch (Throwable t) {
-t.printStackTrace();
-              }
 
                 return null;
             }
@@ -186,7 +197,18 @@ t.printStackTrace();
 
         return task;
     }
-    
+
+    private Chart createChart(Series<Integer, Double> series) {
+        NumberAxis xAxis = new NumberAxis();
+        NumberAxis yAxis = new NumberAxis();
+        ScatterChart answer = new ScatterChart(xAxis, yAxis);
+        answer.setTitle("score evolution");
+        ObservableList<XYChart.Series<Integer, Double>> data = FXCollections.observableArrayList();
+        data.add(series);
+        answer.setData(data);
+        return answer;
+    }
+
     private File getFile(File dir, String name, InputStream is) throws IOException {
         File answer = new File(dir, name);
         FileOutputStream fos = new FileOutputStream(answer);
