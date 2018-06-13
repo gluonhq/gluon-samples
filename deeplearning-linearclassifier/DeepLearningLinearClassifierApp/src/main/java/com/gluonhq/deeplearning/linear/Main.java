@@ -41,9 +41,9 @@ public class Main extends MobileApplication {
     public void init() {
         addViewFactory(HOME_VIEW, () -> new TrainingView());
 
-        System.setProperty("java.vm.name", "gluonvm");
-        System.setProperty("sun.arch.data.model", "64");
-        System.setProperty(VERSION_CHECK_PROPERTY, "false");
+        // System.setProperty("java.vm.name", "gluonvm");
+        // System.setProperty("sun.arch.data.model", "64");
+        // System.setProperty(VERSION_CHECK_PROPERTY, "false");
 
     }
 

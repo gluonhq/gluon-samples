@@ -40,6 +40,7 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.geometry.Pos;
 import javafx.scene.chart.Chart;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
@@ -181,7 +182,8 @@ public class TrainingView extends View {
                         evaluation.eval(labels, predicted);
                     }
 
-                    Platform.runLater(() -> label.setText("model evaluation result:\n" + evaluation.stats()));
+                    Platform.runLater(() -> label.setText("F1: " + evaluation.f1()));
+                //    Platform.runLater(() -> label.setText("model evaluation result:\n" + evaluation.stats()));
                 } catch (Throwable t) {
                     t.printStackTrace();
                 }
@@ -201,8 +203,9 @@ public class TrainingView extends View {
     private Chart createChart(Series<Integer, Double> series) {
         NumberAxis xAxis = new NumberAxis();
         NumberAxis yAxis = new NumberAxis();
-        ScatterChart answer = new ScatterChart(xAxis, yAxis);
+        LineChart answer = new LineChart(xAxis, yAxis);
         answer.setTitle("score evolution");
+        answer.setCreateSymbols(false);
         ObservableList<XYChart.Series<Integer, Double>> data = FXCollections.observableArrayList();
         data.add(series);
         answer.setData(data);

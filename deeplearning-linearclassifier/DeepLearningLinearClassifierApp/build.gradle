@@ -9,7 +9,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:2.0.24'
+          classpath 'org.javafxports:jfxmobile-plugin:2.0.26'
     }
 }
 
@@ -74,10 +74,10 @@ dependencies {
 
     // ios
     iosRuntime snapshotLocal("org.nd4j:nd4j-native:$dl4jVersion:ios-x86_64")
-    // iosRuntime snapshotLocal("org.nd4j:nd4j-native:$dl4jVersion:ios-arm64")
+    iosRuntime snapshotLocal("org.nd4j:nd4j-native:$dl4jVersion:ios-arm64")
     iosRuntime snapshotLocal("org.bytedeco.javacpp-presets:openblas:${openblasVersion}")
     iosRuntime snapshotLocal("org.bytedeco.javacpp-presets:openblas:${openblasVersion}:ios-x86_64")
-    // iosRuntime snapshotLocal("org.bytedeco.javacpp-presets:openblas:${openblasVersion}:ios-arm64")
+    iosRuntime snapshotLocal("org.bytedeco.javacpp-presets:openblas:${openblasVersion}:ios-arm64")
 }
 
 jfxmobile {
