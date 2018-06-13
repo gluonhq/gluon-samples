@@ -143,10 +143,14 @@ public class TrainingView extends View {
                     network.setListeners(new ScoreIterationListener(10) {
                         @Override
                         public void iterationDone(Model model, int iteration, int epoch) {
-                            double s = model.score();
-                            Platform.runLater(() -> series.getData().add(new XYChart.Data<>(iteration, s)));
 
                             if (iteration % 10 == 0) {
+                                double s = model.score();
+                                Platform.runLater(() -> {
+                                    series.getData().add(new XYChart.Data<>(iteration, s));
+                                    label.setText(String.format("%.3f",s));
+                                });
+
                                 System.out.println("iteration " + iteration + " done, epoch = " + epoch + ", score = " + model.score()); //To change body of generated methods, choose Tools | Templates.
                             }
                         }
@@ -202,6 +206,10 @@ public class TrainingView extends View {
 
     private Chart createChart(Series<Integer, Double> series) {
         NumberAxis xAxis = new NumberAxis();
+        xAxis.setUpperBound(620d);
+        xAxis.setMinorTickCount(25);
+        xAxis.setTickUnit(100);
+        xAxis.setAutoRanging(false);
         NumberAxis yAxis = new NumberAxis();
         LineChart answer = new LineChart(xAxis, yAxis);
         answer.setTitle("score evolution");
