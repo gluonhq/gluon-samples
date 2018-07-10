@@ -74,11 +74,11 @@ public class BasicView extends View {
     }
 
     private void addBox(ActionEvent event) {
-        shapeCanvas.getChildren().add( new RectShape().getRootShape());
+        shapeCanvas.getChildren().add( new RectShape(this).getRootShape());
     }
 
     private void addCircle(ActionEvent event) {
-        shapeCanvas.getChildren().add( new CircleShape().getRootShape());
+        shapeCanvas.getChildren().add( new CircleShape(this).getRootShape());
     }
 
     private void removeSelected(ActionEvent event) {
@@ -100,7 +100,7 @@ public class BasicView extends View {
         select(null);
     }
 
-    private void select( Shape shape ) {
+    void select( Shape shape ) {
         if ( shape != selectedShapeProperty.get() ) {
             selectedShapeProperty.set(shape);
         }
@@ -108,82 +108,86 @@ public class BasicView extends View {
 
     private Random random = new Random();
 
-    protected double getRandomX() {
+    double getRandomX() {
         return random.nextDouble() * this.getWidth();
     }
 
-    protected double getRandomY() {
+    double getRandomY() {
         return random.nextDouble() * this.getHeight();
     }
 
 
 
-    private class BaseShape {
 
-        private Shape rootShape;
-        private Point2D delta;
+}
 
-        BaseShape(Supplier<Shape> buildRootShape) {
+class BaseShape {
 
-            rootShape = buildRootShape.get();
-            select(rootShape);
+    private Shape rootShape;
+    private Point2D delta;
+    private BasicView view;
 
-            // select shape on click
-            Disposable disposable = JavaFxObservable.eventsOf(rootShape, MouseEvent.MOUSE_CLICKED)
-                    .subscribe( e -> {
-                        select(rootShape);
-                        e.consume();
-                    });
+    BaseShape( BasicView view, Supplier<Shape> buildRootShape) {
 
+        this.view = view;
+        rootShape = buildRootShape.get();
+        view.select(rootShape);
 
-            // dispose "listeners" when shape is removed from the scene
-            JavaFxObservable.changesOf(rootShape.sceneProperty())
-                    .filter( scene -> scene == null )
-                    .subscribe( s -> disposable.dispose());
-
-
-            // calculate delta between shape location and initial mouse position on mouse pressed
-            JavaFxObservable
-                    .eventsOf( rootShape, MouseEvent.MOUSE_PRESSED )
-                    .map( e -> new Point2D( e.getSceneX(), e.getSceneY()))
-                    .subscribe( p -> {
-                        select(rootShape);
-                        Bounds bounds = rootShape.localToScene(rootShape.getLayoutBounds());
-                        delta =  p.subtract( new Point2D(bounds.getMinX(), bounds.getMinY()) );
-                    });
-
-            // User current mouse position and delta to recalculate and set new shape location on mouse dragged
-            JavaFxObservable
-                    .eventsOf( rootShape, MouseDragEvent.MOUSE_DRAGGED )
-                    .map( e -> rootShape.sceneToLocal(e.getSceneX() - delta.getX(),  e.getSceneY() - delta.getY()))
-                    .map( p -> rootShape.localToParent(p))
-                    .subscribe( p -> rootShape.relocate(  p.getX(), p.getY()));
-
-        }
-
-        Shape getRootShape() {
-            return rootShape;
-        }
-
-    }
+        // select shape on click
+        Disposable disposable = JavaFxObservable.eventsOf(rootShape, MouseEvent.MOUSE_CLICKED)
+                .subscribe( e -> {
+                    view.select(rootShape);
+                    e.consume();
+                });
 
 
-    class RectShape extends BaseShape {
+        // dispose "listeners" when shape is removed from the scene
+        JavaFxObservable.changesOf(rootShape.sceneProperty())
+                .filter( scene -> scene == null )
+                .subscribe( s -> disposable.dispose());
 
-        RectShape() {
-            super( () -> new Rectangle(getRandomX(), getRandomY(), 100, 100 ));
-        }
+
+        // calculate delta between shape location and initial mouse position on mouse pressed
+        JavaFxObservable
+                .eventsOf( rootShape, MouseEvent.MOUSE_PRESSED )
+                .map( e -> new Point2D( e.getSceneX(), e.getSceneY()))
+                .subscribe( p -> {
+                    view.select(rootShape);
+                    Bounds bounds = rootShape.localToScene(rootShape.getLayoutBounds());
+                    delta =  p.subtract( new Point2D(bounds.getMinX(), bounds.getMinY()) );
+                });
+
+        // User current mouse position and delta to recalculate and set new shape location on mouse dragged
+        JavaFxObservable
+                .eventsOf( rootShape, MouseDragEvent.MOUSE_DRAGGED )
+                .map( e -> rootShape.sceneToLocal(e.getSceneX() - delta.getX(),  e.getSceneY() - delta.getY()))
+                .map( p -> rootShape.localToParent(p))
+                .subscribe( p -> rootShape.relocate(  p.getX(), p.getY()));
 
     }
 
-    class CircleShape extends BaseShape {
-
-        CircleShape() {
-            super( () ->  new Circle(getRandomX(), getRandomY(), 50 ));
-        }
-
+    Shape getRootShape() {
+        return rootShape;
     }
 
 }
+
+
+class RectShape extends BaseShape {
+
+    RectShape(BasicView view) {
+        super( view, () -> new Rectangle( view.getRandomX(), view.getRandomY(), 100, 100 ));
+    }
+
+}
+
+class CircleShape extends BaseShape {
+
+    CircleShape(BasicView view) {
+        super( view, () ->  new Circle( view.getRandomX(), view.getRandomY(), 50 ));
+    }
+
+}
+
 
 
