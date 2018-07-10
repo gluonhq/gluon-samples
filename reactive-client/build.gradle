@@ -20,13 +20,13 @@ repositories {
     }
 }
 
-mainClassName = 'org.gluonhq.RxGluonApp'
+mainClassName = 'org.gluonhq.reactive.RxGluonApp'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    if (JavaVersion.current() == JavaVersion.VERSION_1_9) {
+    if (JavaVersion.current().isJava9()) {
         compile 'com.gluonhq:charm:5.0.0-jdk9'
         androidRuntime 'com.gluonhq:charm:5.0.0'
     } else {
