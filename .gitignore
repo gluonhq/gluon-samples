@@ -20,7 +20,7 @@ out/
 gluoncloudlink_config.json
 
 ### Package Files
-*.jar
+//*.jar
 *.war
 *.ear
 *.zip
