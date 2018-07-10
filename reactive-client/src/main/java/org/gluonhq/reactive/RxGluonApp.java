@@ -1,4 +1,4 @@
-package org.gluonhq;
+package org.gluonhq.reactive;
 
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.visual.Swatch;

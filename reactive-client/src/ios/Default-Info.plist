@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
         <key>CFBundleIdentifier</key>
-        <string>org.gluonhq.RxGluonApp</string>
+        <string>org.gluonhq.reactive.RxGluonApp</string>
         <key>CFBundleVersion</key>
         <string>1.0</string>
         <key>CFBundleExecutable</key>

@@ -1,4 +1,4 @@
-package org.gluonhq;
+package org.gluonhq.reactive;
 
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
