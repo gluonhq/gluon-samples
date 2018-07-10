@@ -1,6 +1,6 @@
 
-Notes
-===========
+Reactive Sample
+===============
 
 A JavaFX application that uses Gluon Mobile Glisten 
 (a mobile application framework with mobile-friendly UI controls) 
