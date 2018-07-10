@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.gluonhq" android:versionCode="1" android:versionName="1.0">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.gluonhq.reactive" android:versionCode="1" android:versionName="1.0">
         <supports-screens android:xlargeScreens="true"/>
         <uses-permission android:name="android.permission.INTERNET"/>
         <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -7,7 +7,7 @@
         <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="21"/>
         <application android:label="RxGluonApp" android:name="android.support.multidex.MultiDexApplication" android:icon="@mipmap/ic_launcher">
                 <activity android:name="javafxports.android.FXActivity" android:label="RxGluonApp" android:configChanges="orientation|screenSize">
-                        <meta-data android:name="main.class" android:value="org.gluonhq.RxGluonApp"/>
+                        <meta-data android:name="main.class" android:value="org.gluonhq.reactive.RxGluonApp"/>
                         <meta-data android:name="debug.port" android:value="0"/>
                         <intent-filter>
                                 <action android:name="android.intent.action.MAIN"/>
