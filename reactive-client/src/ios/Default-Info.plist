@@ -7,7 +7,7 @@
         <key>CFBundleVersion</key>
         <string>1.0</string>
         <key>CFBundleExecutable</key>
-        <string>RxGluonApp</string>
+        <string>reactive-client</string>
         <key>CFBundleIconName</key>
         <string>AppIcon</string>
         <key>CFBundleName</key>
