@@ -1,32 +1,29 @@
 package com.gluonhq.awsmobilehub;
 
+import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.Icon;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-public class BasicView extends View {
+public class SignedOutView extends View {
 
-    public BasicView() {
+    public SignedOutView() {
         
         Label label = new Label("Gluon - AWS Mobile Hub");
 
-        Label signIn = new Label("Accesing signed view...");
+        Button signIn = new Button("Sign In");
         signIn.setGraphic(new Icon(MaterialDesignIcon.VPN_LOCK));
+        signIn.setOnAction(e -> AWSService.getInstance().signIn());
         
         VBox controls = new VBox(15.0, label, signIn);
         controls.setAlignment(Pos.CENTER);
         
         setCenter(controls);
-        
-        setOnShowing(e -> {
-            if (! AWSService.getInstance().isSignedIn()) {
-                getApplication().switchView(AwsMobileHub.SIGNED_OUT_VIEW);
-            }
-        });
     }
 
     @Override

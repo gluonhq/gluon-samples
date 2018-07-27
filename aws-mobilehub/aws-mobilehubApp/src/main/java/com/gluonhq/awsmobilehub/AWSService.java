@@ -3,6 +3,8 @@ package com.gluonhq.awsmobilehub;
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.mobile.auth.core.IdentityHandler;
 import com.amazonaws.mobile.auth.core.IdentityManager;
+import com.amazonaws.mobile.auth.core.SignInStateChangeListener;
+import com.amazonaws.mobile.auth.ui.SignInUI;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.config.AWSConfiguration;
 import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
@@ -12,6 +14,9 @@ import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.gluonhq.charm.down.Services;
 import com.gluonhq.charm.down.plugins.StorageService;
+import com.gluonhq.charm.glisten.application.MobileApplication;
+import static com.gluonhq.charm.glisten.application.MobileApplication.HOME_VIEW;
+import com.gluonhq.charm.glisten.application.ViewStackPolicy;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -19,6 +24,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 
 public class AWSService {
 
@@ -27,39 +33,82 @@ public class AWSService {
     /** AWSConfiguration object that represents the awsconfiguration.json file. */
     private AWSConfiguration awsConfiguration;
     
-    public AWSService() {
+    private static AWSService instance;
+    
+    private boolean signedIn;
+    
+    public static AWSService getInstance() {
+        if (instance == null) {
+            instance = new AWSService();
+        }
+        return instance;
+    }
+    
+    AWSService() {
+        LOGGER.log(Level.INFO, "[GLUONAWS] Reading AWSConfiguration");
         try {
             awsConfiguration = new AWSConfiguration();
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Missing awsconfiguration.json file under /src/main/resources");
         }
         
+        signedIn = false;
         AWSMobileClient.getInstance().initialize(awsStartupResult -> {
             LOGGER.log(Level.INFO, "[GLUONAWS] AWSMobileClient is instantiated and you are connected to AWS!");
             
             // Obtain the reference to the AWSCredentialsProvider and AWSConfiguration objects
-                AWSCredentialsProvider credentialsProvider = AWSMobileClient.getInstance().getCredentialsProvider();
-                AWSConfiguration configuration = AWSMobileClient.getInstance().getConfiguration();
+            AWSCredentialsProvider credentialsProvider = AWSMobileClient.getInstance().getCredentialsProvider();
+            AWSConfiguration configuration = AWSMobileClient.getInstance().getConfiguration();
 
-                LOGGER.log(Level.INFO, "[GLUONAWS] credentials:");
-                // Use IdentityManager#getUserID to fetch the identity id.
-                IdentityManager.getDefaultIdentityManager().getUserID(new IdentityHandler() {
-                    @Override
-                    public void onIdentityId(String identityId) {
-                        LOGGER.log(Level.INFO, "[GLUONAWS] Identity ID = " + identityId);
+            LOGGER.log(Level.INFO, "[GLUONAWS] credentials:");
+            // Use IdentityManager#getUserID to fetch the identity id.
+            IdentityManager.getDefaultIdentityManager().getUserID(new IdentityHandler() {
+                @Override
+                public void onIdentityId(String identityId) {
+                    LOGGER.log(Level.INFO, "[GLUONAWS] Identity ID = " + identityId);
 
-                        // Use IdentityManager#getCachedUserID to
-                        //  fetch the locally cached identity id.
-                        final String cachedIdentityId = IdentityManager.getDefaultIdentityManager().getCachedUserID();
-                        LOGGER.log(Level.INFO, "[GLUONAWS] cachedIdentityId " + cachedIdentityId);
-                    }
+                    // Use IdentityManager#getCachedUserID to
+                    //  fetch the locally cached identity id.
+                    final String cachedIdentityId = IdentityManager.getDefaultIdentityManager().getCachedUserID();
+                    LOGGER.log(Level.INFO, "[GLUONAWS] cachedIdentityId " + cachedIdentityId);
+                }
 
-                    @Override
-                    public void handleError(Exception exception) {
-                        LOGGER.log(Level.INFO, "[GLUONAWS] Error in retrieving the identity" + exception);
-                    }
-                });
+                @Override
+                public void handleError(Exception exception) {
+                    LOGGER.log(Level.INFO, "[GLUONAWS] Error in retrieving the identity" + exception);
+                    MobileApplication.getInstance().switchView(AwsMobileHub.SIGNED_OUT_VIEW, ViewStackPolicy.SKIP);
+                }
+            });
+            IdentityManager.getDefaultIdentityManager().addSignInStateChangeListener(new SignInStateChangeListener() {
+                @Override
+                public void onUserSignedIn() {
+                    LOGGER.log(Level.INFO, "[GLUONAWS] User signed in");
+                    signedIn = true;
+                }
+
+                @Override
+                public void onUserSignedOut() {
+                    LOGGER.log(Level.INFO, "[GLUONAWS] User signed out");
+                    signedIn = false;
+                    Platform.runLater(() -> MobileApplication.getInstance().switchView(AwsMobileHub.SIGNED_OUT_VIEW, ViewStackPolicy.SKIP));
+                }
+            });
+            signIn();
         }).execute();
+    }
+    
+    void signIn() {
+        LOGGER.log(Level.INFO, "Sign in or resume");
+        SignInUI signin = (SignInUI) AWSMobileClient.getInstance().getClient(SignInUI.class);
+        signin.login(HOME_VIEW, AwsMobileHub.SIGNED_VIEW).execute();
+    }
+    
+    public void signOut() {
+        IdentityManager.getDefaultIdentityManager().signOut();
+    }
+
+    public boolean isSignedIn() {
+        return signedIn;
     }
     
     public void uploadFile(String fileName) {

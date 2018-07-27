@@ -8,9 +8,14 @@ import javafx.stage.Stage;
 
 public class AwsMobileHub extends MobileApplication {
 
+    public static final String SIGNED_VIEW = "SignedView";
+    public static final String SIGNED_OUT_VIEW = "SignedOutView";
+    
     @Override
     public void init() {
         addViewFactory(HOME_VIEW, () -> new BasicView());
+        addViewFactory(SIGNED_VIEW, () -> new SignedView());
+        addViewFactory(SIGNED_OUT_VIEW, () -> new SignedOutView());
     }
 
     @Override
@@ -18,6 +23,8 @@ public class AwsMobileHub extends MobileApplication {
         Swatch.BLUE.assignTo(scene);
 
         ((Stage) scene.getWindow()).getIcons().add(new Image(AwsMobileHub.class.getResourceAsStream("/icon.png")));
+        
+        AWSService.getInstance();
     }
     
     @Override
