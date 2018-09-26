@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:1.3.5'
+        classpath 'org.javafxports:jfxmobile-plugin:1.3.14'
     }
 }
 
@@ -24,12 +24,12 @@ mainClassName = 'com.gluonhq.comments20.Comments20'
 
 dependencies {
     compile 'com.gluonhq:glisten-afterburner:1.4.0'
-    compile 'com.gluonhq:charm-glisten-connect-view:5.0.0'
+    compile 'com.gluonhq:charm-glisten-connect-view:5.0.1'
 }
 
 jfxmobile {
     downConfig {
-        version = '3.8.0'
+        version = '3.8.4'
         plugins 'cache', 'display', 'lifecycle', 'statusbar', 'storage'
     }
     android {

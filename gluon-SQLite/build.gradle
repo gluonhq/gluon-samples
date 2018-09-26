@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:1.3.5'
+        classpath 'org.javafxports:jfxmobile-plugin:1.3.14'
     }
 }
 
@@ -23,7 +23,7 @@ repositories {
 mainClassName = 'com.gluonhq.sqlite.GluonSQLite'
 
 dependencies {
-    compile 'com.gluonhq:charm:5.0.0'
+    compile 'com.gluonhq:charm:5.0.1'
 
     // Desktop SQL -> https://github.com/xerial/sqlite-jdbc
     desktopRuntime 'org.xerial:sqlite-jdbc:3.8.11.2'
@@ -39,7 +39,7 @@ dependencies {
 
 jfxmobile {
     downConfig {
-        version = '3.8.0'
+        version = '3.8.4'
         plugins 'display', 'lifecycle', 'statusbar', 'storage'
     }
     android {
@@ -59,12 +59,12 @@ jfxmobile {
     embedded {
         remotePlatforms {
             raspberry {
-                host = '192.168.1.51'
-                username = 'pi'
-                password = 'pi'
-                workingDir = '/home/pi/Gluon'
-                jreLocation = '/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt'
-                execPrefix = 'sudo'
+//                host = '192.168.1.51'
+//                username = 'pi'
+//                password = 'raspberry'
+//                workingDir = '/home/pi/Gluon'
+//                jreLocation = '/opt/jdk1.8.0_181'
+//                execPrefix = 'sudo'
             }
         }
     }
