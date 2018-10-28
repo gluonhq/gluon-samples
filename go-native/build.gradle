@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:1.3.14'
+        classpath 'org.javafxports:jfxmobile-plugin:1.3.15'
     }
 }
 
@@ -24,12 +24,12 @@ repositories {
 mainClassName = 'com.gluonhq.gonative.GoNative'
 
 dependencies {
-    compile 'com.gluonhq:glisten-afterburner:1.4.0'
+    compile 'com.gluonhq:glisten-afterburner:1.4.1'
 }
 
 jfxmobile {
     downConfig {
-        version = '3.8.4'
+        version = '3.8.5'
         plugins 'display', 'lifecycle', 'statusbar', 'storage'
     }
     android {
