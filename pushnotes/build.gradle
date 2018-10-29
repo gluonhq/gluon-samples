@@ -46,10 +46,6 @@ jfxmobile {
                 'javax.json.**.*',
                 'org.glassfish.json.**.*'
         ]
-        apsEnvironment = 'development'
-        iosSignIdentity = 'iPhone Developer: Jose Pereda (VNV4PD42HY)'
-        iosProvisioningProfile = 'PushNotes-Jose'
-
 //        apsEnvironment = 'development'
 //        iosSignIdentity = 'iPhone Developer: XXXX'
 //        iosProvisioningProfile = 'PushNotes Provisioning Profile'
