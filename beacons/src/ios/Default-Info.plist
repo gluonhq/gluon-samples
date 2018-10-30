@@ -6,21 +6,12 @@
         <string>com.gluonhq.beacons.Beacons</string>
         <key>CFBundleVersion</key>
         <string>1.0</string>
+        <key>CFBundleShortVersionString</key>
+        <string>1.0</string>
         <key>CFBundleExecutable</key>
         <string>Beacons</string>
-        <key>CFBundleIconFiles</key>
-        <array>
-                <string>Icon-60</string>
-                <string>Icon-76</string>
-                <string>Icon-Small-40</string>
-                <string>Icon-Small</string>
-        </array>
-        <key>CFBundleIconFiles~ipad</key>
-        <array>
-                <string>Icon-76</string>
-                <string>Icon-Small-40</string>
-                <string>Icon-Small</string>
-        </array>
+        <key>CFBundleIconName</key>
+        <string>AppIcon</string>
         <key>CFBundleName</key>
         <string>Beacons</string>
         <key>CFBundlePackageType</key>
@@ -50,11 +41,17 @@
                 <integer>1</integer>
                 <integer>2</integer>
         </array>
+        <key>MinimumOSVersion</key>
+        <string>8.0</string>
+        <key>UIRequiresFullScreen</key>
+        <string>YES</string>
         <key>NSLocationUsageDescription</key>
         <string>This app needs location services</string>
         <key>NSLocationWhenInUseUsageDescription</key>
         <string>This app needs location services</string>
         <key>NSLocationAlwaysUsageDescription</key>
+        <string>This app needs location services</string>
+        <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
         <string>This app needs location services</string>
 </dict>
 </plist>

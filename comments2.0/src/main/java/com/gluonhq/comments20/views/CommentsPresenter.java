@@ -115,7 +115,7 @@ public class CommentsPresenter extends GluonPresenter<Comments20> {
                     });
             
             // notify view that cell is sliding
-            sliding.bind(commentListCell.slidingProperty());
+            commentListCell.slidingProperty().addListener((obs, ov, nv) -> sliding.set(nv));
         
             return commentListCell; 
         });
