@@ -1,13 +1,13 @@
 buildscript {
     repositories {
-        jcenter()
         google()
+        jcenter()
         maven {
             url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
         }
     }
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:2.0.28'
+        classpath 'org.javafxports:jfxmobile-plugin:2.0.30'
     }
 }
 
@@ -26,7 +26,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    if (JavaVersion.current().isJava9()) {
+    if (JavaVersion.current().isJava9Compatible()) {
         compile 'com.gluonhq:charm:5.0.0-jdk9'
         androidRuntime 'com.gluonhq:charm:5.0.0'
     } else {
@@ -37,7 +37,7 @@ dependencies {
 
 jfxmobile {
     downConfig {
-        version = '3.8.0'
+        version = '3.8.5'
         // Do not edit the line below. Use Gluon Mobile Settings in your project context menu instead
         plugins 'display', 'lifecycle', 'statusbar', 'storage'
     }

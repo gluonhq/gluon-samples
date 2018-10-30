@@ -2,14 +2,14 @@ import org.gradle.internal.os.OperatingSystem
 
 buildscript {
     repositories {
-        jcenter()
         google()
+        jcenter()
         maven {
             url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
         }
     }
     dependencies {
-          classpath 'org.javafxports:jfxmobile-plugin:2.0.27'
+          classpath 'org.javafxports:jfxmobile-plugin:2.0.30'
     }
 }
 
@@ -38,14 +38,14 @@ targetCompatibility = 1.8
 dependencies {
     // gluon mobile
 
-    if (JavaVersion.current() == JavaVersion.VERSION_1_8) {
-        compile 'com.gluonhq:charm:5.0.0'
-        compile "com.gluonhq:glisten-afterburner:1.4.0"
-    } else {
+    if (JavaVersion.current().isJava9Compatible()) {
         compile 'com.gluonhq:charm:5.0.0-jdk9'
         compile "com.gluonhq:glisten-afterburner:1.4.0-jdk9"
+    } else {
+        compile 'com.gluonhq:charm:5.0.2'
+        compile "com.gluonhq:glisten-afterburner:1.4.1"
     }
-
+    
     // dl4j and nd4j
     compile 'org.slf4j:slf4j-nop:1.7.25'
     compile("org.deeplearning4j:deeplearning4j-core:$dl4jVersion") {
@@ -82,7 +82,7 @@ dependencies {
 
 jfxmobile {
     downConfig {
-        version = '3.8.0'
+        version = '3.8.5'
         // Do not edit the line below. Use Gluon Mobile Settings in your project context menu instead
         plugins 'display', 'lifecycle', 'statusbar', 'storage'
     }

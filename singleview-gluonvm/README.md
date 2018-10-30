@@ -1,11 +1,10 @@
 
-Reactive Sample
+SingleView-GluonVM
 ===============
 
-A JavaFX application that uses Gluon Mobile Glisten
+A simple JavaFX application that uses Gluon Mobile Glisten
 (a mobile application framework with mobile-friendly UI controls) 
-and Gluon VM, and demonstrates the use of Reactive programming using RXJava and RXJavaFX.
-
+and Gluon VM
 
 Instructions
 ------------
@@ -17,3 +16,5 @@ To execute the sample, do as follows:
 > Connect your Android device and run `./gradlew androidInstall`
 * iOS (Requires JDK 9 or 10)
 > Connect your iOS device and run `./gradlew launchIOSDevice`
+
+

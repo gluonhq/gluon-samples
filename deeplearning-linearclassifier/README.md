@@ -39,27 +39,27 @@ Either from the IDE or from command line the project can be clean, build and run
 
 Clean and build:
 
-    ./gradlew clean DeepLearningLinearClassifierApp:build
+    ./gradlew clean build
 
 Run on desktop:
 
-    ./gradlew DeepLearningLinearClassifierApp:run
+    ./gradlew run
 
 Deploy to Android:
 
-    ./gradlew DeepLearningLinearClassifierApp:androidInstall
+    ./gradlew androidInstall
 
 Deploy to iOS simulator:
 
-    ./gradlew  DeepLearningLinearClassifierApp:launchIPhoneSimulator
+    ./gradlew launchIPhoneSimulator
 	
 Deploy to iOS device:
 
-    ./gradlew  DeepLearningLinearClassifierApp:launchIOSDevice
+    ./gradlew launchIOSDevice
 	
 		
 For more details about the different tasks or the `build.gradle` file, see the Gluon Mobile
-[documentation](http://docs.gluonhq.com/charm/4.4.1/#_building_and_deploying).
+[documentation](http://docs.gluonhq.com/charm/latest/#_building_and_deploying).
 
 
 
