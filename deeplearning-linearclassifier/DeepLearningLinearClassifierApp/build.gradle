@@ -5,7 +5,7 @@ buildscript {
         google()
         jcenter()
         maven {
-            url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
+            url 'https://nexus.gluonhq.com/nexus/content/repositories/releases'
         }
     }
     dependencies {
@@ -18,7 +18,7 @@ apply plugin: 'org.javafxports.jfxmobile'
 repositories {
     jcenter()
     maven {
-        url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
+        url 'https://nexus.gluonhq.com/nexus/content/repositories/releases'
     }
     maven {
         url 'https://oss.sonatype.org/content/repositories/snapshots/'

@@ -17,7 +17,7 @@ apply from: 'ios-build.gradle'
 repositories {
     jcenter()
     maven {
-        url 'http://nexus.gluonhq.com/nexus/content/repositories/releases'
+        url 'https://nexus.gluonhq.com/nexus/content/repositories/releases'
     }
 }
 
