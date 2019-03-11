@@ -34,11 +34,13 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -51,7 +53,7 @@ public class DetailController extends AbstractController {
     private BorderPane detail;
 
     @FXML
-    private ListTile listTile;
+    private VBox question;
 
     @FXML
     private ListView<StackEntry> listView;
@@ -86,31 +88,6 @@ public class DetailController extends AbstractController {
 
         });
     }
-    
-    public void setStackEntry(StackEntry stackEntry) {
-        StackOwner stackOwner = stackEntry.getOwner();
-        if (stackOwner != null) {
-            ImageView imageView = new ImageView(Util.getImage(stackOwner.getProfile_image()));
-            imageView.setPreserveRatio(true);
-            listTile.setPrimaryGraphic(imageView);
-            listTile.textProperty().setAll(stackEntry.getTitle(),
-                    stackOwner.getDisplay_name(), 
-                    "Created: " + Util.FORMATTER.format(LocalDateTime.ofEpochSecond(stackEntry.getCreation_date(), 0, ZoneOffset.UTC)) +
-                        " - Answers: " + stackEntry.getAnswer_count());
-            listTile.setOnMouseClicked(e -> getApp().getHostServices().showDocument(stackEntry.getLink()));
-        }
-        search(String.valueOf(stackEntry.getQuestion_id()));
-      }
-
-    private void search(String questionId) {
-        listView.setItems(FXCollections.emptyObservableList());
-        GluonObservableObject<StackResponse> answersStackOverflow = getApp().service().answersStackOverflow(StackResponse.class, questionId);
-        answersStackOverflow.initializedProperty().addListener((obs, ov, nv) -> {
-            if (nv) {
-                listView.setItems(FXCollections.observableArrayList(answersStackOverflow.get().getItems()));
-            }
-        });
-    }
 
     @Override
     public Parent getRoot() {
@@ -120,5 +97,42 @@ public class DetailController extends AbstractController {
     public void backToMain(ActionEvent event) {
         AbstractController mainController = getApp().getController("main");
         getApp().setRoot(mainController.getRoot());
+    }
+
+    public void setStackEntry(StackEntry stackEntry) {
+        StackOwner stackOwner = stackEntry.getOwner();
+        if (stackOwner != null) {
+            createListTile(stackEntry, stackOwner);
+        }
+        search(String.valueOf(stackEntry.getQuestion_id()));
+      }
+
+    private void createListTile(StackEntry stackEntry, StackOwner stackOwner) {
+        ImageView imageView = new ImageView(Util.getImage(stackOwner.getProfile_image()));
+        imageView.setPreserveRatio(true);
+        ListTile listTile = new ListTile();
+        listTile.setPrimaryGraphic(imageView);
+        listTile.textProperty().setAll(stackEntry.getTitle(),
+                stackOwner.getDisplay_name(),
+                "Created: " + Util.FORMATTER.format(LocalDateTime.ofEpochSecond(stackEntry.getCreation_date(), 0, ZoneOffset.UTC)) +
+                    " - Answers: " + stackEntry.getAnswer_count());
+        Button open = new Button("Open");
+        open.setOnAction(e -> getApp().getHostServices().showDocument(stackEntry.getLink()));
+        listTile.setSecondaryGraphic(open);
+        if (question.getChildren().size() == 2) {
+            question.getChildren().set(1, listTile);
+        } else {
+            question.getChildren().add(listTile);
+        }
+    }
+
+    private void search(String questionId) {
+        listView.setItems(FXCollections.emptyObservableList());
+        GluonObservableObject<StackResponse> answersStackOverflow = getApp().service().answersStackOverflow(StackResponse.class, questionId);
+        answersStackOverflow.initializedProperty().addListener((obs, ov, nv) -> {
+            if (nv) {
+                listView.setItems(FXCollections.observableArrayList(answersStackOverflow.get().getItems()));
+            }
+        });
     }
 }

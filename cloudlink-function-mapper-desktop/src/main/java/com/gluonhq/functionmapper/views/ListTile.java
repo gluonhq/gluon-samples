@@ -54,6 +54,7 @@ public class ListTile extends BorderPane {
     }
 
     public void setSecondaryGraphic(Node node) {
+        BorderPane.setAlignment(node, Pos.CENTER);
         setRight(node);
     }
 
