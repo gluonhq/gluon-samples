@@ -38,7 +38,7 @@
     <top>
         <HBox fx:id="top" styleClass="top">
             <Label text="Search for Tag:"/>
-            <ComboBox fx:id="tagComboBox" prefWidth="150.0" promptText="tag"/>
+            <ComboBox fx:id="tagComboBox" prefWidth="150.0" editable="true" promptText="tag"/>
         </HBox>
     </top>
     <center>

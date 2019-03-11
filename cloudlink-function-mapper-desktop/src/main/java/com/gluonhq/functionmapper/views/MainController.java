@@ -63,7 +63,6 @@ public class MainController extends AbstractController {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         tagComboBox.getItems().addAll(TAGS);
-        tagComboBox.setEditable(true);
 
         listView.setPlaceholder(new Label("No items yet\nSelect a tag"));
 
