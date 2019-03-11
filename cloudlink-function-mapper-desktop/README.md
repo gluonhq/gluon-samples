@@ -11,15 +11,19 @@ Prerequisites
 
 * JDK 11
 * `JAVA_HOME` environment variable pointing to JDK 11.
-* A valid subscription to Gluon CloudLink. You can get it [here](http://gluonhq.com/products/cloudlink/buy/), and there is a 30-day free trial. Sign up and get a valid account on Gluon CloudLink and a link to download the Gluon CloudLink Dashboard. 
+* You need a valid subscription to Gluon CloudLink. You can get it [here](http://gluonhq.com/products/cloudlink/buy/), and there is a 30-day free trial. Sign up and get a valid account on Gluon CloudLink to sign in on [Gluon Dashboard](https://gluon.io). 
+* Create the remote functions used by this sample in the Dashboard's API Management view, as explained in the documentation linked below.
 
 Instructions
 ------------
-
-Install and open the Dashboard, and sign in using the Gluon account credentials provided above. You will need to create the remote functions used by this sample in the Dashboard's API Management view, as explained in the documentation linked below.
 
 To execute the sample, do as follows:
 
 ```
 mvn javafx:run
 ```
+
+Documentation
+-------------
+
+Read how to create this sample step by step [here](http://docs.gluonhq.com/samples/functionmapperdesktop/)
