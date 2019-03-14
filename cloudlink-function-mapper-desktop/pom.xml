@@ -11,10 +11,6 @@
     </properties>
     <repositories>
         <repository>
-            <id>gluon-private-snapshot</id>
-            <url>https://nexus.gluonhq.com/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
             <id>Gluon-Public-Snapshot</id>
             <url>https://nexus.gluonhq.com/nexus/content/repositories/public-snapshots/</url>
         </repository>
