@@ -29,23 +29,24 @@ package com.gluonhq.functionmapper.service;
 import com.gluonhq.cloudlink.client.data.RemoteFunctionBuilder;
 import com.gluonhq.cloudlink.client.data.RemoteFunctionObject;
 import com.gluonhq.connect.GluonObservableObject;
+import com.gluonhq.functionmapper.model.StackResponse;
 
 public class RemoteService {
     
-    public <T> GluonObservableObject<T> answersStackOverflow(Class<T> clazz, String value) {
+    public GluonObservableObject<StackResponse> answersStackOverflow(String value) {
         RemoteFunctionObject function = RemoteFunctionBuilder
                 .create("answersStackOverflow")
                 .param("questionID", value)
                 .object();
-        return function.call(clazz);
+        return function.call(StackResponse.class);
     }
 
-    public <T> GluonObservableObject<T> searchStackOverflow(Class<T> clazz, String value) {
+    public GluonObservableObject<StackResponse> searchStackOverflow(String value) {
         RemoteFunctionObject function = RemoteFunctionBuilder
                 .create("searchStackOverflow")
                 .param("tagged", value)
                 .object();
-        return function.call(clazz);
+        return function.call(StackResponse.class);
     }
 }
 
