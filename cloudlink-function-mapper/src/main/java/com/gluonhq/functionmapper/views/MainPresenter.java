@@ -27,6 +27,11 @@
 package com.gluonhq.functionmapper.views;
 
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
+import com.gluonhq.charm.glisten.control.AppBar;
+import com.gluonhq.charm.glisten.control.CharmListCell;
+import com.gluonhq.charm.glisten.control.CharmListView;
+import com.gluonhq.charm.glisten.control.Icon;
+import com.gluonhq.charm.glisten.control.ListTile;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.connect.GluonObservableObject;
@@ -141,7 +146,7 @@ public class MainPresenter extends GluonPresenter<FunctionMapper> {
     
     private void search(String tag) {
         charmListView.setItems(FXCollections.emptyObservableList());
-        GluonObservableObject<StackResponse> searchStackOverflow = remoteService.searchStackOverflow(StackResponse.class, tag);
+        GluonObservableObject<StackResponse> searchStackOverflow = remoteService.searchStackOverflow(tag);
         searchStackOverflow.initializedProperty().addListener((obs, ov, nv) -> {
             if (nv) {
                 charmListView.setItems(FXCollections.observableArrayList(searchStackOverflow.get().getItems()));

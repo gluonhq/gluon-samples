@@ -26,9 +26,7 @@
  */
 package com.gluonhq.functionmapper.views;
 
-import com.gluonhq.connect.GluonObservableObject;
 import com.gluonhq.functionmapper.model.StackEntry;
-import com.gluonhq.functionmapper.model.StackResponse;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -110,7 +108,7 @@ public class MainController extends AbstractController {
     
     private void search(String tag) {
         reset();
-        GluonObservableObject<StackResponse> searchStackOverflow = getApp().service().searchStackOverflow(StackResponse.class, tag);
+        var searchStackOverflow = getApp().service().searchStackOverflow(tag);
         searchStackOverflow.setOnSucceeded(e -> {
             listView.setItems(FXCollections.observableArrayList(searchStackOverflow.get().getItems()));
             if (top.getChildren().size() == 3) {
