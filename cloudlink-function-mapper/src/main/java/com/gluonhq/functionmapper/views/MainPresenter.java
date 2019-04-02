@@ -53,7 +53,7 @@ import java.util.List;
 
 public class MainPresenter extends GluonPresenter<FunctionMapper> {
 
-    private static final List<String> TAGS = Arrays.asList(new String[] { "gluon", "gluon-mobile", "javafxports", "javafx", "scenebuilder" });
+    private static final List<String> TAGS = Arrays.asList("gluon", "gluon-mobile", "javafxports", "javafx", "scenebuilder");
   
     @Inject
     private RemoteService remoteService;
@@ -153,5 +153,4 @@ public class MainPresenter extends GluonPresenter<FunctionMapper> {
             }
         });
     }
-    
 }
