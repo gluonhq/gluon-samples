@@ -31,7 +31,7 @@ import java.util.List;
 
 public class StackResponse {
     
-    private List<StackEntry> items = new LinkedList();
+    private List<StackEntry> items = new LinkedList<>();
 
     public List<StackEntry> getItems() {
         return items;
@@ -45,5 +45,4 @@ public class StackResponse {
     public String toString() {
         return "StackResponse{" + "items=" + items + '}';
     }
-    
 }

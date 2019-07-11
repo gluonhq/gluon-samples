@@ -161,7 +161,7 @@ public class DetailPresenter extends GluonPresenter<FunctionMapper> {
 
     private void search(String questionId) {
         charmListView.setItems(FXCollections.emptyObservableList());
-        GluonObservableObject<StackResponse> answersStackOverflow = remoteService.answersStackOverflow(StackResponse.class, questionId);
+        GluonObservableObject<StackResponse> answersStackOverflow = remoteService.answersStackOverflow(questionId);
         answersStackOverflow.initializedProperty().addListener((obs, ov, nv) -> {
             if (nv) {
                 charmListView.setItems(FXCollections.observableArrayList(answersStackOverflow.get().getItems()));
