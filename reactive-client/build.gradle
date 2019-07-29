@@ -28,16 +28,17 @@ targetCompatibility = 1.8
 dependencies {
     if (JavaVersion.current().isJava9Compatible()) {
         compile 'com.gluonhq:charm:5.0.0-jdk9'
-        androidRuntime 'com.gluonhq:charm:5.0.0'
+        androidRuntime 'com.gluonhq:charm:5.0.2'
     } else {
-        compile 'com.gluonhq:charm:5.0.0'
+        compile 'com.gluonhq:charm:5.0.2'
     }
     compile 'io.reactivex.rxjava2:rxjavafx:2.2.2'
 }
 
 jfxmobile {
+    javafxportsVersion = "8.60.12"
     downConfig {
-        version = '3.8.5'
+        version = '3.8.6'
         // Do not edit the line below. Use Gluon Mobile Settings in your project context menu instead
         plugins 'display', 'lifecycle', 'statusbar', 'storage'
     }

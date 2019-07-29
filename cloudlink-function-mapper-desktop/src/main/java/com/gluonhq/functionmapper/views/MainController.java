@@ -110,9 +110,13 @@ public class MainController extends AbstractController {
         reset();
         var searchStackOverflow = getApp().service().searchStackOverflow(tag);
         searchStackOverflow.setOnSucceeded(e -> {
-            listView.setItems(FXCollections.observableArrayList(searchStackOverflow.get().getItems()));
-            if (top.getChildren().size() == 3) {
-                top.getChildren().remove(2);
+            var stackResponse = searchStackOverflow.get();
+            System.out.println("stackResponse = " + stackResponse);
+            if (stackResponse != null) {
+                listView.setItems(FXCollections.observableArrayList(stackResponse.getItems()));
+                if (top.getChildren().size() == 3) {
+                    top.getChildren().remove(2);
+                }
             }
         });
         searchStackOverflow.setOnFailed(e -> {

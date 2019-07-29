@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:1.3.16'
+        classpath 'org.javafxports:jfxmobile-plugin:1.3.17'
         classpath 'net.sf.proguard:proguard-gradle:5.2.1'
     }
 }
