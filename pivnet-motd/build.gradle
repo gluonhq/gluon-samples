@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:1.3.5'
+        classpath 'org.javafxports:jfxmobile-plugin:1.3.17'
         classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.2.RELEASE'
     }
 }
@@ -72,15 +72,15 @@ configure([project(':client')]) {
     }
 
     dependencies {
-        compile 'com.gluonhq:glisten-afterburner:1.4.0'
-        compile 'com.gluonhq:charm-cloudlink-client:4.3.3'
+        compile 'com.gluonhq:glisten-afterburner:1.4.1'
+        compile 'com.gluonhq:charm-cloudlink-client:4.5.2'
     }
 
     mainClassName = 'com.gluonhq.pivnet.motd.client.MessageOfTheDay'
 
     jfxmobile {
         downConfig {
-            version = '3.8.0'
+            version = '3.8.6'
             plugins 'display', 'lifecycle', 'statusbar', 'storage'
         }
         android {

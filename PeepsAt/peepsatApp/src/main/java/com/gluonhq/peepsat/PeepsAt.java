@@ -35,6 +35,14 @@ import javafx.stage.Stage;
 
 public class PeepsAt extends MobileApplication {
 
+    static {
+        String httpAgent = System.getProperty("http.agent");
+        if (httpAgent == null) {
+            httpAgent = "(" + System.getProperty("os.name") + " / " + System.getProperty("os.version") + " / " + System.getProperty("os.arch") + ")";
+        }
+        System.setProperty("http.agent", "Gluon Mobile/1.0.3 " + httpAgent);
+    }
+
     @Override
     public void init() {
         AppViewManager.registerViewsAndDrawer(this);

@@ -11,40 +11,44 @@
     </properties>
     <repositories>
         <repository>
-            <id>Gluon-Public-Snapshot</id>
-            <url>https://nexus.gluonhq.com/nexus/content/repositories/public-snapshots/</url>
+            <id>Gluon-Releases</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
         </repository>
     </repositories>
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>11.0.2</version>
+            <version>12.0.2</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>11.0.2</version>
+            <version>12.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-cloudlink-client</artifactId>
-            <version>6.0.0-SNAPSHOT</version>
+            <version>6.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>cache</artifactId>
-            <version>4.0.0-SNAPSHOT</version>
+            <version>4.0.2</version>
             <classifier>desktop</classifier>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>storage</artifactId>
-            <version>4.0.0-SNAPSHOT</version>
+            <version>4.0.2</version>
             <classifier>desktop</classifier>
         </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>util</artifactId>
+            <version>4.0.2</version>
+        </dependency>
 
-        <!-- Cloudlink client should expose these dependencies -->
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.json</artifactId>
@@ -58,7 +62,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>3.8.1</version>
                 <configuration>
                     <release>11</release>
                 </configuration>
@@ -66,7 +70,7 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.1</version>
+                <version>0.0.3</version>
                 <configuration>
                     <mainClass>com.gluonhq.functionmapper.FunctionMapper</mainClass>
                     <options>

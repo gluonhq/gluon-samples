@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:2.0.24'
+        classpath 'org.javafxports:jfxmobile-plugin:2.0.30'
     }
 }
 
@@ -88,9 +88,9 @@ dependencies {
 }
 
 jfxmobile {
-    javafxportsVersion="8.60.11"
+    javafxportsVersion = "8.60.12"
     downConfig {
-        version = '3.8.0'
+        version = '3.8.6'
         // Do not edit the line below. Use Gluon Mobile Settings in your project context menu instead
         plugins 'display', 'lifecycle', 'pictures', 'statusbar', 'storage'
     }

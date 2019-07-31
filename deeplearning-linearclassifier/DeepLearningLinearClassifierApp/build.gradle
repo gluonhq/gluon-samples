@@ -81,8 +81,9 @@ dependencies {
 }
 
 jfxmobile {
+    javafxportsVersion = "8.60.12"
     downConfig {
-        version = '3.8.5'
+        version = '3.8.6'
         // Do not edit the line below. Use Gluon Mobile Settings in your project context menu instead
         plugins 'display', 'lifecycle', 'statusbar', 'storage'
     }

@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'org.javafxports:jfxmobile-plugin:1.3.5'
+        classpath 'org.javafxports:jfxmobile-plugin:1.3.17'
     }
 }
 
@@ -28,7 +28,7 @@ dependencies {
 
     compile 'org.scala-lang:scala-library:2.12.2'
 
-    compile 'com.gluonhq:charm:5.0.0'
+    compile 'com.gluonhq:charm:5.0.2'
 
     // Desktop SQL -> https://github.com/xerial/sqlite-jdbc
     desktopRuntime 'org.xerial:sqlite-jdbc:3.8.11.2'
@@ -44,11 +44,14 @@ dependencies {
 
 jfxmobile {
     downConfig {
-        version = '3.8.0'
+        version = '3.8.6'
         plugins 'display', 'lifecycle', 'statusbar', 'storage'
     }
     android {
         manifest = 'src/android/AndroidManifest.xml'
+        dexOptions {
+            additionalParameters = ['--min-sdk-version=26']
+        }
     }
     ios {
         infoPList = file('src/ios/Default-Info.plist')
