@@ -1,8 +1,0 @@
-
----
-spring:
-  jpa:
-    generate-ddl: true
-security:
-  basic:
-    enabled: false

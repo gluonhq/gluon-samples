@@ -1,3 +1,0 @@
-include 'logic'
-include 'server'
-include 'app'

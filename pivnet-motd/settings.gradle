@@ -1,5 +1,0 @@
-include 'server'
-include 'client'
-
-rootProject.name = 'PivNet-MOTD'
-

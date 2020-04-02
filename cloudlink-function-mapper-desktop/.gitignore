@@ -1,9 +1,0 @@
-# Maven
-target/
-
-# IntelliJ IDEA
-cloudlinkdemo.iml
-.idea/
-
-# Gluon
-gluoncloudlink_config.json
