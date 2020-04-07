@@ -103,7 +103,6 @@
                     <target>${client.target}</target>
                     <verbose>true</verbose>
                     <mainClass>${mainClassName}</mainClass>
-                    <graalvmHome>/opt/graalvm-svm-linux-20.1-latest</graalvmHome>
                     <reflectionList>
                         <list>com.gluonhq.samples.connect.basic.Language</list>
                         <list>com.gluonhq.samples.connect.basic.User</list>
