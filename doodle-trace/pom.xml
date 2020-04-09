@@ -13,11 +13,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <javafx.version>15-ea+1</javafx.version>
+        <javafx.version>14</javafx.version>
         <attach.version>4.0.6</attach.version>
-        <mainClassName>com.carlfx.GluonApplication</mainClassName>
-        <javafx-maven-plugin-version>0.0.4</javafx-maven-plugin-version>
-        <client-maven-plugin-version>0.1.19</client-maven-plugin-version>
+        <javafx.plugin.version>0.0.4</javafx.plugin.version>
+        <client.plugin.version>0.1.20</client.plugin.version>
+        <main.class>com.carlfx.GluonApplication</main.class>
     </properties>
 
     <dependencies>
@@ -62,6 +62,45 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>11</release>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>${javafx.plugin.version}</version>
+                <configuration>
+                    <mainClass>${main.class}</mainClass>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.gluonhq</groupId>
+                <artifactId>client-maven-plugin</artifactId>
+                <version>${client.plugin.version}</version>
+                <configuration>
+                    <target>${client.target}</target>
+                    <attachList>
+                        <list>display</list>
+                        <list>lifecycle</list>
+                         <list>statusbar</list> 
+                        <list>storage</list>
+                    </attachList>
+                    <verbose>true</verbose>
+                    <mainClass>${main.class}</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <profiles>
         <profile>
             <id>desktop</id>
@@ -77,73 +116,37 @@
                     <artifactId>display</artifactId>
                     <version>${attach.version}</version>
                     <classifier>desktop</classifier>
+                    <scope>runtime</scope>
                 </dependency>
                 <dependency>
                     <groupId>com.gluonhq.attach</groupId>
                     <artifactId>lifecycle</artifactId>
                     <version>${attach.version}</version>
                     <classifier>desktop</classifier>
+                    <scope>runtime</scope>
                 </dependency>
                 <dependency>
                     <groupId>com.gluonhq.attach</groupId>
                     <artifactId>storage</artifactId>
                     <version>${attach.version}</version>
                     <classifier>desktop</classifier>
+                    <scope>runtime</scope>
                 </dependency>
             </dependencies>
         </profile>
         <profile>
             <id>ios</id>
             <properties>
-                <clientTarget>ios</clientTarget>
+                <client.target>ios</client.target>
             </properties>
         </profile>
         <profile>
             <id>android</id>
             <properties>
-                <clientTarget>android</clientTarget>
+                <client.target>android</client.target>
             </properties>
         </profile>
     </profiles>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <release>11</release>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.openjfx</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>${javafx-maven-plugin-version}</version>
-                <configuration>
-                    <mainClass>${mainClassName}</mainClass>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>com.gluonhq</groupId>
-                <artifactId>client-maven-plugin</artifactId>
-                <version>${client-maven-plugin-version}</version>
-                <configuration>
-                    <target>${clientTarget}</target>
-                    <attachList>
-                        <list>display</list>
-                        <list>lifecycle</list>
-                        <!-- <list>statusbar</list> -->
-                        <list>storage</list>
-                    </attachList>
-                    <verbose>true</verbose>
-                    <mainClass>${mainClassName}</mainClass>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
     <repositories>
         <repository>
