@@ -44,11 +44,11 @@ Build a native image for iOS using:
 
     mvn client:build -Pios
 
-Install adn run the native image on a connected iOS device:
+Install and run the native image on a connected iOS device:
 
     mvn client:run -Pios
 
-Deploy the IPA file (for submission to Test Flight or App Store):
+Create an IPA file (for submission to Test Flight or App Store):
 
     mvn client:package -Pios
 
