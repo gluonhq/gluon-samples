@@ -108,7 +108,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <clientTarget>host</clientTarget>
+                <client.target>host</client.target>
             </properties>
             <dependencies>
                 <dependency>
