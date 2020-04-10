@@ -91,7 +91,7 @@
                     <attachList>
                         <list>display</list>
                         <list>lifecycle</list>
-                         <list>statusbar</list> 
+                        <list>statusbar</list>
                         <list>storage</list>
                     </attachList>
                     <verbose>true</verbose>
