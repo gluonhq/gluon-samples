@@ -18,21 +18,21 @@ Run the application using:
 
     mvn javafx:run
 
-Build native image using:
+Build a native image using:
 
     mvn client:build
 
-Run native image app:
+Run the native image app:
 
     mvn client:run
 
 ### Android
 
-Build using:
+Build a native image for Android using:
 
     mvn client:build -Pandroid
 
-Package the android application:
+Package the native image as an 'apk' file:
 
     mvn client:package -Pandroid
 
@@ -40,24 +40,20 @@ Install it on a connected android device:
 
     mvn client:install -Pandroid
 
-Run installed application on the connected android device:
+Run the installed app on a connected android device:
 
     mvn client:run -Pandroid
 
 ### iOS
 
-Build using:
+Build a native image for iOS using:
 
     mvn client:build -Pios
 
-Package the iOS application:
-
-    mvn client:package -Pios
-
-Install it on a connected iOS device:
-
-    mvn client:install -Pios
-
-Run installed application on the connected iOS device:
+Install and run the native image on a connected iOS device:
 
     mvn client:run -Pios
+
+Create an IPA file (for submission to Test Flight or App Store):
+
+    mvn client:package -Pios

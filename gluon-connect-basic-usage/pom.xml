@@ -9,21 +9,14 @@
 
     <name>Gluon Connect Basic Usage</name>
 
-    <repositories>
-        <repository>
-            <id>gluon-releases</id>
-            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
-        </repository>
-    </repositories>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.release>11</maven.compiler.release>
         <javafx.version>14</javafx.version>
-        <client.plugin.version>0.1.20</client.plugin.version>
         <attach.version>4.0.6</attach.version>
-        <mainClassName>com.gluonhq.samples.connect.basic.Main</mainClassName>
+        <javafx.plugin.version>0.0.4</javafx.plugin.version>
+        <client.plugin.version>0.1.20</client.plugin.version>
+        <main.class>com.gluonhq.samples.connect.basic.Main</main.class>
     </properties>
 
     <dependencies>
@@ -31,6 +24,16 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>charm-glisten</artifactId>
+            <version>6.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>connect</artifactId>
+            <version>2.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish</groupId>
@@ -44,16 +47,6 @@
             <artifactId>jaxb-runtime</artifactId>
             <version>2.3.1</version>
             <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.gluonhq</groupId>
-            <artifactId>charm-glisten</artifactId>
-            <version>6.0.3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.gluonhq</groupId>
-            <artifactId>connect</artifactId>
-            <version>2.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
@@ -88,17 +81,14 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
-                <configuration>
-                    <release>11</release>
-                </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>0.0.4</version>
+                <version>${javafx.plugin.version}</version>
                 <configuration>
-                    <mainClass>${mainClassName}</mainClass>
+                    <mainClass>${main.class}</mainClass>
                 </configuration>
             </plugin>
 
@@ -108,29 +98,22 @@
                 <version>${client.plugin.version}</version>
                 <configuration>
                     <target>${client.target}</target>
-                    <verbose>true</verbose>
-                    <mainClass>${mainClassName}</mainClass>
-                    <reflectionList>
-                        <list>com.gluonhq.samples.connect.basic.Language</list>
-                        <list>com.gluonhq.samples.connect.basic.User</list>
-                    </reflectionList>
                     <attachList>
                         <list>display</list>
                         <list>lifecycle</list>
                         <list>statusbar</list>
                         <list>storage</list>
                     </attachList>
+                    <verbose>true</verbose>
+                    <mainClass>${main.class}</mainClass>
+                    <reflectionList>
+                        <list>com.gluonhq.samples.connect.basic.Language</list>
+                        <list>com.gluonhq.samples.connect.basic.User</list>
+                    </reflectionList>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>gluon-releases</id>
-            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
-        </pluginRepository>
-    </pluginRepositories>
 
     <profiles>
         <profile>
@@ -178,4 +161,18 @@
             </properties>
         </profile>
     </profiles>
+
+    <repositories>
+        <repository>
+            <id>gluon-releases</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>gluon-releases</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
