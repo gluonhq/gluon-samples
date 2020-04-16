@@ -15,7 +15,7 @@
         <javafx.version>14</javafx.version>
         <attach.version>4.0.6</attach.version>
         <javafx.plugin.version>0.0.4</javafx.plugin.version>
-        <client.plugin.version>0.1.20</client.plugin.version>
+        <client.plugin.version>0.1.21-SNAPSHOT</client.plugin.version>
         <main.class>com.gluonhq.samples.connect.rest.Main</main.class>
     </properties>
 
@@ -58,12 +58,17 @@
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>browser</artifactId>
-            <version>${attach.version}</version>
+            <version>4.0.7-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>util</artifactId>
             <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish</groupId>
@@ -77,12 +82,6 @@
             <artifactId>jaxb-runtime</artifactId>
             <version>2.3.1</version>
             <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.3.1</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
