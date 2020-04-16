@@ -42,6 +42,7 @@ import javafx.scene.control.Label;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 
 public class NotesPresenter extends GluonPresenter<CombinedStorage> {
@@ -70,8 +71,8 @@ public class NotesPresenter extends GluonPresenter<CombinedStorage> {
         lstNotes.setCellFactory(p -> new NoteCell(service, this::edit, this::remove));
         lstNotes.setHeadersFunction(t -> t.getCreationDate().toLocalDate());
         lstNotes.setHeaderCellFactory(p -> new HeaderCell());
-        lstNotes.setComparator((n1, n2) -> n1.getCreationDate().compareTo(n2.getCreationDate()));
-        lstNotes.setHeaderComparator((h1, h2) -> h1.compareTo(h2));
+        lstNotes.setComparator(Comparator.comparing(Note::getCreationDate));
+        lstNotes.setHeaderComparator(LocalDate::compareTo);
         lstNotes.setPlaceholder(new Label(resources.getString("label.no.notes")));
         
         final FloatingActionButton floatingActionButton = new FloatingActionButton();
