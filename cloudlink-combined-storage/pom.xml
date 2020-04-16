@@ -126,9 +126,14 @@
                         <list>javafx.fxml.FXMLLoader</list>
                         <list>com.gluonhq.combinedstorage.model.Model</list>
                         <list>com.gluonhq.combinedstorage.model.Note</list>
+                        <list>com.gluonhq.combinedstorage.service.Service</list>
                         <list>com.gluonhq.combinedstorage.views.EditionPresenter</list>
                         <list>com.gluonhq.combinedstorage.views.NotesPresenter</list>
                     </reflectionList>
+                    <bundlesList>
+                        <list>com.gluonhq.combinedstorage.views.edition</list>
+                        <list>com.gluonhq.combinedstorage.views.notes</list>
+                    </bundlesList>
                 </configuration>
             </plugin>
         </plugins>
