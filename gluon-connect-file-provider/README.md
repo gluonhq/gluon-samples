@@ -1,12 +1,18 @@
-# Gluon-Connect File Provider Sample
+# Gluon Connect - File Provider
 
 A JavaFX application that uses [Gluon Connect](https://github.com/gluonhq/connect), a mobile application
 framework to bind your data to your JavaFX UI controls. This application demonstrates how to retrieve data from a
 file on the local file system.
 
-## Instructions
+## Documentation
 
-Please follow the pre-requisites as stated [here](https://github.com/gluonhq/client-samples/#build-and-run-the-samples).
+Read more about this particular sample in the [File provider](http://docs.gluonhq.com/connect/latest/#_file_provider)
+section on the Gluon Connect documentation website.
+
+## Quick Instructions
+
+We use [Gluon Client](https://docs.gluonhq.com/client/) to build a native image for platforms including desktop, android and iOS.
+Please follow the Gluon Client prerequisite as stated [here](https://github.com/gluonhq/client-samples/#build-and-run-the-samples).
 
 ### Desktop
 
@@ -53,8 +59,3 @@ Install and run the native image on a connected iOS device:
 Create an IPA file (for submission to Test Flight or App Store):
 
     mvn client:package -Pios
-
-## Documentation
-
-Read more about this particular sample in the [File provider](http://docs.gluonhq.com/connect/latest/#_file_provider)
-section on the Gluon Connect documentation website.
