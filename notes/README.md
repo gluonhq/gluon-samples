@@ -1,6 +1,5 @@
 
-Notes
-===========
+# Notes
 
 A JavaFX application that uses Gluon Mobile Glisten (a mobile application framework with mobile-friendly UI controls) and Gluon Mobile Connect (for locally storing notes and user settings).
 
