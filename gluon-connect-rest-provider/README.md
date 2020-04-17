@@ -1,5 +1,4 @@
-
-# Gluon-Connect Rest Provider
+# Gluon Connect - Rest Provider
 
 A JavaFX application that uses [Gluon Connect](https://github.com/gluonhq/connect), a mobile application
 framework to bind your data to your JavaFX UI controls. This application demonstrates how to retrieve data from an
@@ -11,6 +10,8 @@ Read more about this particular sample in the [REST provider](http://docs.gluonh
 section on the Gluon Connect documentation website.
 
 ## Quick Instructions
+
+Please follow the Gluon Client prerequisite as stated [here](https://github.com/gluonhq/client-samples/#build-and-run-the-samples).
 
 ### Desktop
 
