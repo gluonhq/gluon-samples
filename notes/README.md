@@ -5,7 +5,11 @@ Notes
 A JavaFX application that uses Gluon Mobile Glisten (a mobile application framework with mobile-friendly UI controls) and Gluon Mobile Connect (for locally storing notes and user settings).
 
 
-## Instructions
+## Documentation
+
+Read how to create this sample step by step [here](http://docs.gluonhq.com/samples/notes/)
+
+## Quick Instructions
 
 Please follow the pre-requisites as stated [here](https://github.com/gluonhq/client-samples/#build-and-run-the-samples).
 
@@ -54,8 +58,3 @@ Install and run the native image on a connected iOS device:
 Create an IPA file (for submission to TestFlight or App Store):
 
     mvn client:package -Pios
-
-## Documentation
-
-Read how to create this sample step by step [here](http://docs.gluonhq.com/samples/notes/)
-

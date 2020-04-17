@@ -45,7 +45,7 @@ public class AppViewManager {
 
     private static final AppViewRegistry REGISTRY = new AppViewRegistry();
 
-    private static final ResourceBundle bundle = ResourceBundle.getBundle("com/gluonhq/samples/notes/drawer");
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("com.gluonhq.samples.notes.drawer");
 
     public static final AppView NOTES_VIEW = view(bundle.getString("view.notes.text"), NotesPresenter.class, MaterialDesignIcon.HOME, SHOW_IN_DRAWER, HOME_VIEW, SKIP_VIEW_STACK);
     public static final AppView EDITION_VIEW = view(bundle.getString("view.edition.text"), EditionPresenter.class, MaterialDesignIcon.EDIT, SHOW_IN_DRAWER);
