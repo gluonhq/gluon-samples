@@ -171,6 +171,12 @@
                 <clientTarget>ios</clientTarget>
             </properties>
         </profile>
+        <profile>
+            <id>android</id>
+            <properties>
+                <clientTarget>android</clientTarget>
+            </properties>
+        </profile>
     </profiles>
 
     <repositories>
