@@ -10,7 +10,8 @@ Read how to create this sample step by step [here](http://docs.gluonhq.com/sampl
 
 ## Quick Instructions
 
-Please follow the pre-requisites as stated [here](https://github.com/gluonhq/client-samples/#build-and-run-the-samples).
+We use [Gluon Client](https://docs.gluonhq.com/client/) to build a native image for platforms including desktop, android and iOS.
+Please follow the Gluon Client prerequisites as stated [here](https://github.com/gluonhq/client-samples/#build-and-run-the-samples).
 
 ### Desktop
 
