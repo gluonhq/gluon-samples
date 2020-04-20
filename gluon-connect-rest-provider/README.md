@@ -56,6 +56,6 @@ Install and run the native image on a connected iOS device:
 
     mvn client:run -Pios
 
-Create an IPA file (for submission to Test Flight or App Store):
+Create an IPA file (for submission to TestFlight or App Store):
 
     mvn client:package -Pios
