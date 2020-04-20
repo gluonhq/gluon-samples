@@ -29,7 +29,8 @@ Read how to create this sample step by step [here](http://docs.gluonhq.com/sampl
 
 ## Quick Instructions
 
-Please follow the Gluon Client pre-requisites as stated [here](https://github.com/gluonhq/client-samples/#build-and-run-the-samples).
+We use [Gluon Client](https://docs.gluonhq.com/client/) to build a native image for platforms including desktop, android and iOS.
+Please follow the Gluon Client prerequisites as stated [here](https://github.com/gluonhq/client-samples/#build-and-run-the-samples).
 
 ### Desktop
 
@@ -73,6 +74,6 @@ Install and run the native image on a connected iOS device:
 
     mvn client:run -Pios
 
-Create an IPA file (for submission to Test Flight or App Store):
+Create an IPA file (for submission to TestFlight or App Store):
 
     mvn client:package -Pios
