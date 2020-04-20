@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.gluonhq.samples</groupId>
-    <artifactId>file-provider</artifactId>
+    <artifactId>connect-file-provider</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
