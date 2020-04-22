@@ -14,9 +14,9 @@
         <maven.compiler.release>11</maven.compiler.release>
         <javafx.version>14.0.1</javafx.version>
         <charm.version>6.0.4-SNAPSHOT</charm.version>
-        <attach.version>4.0.7-SNAPSHOT</attach.version>
+        <attach.version>4.0.7</attach.version>
         <javafx-maven-plugin-version>0.0.4</javafx-maven-plugin-version>
-        <client-maven-plugin-version>0.1.21-SNAPSHOT</client-maven-plugin-version>
+        <client-maven-plugin-version>0.1.22-SNAPSHOT</client-maven-plugin-version>
         <mainClassName>com.gluonhq.samples.beacons.Beacons</mainClassName>
     </properties>
 
