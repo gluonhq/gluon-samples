@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
         <javafx.version>14</javafx.version>
-        <charm.version>6.0.3</charm.version>
+        <charm.version>6.0.4-SNAPSHOT</charm.version>
         <attach.version>4.0.7</attach.version>
         <javafx.plugin.version>0.0.4</javafx.plugin.version>
         <client.plugin.version>0.1.22-SNAPSHOT</client.plugin.version>
@@ -133,7 +133,6 @@
                     <verbose>true</verbose>
                     <mainClass>${main.class}</mainClass>
                     <reflectionList>
-                        <list>javafx.fxml.FXMLLoader</list>
                         <list>com.gluonhq.samples.notes.model.Model</list>
                         <list>com.gluonhq.samples.notes.model.Note</list>
                         <list>com.gluonhq.samples.notes.model.Settings</list>

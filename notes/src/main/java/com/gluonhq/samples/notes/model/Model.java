@@ -31,7 +31,7 @@ import javafx.beans.property.SimpleObjectProperty;
 
 public class Model {
     
-    final ObjectProperty<Note> activeNote = new SimpleObjectProperty<>();
+    private final ObjectProperty<Note> activeNote = new SimpleObjectProperty<>();
     
     public ObjectProperty<Note> activeNote() {
         return activeNote;

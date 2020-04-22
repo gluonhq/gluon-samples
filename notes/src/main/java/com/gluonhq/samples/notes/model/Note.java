@@ -33,9 +33,9 @@ import javafx.beans.property.StringProperty;
 
 public class Note {
 
-    final StringProperty title = new SimpleStringProperty();
-    final StringProperty text = new SimpleStringProperty();
-    long creationDate;
+    private final StringProperty title = new SimpleStringProperty();
+    private final StringProperty text = new SimpleStringProperty();
+    private long creationDate;
     
     public Note() {
         this.creationDate = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);

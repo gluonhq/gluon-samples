@@ -42,7 +42,7 @@ public class Settings {
     }
     
     // showDate
-    final BooleanProperty showDate = new SimpleBooleanProperty(this, "showDate", true);
+    private final BooleanProperty showDate = new SimpleBooleanProperty(this, "showDate", true);
     
     public final BooleanProperty showDateProperty() {
        return showDate;
@@ -57,7 +57,7 @@ public class Settings {
     }
     
     // ascending
-    final BooleanProperty ascending = new SimpleBooleanProperty(this, "ascending", true);
+    private final BooleanProperty ascending = new SimpleBooleanProperty(this, "ascending", true);
     
     public final BooleanProperty ascendingProperty() {
        return ascending;
@@ -72,7 +72,7 @@ public class Settings {
     }
 
     // sorting
-    final ObjectProperty<SORTING> sorting = new SimpleObjectProperty<>(this, "sorting", SORTING.DATE);
+    private final ObjectProperty<SORTING> sorting = new SimpleObjectProperty<>(this, "sorting", SORTING.DATE);
 
     public final ObjectProperty<SORTING> sortingProperty() {
        return sorting;
@@ -87,7 +87,7 @@ public class Settings {
     }
 
     // fontSize
-    final IntegerProperty fontSize = new SimpleIntegerProperty(this, "fontSize", 10);
+    private final IntegerProperty fontSize = new SimpleIntegerProperty(this, "fontSize", 10);
     
     public final IntegerProperty fontSizeProperty() {
        return fontSize;
