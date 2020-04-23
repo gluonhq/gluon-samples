@@ -117,7 +117,6 @@
                         <list>storage</list>
                     </attachList>
                     <reflectionList>
-                        <list>javafx.fxml.FXMLLoader</list>
                         <list>com.gluonhq.samples.beacons.settings.Settings</list>
                         <list>com.gluonhq.samples.beacons.views.BeaconPresenter</list>
                         <list>com.gluonhq.samples.beacons.views.BeaconsPresenter</list>
