@@ -13,9 +13,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
         <javafx.version>14</javafx.version>
-        <attach.version>4.0.6</attach.version>
+        <attach.version>4.0.7</attach.version>
         <javafx.plugin.version>0.0.4</javafx.plugin.version>
-        <client.plugin.version>0.1.21-SNAPSHOT</client.plugin.version>
+        <client.plugin.version>0.1.21</client.plugin.version>
         <main.class>com.gluonhq.samples.connect.rest.Main</main.class>
     </properties>
 
@@ -58,7 +58,7 @@
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
             <artifactId>browser</artifactId>
-            <version>4.0.7-SNAPSHOT</version>
+            <version>${attach.version}</version>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
