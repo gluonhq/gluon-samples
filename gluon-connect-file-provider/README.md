@@ -1,8 +1,8 @@
 # Gluon Connect - File Provider
 
-A JavaFX application that uses [Gluon Connect](https://github.com/gluonhq/connect), a mobile application
-framework to bind your data to your JavaFX UI controls. This application demonstrates how to retrieve data from a
-file on the local file system.
+A JavaFX application that uses [Gluon Connect](https://github.com/gluonhq/connect),
+a mobile application framework to bind your data to your JavaFX UI controls.
+This application demonstrates how to retrieve data from a file on the local file system.
 
 ## Documentation
 
