@@ -1,8 +1,8 @@
 # Gluon Connect - Basic Usage
 
-A JavaFX application that uses [Gluon Connect](https://gluonhq.com/open-source/connect), an application framework to
-bind your data to your JavaFX UI controls. This application demonstrates how to retrieve data from a resource that is
-located on the classpath.
+A JavaFX application that uses [Gluon Connect](https://gluonhq.com/open-source/connect),
+an application framework to bind your data to your JavaFX UI controls. 
+This application demonstrates how to retrieve data from a resource that is located on the classpath.
 
 ## Documentation
 
@@ -10,6 +10,7 @@ Read how to create this sample step by step here
 
 ## Quick Instructions
 
+We use [Gluon Client](https://docs.gluonhq.com/client/) to build a native image for platforms including desktop, android and iOS.
 Please follow the pre-requisites as stated [here](https://github.com/gluonhq/client-samples/#build-and-run-the-samples).
 
 ### Desktop
@@ -54,6 +55,6 @@ Install and run the native image on a connected iOS device:
 
     mvn client:run -Pios
 
-Create an IPA file (for submission to Test Flight or App Store):
+Create an IPA file (for submission to TestFlight or App Store):
 
     mvn client:package -Pios
