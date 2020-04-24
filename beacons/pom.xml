@@ -16,7 +16,7 @@
         <charm.version>6.0.4</charm.version>
         <attach.version>4.0.7</attach.version>
         <javafx-maven-plugin-version>0.0.4</javafx-maven-plugin-version>
-        <client-maven-plugin-version>0.1.22-SNAPSHOT</client-maven-plugin-version>
+        <client-maven-plugin-version>0.1.22</client-maven-plugin-version>
         <mainClassName>com.gluonhq.samples.beacons.Beacons</mainClassName>
     </properties>
 
@@ -39,7 +39,7 @@
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>glisten-afterburner</artifactId>
-            <version>2.0.3</version>
+            <version>2.0.4</version>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
@@ -183,28 +183,6 @@
             <id>Gluon</id>
             <url>https://nexus.gluonhq.com/nexus/content/repositories/releases</url>
         </repository>
-        <repository>
-            <id>Gluon-snapshots</id>
-            <url>https://nexus.gluonhq.com/nexus/content/repositories/public-snapshots</url>
-        </repository>
-        <repository>
-            <id>snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </repository>
     </repositories>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>gluon-releases</id>
-            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>Gluon-snapshots</id>
-            <url>https://nexus.gluonhq.com/nexus/content/repositories/public-snapshots</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </pluginRepository>
-    </pluginRepositories>
 </project>
