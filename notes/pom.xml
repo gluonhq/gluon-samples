@@ -16,7 +16,7 @@
         <charm.version>6.0.4</charm.version>
         <attach.version>4.0.7</attach.version>
         <javafx.plugin.version>0.0.4</javafx.plugin.version>
-        <client.plugin.version>0.1.22-SNAPSHOT</client.plugin.version>
+        <client.plugin.version>0.1.22</client.plugin.version>
         <main.class>com.gluonhq.samples.notes.Notes</main.class>
     </properties>
 
@@ -39,7 +39,7 @@
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>glisten-afterburner</artifactId>
-            <version>2.0.3</version>
+            <version>2.0.4</version>
         </dependency>
         <dependency>
             <groupId>com.gluonhq</groupId>
@@ -208,10 +208,4 @@
         </repository>
     </repositories>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>gluon-releases</id>
-            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
-        </pluginRepository>
-    </pluginRepositories>
 </project>
