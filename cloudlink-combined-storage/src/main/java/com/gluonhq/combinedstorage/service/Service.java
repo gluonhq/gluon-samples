@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017, Gluon
+ * Copyright (c) 2017, 2020 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,31 +33,18 @@ import com.gluonhq.cloudlink.client.data.SyncFlag;
 import com.gluonhq.connect.GluonObservableList;
 import com.gluonhq.connect.provider.DataProvider;
 import com.gluonhq.combinedstorage.model.Note;
-import java.util.ArrayList;
-import java.util.List;
-import javafx.beans.binding.Bindings;
 import javax.annotation.PostConstruct;
 
 public class Service {
     
     private static final String NOTES = "notes-combined";
-    
-    /**
-     * True uses cloud storage with preference over local storage
-     * False disables cloud storage
-     */
-    private static final boolean CLOUD_STORAGE_ENABLED = true;
 
     private GluonObservableList<Note> notes;
     
-    private DataClient localDataClient;
     private DataClient cloudDataClient;
     
     @PostConstruct
     public void postConstruct() {
-        localDataClient = DataClientBuilder.create()
-                .operationMode(OperationMode.LOCAL_ONLY)
-                .build();
         
         cloudDataClient = DataClientBuilder.create()
                 .operationMode(OperationMode.CLOUD_FIRST)
@@ -67,47 +54,11 @@ public class Service {
     }
     
     private GluonObservableList<Note> retrieveNotes() {
-        // Read local notes first
-        GluonObservableList<Note> internalLocalNotes = DataProvider.retrieveList(
-                localDataClient.createListDataReader(NOTES, Note.class,
-                            SyncFlag.LIST_WRITE_THROUGH,
-                            SyncFlag.OBJECT_WRITE_THROUGH));
-
-        internalLocalNotes.initializedProperty().addListener((obs, ov, nv) -> {
-            if (nv) {
-                if (CLOUD_STORAGE_ENABLED) { 
-                    // Retrieve cloud notes 
-                    GluonObservableList<Note> internalCloudNotes = DataProvider.retrieveList(
-                            cloudDataClient.createListDataReader(NOTES, Note.class,
-                            SyncFlag.LIST_WRITE_THROUGH,
-                            SyncFlag.OBJECT_WRITE_THROUGH));
-
-                    internalCloudNotes.initializedProperty().addListener((obs2, ov2, nv2) -> {
-                        if (nv2) {
-                            // add to local new notes from cloud
-                            for (Note cloudNote : internalCloudNotes) {
-                                if (!internalLocalNotes.contains(cloudNote)) {
-                                    internalLocalNotes.add(cloudNote);
-                                }
-                            }
-                    
-                            // remove from local if it doesn't exist in the cloud
-                            List<Note> toRemove = new ArrayList<>();
-                            for (Note localNote : internalLocalNotes) {
-                                if (!internalCloudNotes.contains(localNote)) {
-                                    toRemove.add(localNote);
-                                }
-                            }
-                            internalLocalNotes.removeAll(toRemove);
-                    
-                            // bind content between local and cloud lists
-                            Bindings.bindContent(internalCloudNotes, internalLocalNotes);
-                        }
-                    });
-                }
-            }
-        });
-        return internalLocalNotes;
+        // Retrieve notes from cloud or local storage
+        return DataProvider.retrieveList(
+                cloudDataClient.createListDataReader(NOTES, Note.class,
+                SyncFlag.LIST_WRITE_THROUGH,
+                SyncFlag.OBJECT_WRITE_THROUGH));
     }
     
     public Note addNote(Note note) {
@@ -122,5 +73,4 @@ public class Service {
     public GluonObservableList<Note> getNotes() {
         return notes;
     }
-    
 }
