@@ -5,7 +5,7 @@ Gluon CloudLink to manage storage of notes both locally in the device and remote
 
 ## Prerequisites
 
-You need a valid subscription to Gluon CloudLink. You can get it [here](http://gluonhq.com/products/cloudlink/buy/),and there is a 30-day free trial.
+You need a valid subscription to Gluon CloudLink. You can get it [here](https://gluonhq.com/products/cloudlink/buy/), and there is a 30-day free trial.
 Sign up and get a valid account on Gluon CloudLink and a link to access the Gluon Dashboard. 
 
 Open the [Gluon Dashboard](https://gluon.io) in your browser and sign in using the Gluon account credentials provided above.
@@ -14,7 +14,7 @@ Download the file `gluoncloudlink_config.json` and store it in the `client` proj
 
 ## Documentation
 
-Read how to create this sample step by step [here](http://docs.gluonhq.com/samples/combinedstorage/)
+Read how to create this sample step by step [here](https://docs.gluonhq.com/samples/combinedstorage/).
 
 ## Quick Instructions
 
