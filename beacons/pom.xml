@@ -16,7 +16,7 @@
         <charm.version>6.0.4</charm.version>
         <attach.version>4.0.7</attach.version>
         <javafx-maven-plugin-version>0.0.4</javafx-maven-plugin-version>
-        <client-maven-plugin-version>0.1.22</client-maven-plugin-version>
+        <client-maven-plugin-version>0.1.24</client-maven-plugin-version>
         <mainClassName>com.gluonhq.samples.beacons.Beacons</mainClassName>
     </properties>
 
