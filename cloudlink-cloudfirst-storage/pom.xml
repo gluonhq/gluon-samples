@@ -13,10 +13,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
         <javafx.version>14</javafx.version>
-        <charm.version>6.0.4</charm.version>
+        <charm.version>6.0.5</charm.version>
         <attach.version>4.0.7</attach.version>
         <javafx.plugin.version>0.0.4</javafx.plugin.version>
-        <client.plugin.version>0.1.22</client.plugin.version>
+        <client.plugin.version>0.1.24</client.plugin.version>
         <main.class>com.gluonhq.cloudfirst.CombinedStorage</main.class>
     </properties>
 
