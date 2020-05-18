@@ -24,17 +24,17 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.combinedstorage.views;
+package com.gluonhq.cloudfirst.views;
 
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.combinedstorage.CombinedStorage;
-import com.gluonhq.combinedstorage.model.Model;
-import com.gluonhq.combinedstorage.model.Note;
-import com.gluonhq.combinedstorage.service.Service;
+import com.gluonhq.cloudfirst.CombinedStorage;
+import com.gluonhq.cloudfirst.model.Model;
+import com.gluonhq.cloudfirst.model.Note;
+import com.gluonhq.cloudfirst.service.Service;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

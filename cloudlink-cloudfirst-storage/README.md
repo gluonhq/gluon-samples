@@ -1,7 +1,9 @@
-# CloudLink-Combined-Storage
+# CloudLink Cloud-First Storage
 
-A JavaFX application that uses Gluon Mobile Glisten (a mobile application framework with mobile-friendly UI controls) and 
-Gluon CloudLink to manage storage of notes both locally in the device and remotely in the cloud, with a combined strategy.
+A JavaFX application that uses Gluon Mobile (a mobile application framework with mobile-friendly UI controls) and 
+Gluon CloudLink to manage storage of notes with a cloud first strategy.
+Gluon Cloudlink can be used in different operation modes to store data on either the device, the cloud, or both.
+Cloud-First operation mode is used to store data in both device and cloud. It also provides seamless syncing capabilities without any user interference.
 
 ## Prerequisites
 

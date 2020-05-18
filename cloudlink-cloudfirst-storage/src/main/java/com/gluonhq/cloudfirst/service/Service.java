@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017, Gluon
+ * Copyright (c) 2017, 2020 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,17 +24,53 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.combinedstorage.model;
+package com.gluonhq.cloudfirst.service;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
+import com.gluonhq.cloudlink.client.data.DataClient;
+import com.gluonhq.cloudlink.client.data.DataClientBuilder;
+import com.gluonhq.cloudlink.client.data.OperationMode;
+import com.gluonhq.cloudlink.client.data.SyncFlag;
+import com.gluonhq.connect.GluonObservableList;
+import com.gluonhq.connect.provider.DataProvider;
+import com.gluonhq.cloudfirst.model.Note;
+import javax.annotation.PostConstruct;
 
-public class Model {
+public class Service {
     
-    private final ObjectProperty<Note> activeNote = new SimpleObjectProperty<>();
+    private static final String NOTES = "notes-combined";
+
+    private GluonObservableList<Note> notes;
     
-    public ObjectProperty<Note> activeNote() {
-        return activeNote;
+    private DataClient dataClient;
+    
+    @PostConstruct
+    public void postConstruct() {
+        
+        dataClient = DataClientBuilder.create()
+                .operationMode(OperationMode.CLOUD_FIRST)
+                .build();
+        
+        notes = retrieveNotes();
     }
     
+    private GluonObservableList<Note> retrieveNotes() {
+        // Retrieve notes from cloud or local storage
+        return DataProvider.retrieveList(
+                dataClient.createListDataReader(NOTES, Note.class,
+                SyncFlag.LIST_WRITE_THROUGH,
+                SyncFlag.OBJECT_WRITE_THROUGH));
+    }
+    
+    public Note addNote(Note note) {
+        notes.add(note);
+        return note;
+    }
+
+    public void removeNote(Note note) {
+        notes.remove(note);
+    }
+
+    public GluonObservableList<Note> getNotes() {
+        return notes;
+    }
 }

@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2017, 2020 Gluon
+/*
+ * Copyright (c) 2020 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,53 +24,31 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.combinedstorage.service;
+module com.gluonhq.combinedstorage {
 
-import com.gluonhq.cloudlink.client.data.DataClient;
-import com.gluonhq.cloudlink.client.data.DataClientBuilder;
-import com.gluonhq.cloudlink.client.data.OperationMode;
-import com.gluonhq.cloudlink.client.data.SyncFlag;
-import com.gluonhq.connect.GluonObservableList;
-import com.gluonhq.connect.provider.DataProvider;
-import com.gluonhq.combinedstorage.model.Note;
-import javax.annotation.PostConstruct;
+    requires javafx.controls;
+    requires javafx.fxml;
 
-public class Service {
-    
-    private static final String NOTES = "notes-combined";
+    requires com.gluonhq.charm.glisten;
+    requires com.gluonhq.cloudlink.client;
+    requires com.gluonhq.connect;
+    requires com.gluonhq.glisten.afterburner;
 
-    private GluonObservableList<Note> notes;
-    
-    private DataClient cloudDataClient;
-    
-    @PostConstruct
-    public void postConstruct() {
-        
-        cloudDataClient = DataClientBuilder.create()
-                .operationMode(OperationMode.CLOUD_FIRST)
-                .build();
-        
-        notes = retrieveNotes();
-    }
-    
-    private GluonObservableList<Note> retrieveNotes() {
-        // Retrieve notes from cloud or local storage
-        return DataProvider.retrieveList(
-                cloudDataClient.createListDataReader(NOTES, Note.class,
-                SyncFlag.LIST_WRITE_THROUGH,
-                SyncFlag.OBJECT_WRITE_THROUGH));
-    }
-    
-    public Note addNote(Note note) {
-        notes.add(note);
-        return note;
-    }
+    requires com.gluonhq.attach.display;
+    requires com.gluonhq.attach.lifecycle;
+    requires com.gluonhq.attach.statusbar;
+    requires com.gluonhq.attach.storage;
+    requires com.gluonhq.attach.util;
 
-    public void removeNote(Note note) {
-        notes.remove(note);
-    }
+    requires java.json;
+    requires java.annotation;
+    requires afterburner.mfx;
 
-    public GluonObservableList<Note> getNotes() {
-        return notes;
-    }
+    exports com.gluonhq.cloudfirst;
+    exports com.gluonhq.cloudfirst.model to afterburner.mfx;
+    exports com.gluonhq.cloudfirst.service to afterburner.mfx;
+    exports com.gluonhq.cloudfirst.views to afterburner.mfx;
+
+    opens com.gluonhq.cloudfirst.model to com.gluonhq.cloudlink.client;
+    opens com.gluonhq.cloudfirst.views to javafx.fxml, afterburner.mfx, com.gluonhq.glisten.afterburner;
 }

@@ -32,7 +32,7 @@
 <?import com.gluonhq.charm.glisten.mvc.View?>
 <?import javafx.scene.layout.BorderPane?>
 
-<View fx:id="notes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.combinedstorage.views.NotesPresenter">
+<View fx:id="notes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.cloudfirst.views.NotesPresenter">
    <center>
       <CharmListView fx:id="lstNotes" BorderPane.alignment="CENTER" />
    </center>

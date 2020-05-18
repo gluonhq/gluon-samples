@@ -24,7 +24,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.combinedstorage.model;
+package com.gluonhq.cloudfirst.model;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;

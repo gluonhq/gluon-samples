@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.gluonhq.samples</groupId>
-    <artifactId>cloudlink-combined-storage</artifactId>
+    <artifactId>cloudlink-cloudfirst-storage</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Gluon Cloudlink - Combined Storage</name>
+    <name>Gluon Cloudlink - Cloud First Storage</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,7 +17,7 @@
         <attach.version>4.0.7</attach.version>
         <javafx.plugin.version>0.0.4</javafx.plugin.version>
         <client.plugin.version>0.1.22</client.plugin.version>
-        <main.class>com.gluonhq.combinedstorage.CombinedStorage</main.class>
+        <main.class>com.gluonhq.cloudfirst.CombinedStorage</main.class>
     </properties>
 
     <dependencies>
@@ -119,15 +119,15 @@
                     </attachList>
                     <reflectionList>
                         <list>javafx.fxml.FXMLLoader</list>
-                        <list>com.gluonhq.combinedstorage.model.Model</list>
-                        <list>com.gluonhq.combinedstorage.model.Note</list>
-                        <list>com.gluonhq.combinedstorage.service.Service</list>
-                        <list>com.gluonhq.combinedstorage.views.EditionPresenter</list>
-                        <list>com.gluonhq.combinedstorage.views.NotesPresenter</list>
+                        <list>com.gluonhq.cloudfirst.model.Model</list>
+                        <list>com.gluonhq.cloudfirst.model.Note</list>
+                        <list>com.gluonhq.cloudfirst.service.Service</list>
+                        <list>com.gluonhq.cloudfirst.views.EditionPresenter</list>
+                        <list>com.gluonhq.cloudfirst.views.NotesPresenter</list>
                     </reflectionList>
                     <bundlesList>
-                        <list>com.gluonhq.combinedstorage.views.edition</list>
-                        <list>com.gluonhq.combinedstorage.views.notes</list>
+                        <list>com.gluonhq.cloudfirst.views.edition</list>
+                        <list>com.gluonhq.cloudfirst.views.notes</list>
                     </bundlesList>
                 </configuration>
             </plugin>
