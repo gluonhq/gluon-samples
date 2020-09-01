@@ -1,0 +1,20 @@
+<?xml version='1.0'?>
+<manifest xmlns:a='http://schemas.android.com/apk/res/android' package='com.gluonhq.samples.beacons' a:versionCode='1' a:versionName='1.0'>
+    <supports-screens a:xlargeScreens="true"/>
+    <uses-sdk a:minSdkVersion="21" a:targetSdkVersion="28"/>
+    <uses-permission a:name="android.permission.INTERNET"/>
+    <uses-permission a:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission a:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission a:name="android.permission.BLUETOOTH"/>
+    <uses-permission a:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission a:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <application a:label='beacons' a:icon="@mipmap/ic_launcher">
+        <activity a:name='com.gluonhq.helloandroid.MainActivity' a:configChanges="orientation|keyboardHidden">
+            <intent-filter>
+                <category a:name='android.intent.category.LAUNCHER'/>
+                <action a:name='android.intent.action.MAIN'/>
+            </intent-filter>
+        </activity>
+        <activity a:name='com.gluonhq.helloandroid.PermissionRequestActivity'/>
+    </application>
+</manifest>
