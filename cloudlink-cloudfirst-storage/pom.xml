@@ -108,7 +108,6 @@
                 <configuration>
                     <mainClass>${main.class}</mainClass>
                     <target>${client.target}</target>
-                    <verbose>true</verbose>
                     <attachList>
                         <list>display</list>
                         <list>lifecycle</list>
