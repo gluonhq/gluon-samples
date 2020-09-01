@@ -2,21 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.gluonhq.samples</groupId>
+    <parent>
+        <groupId>com.gluonhq.samples</groupId>
+        <artifactId>samples</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>notes</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Notes</name>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>11</maven.compiler.release>
-        <javafx.version>14</javafx.version>
-        <charm.version>6.0.4</charm.version>
-        <attach.version>4.0.7</attach.version>
-        <javafx.plugin.version>0.0.4</javafx.plugin.version>
-        <client.plugin.version>0.1.22</client.plugin.version>
         <main.class>com.gluonhq.samples.notes.Notes</main.class>
     </properties>
 
@@ -112,7 +110,7 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>${javafx.plugin.version}</version>
+                <version>${javafx.maven.plugin.version}</version>
                 <configuration>
                     <mainClass>${main.class}</mainClass>
                 </configuration>
@@ -121,7 +119,7 @@
             <plugin>
                 <groupId>com.gluonhq</groupId>
                 <artifactId>client-maven-plugin</artifactId>
-                <version>${client.plugin.version}</version>
+                <version>${client.maven.plugin.version}</version>
                 <configuration>
                     <target>${client.target}</target>
                     <attachList>
@@ -130,7 +128,6 @@
                         <list>statusbar</list>
                         <list>storage</list>
                     </attachList>
-                    <verbose>true</verbose>
                     <mainClass>${main.class}</mainClass>
                     <reflectionList>
                         <list>com.gluonhq.samples.notes.model.Model</list>
@@ -200,12 +197,5 @@
             </properties>
         </profile>
     </profiles>
-
-    <repositories>
-        <repository>
-            <id>gluon-releases</id>
-            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
-        </repository>
-    </repositories>
 
 </project>

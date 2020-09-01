@@ -2,7 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.gluonhq.samples</groupId>
+    <parent>
+        <groupId>com.gluonhq.samples</groupId>
+        <artifactId>samples</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>cloudlink-cloudfirst-storage</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -10,13 +15,6 @@
     <name>Gluon Cloudlink - Cloud First Storage</name>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>11</maven.compiler.release>
-        <javafx.version>14</javafx.version>
-        <charm.version>6.0.5</charm.version>
-        <attach.version>4.0.7</attach.version>
-        <javafx.plugin.version>0.0.4</javafx.plugin.version>
-        <client.plugin.version>0.1.24</client.plugin.version>
         <main.class>com.gluonhq.cloudfirst.CombinedStorage</main.class>
     </properties>
 
@@ -97,7 +95,7 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>${javafx.plugin.version}</version>
+                <version>${javafx.maven.plugin.version}</version>
                 <configuration>
                     <mainClass>${main.class}</mainClass>
                 </configuration>
@@ -106,7 +104,7 @@
             <plugin>
                 <groupId>com.gluonhq</groupId>
                 <artifactId>client-maven-plugin</artifactId>
-                <version>${client.plugin.version}</version>
+                <version>${client.maven.plugin.version}</version>
                 <configuration>
                     <mainClass>${main.class}</mainClass>
                     <target>${client.target}</target>
@@ -118,7 +116,6 @@
                         <list>storage</list>
                     </attachList>
                     <reflectionList>
-                        <list>javafx.fxml.FXMLLoader</list>
                         <list>com.gluonhq.cloudfirst.model.Model</list>
                         <list>com.gluonhq.cloudfirst.model.Note</list>
                         <list>com.gluonhq.cloudfirst.service.Service</list>

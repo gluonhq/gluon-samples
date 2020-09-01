@@ -2,22 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.gluonhq.samples</groupId>
+    <parent>
+        <groupId>com.gluonhq.samples</groupId>
+        <artifactId>samples</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>fiftystates</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>fiftystates</name>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>11</maven.compiler.release>
-        <javafx.version>14.0.1</javafx.version>
-        <charm.version>6.0.4</charm.version>
-        <attach.version>4.0.8-SNAPSHOT</attach.version>
         <mainClassName>com.gluonhq.fiftystates.FiftyStates</mainClassName>
-        <javafx-maven-plugin-version>0.0.4</javafx-maven-plugin-version>
-        <client-maven-plugin-version>0.1.25</client-maven-plugin-version>
     </properties>
 
     <dependencies>
@@ -68,13 +66,6 @@
             <version>${attach.version}</version>
         </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>Gluon</id>
-            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases</url>
-        </repository>
-    </repositories>
 
     <profiles>
         <profile>
@@ -137,7 +128,7 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>${javafx-maven-plugin-version}</version>
+                <version>${javafx.maven.plugin.version}</version>
                 <configuration>
                     <mainClass>${mainClassName}</mainClass>
                 </configuration>
@@ -146,7 +137,7 @@
             <plugin>
                 <groupId>com.gluonhq</groupId>
                 <artifactId>client-maven-plugin</artifactId>
-                <version>${client-maven-plugin-version}</version>
+                <version>${client.maven.plugin.version}</version>
                 <configuration>
                     <target>${clientTarget}</target>
                     <attachList>
@@ -156,10 +147,16 @@
                         <list>statusbar</list>
                         <list>storage</list>
                     </attachList>
-<!--                    <verbose>true</verbose>-->
                     <mainClass>${mainClassName}</mainClass>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>gluon-releases</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
+        </repository>
+    </repositories>
 </project>
