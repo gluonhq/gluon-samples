@@ -24,47 +24,60 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.fiftystates;
+package com.gluonhq.samples.fiftystates.model;
 
-import com.gluonhq.charm.glisten.control.CharmListCell;
-import com.gluonhq.charm.glisten.control.ListTile;
-import com.gluonhq.fiftystates.model.USState;
-import com.gluonhq.fiftystates.model.USStates;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import java.util.Arrays;
 
-public class USStateCell extends CharmListCell<USState> {
+/**
+ *
+ * Population Density (pop/km2)
+ */
+public class Density {
 
-    private final ListTile tile;
-    private final ImageView imageView;
+    public enum DENSITY {
+        D000(0, 10),
+        D010(10, 50),
+        D050(50, 100),
+        D100(100, 250),
+        D250(250, 500),
+        D500(500, 10000);
 
-    public USStateCell() {
-        this.tile = new ListTile();
-        imageView = new ImageView();
-        imageView.setFitHeight(15);
-        imageView.setFitWidth(25);
-        tile.setPrimaryGraphic(imageView);
-        setText(null);
-    }
+        final double ini;
+        final double end;
 
-    @Override
-    public void updateItem(USState item, boolean empty) {
-        super.updateItem(item, empty);
-        if (item != null && !empty) {
-            tile.textProperty().setAll(item.getName() + " (" + item.getAbbr() + ")",
-                    "Capital: " + item.getCapital() +
-                            ", Population (M): " + String.format("%.2f", item.getPopulation() / 1_000_000d),
-                    "Area (km" + "\u00B2" + "): " + item.getArea() +
-                            ", Density (pop/km" + "\u00B2" + "): " + String.format("%.1f", item.getDensity())
-            );
-            final Image image = USStates.getImage(item.getFlag());
-            if (image != null) {
-                imageView.setImage(image);
-            }
-            setGraphic(tile);
-        } else {
-            setGraphic(null);
+        private DENSITY(double ini, double end){
+            this.ini = ini;
+            this.end = end;
         }
+
+        public double getEnd() {
+            return end;
+        }
+
+        public double getIni() {
+            return ini;
+        }
+
     }
 
+    /**
+     *
+     * @param state
+     * @return DENSITY category for the given US State
+     */
+    public static DENSITY getDensity (USState state) {
+        return getDensity(state.getDensity());
+    }
+
+    /**
+     *
+     * @param density
+     * @return DENSITY category for a given population density
+     */
+    public static DENSITY getDensity (double density) {
+        return Arrays.stream(DENSITY.values())
+                .filter(d -> d.getIni() <= density && density < d.getEnd())
+                .findFirst()
+                .orElse(DENSITY.D000);
+    }
 }

@@ -24,7 +24,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.fiftystates;
+package com.gluonhq.samples.fiftystates;
 
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.Avatar;
@@ -33,10 +33,10 @@ import com.gluonhq.charm.glisten.control.CharmListView;
 import com.gluonhq.charm.glisten.control.ListTile;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.fiftystates.model.Density;
-import com.gluonhq.fiftystates.model.Density.DENSITY;
-import com.gluonhq.fiftystates.model.USState;
-import com.gluonhq.fiftystates.model.USStates;
+import com.gluonhq.samples.fiftystates.model.Density;
+import com.gluonhq.samples.fiftystates.model.Density.DENSITY;
+import com.gluonhq.samples.fiftystates.model.USState;
+import com.gluonhq.samples.fiftystates.model.USStates;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

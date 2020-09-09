@@ -24,29 +24,47 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.fiftystates;
+package com.gluonhq.samples.fiftystates;
 
-import com.gluonhq.charm.glisten.application.MobileApplication;
-import javafx.scene.Scene;
+import com.gluonhq.charm.glisten.control.CharmListCell;
+import com.gluonhq.charm.glisten.control.ListTile;
+import com.gluonhq.samples.fiftystates.model.USState;
+import com.gluonhq.samples.fiftystates.model.USStates;
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
+import javafx.scene.image.ImageView;
 
-public class FiftyStates extends MobileApplication {
+public class USStateCell extends CharmListCell<USState> {
 
-    @Override
-    public void init() {
-        addViewFactory(HOME_VIEW, BasicView::new);
+    private final ListTile tile;
+    private final ImageView imageView;
+
+    public USStateCell() {
+        this.tile = new ListTile();
+        imageView = new ImageView();
+        imageView.setFitHeight(15);
+        imageView.setFitWidth(25);
+        tile.setPrimaryGraphic(imageView);
+        setText(null);
     }
 
     @Override
-    public void postInit(Scene scene) {
-        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-
-        ((Stage) scene.getWindow()).getIcons().add(new Image(FiftyStates.class.getResourceAsStream("/icon.png")));
-    }
-
-    public static void main(String[] args) {
-        launch(args);
+    public void updateItem(USState item, boolean empty) {
+        super.updateItem(item, empty);
+        if (item != null && !empty) {
+            tile.textProperty().setAll(item.getName() + " (" + item.getAbbr() + ")",
+                    "Capital: " + item.getCapital() +
+                            ", Population (M): " + String.format("%.2f", item.getPopulation() / 1_000_000d),
+                    "Area (km" + "\u00B2" + "): " + item.getArea() +
+                            ", Density (pop/km" + "\u00B2" + "): " + String.format("%.1f", item.getDensity())
+            );
+            final Image image = USStates.getImage(item.getFlag());
+            if (image != null) {
+                imageView.setImage(image);
+            }
+            setGraphic(tile);
+        } else {
+            setGraphic(null);
+        }
     }
 
 }

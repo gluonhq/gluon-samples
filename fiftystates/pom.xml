@@ -15,7 +15,7 @@
     <name>fiftystates</name>
 
     <properties>
-        <mainClassName>com.gluonhq.fiftystates.FiftyStates</mainClassName>
+        <mainClassName>com.gluonhq.samples.fiftystates.FiftyStates</mainClassName>
     </properties>
 
     <dependencies>
@@ -82,24 +82,28 @@
                     <artifactId>cache</artifactId>
                     <version>${attach.version}</version>
                     <classifier>desktop</classifier>
+                    <scope>runtime</scope>
                 </dependency>
                 <dependency>
                     <groupId>com.gluonhq.attach</groupId>
                     <artifactId>display</artifactId>
                     <version>${attach.version}</version>
                     <classifier>desktop</classifier>
+                    <scope>runtime</scope>
                 </dependency>
                 <dependency>
                     <groupId>com.gluonhq.attach</groupId>
                     <artifactId>lifecycle</artifactId>
                     <version>${attach.version}</version>
                     <classifier>desktop</classifier>
+                    <scope>runtime</scope>
                 </dependency>
                 <dependency>
                     <groupId>com.gluonhq.attach</groupId>
                     <artifactId>storage</artifactId>
                     <version>${attach.version}</version>
                     <classifier>desktop</classifier>
+                    <scope>runtime</scope>
                 </dependency>
             </dependencies>
         </profile>
