@@ -15,7 +15,7 @@
     <name>Gluon Cloudlink - Cloud First Storage</name>
 
     <properties>
-        <main.class>com.gluonhq.cloudfirst.CombinedStorage</main.class>
+        <main.class>com.gluonhq.samples.cloudfirst.CloudFirstStorage</main.class>
     </properties>
 
     <dependencies>
@@ -32,17 +32,35 @@
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>glisten-afterburner</artifactId>
-            <version>2.0.3</version>
+            <version>${glisten.afterburner.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-glisten</artifactId>
             <version>${charm.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-cloudlink-client</artifactId>
             <version>${charm.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
@@ -72,7 +90,7 @@
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.json</artifactId>
-            <version>1.1.5</version>
+            <version>1.1.6</version>
             <classifier>module</classifier>
             <scope>runtime</scope>
         </dependency>
@@ -115,15 +133,15 @@
                         <list>storage</list>
                     </attachList>
                     <reflectionList>
-                        <list>com.gluonhq.cloudfirst.model.Model</list>
-                        <list>com.gluonhq.cloudfirst.model.Note</list>
-                        <list>com.gluonhq.cloudfirst.service.Service</list>
-                        <list>com.gluonhq.cloudfirst.views.EditionPresenter</list>
-                        <list>com.gluonhq.cloudfirst.views.NotesPresenter</list>
+                        <list>com.gluonhq.samples.cloudfirst.model.Model</list>
+                        <list>com.gluonhq.samples.cloudfirst.model.Note</list>
+                        <list>com.gluonhq.samples.cloudfirst.service.Service</list>
+                        <list>com.gluonhq.samples.cloudfirst.views.EditionPresenter</list>
+                        <list>com.gluonhq.samples.cloudfirst.views.NotesPresenter</list>
                     </reflectionList>
                     <bundlesList>
-                        <list>com.gluonhq.cloudfirst.views.edition</list>
-                        <list>com.gluonhq.cloudfirst.views.notes</list>
+                        <list>com.gluonhq.samples.cloudfirst.views.edition</list>
+                        <list>com.gluonhq.samples.cloudfirst.views.notes</list>
                     </bundlesList>
                 </configuration>
             </plugin>

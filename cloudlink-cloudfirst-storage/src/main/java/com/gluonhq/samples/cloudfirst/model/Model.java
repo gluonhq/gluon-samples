@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2017, 2020 Gluon
+ * Copyright (c) 2017, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,30 +24,17 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.cloudfirst;
+package com.gluonhq.samples.cloudfirst.model;
 
-import com.gluonhq.cloudfirst.views.AppViewManager;
-import com.gluonhq.charm.glisten.application.MobileApplication;
-import com.gluonhq.charm.glisten.visual.Swatch;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
-public class CombinedStorage extends MobileApplication {
-
-    @Override
-    public void init() {
-        AppViewManager.registerViewsAndDrawer(this);
+public class Model {
+    
+    private final ObjectProperty<Note> activeNote = new SimpleObjectProperty<>();
+    
+    public ObjectProperty<Note> activeNote() {
+        return activeNote;
     }
-
-    @Override
-    public void postInit(Scene scene) {
-        Swatch.LIGHT_GREEN.assignTo(scene);
-
-        ((Stage) scene.getWindow()).getIcons().add(new Image(CombinedStorage.class.getResourceAsStream("/icon.png")));
-    }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
+    
 }

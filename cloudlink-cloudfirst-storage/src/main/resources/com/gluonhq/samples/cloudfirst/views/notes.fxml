@@ -28,35 +28,13 @@
 
 -->
 
+<?import com.gluonhq.charm.glisten.control.CharmListView?>
 <?import com.gluonhq.charm.glisten.mvc.View?>
-<?import java.lang.String?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 
-<View fx:id="edition" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.cloudfirst.views.EditionPresenter">
+<View fx:id="notes" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.samples.cloudfirst.views.NotesPresenter">
    <center>
-      <VBox prefHeight="200.0" spacing="10.0" BorderPane.alignment="CENTER">
-         <children>
-            <TextField fx:id="title" promptText="%textfield.prompt" styleClass="light" />
-            <TextArea fx:id="comment" prefHeight="150.0" promptText="%textarea.prompt" wrapText="true" styleClass="light, full-width" />
-            <HBox alignment="TOP_RIGHT" prefHeight="55.0" spacing="5.0" style="-fx-background-color: transparent;">
-               <children>
-                  <Button id="cancel-button" fx:id="cancel" mnemonicParsing="false" text="%button.cancel" styleClass="light, flat" />
-                  <Button id="submit-button" fx:id="submit" defaultButton="true" mnemonicParsing="false" text="%button.submit" styleClass="light, flat" />
-               </children>
-               <padding>
-                  <Insets left="5.0" right="5.0" />
-               </padding>
-            </HBox>
-         </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
+      <CharmListView fx:id="lstNotes" BorderPane.alignment="CENTER" />
    </center>
 </View>
+

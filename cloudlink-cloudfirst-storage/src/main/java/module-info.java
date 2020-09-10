@@ -24,7 +24,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-module com.gluonhq.combinedstorage {
+module com.gluonhq.samples.cloudfirststorage {
 
     requires javafx.controls;
     requires javafx.fxml;
@@ -44,11 +44,11 @@ module com.gluonhq.combinedstorage {
     requires java.annotation;
     requires afterburner.mfx;
 
-    exports com.gluonhq.cloudfirst;
-    exports com.gluonhq.cloudfirst.model to afterburner.mfx;
-    exports com.gluonhq.cloudfirst.service to afterburner.mfx;
-    exports com.gluonhq.cloudfirst.views to afterburner.mfx;
+    exports com.gluonhq.samples.cloudfirst;
+    exports com.gluonhq.samples.cloudfirst.model to afterburner.mfx;
+    exports com.gluonhq.samples.cloudfirst.service to afterburner.mfx;
+    exports com.gluonhq.samples.cloudfirst.views to afterburner.mfx;
 
-    opens com.gluonhq.cloudfirst.model to com.gluonhq.cloudlink.client;
-    opens com.gluonhq.cloudfirst.views to javafx.fxml, afterburner.mfx, com.gluonhq.glisten.afterburner;
+    opens com.gluonhq.samples.cloudfirst.model to com.gluonhq.cloudlink.client;
+    opens com.gluonhq.samples.cloudfirst.views to javafx.fxml, afterburner.mfx, com.gluonhq.glisten.afterburner;
 }

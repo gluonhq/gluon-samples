@@ -24,7 +24,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.cloudfirst.service;
+package com.gluonhq.samples.cloudfirst.service;
 
 import com.gluonhq.cloudlink.client.data.DataClient;
 import com.gluonhq.cloudlink.client.data.DataClientBuilder;
@@ -32,12 +32,12 @@ import com.gluonhq.cloudlink.client.data.OperationMode;
 import com.gluonhq.cloudlink.client.data.SyncFlag;
 import com.gluonhq.connect.GluonObservableList;
 import com.gluonhq.connect.provider.DataProvider;
-import com.gluonhq.cloudfirst.model.Note;
+import com.gluonhq.samples.cloudfirst.model.Note;
 import javax.annotation.PostConstruct;
 
 public class Service {
     
-    private static final String NOTES = "notes-combined";
+    private static final String NOTES = "notes-cloudfirst";
 
     private GluonObservableList<Note> notes;
     
