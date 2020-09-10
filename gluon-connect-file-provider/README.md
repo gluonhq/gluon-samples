@@ -6,7 +6,7 @@ This application demonstrates how to retrieve data from a file on the local file
 
 ## Documentation
 
-Read more about this particular sample in the [File provider](http://docs.gluonhq.com/connect/latest/#_file_provider)
+Read more about this particular sample in the [File provider](https://docs.gluonhq.com/connect/latest/#_file_provider)
 section on the Gluon Connect documentation website.
 
 ## Quick Instructions

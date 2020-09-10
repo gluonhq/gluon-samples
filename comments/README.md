@@ -16,7 +16,7 @@ Download the file `gluoncloudlink_config.json` and store it in the `client` proj
 
 ## Documentation
 
-Read how to create this sample step by step [here](http://docs.gluonhq.com/samples/comments/)
+Read how to create this sample step by step [here](https://docs.gluonhq.com/samples/comments/)
 
 ## Quick Instructions
 

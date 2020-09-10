@@ -7,7 +7,7 @@ A JavaFX Application that uses the Gluon Charm custom control, CharmListView.
 
 ## Documentation
 
-Read how to create this sample step by step [here](http://docs.gluonhq.com/samples/fiftystates/)
+Read how to create this sample step by step [here](https://docs.gluonhq.com/samples/fiftystates/)
 
 ## Quick Instructions
 
