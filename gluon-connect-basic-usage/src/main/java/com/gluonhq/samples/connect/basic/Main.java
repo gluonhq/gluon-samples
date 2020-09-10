@@ -43,8 +43,8 @@ public class Main extends MobileApplication {
 
     @Override
     public void init() {
-        addViewFactory(LIST_VIEW, () -> new BasicListView());
-        addViewFactory(OBJECT_VIEW, () -> new BasicObjectView());
+        addViewFactory(LIST_VIEW, BasicListView::new);
+        addViewFactory(OBJECT_VIEW, BasicObjectView::new);
         updateDrawer();
     }
 
