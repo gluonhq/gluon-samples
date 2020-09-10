@@ -43,13 +43,13 @@ import javax.annotation.PostConstruct;
  */
 public class Service {
 
-    private DataClient dataClient;
-    
     /*
     Every list stored under the same application on the Cloud has a unique id:
     */
     private static final String CLOUD_LIST_ID = "comments";
-    
+
+    private DataClient dataClient;
+
     /*
     An observable wrapper of the retrieved list, used to expose it and bind the 
     ListView items to the list.
@@ -57,9 +57,6 @@ public class Service {
     private final ListProperty<Comment> commentsList = 
             new SimpleListProperty<>(FXCollections.<Comment>observableArrayList()); 
     
-    /**
-     * See Afterburner.fx
-     */
     @PostConstruct
     public void postConstruct() {
         dataClient = DataClientBuilder.create().build();
