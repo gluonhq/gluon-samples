@@ -24,6 +24,9 @@
   "name":"java.security.SecureRandomParameters"
 },
 {
+  "name":"long[]"
+},
+{
   "name":"org.bytedeco.javacpp.BoolPointer"
 },
 {
