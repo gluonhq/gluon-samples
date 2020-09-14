@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2016, 2020, Gluon
+/**
+ * Copyright (c) 2017, 2020 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,60 +24,53 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.fiftystates.model;
+package com.gluonhq.samples.cloudfirst.service;
 
-/**
- *
- * Population Density (pop/km2)
- */
-public class Density {
+import com.gluonhq.cloudlink.client.data.DataClient;
+import com.gluonhq.cloudlink.client.data.DataClientBuilder;
+import com.gluonhq.cloudlink.client.data.OperationMode;
+import com.gluonhq.cloudlink.client.data.SyncFlag;
+import com.gluonhq.connect.GluonObservableList;
+import com.gluonhq.connect.provider.DataProvider;
+import com.gluonhq.samples.cloudfirst.model.Note;
+import javax.annotation.PostConstruct;
 
-    public enum DENSITY {
-        D000(0, 10),
-        D010(10, 50),
-        D050(50, 100),
-        D100(100, 250),
-        D250(250, 500),
-        D500(500, 10000);
+public class Service {
+    
+    private static final String NOTES = "notes-cloudfirst";
 
-        final double ini;
-        final double end;
-
-        private DENSITY(double ini, double end){
-            this.ini = ini;
-            this.end = end;
-        }
-
-        public double getEnd() {
-            return end;
-        }
-
-        public double getIni() {
-            return ini;
-        }
-
+    private GluonObservableList<Note> notes;
+    
+    private DataClient dataClient;
+    
+    @PostConstruct
+    public void postConstruct() {
+        
+        dataClient = DataClientBuilder.create()
+                .operationMode(OperationMode.CLOUD_FIRST)
+                .build();
+        
+        notes = retrieveNotes();
+    }
+    
+    private GluonObservableList<Note> retrieveNotes() {
+        // Retrieve notes from cloud or local storage
+        return DataProvider.retrieveList(
+                dataClient.createListDataReader(NOTES, Note.class,
+                SyncFlag.LIST_WRITE_THROUGH,
+                SyncFlag.OBJECT_WRITE_THROUGH));
+    }
+    
+    public Note addNote(Note note) {
+        notes.add(note);
+        return note;
     }
 
-    /**
-     *
-     * @param state
-     * @return DENSITY category for the given US State
-     */
-    public static DENSITY getDensity (USState state) {
-        return getDensity(state.getDensity());
+    public void removeNote(Note note) {
+        notes.remove(note);
     }
 
-    /**
-     *
-     * @param density
-     * @return DENSITY category for a given population density
-     */
-    public static DENSITY getDensity (double density) {
-        for (DENSITY d : DENSITY.values()) {
-            if (d.getIni() <= density && density < d.getEnd()) {
-                return d;
-            }
-        }
-        return DENSITY.D000;
+    public GluonObservableList<Note> getNotes() {
+        return notes;
     }
 }

@@ -2,7 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.gluonhq.samples</groupId>
+    <parent>
+        <groupId>com.gluonhq.samples</groupId>
+        <artifactId>samples</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>cloudlink-cloudfirst-storage</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -10,14 +15,7 @@
     <name>Gluon Cloudlink - Cloud First Storage</name>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>11</maven.compiler.release>
-        <javafx.version>14</javafx.version>
-        <charm.version>6.0.5</charm.version>
-        <attach.version>4.0.7</attach.version>
-        <javafx.plugin.version>0.0.4</javafx.plugin.version>
-        <client.plugin.version>0.1.24</client.plugin.version>
-        <main.class>com.gluonhq.cloudfirst.CombinedStorage</main.class>
+        <main.class>com.gluonhq.samples.cloudfirst.CloudFirstStorage</main.class>
     </properties>
 
     <dependencies>
@@ -34,17 +32,35 @@
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>glisten-afterburner</artifactId>
-            <version>2.0.3</version>
+            <version>${glisten.afterburner.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-glisten</artifactId>
             <version>${charm.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-cloudlink-client</artifactId>
             <version>${charm.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
@@ -74,7 +90,7 @@
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.json</artifactId>
-            <version>1.1.5</version>
+            <version>1.1.6</version>
             <classifier>module</classifier>
             <scope>runtime</scope>
         </dependency>
@@ -97,7 +113,7 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>${javafx.plugin.version}</version>
+                <version>${javafx.maven.plugin.version}</version>
                 <configuration>
                     <mainClass>${main.class}</mainClass>
                 </configuration>
@@ -106,11 +122,10 @@
             <plugin>
                 <groupId>com.gluonhq</groupId>
                 <artifactId>client-maven-plugin</artifactId>
-                <version>${client.plugin.version}</version>
+                <version>${client.maven.plugin.version}</version>
                 <configuration>
                     <mainClass>${main.class}</mainClass>
                     <target>${client.target}</target>
-                    <verbose>true</verbose>
                     <attachList>
                         <list>display</list>
                         <list>lifecycle</list>
@@ -118,16 +133,15 @@
                         <list>storage</list>
                     </attachList>
                     <reflectionList>
-                        <list>javafx.fxml.FXMLLoader</list>
-                        <list>com.gluonhq.cloudfirst.model.Model</list>
-                        <list>com.gluonhq.cloudfirst.model.Note</list>
-                        <list>com.gluonhq.cloudfirst.service.Service</list>
-                        <list>com.gluonhq.cloudfirst.views.EditionPresenter</list>
-                        <list>com.gluonhq.cloudfirst.views.NotesPresenter</list>
+                        <list>com.gluonhq.samples.cloudfirst.model.Model</list>
+                        <list>com.gluonhq.samples.cloudfirst.model.Note</list>
+                        <list>com.gluonhq.samples.cloudfirst.service.Service</list>
+                        <list>com.gluonhq.samples.cloudfirst.views.EditionPresenter</list>
+                        <list>com.gluonhq.samples.cloudfirst.views.NotesPresenter</list>
                     </reflectionList>
                     <bundlesList>
-                        <list>com.gluonhq.cloudfirst.views.edition</list>
-                        <list>com.gluonhq.cloudfirst.views.notes</list>
+                        <list>com.gluonhq.samples.cloudfirst.views.edition</list>
+                        <list>com.gluonhq.samples.cloudfirst.views.notes</list>
                     </bundlesList>
                 </configuration>
             </plugin>

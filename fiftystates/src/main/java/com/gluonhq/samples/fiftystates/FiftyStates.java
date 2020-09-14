@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2017, Gluon
+/*
+ * Copyright (c) 2016, 2020, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,43 +24,29 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.cloudfirst.views;
+package com.gluonhq.samples.fiftystates;
 
-import com.gluonhq.charm.glisten.control.CharmListCell;
-import com.gluonhq.cloudfirst.model.Note;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-import javafx.scene.control.Label;
+import com.gluonhq.charm.glisten.application.MobileApplication;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
-public class HeaderCell extends CharmListCell<Note> {
+public class FiftyStates extends MobileApplication {
 
-    private final Label label;
-    private Note currentItem;
-    private final DateTimeFormatter dateFormat;
-    
-    public HeaderCell() {
-        label = new Label();
-        dateFormat = DateTimeFormatter.ofPattern("EEEE, MMM dd", Locale.ENGLISH);
+    @Override
+    public void init() {
+        addViewFactory(HOME_VIEW, BasicView::new);
     }
 
     @Override
-    public void updateItem(Note item, boolean empty) {
-        super.updateItem(item, empty);
-        currentItem = item;
-        if (!empty && item != null) {
-            updateWithSettings();
-            setGraphic(label);
-        } else {
-            setGraphic(null);
-        }
+    public void postInit(Scene scene) {
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
+        ((Stage) scene.getWindow()).getIcons().add(new Image(FiftyStates.class.getResourceAsStream("/icon.png")));
     }
 
-    private void updateWithSettings() {
-        if (currentItem != null) {
-            label.setText(dateFormat.format(currentItem.getCreationDate()));
-        } else {
-            label.setText("");
-        }
+    public static void main(String[] args) {
+        launch(args);
     }
-    
+
 }

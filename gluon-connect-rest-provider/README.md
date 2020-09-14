@@ -6,7 +6,7 @@ online HTTP resource.
 
 ## Documentation
 
-Read more about this particular sample in the [REST provider](http://docs.gluonhq.com/connect/latest/#_rest_provider)
+Read more about this particular sample in the [REST provider](https://docs.gluonhq.com/connect/latest/#_rest_provider)
 section on the Gluon Connect documentation website.
 
 ## Quick Instructions

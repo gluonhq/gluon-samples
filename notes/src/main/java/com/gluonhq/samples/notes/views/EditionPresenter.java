@@ -47,9 +47,9 @@ import java.util.ResourceBundle;
 public class EditionPresenter extends GluonPresenter<Notes> {
 
     @Inject private Service service;
-    
+
     @Inject private Model model;
-    
+
     @FXML private View edition;
 
     @FXML private Button submit;
@@ -73,7 +73,7 @@ public class EditionPresenter extends GluonPresenter<Notes> {
                     submit.setText(resources.getString("button.submit.text"));
                     title.setText(activeNote.getTitle());
                     comment.setText(activeNote.getText());
-                    submit.disableProperty().bind(Bindings.createBooleanBinding(()->{
+                    submit.disableProperty().bind(Bindings.createBooleanBinding(() -> {
                         if (title == null || comment == null) {
                             return true;
                         }

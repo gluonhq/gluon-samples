@@ -24,7 +24,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.cloudfirst.views;
+package com.gluonhq.samples.cloudfirst.views;
 
 import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInLeftTransition;
@@ -33,10 +33,10 @@ import com.gluonhq.charm.glisten.control.CharmListView;
 import com.gluonhq.charm.glisten.control.FloatingActionButton;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.cloudfirst.CombinedStorage;
-import com.gluonhq.cloudfirst.model.Model;
-import com.gluonhq.cloudfirst.model.Note;
-import com.gluonhq.cloudfirst.service.Service;
+import com.gluonhq.samples.cloudfirst.CloudFirstStorage;
+import com.gluonhq.samples.cloudfirst.model.Model;
+import com.gluonhq.samples.cloudfirst.model.Note;
+import com.gluonhq.samples.cloudfirst.service.Service;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -45,7 +45,7 @@ import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.ResourceBundle;
 
-public class NotesPresenter extends GluonPresenter<CombinedStorage> {
+public class NotesPresenter extends GluonPresenter<CloudFirstStorage> {
 
     @Inject private Service service;
     

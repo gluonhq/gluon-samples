@@ -37,7 +37,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.function.Consumer;
 
-import javafx.beans.value.ChangeListener;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -47,8 +46,6 @@ public class NoteCell extends CharmListCell<Note> {
     private final ListTile tile;
     private Note currentItem;
     private final DateTimeFormatter dateFormat;
-    
-    private final ChangeListener<String> noteChangeListener;
     
     private Settings settings;
     private int fontSize = -1;
@@ -67,8 +64,6 @@ public class NoteCell extends CharmListCell<Note> {
         
         dateFormat = DateTimeFormatter.ofPattern("EEE, MMM dd yyyy - HH:mm", Locale.ENGLISH);
         
-        noteChangeListener = (obs, ov, nv) -> update();
-        
         service.settingsProperty().addListener((obs, ov, nv) -> {
             settings = nv;
             update();
@@ -80,7 +75,7 @@ public class NoteCell extends CharmListCell<Note> {
     @Override
     public void updateItem(Note item, boolean empty) {
         super.updateItem(item, empty);
-        updateCurrentItem(item);
+        currentItem = item;
         if (!empty && item != null) {
             update();
             setGraphic(tile);
@@ -89,22 +84,6 @@ public class NoteCell extends CharmListCell<Note> {
         }
     }
     
-    private void updateCurrentItem(Note note) {
-        if (currentItem == null || !currentItem.equals(note)) {
-            if (currentItem != null) {
-                currentItem.titleProperty().removeListener(noteChangeListener);
-                currentItem.textProperty().removeListener(noteChangeListener);
-            }
-
-            currentItem = note;
-
-            if (currentItem != null) {
-                currentItem.titleProperty().addListener(noteChangeListener);
-                currentItem.textProperty().addListener(noteChangeListener);
-            }
-        }
-    }
-
     private void update() {
         if (currentItem != null) {
             tile.textProperty().setAll(currentItem.getTitle(), 

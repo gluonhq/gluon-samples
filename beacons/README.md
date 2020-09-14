@@ -6,7 +6,7 @@ It uses the BLE service in [Gluon Attach](https://github.com/gluonhq/attach) to 
 
 ## Documentation
 
-Read how to create this sample step by step [here](http://docs.gluonhq.com/samples/beacons/)
+Read how to create this sample step by step [here](https://docs.gluonhq.com/samples/beacons/)
 
 ## Quick Instructions
 

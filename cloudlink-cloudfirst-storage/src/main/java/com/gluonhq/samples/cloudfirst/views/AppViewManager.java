@@ -24,7 +24,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.cloudfirst.views;
+package com.gluonhq.samples.cloudfirst.views;
 
 import com.gluonhq.charm.glisten.afterburner.AppView;
 import com.gluonhq.charm.glisten.afterburner.AppViewRegistry;
@@ -34,7 +34,7 @@ import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.control.Avatar;
 import com.gluonhq.charm.glisten.control.NavigationDrawer;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.cloudfirst.CombinedStorage;
+import com.gluonhq.samples.cloudfirst.CloudFirstStorage;
 import javafx.scene.image.Image;
 
 import java.util.Locale;
@@ -62,8 +62,8 @@ public class AppViewManager {
         }
 
         NavigationDrawer.Header header = new NavigationDrawer.Header("Gluon Mobile",
-                "Combined Storage App",
-                new Avatar(21, new Image(CombinedStorage.class.getResourceAsStream("/icon.png"))));
+                "Cloud-First Storage App",
+                new Avatar(21, new Image(CloudFirstStorage.class.getResourceAsStream("/icon.png"))));
         Utils.buildDrawer(app.getDrawer(), header, REGISTRY.getViews()); 
     }
 }

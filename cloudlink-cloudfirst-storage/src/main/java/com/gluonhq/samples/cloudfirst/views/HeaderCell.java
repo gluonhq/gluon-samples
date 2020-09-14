@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2016, 2020, Gluon
+/**
+ * Copyright (c) 2017, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,47 +24,43 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.fiftystates;
+package com.gluonhq.samples.cloudfirst.views;
 
 import com.gluonhq.charm.glisten.control.CharmListCell;
-import com.gluonhq.charm.glisten.control.ListTile;
-import com.gluonhq.fiftystates.model.USState;
-import com.gluonhq.fiftystates.model.USStates;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import com.gluonhq.samples.cloudfirst.model.Note;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import javafx.scene.control.Label;
 
-public class USStateCell extends CharmListCell<USState> {
+public class HeaderCell extends CharmListCell<Note> {
 
-    private final ListTile tile;
-    private final ImageView imageView;
-
-    public USStateCell() {
-        this.tile = new ListTile();
-        imageView = new ImageView();
-        imageView.setFitHeight(15);
-        imageView.setFitWidth(25);
-        tile.setPrimaryGraphic(imageView);
-        setText(null);
+    private final Label label;
+    private Note currentItem;
+    private final DateTimeFormatter dateFormat;
+    
+    public HeaderCell() {
+        label = new Label();
+        dateFormat = DateTimeFormatter.ofPattern("EEEE, MMM dd", Locale.ENGLISH);
     }
 
     @Override
-    public void updateItem(USState item, boolean empty) {
+    public void updateItem(Note item, boolean empty) {
         super.updateItem(item, empty);
-        if (item != null && !empty) {
-            tile.textProperty().setAll(item.getName() + " (" + item.getAbbr() + ")",
-                    "Capital: " + item.getCapital() +
-                            ", Population (M): " + String.format("%.2f", item.getPopulation() / 1_000_000d),
-                    "Area (km" + "\u00B2" + "): " + item.getArea() +
-                            ", Density (pop/km" + "\u00B2" + "): " + String.format("%.1f", item.getDensity())
-            );
-            final Image image = USStates.getImage(item.getFlag());
-            if (image != null) {
-                imageView.setImage(image);
-            }
-            setGraphic(tile);
+        currentItem = item;
+        if (!empty && item != null) {
+            updateWithSettings();
+            setGraphic(label);
         } else {
             setGraphic(null);
         }
     }
 
+    private void updateWithSettings() {
+        if (currentItem != null) {
+            label.setText(dateFormat.format(currentItem.getCreationDate()));
+        } else {
+            label.setText("");
+        }
+    }
+    
 }

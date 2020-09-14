@@ -2,20 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.gluonhq.samples.connect</groupId>
+    <parent>
+        <groupId>com.gluonhq.samples</groupId>
+        <artifactId>samples</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>basic-usage</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Gluon Connect Basic Usage</name>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>11</maven.compiler.release>
-        <javafx.version>14</javafx.version>
-        <attach.version>4.0.6</attach.version>
-        <javafx.plugin.version>0.0.4</javafx.plugin.version>
-        <client.plugin.version>0.1.20</client.plugin.version>
         <main.class>com.gluonhq.samples.connect.basic.Main</main.class>
     </properties>
 
@@ -28,17 +27,23 @@
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-glisten</artifactId>
-            <version>6.0.3</version>
+            <version>${charm.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>connect</artifactId>
-            <version>2.0.1</version>
+            <version>${connect.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.json</artifactId>
-            <version>1.1.5</version>
+            <version>1.1.6</version>
             <classifier>module</classifier>
             <scope>runtime</scope>
         </dependency>
@@ -86,7 +91,7 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>${javafx.plugin.version}</version>
+                <version>${javafx.maven.plugin.version}</version>
                 <configuration>
                     <mainClass>${main.class}</mainClass>
                 </configuration>
@@ -95,7 +100,7 @@
             <plugin>
                 <groupId>com.gluonhq</groupId>
                 <artifactId>client-maven-plugin</artifactId>
-                <version>${client.plugin.version}</version>
+                <version>${client.maven.plugin.version}</version>
                 <configuration>
                     <target>${client.target}</target>
                     <attachList>
@@ -104,7 +109,6 @@
                         <list>statusbar</list>
                         <list>storage</list>
                     </attachList>
-                    <verbose>true</verbose>
                     <mainClass>${main.class}</mainClass>
                     <reflectionList>
                         <list>com.gluonhq.samples.connect.basic.Language</list>
@@ -168,11 +172,4 @@
             <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
         </repository>
     </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>gluon-releases</id>
-            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
-        </pluginRepository>
-    </pluginRepositories>
 </project>

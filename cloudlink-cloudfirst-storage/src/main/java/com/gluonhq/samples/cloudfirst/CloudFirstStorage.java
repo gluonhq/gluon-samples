@@ -24,16 +24,16 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.cloudfirst;
+package com.gluonhq.samples.cloudfirst;
 
-import com.gluonhq.cloudfirst.views.AppViewManager;
+import com.gluonhq.samples.cloudfirst.views.AppViewManager;
 import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.visual.Swatch;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class CombinedStorage extends MobileApplication {
+public class CloudFirstStorage extends MobileApplication {
 
     @Override
     public void init() {
@@ -44,7 +44,7 @@ public class CombinedStorage extends MobileApplication {
     public void postInit(Scene scene) {
         Swatch.LIGHT_GREEN.assignTo(scene);
 
-        ((Stage) scene.getWindow()).getIcons().add(new Image(CombinedStorage.class.getResourceAsStream("/icon.png")));
+        ((Stage) scene.getWindow()).getIcons().add(new Image(CloudFirstStorage.class.getResourceAsStream("/icon.png")));
     }
 
     public static void main(String[] args) {

@@ -2,7 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.gluonhq.samples</groupId>
+    <parent>
+        <groupId>com.gluonhq.samples</groupId>
+        <artifactId>samples</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>beacons</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -10,13 +15,6 @@
     <name>beacons</name>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>11</maven.compiler.release>
-        <javafx.version>14.0.1</javafx.version>
-        <charm.version>6.0.4</charm.version>
-        <attach.version>4.0.7</attach.version>
-        <javafx-maven-plugin-version>0.0.4</javafx-maven-plugin-version>
-        <client-maven-plugin-version>0.1.25</client-maven-plugin-version>
         <mainClassName>com.gluonhq.samples.beacons.Beacons</mainClassName>
     </properties>
 
@@ -39,7 +37,7 @@
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>glisten-afterburner</artifactId>
-            <version>2.0.4</version>
+            <version>${glisten.afterburner.version}</version>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
@@ -71,16 +69,6 @@
             <artifactId>util</artifactId>
             <version>${attach.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.airhacks</groupId>
-            <artifactId>afterburner.mfx</artifactId>
-            <version>1.6.3</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-            <version>1.3.2</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -89,15 +77,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
-                <configuration>
-                    <release>${maven.compiler.release}</release>
-                </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>${javafx-maven-plugin-version}</version>
+                <version>${javafx.maven.plugin.version}</version>
                 <configuration>
                     <mainClass>${mainClassName}</mainClass>
                 </configuration>
@@ -106,7 +91,7 @@
             <plugin>
                 <groupId>com.gluonhq</groupId>
                 <artifactId>client-maven-plugin</artifactId>
-                <version>${client-maven-plugin-version}</version>
+                <version>${client.maven.plugin.version}</version>
                 <configuration>
                     <target>${clientTarget}</target>
                     <attachList>
@@ -124,7 +109,6 @@
                         <list>com.gluonhq.samples.beacons.views.MainPresenter</list>
                         <list>com.gluonhq.samples.beacons.views.SettingsPresenter</list>
                     </reflectionList>
-<!--                    <verbose>true</verbose>-->
                     <mainClass>${mainClassName}</mainClass>
                 </configuration>
             </plugin>
@@ -180,8 +164,8 @@
 
     <repositories>
         <repository>
-            <id>Gluon</id>
-            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases</url>
+            <id>gluon-releases</id>
+            <url>https://nexus.gluonhq.com/nexus/content/repositories/releases/</url>
         </repository>
     </repositories>
 

@@ -6,7 +6,8 @@ This application demonstrates how to retrieve data from a resource that is locat
 
 ## Documentation
 
-Read how to create this sample step by step here
+Read more about this particular sample in the [Creating a View](https://docs.gluonhq.com/charm/latest/#_creating_a_view)
+section on the Gluon Mobile documentation website.
 
 ## Quick Instructions
 

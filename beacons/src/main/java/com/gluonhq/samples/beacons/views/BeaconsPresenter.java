@@ -71,10 +71,9 @@ public class BeaconsPresenter extends GluonPresenter<Beacons> {
                 }
             });
             // update list
-            if (beaconsList.itemsProperty().stream().noneMatch(s ->
-                    s.getUuid().equals(t.getUuid()) &&
-                    s.getMajor() == t.getMajor() &&
-                    s.getMinor() == t.getMinor())) {
+            if (t.getUuid().equalsIgnoreCase(settings.getUuid()) &&
+                    beaconsList.itemsProperty().stream().noneMatch(s ->
+                            s.getMajor() == t.getMajor() && s.getMinor() == t.getMinor())) {
                 javafx.application.Platform.runLater(() ->
                         beaconsList.itemsProperty().add(t));
             }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.gluonhq.samples</groupId>
+    <artifactId>samples</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Gluon Samples</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>11</maven.compiler.release>
+        <javafx.version>15</javafx.version>
+        <charm.version>6.0.5</charm.version>
+        <glisten.afterburner.version>2.0.4</glisten.afterburner.version>
+        <attach.version>4.0.9</attach.version>
+        <connect.version>2.0.1</connect.version>
+        <javafx.maven.plugin.version>0.0.4</javafx.maven.plugin.version>
+        <client.maven.plugin.version>0.1.31</client.maven.plugin.version>
+    </properties>
+
+    <modules>
+        <module>beacons</module>
+        <module>cloudlink-cloudfirst-storage</module>
+        <module>comments</module>
+        <module>doodle-trace</module>
+        <module>fiftystates</module>
+        <module>gluon-connect-basic-usage</module>
+        <module>gluon-connect-file-provider</module>
+        <module>gluon-connect-rest-provider</module>
+        <module>notes</module>
+    </modules>
+
+</project>
