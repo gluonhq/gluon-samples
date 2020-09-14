@@ -22,6 +22,11 @@
     </properties>
 
     <modules>
+        <module>helloworld</module>
+        <module>hellofx</module>
+        <module>hellofxml</module>
+        <module>hellogluon</module>
+
         <module>beacons</module>
         <module>cloudlink-cloudfirst-storage</module>
         <module>comments</module>
