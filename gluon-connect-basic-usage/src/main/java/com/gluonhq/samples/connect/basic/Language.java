@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, Gluon
+/*
+ * Copyright (c) 2020, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,6 +27,7 @@
 package com.gluonhq.samples.connect.basic;
 
 public class Language {
+
     private String name;
     private double ratings;
 

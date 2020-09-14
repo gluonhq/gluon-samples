@@ -47,4 +47,8 @@ public class GluonApplication extends MobileApplication {
                 .add(new Image(GluonApplication.class
                         .getResourceAsStream("/icon.png")));
     }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }

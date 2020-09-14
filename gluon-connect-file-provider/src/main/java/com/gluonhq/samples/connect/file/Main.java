@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2016, Gluon
+ * Copyright (c) 2016, 2020 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,9 +26,10 @@
  */
 package com.gluonhq.samples.connect.file;
 
-import com.gluonhq.charm.down.Services;
-import com.gluonhq.charm.down.plugins.StorageService;
+import com.gluonhq.attach.util.Services;
+import com.gluonhq.attach.storage.StorageService;
 import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.control.Avatar;
 import com.gluonhq.charm.glisten.control.NavigationDrawer;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.charm.glisten.visual.Swatch;
@@ -101,8 +102,14 @@ public class Main extends MobileApplication {
             }
             return null;
         });
+        updateDrawer();
+    }
 
+    private void updateDrawer() {
         NavigationDrawer navigationDrawer = getDrawer();
+        NavigationDrawer.Header header = new NavigationDrawer.Header("Gluon Mobile", "Gluon Connect File Provider Sample",
+                new Avatar(21, new Image(getClass().getResourceAsStream("/icon.png"))));
+        navigationDrawer.setHeader(header);
         NavigationDrawer.Item listItem = new NavigationDrawer.Item("List Viewer", MaterialDesignIcon.VIEW_LIST.graphic());
         NavigationDrawer.Item objectItem = new NavigationDrawer.Item("Object Viewer", MaterialDesignIcon.INSERT_DRIVE_FILE.graphic());
         navigationDrawer.getItems().addAll(listItem, objectItem);
@@ -120,5 +127,9 @@ public class Main extends MobileApplication {
         Swatch.BLUE.assignTo(scene);
 
         ((Stage) scene.getWindow()).getIcons().add(new Image(Main.class.getResourceAsStream("/icon.png")));
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 }

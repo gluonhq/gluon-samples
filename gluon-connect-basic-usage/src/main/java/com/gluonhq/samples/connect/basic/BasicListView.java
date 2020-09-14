@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2018 Gluon
+ * Copyright (c) 2016, 2020 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -78,7 +78,7 @@ public class BasicListView extends View {
 
     @Override
     protected void updateAppBar(AppBar appBar) {
-        appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> MobileApplication.getInstance().showLayer(Main.MENU_LAYER)));
+        appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> MobileApplication.getInstance().getDrawer().open()));
         appBar.setTitleText("List Viewer");
     }
     

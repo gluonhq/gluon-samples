@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2018 Gluon
+ * Copyright (c) 2016, 2020 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,6 +27,7 @@
 package com.gluonhq.samples.connect.rest;
 
 import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.control.Avatar;
 import com.gluonhq.charm.glisten.control.NavigationDrawer;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.charm.glisten.visual.Swatch;
@@ -38,13 +39,27 @@ public class Main extends MobileApplication {
 
     private static final String RESTLIST_VIEW = HOME_VIEW;
     private static final String RESTOBJECT_VIEW = "RestObjectView";
-    
+
     @Override
     public void init() {
         addViewFactory(RESTLIST_VIEW, () -> new RestListView());
         addViewFactory(RESTOBJECT_VIEW, () -> new RestObjectView());
 
+        updateDrawer();
+    }
+
+    @Override
+    public void postInit(Scene scene) {
+        Swatch.BLUE.assignTo(scene);
+
+        ((Stage) scene.getWindow()).getIcons().add(new Image(Main.class.getResourceAsStream("/icon.png")));
+    }
+
+    private void updateDrawer() {
         NavigationDrawer navigationDrawer = getDrawer();
+        NavigationDrawer.Header header = new NavigationDrawer.Header("Gluon Mobile", "Gluon Connect Rest Provider Sample",
+                new Avatar(21, new Image(getClass().getResourceAsStream("/icon.png"))));
+        navigationDrawer.setHeader(header);
         NavigationDrawer.Item listItem = new NavigationDrawer.Item("List Viewer", MaterialDesignIcon.VIEW_LIST.graphic());
         NavigationDrawer.Item objectItem = new NavigationDrawer.Item("Object Viewer", MaterialDesignIcon.INSERT_DRIVE_FILE.graphic());
         navigationDrawer.getItems().addAll(listItem, objectItem);
@@ -57,10 +72,7 @@ public class Main extends MobileApplication {
         });
     }
 
-    @Override
-    public void postInit(Scene scene) {
-        Swatch.BLUE.assignTo(scene);
-
-        ((Stage) scene.getWindow()).getIcons().add(new Image(Main.class.getResourceAsStream("/icon.png")));
+    public static void main(String[] args) {
+        launch(args);
     }
 }

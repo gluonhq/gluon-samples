@@ -1,45 +1,70 @@
-
-Comments
-========
+# Comments
 
  A JavaFX Application that uses Gluon Mobile: 
 
  - CloudLink Client: the client-side counterpart of the Gluon CloudLink service 
  - Glisten: Simple application framework, custom UI controls and customized existing JavaFX UI controls
 
-Prerequisites
--------------
+## Prerequisites
 
-You need a valid subscription to Gluon CloudLink. You can get it [here](http://gluonhq.com/products/cloudlink/buy/), and 
-there is a 30-day free trial. Sign up and get a valid account on Gluon CloudLink and a link to download the Gluon CloudLink 
-Dashboard. 
+You need a valid subscription to Gluon CloudLink. You can get it [here](https://gluonhq.com/products/cloudlink/buy/), and there is a 30-day free trial.
+Sign up and get a valid account on Gluon CloudLink and a link to access the Gluon Dashboard. 
 
-Install and open the Dashboard, and sign in using the Gluon account credentials provided above. Go to the App Management view, and you will 
-find a pair of key/secret tokens. Save the file `gluoncloudlink_config.json` under your project 
-`src/main/resources/` folder. The content of the file is a JSON object with the key and secret that will grant access
-to Gluon CloudLink:
+Open the [Gluon Dashboard](https://gluon.io) in your browser and sign in using the Gluon account credentials provided above.
+Go to the Credentials link, and under the Client tab you will find a pair of key/secret tokens.
+Download the file `gluoncloudlink_config.json` and store it in the `client` project under the `src/main/resources/` folder.
 
-```json
-{
-  "gluonCredentials": {
-    "applicationKey": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
-    "applicationSecret": "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-  }
-}
-```
+## Documentation
 
-Instructions
------------------
-To execute the sample, do as follows:
+Read how to create this sample step by step [here](https://docs.gluonhq.com/samples/comments/)
 
-* Desktop
-> Just run it from your IDE or from command line: `./gradlew run`
-* Android
-> Connect your Android device and run `./gradlew androidInstall`
-* iOS
-> Connect your iOS device and run `./gradlew launchIOSDevice`
+## Quick Instructions
 
-Documentation
--------------
+We use [Gluon Client](https://docs.gluonhq.com/client/) to build a native image for platforms including desktop, android and iOS.
+Please follow the Gluon Client prerequisites as stated [here](https://github.com/gluonhq/client-samples/#build-and-run-the-samples).
 
-Read how to create this sample step by step [here](http://docs.gluonhq.com/samples/comments/)
+### Desktop
+
+Run the application using:
+
+    mvn javafx:run
+
+Build a native image using:
+
+    mvn client:build
+
+Run the native image app:
+
+    mvn client:run
+
+### Android
+
+Build a native image for Android using:
+
+    mvn client:build -Pandroid
+
+Package the native image as an 'apk' file:
+
+    mvn client:package -Pandroid
+
+Install it on a connected android device:
+
+    mvn client:install -Pandroid
+
+Run the installed app on a connected android device:
+
+    mvn client:run -Pandroid
+
+### iOS
+
+Build a native image for iOS using:
+
+    mvn client:build -Pios
+
+Install and run the native image on a connected iOS device:
+
+    mvn client:run -Pios
+
+Create an IPA file (for submission to TestFlight or App Store):
+
+    mvn client:package -Pios

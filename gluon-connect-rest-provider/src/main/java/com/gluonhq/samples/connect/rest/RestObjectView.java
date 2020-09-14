@@ -26,9 +26,9 @@
  */
 package com.gluonhq.samples.connect.rest;
 
-import com.gluonhq.charm.down.Platform;
-import com.gluonhq.charm.down.Services;
-import com.gluonhq.charm.down.plugins.BrowserService;
+import com.gluonhq.attach.util.Platform;
+import com.gluonhq.attach.util.Services;
+import com.gluonhq.attach.browser.BrowserService;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;

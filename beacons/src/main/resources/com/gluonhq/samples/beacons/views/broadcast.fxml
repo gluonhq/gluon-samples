@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2016, 2020, Gluon
+    All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+        * Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+        * Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+        * Neither the name of Gluon, any associated website, nor the
+    names of its contributors may be used to endorse or promote products
+    derived from this software without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+    ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    DISCLAIMED. IN NO EVENT SHALL GLUON BE LIABLE FOR ANY
+    DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+    (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+    LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+    ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+-->
+
+<?import com.gluonhq.charm.glisten.mvc.View?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<View fx:id="broadcastView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.samples.beacons.views.BroadcastPresenter">
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <GridPane styleClass="grid" VBox.vgrow="ALWAYS">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="276.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="50.0" vgrow="ALWAYS" />
+               </rowConstraints>
+               <children>
+                  <Label text="UUID" />
+                  <Label text="Major" GridPane.rowIndex="1" />
+                  <Label text="Minor" GridPane.rowIndex="2" />
+                  <Label text="Id" GridPane.rowIndex="3" />
+                  <Label fx:id="labelUUID" maxWidth="1.7976931348623157E308" prefHeight="17.0" GridPane.columnIndex="1" />
+                  <Label fx:id="labelMajor" maxWidth="1.7976931348623157E308" prefHeight="17.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="labelMinor" maxWidth="1.7976931348623157E308" prefHeight="17.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="labelId" maxWidth="1.7976931348623157E308" prefHeight="17.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </GridPane>
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </VBox>
+</View>

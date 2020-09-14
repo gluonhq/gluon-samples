@@ -75,5 +75,4 @@ public class RestListView extends View {
         appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getApplication().getDrawer().open()));
         appBar.setTitleText("Rest List Viewer");
     }
-
 }

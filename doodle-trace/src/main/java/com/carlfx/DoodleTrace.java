@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2018 Gluon
+ * Copyright (c) 2016, 2020 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,7 @@
  */
 package com.carlfx;
 
-import com.gluonhq.charm.down.Platform;
+import com.gluonhq.attach.util.Platform;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.FloatingActionButton;
 import com.gluonhq.charm.glisten.mvc.View;

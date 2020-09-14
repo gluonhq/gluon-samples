@@ -1,22 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.gluonhq.beacons" android:versionCode="1" android:versionName="1.0">
-        <supports-screens android:xlargeScreens="true"/>
-        <uses-permission android:name="android.permission.INTERNET"/>
-        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-        <uses-permission android:name="android.permission.BLUETOOTH"/>
-	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-        <uses-sdk android:minSdkVersion="4" android:targetSdkVersion="28"/>
-        <application android:label="Beacons" android:name="android.support.multidex.MultiDexApplication" android:icon="@mipmap/ic_launcher">
-                <activity android:name="javafxports.android.FXActivity" android:label="Beacons" android:configChanges="orientation|screenSize">
-                        <meta-data android:name="main.class" android:value="com.gluonhq.beacons.Beacons"/>
-                        <meta-data android:name="debug.port" android:value="0"/>
-                        <intent-filter>
-                                <action android:name="android.intent.action.MAIN"/>
-                                <category android:name="android.intent.category.LAUNCHER"/>
-                        </intent-filter>
-                </activity>
-                <activity android:name="com.gluonhq.impl.charm.down.plugins.android.PermissionRequestActivity" />
-        </application>
+<?xml version='1.0'?>
+<manifest xmlns:a='http://schemas.android.com/apk/res/android' package='com.gluonhq.samples.beacons' a:versionCode='1' a:versionName='1.0'>
+    <supports-screens a:xlargeScreens="true"/>
+    <uses-sdk a:minSdkVersion="21" a:targetSdkVersion="28"/>
+    <uses-permission a:name="android.permission.INTERNET"/>
+    <uses-permission a:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission a:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission a:name="android.permission.BLUETOOTH"/>
+    <uses-permission a:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission a:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <application a:label='beacons' a:icon="@mipmap/ic_launcher">
+        <activity a:name='com.gluonhq.helloandroid.MainActivity' a:configChanges="orientation|keyboardHidden">
+            <intent-filter>
+                <category a:name='android.intent.category.LAUNCHER'/>
+                <action a:name='android.intent.action.MAIN'/>
+            </intent-filter>
+        </activity>
+        <activity a:name='com.gluonhq.helloandroid.PermissionRequestActivity'/>
+    </application>
 </manifest>
