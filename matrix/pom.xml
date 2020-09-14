@@ -81,6 +81,11 @@
                 <configuration>
                     <mainClass>${main.class}</mainClass>
                     <includePathExceptionsInClasspath>true</includePathExceptionsInClasspath>
+<!--
+<options>
+ <option>-agentlib:native-image-agent=config-merge-dir=src/main/resources/META-INF/native-image</option>
+</options>
+-->
                 </configuration>
             </plugin>
 
@@ -91,6 +96,9 @@
                 <configuration>
                     <target>${client.target}</target>
                     <mainClass>${main.class}</mainClass>
+                    <resourcesList>
+                        <item>nd4j-native.properties</item>
+                    </resourcesList>
                 </configuration>
             </plugin>
         </plugins>
