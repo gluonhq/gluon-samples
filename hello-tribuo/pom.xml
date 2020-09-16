@@ -16,7 +16,7 @@
         <maven.compiler.release>11</maven.compiler.release>
         <javafx.version>15</javafx.version>
         <javafx.plugin.version>0.0.4</javafx.plugin.version>
-        <client.plugin.version>0.1.31</client.plugin.version>
+        <client.plugin.version>0.1.32-SNAPSHOT</client.plugin.version>
         <charm.version>6.0.5</charm.version>
         <attach.version>4.0.8</attach.version>
         <main.class>com.gluonhq.samples.sample.Main</main.class>
@@ -96,8 +96,12 @@
                 <artifactId>client-maven-plugin</artifactId>
                 <version>${client.plugin.version}</version>
                 <configuration>
+<verbose>true</verbose>
                     <target>${client.target}</target>
                     <mainClass>${main.class}</mainClass>
+                    <resourcesList>
+                        <item>bezdekIris.data</item>
+                    </resourcesList>
                     <attachList>
                         <list>display</list>
                         <list>lifecycle</list>
