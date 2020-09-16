@@ -8,31 +8,55 @@ import com.gluonhq.charm.glisten.control.FloatingActionButton;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.charm.glisten.visual.Swatch;
-import javafx.application.Application;
+import java.net.URL;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.Chart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Data;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import org.tribuo.Model;
+import org.tribuo.MutableDataset;
+import org.tribuo.Prediction;
+import org.tribuo.classification.LabelFactory;
+import org.tribuo.classification.dtree.CARTClassificationTrainer;
+import org.tribuo.classification.evaluation.LabelEvaluation;
+import org.tribuo.classification.evaluation.LabelEvaluator;
+import org.tribuo.classification.sgd.linear.LogisticRegressionTrainer;
+import org.tribuo.common.tree.TreeModel;
+import org.tribuo.data.csv.CSVLoader;
+import org.tribuo.datasource.ListDataSource;
+import org.tribuo.evaluation.TrainTestSplitter;
 
 public class Main extends MobileApplication {
 
+    Series<String, Number> tpSeries = new Series<>();
+    Series<String, Number> fpSeries = new Series<>();
+
     @Override
     public void init() {
+        tpSeries.setName("TP");
+        fpSeries.setName("FP");
         addViewFactory(HOME_VIEW, () -> {
             FloatingActionButton fab = new FloatingActionButton(MaterialDesignIcon.SEARCH.text,
                     e -> System.out.println("Search"));
 
-            ImageView imageView = new ImageView(new Image(Main.class.getResourceAsStream("openduke.png")));
-            imageView.setFitHeight(200);
-            imageView.setPreserveRatio(true);
+            Chart chart = createChart();
 
-            Label label = new Label("Hello, Gluon Mobile!");
+            Label label = new Label("Hello, Tribuo with Gluon Mobile!");
 
-            VBox root = new VBox(20, imageView, label);
+            VBox root = new VBox(20, chart, label);
             root.setAlignment(Pos.CENTER);
 
             View view = new View(root) {
@@ -46,6 +70,7 @@ public class Main extends MobileApplication {
 
             return view;
         });
+        train();
     }
 
     @Override
@@ -60,6 +85,55 @@ public class Main extends MobileApplication {
             scene.getWindow().setWidth(dimension2D.getWidth());
             scene.getWindow().setHeight(dimension2D.getHeight());
         }
+    }
+
+    private void train() {
+        Thread thread = new Thread(){
+            @Override public void run() {
+                try {
+                    URL dataUrl = Main.class.getResource("/bezdekIris.data");
+                    var irisHeaders = new String[]{"sepalLength", "sepalWidth", "petalLength", "petalWidth", "species"};
+                    ListDataSource<org.tribuo.classification.Label> irisData
+                            = new CSVLoader<>(new LabelFactory()).loadDataSource(dataUrl, irisHeaders[4], irisHeaders);
+                    TrainTestSplitter<org.tribuo.classification.Label> irisSplitter = new TrainTestSplitter<>(irisData, 0.7, 1L);
+                    MutableDataset<org.tribuo.classification.Label> trainData = new MutableDataset<>(irisSplitter.getTrain());
+                    MutableDataset<org.tribuo.classification.Label> testData = new MutableDataset<>(irisSplitter.getTest());
+                    var cartTrainer = new CARTClassificationTrainer();
+                    TreeModel<org.tribuo.classification.Label> tree = cartTrainer.train(trainData);
+
+                    var linearTrainer = new LogisticRegressionTrainer();
+                    var evaluator = new LabelEvaluator();
+                    LabelEvaluation evaluation = evaluator.evaluate(tree, testData);
+
+                    for (org.tribuo.classification.Label label : trainData.getOutputs()) {
+                        double f1 = evaluation.f1(label);
+                        double fn = evaluation.fn(label);
+                        double fp = evaluation.fp(label);
+                        double tn = evaluation.tn(label);
+                        double tp = evaluation.tp(label);
+                        javafx.application.Platform.runLater(() -> {
+                            tpSeries.getData().add(new Data(label.getLabel(), tp));
+                            fpSeries.getData().add(new Data(label.getLabel(), fp));
+                        });
+                        System.err.println("Label " + label + " f1 = " + f1 + ", fn = " + fn + ", fp = " + fp);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } ;
+        thread.start();
+    }
+
+    private Chart createChart() {
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+        StackedBarChart<String, Number> chart = new StackedBarChart(xAxis, yAxis);
+        ObservableList<XYChart.Series<String, Number>> chartData = FXCollections.observableArrayList();
+        chartData.add(tpSeries);
+        chartData.add(fpSeries);
+        chart.setData(chartData);
+        return chart;
     }
 
     public static void main(String[] args) {
