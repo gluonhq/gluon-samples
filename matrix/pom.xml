@@ -112,8 +112,8 @@
             </activation>
             <properties>
                 <client.target>host</client.target>
+                <cl>linux-x86_64</cl>
                 <cl>macosx-x86_64</cl>
-                <!-- <cl>linux-x86_64</cl> -->
             </properties>
         </profile>
         <profile>
