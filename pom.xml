@@ -18,7 +18,7 @@
         <attach.version>4.0.9</attach.version>
         <connect.version>2.0.1</connect.version>
         <javafx.maven.plugin.version>0.0.4</javafx.maven.plugin.version>
-        <client.maven.plugin.version>0.1.31</client.maven.plugin.version>
+        <client.maven.plugin.version>0.1.32</client.maven.plugin.version>
     </properties>
 
     <modules>
