@@ -64,6 +64,36 @@
             <artifactId>nd4j-native</artifactId>
             <version>${dl4j.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>charm-glisten</artifactId>
+            <version>${charm.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>display</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>lifecycle</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>statusbar</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>storage</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq.attach</groupId>
+            <artifactId>util</artifactId>
+            <version>${attach.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -99,6 +129,12 @@
                     <resourcesList>
                         <item>nd4j-native.properties</item>
                     </resourcesList>
+                    <attachList>
+                        <list>display</list>
+                        <list>lifecycle</list>
+                        <list>statusbar</list>
+                        <list>storage</list>
+                    </attachList>
                 </configuration>
             </plugin>
         </plugins>

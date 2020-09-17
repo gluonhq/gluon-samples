@@ -1,13 +1,21 @@
 package com.gluonhq.samples.matrix;
 
+import com.gluonhq.attach.display.DisplayService;
+import com.gluonhq.attach.util.Platform;
+import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.control.AppBar;
+import com.gluonhq.charm.glisten.control.FloatingActionButton;
+import com.gluonhq.charm.glisten.mvc.View;
+import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
+import com.gluonhq.charm.glisten.visual.Swatch;
 import org.nd4j.linalg.api.buffer.DataType;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Dimension2D;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.Chart;
@@ -19,19 +27,50 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 
-public class Main extends Application {
+public class Main extends MobileApplication {
     
     Series<Number, Number> series = new Series<>();
 
-    private static void calcGrid(){
-     
-INDArray na = Nd4j.create(new float[]{1,2,3,4},new int[]{2,2});
-INDArray nb = Nd4j.create(new float[]{3,-2,1,0},new int[]{2,2});
-INDArray nc = na.mmul(nb);
-System.err.println("A = "+na+"\n\nB = " + nb+"\n\nC = " + nc);
+        @Override
+    public void init() {
+        addViewFactory(HOME_VIEW, () -> {
+            FloatingActionButton fab = new FloatingActionButton(MaterialDesignIcon.SEARCH.text,
+                    e -> System.out.println("Search"));
 
+            Chart chart = createChart();
+
+            Label label = new Label("Hello, ND4J with Gluon Mobile!");
+
+            VBox root = new VBox(20, chart, label);
+            root.setAlignment(Pos.CENTER);
+
+            View view = new View(root) {
+                @Override
+                protected void updateAppBar(AppBar appBar) {
+                    appBar.setTitleText("Gluon Mobile and ND4J");
+                }
+            };
+
+            fab.showOn(view);
+
+            return view;
+        });
+        train();
     }
-    
+    @Override
+    public void postInit(Scene scene) {
+        Swatch.LIGHT_GREEN.assignTo(scene);
+        scene.getStylesheets().add(Main.class.getResource("styles.css").toExternalForm());
+
+        if (Platform.isDesktop()) {
+            Dimension2D dimension2D = DisplayService.create()
+                    .map(DisplayService::getDefaultDimensions)
+                    .orElse(new Dimension2D(640, 480));
+            scene.getWindow().setWidth(dimension2D.getWidth());
+            scene.getWindow().setHeight(dimension2D.getHeight());
+        }
+    }
+
     private long multiplyMatrix(int dim) {
         double[] a = new double[dim * dim];
         double[] b = new double[dim * dim];
@@ -48,27 +87,6 @@ System.err.println("A = "+na+"\n\nB = " + nb+"\n\nC = " + nc);
         return d;
     }
 
-    @Override
-    public void start(Stage stage) {
-        String javaVersion = System.getProperty("java.version");
-        String javafxVersion = System.getProperty("javafx.version");
-        Label label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-
-        // ImageView imageView = new ImageView(new Image(Main.class.getResourceAsStream("openduke.png")));
-        // imageView.setFitHeight(200);
-        // imageView.setPreserveRatio(true);
-
-        VBox root = new VBox(30, createChart(), label);
-        root.setAlignment(Pos.CENTER);
-
-        Scene scene = new Scene(root, 640, 480);
-        // scene.getStylesheets().add(Main.class.getResource("styles.css").toExternalForm());
-        stage.setScene(scene);
-        train();
-        stage.show();
-// calcGrid();
-    }
-
     private void train() {
         Thread thread = new Thread(){
             @Override public void run() {
@@ -79,11 +97,8 @@ System.err.println("A = "+na+"\n\nB = " + nb+"\n\nC = " + nc);
                     final int x = 10*i;
                     final double y = t;
                     System.err.println("points "+i+", "+y);
-                    Platform.runLater(() -> series.getData().add(new XYChart.Data(x, y)));
+                    javafx.application.Platform.runLater(() -> series.getData().add(new XYChart.Data(x, y)));
                 }
-System.err.println("Calculate grid");
-              //  calcGrid();
-System.err.println("Calculate grid done");
             }
         };
         thread.start();
@@ -92,14 +107,22 @@ System.err.println("Calculate grid done");
     private Chart createChart() {
         NumberAxis xAxis = new NumberAxis();
         NumberAxis yAxis = new NumberAxis();
+        xAxis.setLabel("matrix dimension");
+        yAxis.setLabel("Time (ms)");
+        series.setName("nd4j");
         LineChart<Number, Number> lineChart = new LineChart(xAxis, yAxis);
         ObservableList<XYChart.Series<Number, Number>> chartData = FXCollections.observableArrayList();
         chartData.add(series);
         lineChart.setData(chartData);
         return lineChart;
     }
-    
+
     public static void main(String[] args) {
+        if (Platform.isAndroid()) {
+            System.setProperty("org.bytedeco.javacpp.platform", "arm64-v8a");
+            System.setProperty("org.bytedeco.javacpp.platform.library.path", "/lib");
+            System.setProperty("org.bytedeco.javacpp.pathsFirst", "true");
+        }
         launch(args);
     }
 }
