@@ -26,9 +26,7 @@ import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import org.tribuo.Model;
 import org.tribuo.MutableDataset;
-import org.tribuo.Prediction;
 import org.tribuo.classification.LabelFactory;
 import org.tribuo.classification.dtree.CARTClassificationTrainer;
 import org.tribuo.classification.evaluation.LabelEvaluation;
@@ -41,8 +39,8 @@ import org.tribuo.evaluation.TrainTestSplitter;
 
 public class Main extends MobileApplication {
 
-    Series<String, Number> tpSeries = new Series<>();
-    Series<String, Number> fpSeries = new Series<>();
+    Series<String, Number> tpSeries = new Series<>(); // true positives
+    Series<String, Number> fpSeries = new Series<>(); // false positives
 
     @Override
     public void init() {
@@ -56,7 +54,7 @@ public class Main extends MobileApplication {
 
             Label label = new Label("Hello, Tribuo with Gluon Mobile!");
 
-            VBox root = new VBox(20, chart, label);
+            VBox root = new VBox(20, label, chart);
             root.setAlignment(Pos.CENTER);
 
             View view = new View(root) {
@@ -87,6 +85,8 @@ public class Main extends MobileApplication {
     }
 
     private void train() {
+        tpSeries.getData().clear();
+        fpSeries.getData().clear();
         Thread thread = new Thread(){
             @Override public void run() {
                 try {
@@ -100,7 +100,6 @@ public class Main extends MobileApplication {
                     var cartTrainer = new CARTClassificationTrainer();
                     TreeModel<org.tribuo.classification.Label> tree = cartTrainer.train(trainData);
 
-                    var linearTrainer = new LogisticRegressionTrainer();
                     var evaluator = new LabelEvaluator();
                     LabelEvaluation evaluation = evaluator.evaluate(tree, testData);
 
@@ -111,8 +110,8 @@ public class Main extends MobileApplication {
                         double tn = evaluation.tn(label);
                         double tp = evaluation.tp(label);
                         javafx.application.Platform.runLater(() -> {
-                            tpSeries.getData().add(new Data(label.getLabel(), tp));
-                            fpSeries.getData().add(new Data(label.getLabel(), fp));
+                            tpSeries.getData().add(new Data<>(label.getLabel(), tp));
+                            fpSeries.getData().add(new Data<>(label.getLabel(), fp));
                         });
                     }
                 } catch (Exception e) {
@@ -126,11 +125,13 @@ public class Main extends MobileApplication {
     private Chart createChart() {
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
-        StackedBarChart<String, Number> chart = new StackedBarChart(xAxis, yAxis);
+        StackedBarChart<String, Number> chart = new StackedBarChart<>(xAxis, yAxis);
         ObservableList<XYChart.Series<String, Number>> chartData = FXCollections.observableArrayList();
         chartData.add(tpSeries);
         chartData.add(fpSeries);
         chart.setData(chartData);
+        chart.setAnimated(false);
+        chart.setTitle("Iris");
         return chart;
     }
 
