@@ -16,15 +16,9 @@
     <packaging>jar</packaging>
 
 
-    <name>Hello Tribuo</name>
+    <name>HelloTribuo</name>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>11</maven.compiler.release>
-        <javafx.version>15</javafx.version>
-        <javafx.plugin.version>0.0.4</javafx.plugin.version>
-        <charm.version>6.0.5</charm.version>
-        <attach.version>4.0.8</attach.version>
         <main.class>com.gluonhq.samples.sample.Main</main.class>
     </properties>
 
@@ -34,16 +28,6 @@
             <artifactId>tribuo-all</artifactId>
             <version>4.0.1</version>
             <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-base</artifactId>
-            <version>${javafx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-            <version>${javafx.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -92,7 +76,7 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
-                <version>${javafx.plugin.version}</version>
+                <version>${javafx.maven.plugin.version}</version>
                 <configuration>
                     <mainClass>${main.class}</mainClass>
                 </configuration>
@@ -102,7 +86,6 @@
                 <artifactId>client-maven-plugin</artifactId>
                 <version>${client.maven.plugin.version}</version>
                 <configuration>
-<verbose>true</verbose>
                     <target>${client.target}</target>
                     <mainClass>${main.class}</mainClass>
                     <resourcesList>

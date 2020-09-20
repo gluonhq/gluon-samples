@@ -50,7 +50,7 @@ public class Main extends MobileApplication {
         fpSeries.setName("FP");
         addViewFactory(HOME_VIEW, () -> {
             FloatingActionButton fab = new FloatingActionButton(MaterialDesignIcon.SEARCH.text,
-                    e -> System.out.println("Search"));
+                    e -> train());
 
             Chart chart = createChart();
 
@@ -70,7 +70,6 @@ public class Main extends MobileApplication {
 
             return view;
         });
-        train();
     }
 
     @Override
@@ -115,7 +114,6 @@ public class Main extends MobileApplication {
                             tpSeries.getData().add(new Data(label.getLabel(), tp));
                             fpSeries.getData().add(new Data(label.getLabel(), fp));
                         });
-                        System.err.println("Label " + label + " f1 = " + f1 + ", fn = " + fn + ", fp = " + fp);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
