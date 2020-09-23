@@ -35,6 +35,7 @@
         <module>gluon-connect-basic-usage</module>
         <module>gluon-connect-file-provider</module>
         <module>gluon-connect-rest-provider</module>
+        <module>hello-tribuo</module>
         <module>notes</module>
     </modules>
 
