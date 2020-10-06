@@ -12,7 +12,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>beacons</name>
+    <name>Beacons</name>
 
     <properties>
         <mainClassName>com.gluonhq.samples.beacons.Beacons</mainClassName>
