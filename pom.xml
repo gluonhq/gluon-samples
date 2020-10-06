@@ -18,14 +18,14 @@
         <attach.version>4.0.9</attach.version>
         <connect.version>2.0.1</connect.version>
         <javafx.maven.plugin.version>0.0.4</javafx.maven.plugin.version>
-        <client.maven.plugin.version>0.1.32</client.maven.plugin.version>
+        <client.maven.plugin.version>0.1.33</client.maven.plugin.version>
     </properties>
 
     <modules>
-        <module>helloworld</module>
-        <module>hellofx</module>
-        <module>hellofxml</module>
-        <module>hellogluon</module>
+        <module>HelloWorld</module>
+        <module>HelloFX</module>
+        <module>HelloFXML</module>
+        <module>HelloGluon</module>
 
         <module>beacons</module>
         <module>cloudlink-cloudfirst-storage</module>

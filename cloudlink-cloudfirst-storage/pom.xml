@@ -12,7 +12,7 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Gluon Cloudlink - Cloud First Storage</name>
+    <name>Cloudlink CloudFirst Storage</name>
 
     <properties>
         <main.class>com.gluonhq.samples.cloudfirst.CloudFirstStorage</main.class>
