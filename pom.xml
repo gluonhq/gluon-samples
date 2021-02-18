@@ -38,6 +38,7 @@
         <module>hello-tribuo</module>
         <module>notes</module>
         <module>pushnotes</module>
+        <module>rubiks-cube</module>
     </modules>
 
 </project>
