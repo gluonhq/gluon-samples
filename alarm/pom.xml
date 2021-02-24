@@ -131,20 +131,7 @@
                         <list>storage</list>
                     </attachList>
                     <mainClass>${main.class}</mainClass>
-                    <!--<reflectionList>
-                        <list>com.gluonhq.samples.alarm.model.Event</list>
-                        <list>com.gluonhq.samples.alarm.service.Service</list>
-                        <list>com.gluonhq.samples.alarm.views.AlarmPresenter</list>
-                        <list>com.gluonhq.samples.alarm.views.EventsPresenter</list>
-                        <list>com.gluonhq.charm.glisten.control.ExpansionPanel</list>
-                        <list>com.gluonhq.charm.glisten.control.ExpansionPanel$CollapsedPanel</list>
-                        <list>com.gluonhq.charm.glisten.control.ExpansionPanelContainer</list>
-                    </reflectionList>
-                    <bundlesList>
-                        <list>com.gluonhq.samples.alarm.drawer</list>
-                        <list>com.gluonhq.samples.alarm.views.alarm</list>
-                        <list>com.gluonhq.samples.alarm.views.result</list>
-                    </bundlesList>-->
+                    <!-- Run mvn client:runagent to generate reflection, resources and bundles list -->
                 </configuration>
             </plugin>
         </plugins>
