@@ -131,7 +131,7 @@
                         <list>storage</list>
                     </attachList>
                     <mainClass>${main.class}</mainClass>
-                    <!-- Run mvn client:runagent to generate reflection, resources and bundles list -->
+                    <!-- Run mvn client:runagent to generate reflection, resources and bundles lists -->
                 </configuration>
             </plugin>
         </plugins>
