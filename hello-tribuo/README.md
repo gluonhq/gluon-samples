@@ -4,7 +4,7 @@ This Gluon Client sample was generated from https://start.gluon.io
 
 ## Basic Requirements
 
-A list of the basic requirements can be found online in the [Gluon Client documentation](https://docs.gluonhq.com/client/#_requirements).
+A list of the basic requirements can be found online in the [Gluon Client documentation](https://docs.gluonhq.com/#_requirements).
 
 ## Quick instructions
 

@@ -12,7 +12,7 @@ The following platforms are currently supported:
 
 ## Documentation
 
-Before getting started with this samples, read the Client plugin [documentation](https://docs.gluonhq.com/client/).
+Before getting started with this samples, read the Client plugin [documentation](https://docs.gluonhq.com/).
 
 ## Build and run the samples
 
@@ -23,4 +23,4 @@ Visit each sample's README for further instructions.
 Issues can be reported to the [Issue tracker](https://github.com/gluonhq/gluon-samples/issues)
 
 Contributions can be submitted via [Pull requests](https://github.com/gluonhq/gluon-samples/pulls), 
-providing you have signed the [Gluon Individual Contributor License Agreement (CLA)](https://docs.google.com/forms/d/16aoFTmzs8lZTfiyrEm8YgMqMYaGQl0J8wA0VJE2LCCY).
+providing you have signed the [Gluon Individual Contributor License Agreement (CLA)](https://cla.gluonhq.com).
