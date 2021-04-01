@@ -5,12 +5,12 @@ A simple Hello World application with Java 11+, JavaFX 15+, Gluon Mobile and Gra
 
 ## Documentation
 
-Read about this sample [here](https://docs.gluonhq.com/client/#_hellogluon_sample)
+Read about this sample [here](https://docs.gluonhq.com/#_hellogluon_sample)
 
 ## Quick Instructions
 
-We use [Gluon Client](https://docs.gluonhq.com/client/) to build a native image for platforms including desktop, android and iOS.
-Please follow the Gluon Client prerequisites as stated [here](https://docs.gluonhq.com/client/#_requirements).
+We use [Gluon Client](https://docs.gluonhq.com/) to build a native image for platforms including desktop, android and iOS.
+Please follow the Gluon Client prerequisites as stated [here](https://docs.gluonhq.com/#_requirements).
 
 ### Desktop
 
