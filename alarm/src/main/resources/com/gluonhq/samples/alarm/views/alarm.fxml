@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2021, Gluon
+    All rights reserved.
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+        * Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+        * Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in the
+    documentation and/or other materials provided with the distribution.
+        * Neither the name of Gluon, any associated website, nor the
+    names of its contributors may be used to endorse or promote products
+    derived from this software without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+    ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    DISCLAIMED. IN NO EVENT SHALL GLUON BE LIABLE FOR ANY
+    DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+    (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+    LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+    ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+-->
+
+<?import com.gluonhq.charm.glisten.control.ExpansionPanel?>
+<?import com.gluonhq.charm.glisten.control.ExpansionPanel.CollapsedPanel?>
+<?import com.gluonhq.charm.glisten.control.ExpansionPanelContainer?>
+<?import com.gluonhq.charm.glisten.control.Icon?>
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import com.gluonhq.charm.glisten.mvc.View?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<View fx:id="alarm" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gluonhq.samples.alarm.views.AlarmPresenter">
+   <top>
+      <VBox alignment="CENTER" styleClass="main" BorderPane.alignment="CENTER">
+         <children>
+            <Label styleClass="title" text="%label.text.top" />
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0" styleClass="main" BorderPane.alignment="CENTER">
+         <children>
+            <ExpansionPanelContainer fx:id="expansionContainer" VBox.vgrow="ALWAYS">
+               <items>
+                  <ExpansionPanel>
+                     <collapsedContent>
+                        <ExpansionPanel.CollapsedPanel>
+                           <titleNodes>
+                              <Label styleClass="text" text="%label.at" />
+                              <Label fx:id="alarmAtLabel" styleClass="value" text="09:00" />
+                              <ToggleButton fx:id="toggleAt" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" styleClass="switch" />
+                           </titleNodes>
+                        </ExpansionPanel.CollapsedPanel>
+                     </collapsedContent>
+                     <expandedContent>
+                        <VBox prefHeight="200.0" prefWidth="100.0" styleClass="expand">
+                           <children>
+                              <TextField fx:id="titleAtText" floatText="%title.at.float.text" text="%title.at.text" />
+                              <TextField fx:id="messageAtText" floatText="%message.at.float.text" layoutX="10.0" layoutY="10.0" text="%message.at.text" />
+                              <Button fx:id="timeAtButton" mnemonicParsing="false" text="%button.set.time">
+                                 <graphic>
+                                    <Icon content="AV_TIMER" />
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </expandedContent>
+                  </ExpansionPanel>
+                  <ExpansionPanel layoutX="10.0" layoutY="10.0">
+                     <collapsedContent>
+                        <ExpansionPanel.CollapsedPanel>
+                           <titleNodes>
+                              <Label styleClass="text" text="%label.in" />
+                              <Label fx:id="alarmInLabel" styleClass="value" text="5 min" />
+                              <ToggleButton fx:id="toggleIn" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" selected="true" styleClass="switch" />
+                           </titleNodes>
+                        </ExpansionPanel.CollapsedPanel>
+                     </collapsedContent>
+                     <expandedContent>
+                        <VBox prefHeight="200.0" prefWidth="100.0" styleClass="expand">
+                           <children>
+                              <TextField fx:id="titleInText" floatText="%title.in.float.text" text="%title.in.text" />
+                              <TextField fx:id="messageInText" floatText="%message.in.float.text" layoutX="20.0" layoutY="20.0" text="%message.in.text" />
+                              <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" styleClass="time">
+                                 <children>
+                                    <Label layoutX="144.0" layoutY="30.0" minWidth="20.0" text="In:" HBox.hgrow="NEVER" />
+                                    <Pane HBox.hgrow="ALWAYS" />
+                                    <TextField fx:id="hourInText" floatText="Hours" layoutX="10.0" layoutY="10.0" maxWidth="50.0" text="00" />
+                                    <Label text=":" />
+                                    <TextField fx:id="minInText" floatText="Minutes" layoutX="10.0" layoutY="10.0" maxWidth="50.0" text="01" />
+                                    <Label text=":" />
+                                    <TextField fx:id="secInText" floatText="Seconds" maxWidth="50.0" text="00" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </expandedContent>
+                  </ExpansionPanel>
+               </items>
+            </ExpansionPanelContainer>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <VBox alignment="CENTER" styleClass="main" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="scheduleButton" mnemonicParsing="false" onAction="#scheduleButtonAction" text="%button.text">
+               <graphic>
+                  <Icon content="ALARM" />
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+   </bottom>
+</View>
