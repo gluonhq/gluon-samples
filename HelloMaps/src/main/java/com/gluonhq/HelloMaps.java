@@ -47,7 +47,7 @@ import javafx.stage.Stage;
 
 public class HelloMaps extends Application {
 
-    public static final int DEFAULT_ZOOM = 3;
+    private static final int DEFAULT_ZOOM = 3;
     private static final double DEFAULT_LAT = 50.0;
     private static final double DEFAULT_LONG = 4.0;
 
