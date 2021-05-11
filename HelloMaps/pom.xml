@@ -30,7 +30,7 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>14</version>
+            <version>${javafx.version}</version>
         </dependency>
         <dependency>
             <groupId>com.gluonhq</groupId>

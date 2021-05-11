@@ -47,13 +47,17 @@ import javafx.stage.Stage;
 
 public class HelloMaps extends Application {
 
+    public static final int DEFAULT_ZOOM = 3;
+    private static final double DEFAULT_LAT = 50.0;
+    private static final double DEFAULT_LONG = 4.0;
+
     private MapPoint mapPoint;
 
     @Override
     public void start(Stage stage) {
         MapView view = new MapView();
         view.addLayer(positionLayer());
-        view.setZoom(3);
+        view.setZoom(DEFAULT_ZOOM);
         Scene scene;
         if (Platform.isDesktop()) {
             scene = new Scene(view, 600, 700);
@@ -83,7 +87,7 @@ public class HelloMaps extends Application {
                     ReadOnlyObjectProperty<Position> positionProperty = positionService.positionProperty();
                     Position position = positionProperty.get();
                     if (position == null) {
-                        position = new Position(50., 4.);
+                        position = new Position(DEFAULT_LAT, DEFAULT_LONG);
                     }
                     mapPoint = new MapPoint(position.getLatitude(), position.getLongitude());
 
@@ -98,7 +102,7 @@ public class HelloMaps extends Application {
                 })
                 .orElseGet(() -> {
                     PoiLayer answer = new PoiLayer();
-                    mapPoint = new MapPoint(50., 4.);
+                    mapPoint = new MapPoint(DEFAULT_LAT, DEFAULT_LONG);
                     answer.addPoint(mapPoint, new Circle(7, Color.RED));
                     return answer;
                 });
