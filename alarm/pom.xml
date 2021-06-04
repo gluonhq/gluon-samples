@@ -118,8 +118,8 @@
 
             <plugin>
                 <groupId>com.gluonhq</groupId>
-                <artifactId>client-maven-plugin</artifactId>
-                <version>${client.maven.plugin.version}</version>
+                <artifactId>gluonfx-maven-plugin</artifactId>
+                <version>${gluonfx.maven.plugin.version}</version>
                 <configuration>
                     <target>${client.target}</target>
                     <attachList>
@@ -131,7 +131,7 @@
                         <list>storage</list>
                     </attachList>
                     <mainClass>${main.class}</mainClass>
-                    <!-- Run mvn client:runagent to generate reflection, resources and bundles lists -->
+                    <!-- Run mvn javafx:runagent to generate reflection, resources and bundles lists -->
                 </configuration>
             </plugin>
         </plugins>
