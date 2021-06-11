@@ -108,7 +108,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <clientTarget>host</clientTarget>
+                <gluonfx.target>host</gluonfx.target>
             </properties>
             <dependencies>
                 <dependency>
@@ -134,13 +134,13 @@
         <profile>
             <id>android</id>
             <properties>
-                <clientTarget>android</clientTarget>
+                <gluonfx.target>android</gluonfx.target>
             </properties>
         </profile>
         <profile>
             <id>ios</id>
             <properties>
-                <clientTarget>ios</clientTarget>
+                <gluonfx.target>ios</gluonfx.target>
             </properties>
         </profile>
     </profiles>
@@ -167,7 +167,7 @@
                 <artifactId>gluonfx-maven-plugin</artifactId>
                 <version>${gluonfx.maven.plugin.version}</version>
                 <configuration>
-                    <target>${clientTarget}</target>
+                    <target>${gluonfx.target}</target>
                     <attachList>
                         <list>display</list>
                         <list>lifecycle</list>
