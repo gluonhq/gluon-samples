@@ -18,7 +18,7 @@
         <attach.version>4.0.11</attach.version>
         <connect.version>2.0.1</connect.version>
         <javafx.maven.plugin.version>0.0.6</javafx.maven.plugin.version>
-        <gluonfx.maven.plugin.version>0.9.0-SNAPSHOT</gluonfx.maven.plugin.version>
+        <gluonfx.maven.plugin.version>0.9.1-SNAPSHOT</gluonfx.maven.plugin.version>
     </properties>
 
     <modules>
@@ -41,5 +41,16 @@
         <module>pushnotes</module>
         <module>rubiks-cube</module>
     </modules>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven-central</id>
+            <url>https://repo1.maven.apache.org/maven2/</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>maven-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>
