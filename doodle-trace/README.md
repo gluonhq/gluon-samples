@@ -8,7 +8,7 @@ Read how to create this sample step by step here.
 
 ## Quick Instructions
 
-We use [Gluon Client](https://docs.gluonhq.com/) to build a native image for platforms including desktop, android and iOS.
+We use [GluonFX plugin](https://docs.gluonhq.com/) to build a native image for platforms including desktop, android and iOS.
 Please follow the pre-requisites as stated [here](https://docs.gluonhq.com/#_requirements).
 
 ### Desktop
@@ -19,40 +19,40 @@ Run the application using:
 
 Build a native image using:
 
-    mvn client:build
+    mvn gluonfx:build
 
 Run the native image app:
 
-    mvn client:run
+    mvn gluonfx:run
 
 ### Android
 
 Build a native image for Android using:
 
-    mvn client:build -Pandroid
+    mvn gluonfx:build -Pandroid
 
 Package the native image as an 'apk' file:
 
-    mvn client:package -Pandroid
+    mvn gluonfx:package -Pandroid
 
 Install it on a connected android device:
 
-    mvn client:install -Pandroid
+    mvn gluonfx:install -Pandroid
 
 Run the installed app on a connected android device:
 
-    mvn client:run -Pandroid
+    mvn gluonfx:run -Pandroid
 
 ### iOS
 
 Build a native image for iOS using:
 
-    mvn client:build -Pios
+    mvn gluonfx:build -Pios
 
 Install and run the native image on a connected iOS device:
 
-    mvn client:run -Pios
+    mvn gluonfx:run -Pios
 
 Create an IPA file (for submission to TestFlight or App Store):
 
-    mvn client:package -Pios
+    mvn gluonfx:package -Pios

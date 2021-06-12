@@ -4,7 +4,7 @@ This Gluon Client sample was generated from https://start.gluon.io
 
 ## Basic Requirements
 
-A list of the basic requirements can be found online in the [Gluon Client documentation](https://docs.gluonhq.com/#_requirements).
+A list of the basic requirements can be found online in the [Gluon documentation](https://docs.gluonhq.com/#_requirements).
 
 ## Quick instructions
 
@@ -14,15 +14,15 @@ A list of the basic requirements can be found online in the [Gluon Client docume
 
 ### Run the sample as a native image
 
-    mvn client:build client:run
+    mvn gluonfx:build gluonfx:run
 
 ### Run the sample as a native android image
 
-    mvn -Pandroid client:build client:package client:install client:run
+    mvn -Pandroid gluonfx:build gluonfx:package gluonfx:install gluonfx:run
 
 ### Run the sample as a native iOS image
 
-    mvn -Pios client:build client:package client:install client:run
+    mvn -Pios gluonfx:build gluonfx:package gluonfx:install gluonfx:run
 
 ## Selected features
 
