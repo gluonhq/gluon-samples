@@ -26,6 +26,7 @@
         <module>HelloFX</module>
         <module>HelloFXML</module>
         <module>HelloGluon</module>
+        <module>HelloMaps</module>
 
         <module>alarm</module>
         <module>beacons</module>
