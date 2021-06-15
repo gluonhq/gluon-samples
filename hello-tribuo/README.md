@@ -10,19 +10,27 @@ A list of the basic requirements can be found online in the [Gluon documentation
 
 ### Run the sample
 
-    mvn javafx:run
+Run the application on JVM/HotSpot:
+
+    mvn gluonfx:run
 
 ### Run the sample as a native image
 
-    mvn gluonfx:build gluonfx:run
+Run the application and explore all scenarios to generate config files for the native image with:
+
+    mvn gluonfx:runagent
+    
+Build and run the native image:
+
+    mvn gluonfx:build gluonfx:nativerun
 
 ### Run the sample as a native android image
 
-    mvn -Pandroid gluonfx:build gluonfx:package gluonfx:install gluonfx:run
+    mvn -Pandroid gluonfx:build gluonfx:package gluonfx:install gluonfx:nativerun
 
 ### Run the sample as a native iOS image
 
-    mvn -Pios gluonfx:build gluonfx:package gluonfx:install gluonfx:run
+    mvn -Pios gluonfx:build gluonfx:package gluonfx:install gluonfx:nativerun
 
 ## Selected features
 

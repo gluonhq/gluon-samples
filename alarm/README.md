@@ -10,7 +10,11 @@ Please follow the prerequisites as stated [here](https://docs.gluonhq.com/#_requ
 
 ### Desktop
 
-Run the application and explore all options using:
+Run the application on JVM/HotSpot:
+
+    mvn gluonfx:run
+
+Run the application and explore all scenarios to generate config files for the native image with:
 
     mvn gluonfx:runagent
 
@@ -20,7 +24,7 @@ Build a native image using:
 
 Run the native image app:
 
-    mvn gluonfx:run
+    mvn gluonfx:nativerun
 
 ### Android
 
@@ -38,7 +42,7 @@ Install it on a connected android device:
 
 Run the installed app on a connected android device:
 
-    mvn gluonfx:run -Pandroid
+    mvn gluonfx:nativerun -Pandroid
 
 ### iOS
 
@@ -48,7 +52,7 @@ Build a native image for iOS using:
 
 Install and run the native image on a connected iOS device:
 
-    mvn gluonfx:run -Pios
+    mvn gluonfx:nativerun -Pios
 
 Create an IPA file (for submission to TestFlight or App Store):
 
