@@ -68,15 +68,6 @@
 
     <profiles>
         <profile>
-            <id>desktop</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <gluonfx.target>host</gluonfx.target>
-            </properties>
-        </profile>
-        <profile>
             <id>ios</id>
             <properties>
                 <gluonfx.target>ios</gluonfx.target>
