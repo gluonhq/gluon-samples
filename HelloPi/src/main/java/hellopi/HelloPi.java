@@ -37,9 +37,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.util.Locale;
-
-
 public class HelloPi extends Application {
 
     public void start(Stage stage) {
@@ -57,7 +54,7 @@ public class HelloPi extends Application {
         scene.getStylesheets().add(HelloPi.class.getResource("styles.css").toExternalForm());
         stage.setScene(scene);
 
-        if (HelloPi.isEmbeddedDevice()) {
+        if (Boolean.getBoolean("use.fullscreen")) {
             Rectangle2D bounds = Screen.getPrimary().getBounds();
             stage.setX(bounds.getMinX());
             stage.setY(bounds.getMinY());
@@ -65,12 +62,6 @@ public class HelloPi extends Application {
             stage.setHeight(bounds.getHeight());
         }
         stage.show();
-    }
-
-    private static boolean isEmbeddedDevice() {
-        String osName  = System.getProperty("os.name").toLowerCase(Locale.ROOT);
-        String osArch = System.getProperty("os.arch").toLowerCase(Locale.ROOT);
-        return "linux".equals(osName) && ("aarch64".equals(osArch) || osArch.startsWith("arm"));
     }
 
     public static void main(String[] args) {

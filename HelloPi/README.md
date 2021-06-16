@@ -47,12 +47,16 @@ On a Linux machine, build a native image using:
 From the Linux machine, install the native image, making sure the `remote.host.name` and `remote.dir` properties are set correctly:
     
     mvn gluonfx:install -Ppi
+
+Alternatively you can copy manually the native image binary that is located at:
+
+    target/gluonfx/aarch64-linux/HelloPi    
  
-and run remotely with SSH:
+Run remotely with SSH:
    
     mvn gluonfx:nativerun -Ppi
 
 or locally from the Raspberry Pi:
 
     export ENABLE_GLUON_COMMERCIAL_EXTENSIONS=true
-    /home/pi/Downloads/samples/hellpi/HelloPi -Dmonocle.platform=EGL -Duse.egl=true -Dembedded=monocle -Dglass.platform=Monocle
+    ${remote.dir}/HelloPi -Duse.fullscreen=true -Dmonocle.platform=EGL -Duse.egl=true -Dembedded=monocle -Dglass.platform=Monocle
