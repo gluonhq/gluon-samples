@@ -7,16 +7,18 @@ A simple HelloFX application with Java 11+, JavaFX 11+ and GraalVM that runs on 
 
 Read about getting started with JavaFX on Embedded [here](https://docs.gluonhq.com/#platforms_embedded)
 
-Note that Gluon applications can run on JVM/HotSpot on ARM devices (32/64 bits) but native images can be created only for AArch64 (64 bits).
+Note that Gluon applications can run on JVM/HotSpot on ARM devices (32/64 bits) but native images currently can be created only for AArch64 (64 bits).
 
 ## Quick Instructions
 
-We use [GluonFX plugin](https://docs.gluonhq.com/) to build a native image for platforms including desktop, android and iOS.
+We use [GluonFX plugin](https://docs.gluonhq.com/) to build a native image for platforms including desktop, embedded, android and iOS.
 Please follow the prerequisites as stated [here](https://docs.gluonhq.com/#_requirements).
+
+While running this sample on a JVM can be done directly from the Raspberry Pi (both 32 and 64 bits), the following instructions are mainly describing how to cross-compile and remote deploy a native image from a desktop Linux machine (x86_64) to a Raspberry Pi (64 bits, AArch64).
 
 ### Desktop
 
-Run the application on JVM/HotSpot:
+You can run the application on a JVM on your desktop (x86_64) machine:
 
     mvn gluonfx:run
 
@@ -34,29 +36,35 @@ Run the native image app:
    
 ### Embedded (Raspberry Pi 32/64 bits)
     
-Run the application on JVM/HotSpot using:
+Directly from the Raspberry Pi, run the application on a JVM using:
 
     mvn gluonfx:run -Ppi,sdk
 
 ### Embedded (Raspberry Pi 64 bits)
 
-On a Linux machine, build a native image using:
+#### build
+
+On a desktop Linux machine (x86_64), cross-compile a native image for the Raspberry Pi (AArch64), using:
     
     mvn gluonfx:build -Ppi
     
-From the Linux machine, install the native image, making sure the `remote.host.name` and `remote.dir` properties are set correctly:
+#### deploy
+
+From the same Linux machine, install the native image, making sure the `remote.host.name` and `remote.dir` properties in the sample's pom are correctly set:
     
     mvn gluonfx:install -Ppi
 
-Alternatively you can copy manually the native image binary that is located at:
+or, alternatively you can copy manually the native image binary that is located at:
 
     target/gluonfx/aarch64-linux/HelloPi    
  
-Run remotely with SSH:
+### run
+
+If you installed the native image from your Linux machine, you can run it remotely (via SSH) using:
    
     mvn gluonfx:nativerun -Ppi
 
-or locally from the Raspberry Pi:
+In any case, you can also run it locally from the Raspberry Pi with:
 
     export ENABLE_GLUON_COMMERCIAL_EXTENSIONS=true
-    ${remote.dir}/HelloPi -Duse.fullscreen=true -Dmonocle.platform=EGL -Duse.egl=true -Dembedded=monocle -Dglass.platform=Monocle
+    ${remote.dir}/HelloPi -Duse.fullscreen=true -Dmonocle.platform=EGL -Dembedded=monocle -Dglass.platform=Monocle

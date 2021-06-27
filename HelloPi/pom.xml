@@ -72,7 +72,7 @@
                 <remote.host.name>pi@raspberrypi.local</remote.host.name>
                 <remote.dir>/home/pi/Downloads/samples/hellopi</remote.dir>
                 <remote.sdk.path>/opt/javafx-sdk-17</remote.sdk.path>
-                <runtime.options>-Duse.fullscreen=true,-Dmonocle.platform=EGL,-Duse.egl=true,-Dembedded=monocle,-Dglass.platform=Monocle</runtime.options>
+                <runtime.options>-Duse.fullscreen=true,-Dmonocle.platform=EGL,-Dembedded=monocle,-Dglass.platform=Monocle</runtime.options>
                 <runtime.jvm.options>-Dmonocle.egl.lib=${remote.sdk.path}/lib/libgluon_drm-${drm.version}.so,${runtime.options}</runtime.jvm.options>
             </properties>
         </profile>
