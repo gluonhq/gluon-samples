@@ -18,11 +18,11 @@ While running this sample on a JVM can be done directly from the Raspberry Pi (b
 
 ### Desktop
 
-You can run the application on a JVM on your desktop (x86_64) machine:
+Testing, fixing, and development in general, is best done on desktop. Therefore, before deploying to the Raspberry Pi, you can run the application on a JVM on your desktop (x86_64) machine:
 
     mvn gluonfx:run
 
-Run the application and explore all scenarios to generate config files for the native image with:
+Then run the application and explore all scenarios to generate config files for the native image with:
 
     mvn gluonfx:runagent
 
