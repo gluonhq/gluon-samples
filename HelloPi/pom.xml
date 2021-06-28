@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.gluonhq.samples</groupId>
+        <artifactId>samples</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>hellopi</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>HelloPi</name>
+
+    <properties>
+        <main.class>hellopi.HelloPi</main.class>
+        <drm.version>1.1.4</drm.version>
+        <runtime.jvm.options/>
+        <runtime.options/>
+        <remote.host.name/>
+        <remote.dir/>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>${javafx.maven.plugin.version}</version>
+                <configuration>
+                    <mainClass>${main.class}</mainClass>
+                    <options>${runtime.jvm.options}</options>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.gluonhq</groupId>
+                <artifactId>gluonfx-maven-plugin</artifactId>
+                <version>${gluonfx.maven.plugin.version}</version>
+                <configuration>
+                    <target>${gluonfx.target}</target>
+                    <mainClass>${main.class}</mainClass>
+                    <runtimeArgs>${runtime.options}</runtimeArgs>
+                    <remoteHostName>${remote.host.name}</remoteHostName>
+                    <remoteDir>${remote.dir}</remoteDir>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>pi</id>
+            <properties>
+                <gluonfx.target>linux-aarch64</gluonfx.target>
+                <remote.host.name>pi@raspberrypi.local</remote.host.name>
+                <remote.dir>/home/pi/Downloads/samples/hellopi</remote.dir>
+                <remote.sdk.path>/opt/javafx-sdk-17</remote.sdk.path>
+                <runtime.options>-Duse.fullscreen=true,-Dmonocle.platform=EGL,-Dembedded=monocle,-Dglass.platform=Monocle</runtime.options>
+                <runtime.jvm.options>-Dmonocle.egl.lib=${remote.sdk.path}/lib/libgluon_drm-${drm.version}.so,${runtime.options}</runtime.jvm.options>
+            </properties>
+        </profile>
+        <profile>
+            <id>sdk</id>
+            <dependencies>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-base</artifactId>
+                    <version>${javafx.version}</version>
+                    <scope>system</scope>
+                    <systemPath>${remote.sdk.path}/lib/javafx.base.jar</systemPath>
+                </dependency>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-graphics</artifactId>
+                    <version>${javafx.version}</version>
+                    <scope>system</scope>
+                    <systemPath>${remote.sdk.path}/lib/javafx.graphics.jar</systemPath>
+                </dependency>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-controls</artifactId>
+                    <version>${javafx.version}</version>
+                    <scope>system</scope>
+                    <systemPath>${remote.sdk.path}/lib/javafx.controls.jar</systemPath>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+</project>
