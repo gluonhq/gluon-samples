@@ -1,0 +1,26 @@
+{
+  "resources":[
+    {"pattern":"\\QMETA-INF/services/java.nio.file.spi.FileSystemProvider\\E"}, 
+    {"pattern":"\\QMETA-INF/services/org.nd4j.common.base.PreconditionsFormat\\E"}, 
+    {"pattern":"\\QMETA-INF/services/org.nd4j.linalg.compression.NDArrayCompressor\\E"}, 
+    {"pattern":"\\QMETA-INF/services/org.nd4j.linalg.env.EnvironmentalAction\\E"}, 
+    {"pattern":"\\QMETA-INF/services/org.nd4j.linalg.factory.Nd4jBackend\\E"}, 
+    {"pattern":"\\Qai/skymind/\\E"},
+    {"pattern":"\\Qnd4j-native.properties\\E"},
+    {"pattern":"\\Qorg/bytedeco/javacpp/arm64-v8a/libjnijavacpp.so\\E"},
+    {"pattern":"\\Qorg/bytedeco/javacpp/properties/android-arm64.properties\\E"},
+    {"pattern":"\\Qorg/bytedeco/openblas/arm64-v8a/libgcc_s.so.1\\E"},
+    {"pattern":"\\Qorg/bytedeco/openblas/arm64-v8a/libgfortran.so.4\\E"},
+    {"pattern":"\\Qorg/bytedeco/openblas/arm64-v8a/libjniopenblas.so\\E"},
+    {"pattern":"\\Qorg/bytedeco/openblas/arm64-v8a/libjniopenblas_nolapack.so\\E"},
+    {"pattern":"\\Qorg/bytedeco/openblas/arm64-v8a/libopenblas.so.0\\E"},
+    {"pattern":"\\Qorg/bytedeco/openblas/arm64-v8a/libquadmath.so.0\\E"},
+    {"pattern":"\\Qorg/nd4j/nativeblas/arm64-v8a/libgomp.so.1\\E"},
+    {"pattern":"\\Qorg/nd4j/nativeblas/arm64-v8a/libjnind4jcpu.so\\E"},
+    {"pattern":"\\Qorg/nd4j/nativeblas/arm64-v8a/libnd4jcpu.so\\E"},
+    {"pattern":"\\Qorg/slf4j/impl/StaticLoggerBinder.class\\E"}
+  ],
+  "bundles":[]
+}
+
+
