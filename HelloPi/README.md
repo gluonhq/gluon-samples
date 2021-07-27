@@ -34,13 +34,13 @@ Run the native image app:
 
     mvn gluonfx:nativerun
    
-### Embedded (Raspberry Pi 32/64 bits)
+### Embedded - JVM (Raspberry Pi 32/64 bits)
     
 Directly from the Raspberry Pi, run the application on a JVM using:
 
     mvn gluonfx:run -Ppi,sdk
 
-### Embedded (Raspberry Pi 64 bits)
+### Embedded - Native (Raspberry Pi 64 bits)
 
 #### build
 
