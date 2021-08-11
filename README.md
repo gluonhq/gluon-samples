@@ -1,6 +1,6 @@
 # Gluon Samples
 
-Java, JavaFX and Gluon Mobile samples to run with Java 11+, GraalVM and the Gluon Client plugin for [Maven](https://github.com/gluonhq/gluonfx-maven-plugin/).
+Java, JavaFX and Gluon Mobile samples to run with Java 11+, GraalVM and the GluonFX plugin for [Maven](https://github.com/gluonhq/gluonfx-maven-plugin/).
 
 The following platforms are currently supported:
 
@@ -9,10 +9,11 @@ The following platforms are currently supported:
 * Windows
 * iOS
 * Android
+* Embedded
 
 ## Documentation
 
-Before getting started with this samples, read the Client plugin [documentation](https://docs.gluonhq.com/).
+Before getting started with this samples, read the GluonFX plugin [documentation](https://docs.gluonhq.com/).
 
 ## Build and run the samples
 
