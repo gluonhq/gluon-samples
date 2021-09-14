@@ -12,12 +12,12 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
-        <javafx.version>16</javafx.version>
+        <javafx.version>17</javafx.version>
         <charm.version>6.0.6</charm.version>
         <glisten.afterburner.version>2.0.5</glisten.afterburner.version>
-        <attach.version>4.0.11</attach.version>
+        <attach.version>4.0.12</attach.version>
         <connect.version>2.0.1</connect.version>
-        <javafx.maven.plugin.version>0.0.6</javafx.maven.plugin.version>
+        <javafx.maven.plugin.version>0.0.7</javafx.maven.plugin.version>
         <gluonfx.maven.plugin.version>1.0.5</gluonfx.maven.plugin.version>
     </properties>
 
