@@ -18,7 +18,7 @@
         <attach.version>4.0.12</attach.version>
         <connect.version>2.0.1</connect.version>
         <javafx.maven.plugin.version>0.0.7</javafx.maven.plugin.version>
-        <gluonfx.maven.plugin.version>1.0.5</gluonfx.maven.plugin.version>
+        <gluonfx.maven.plugin.version>1.0.6</gluonfx.maven.plugin.version>
     </properties>
 
     <modules>
