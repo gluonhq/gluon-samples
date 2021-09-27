@@ -1,0 +1,10 @@
+{
+  "resources":{
+  "includes":[
+    {"pattern":"\\Qcom/gluonhq/sample/Gluon-Logo.png\\E"}, 
+    {"pattern":"\\Qcom/gluonhq/sample/JavaFX_Logo.png\\E"}, 
+    {"pattern":"\\Qcom/gluonhq/sample/WebGL_Logo.svg.png\\E"}, 
+    {"pattern":"\\Qcom/gluonhq/sample/openduke.png\\E"}
+  ]},
+  "bundles":[{"name":"com.sun.javafx.tk.quantum.QuantumMessagesBundle"}]
+}

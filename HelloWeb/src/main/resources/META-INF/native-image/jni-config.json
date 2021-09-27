@@ -1,0 +1,33 @@
+[
+{
+  "name":"com.sun.glass.ui.Screen[]"
+},
+{
+  "name":"com.sun.javafx.font.FontConfigManager$FcCompFont",
+  "fields":[
+    {"name":"allFonts"}, 
+    {"name":"fcName"}, 
+    {"name":"firstFont"}
+  ]
+},
+{
+  "name":"com.sun.javafx.font.FontConfigManager$FontConfigFont",
+  "fields":[
+    {"name":"familyName"}, 
+    {"name":"fontFile"}, 
+    {"name":"fullName"}, 
+    {"name":"styleStr"}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.javafx.font.FontConfigManager$FontConfigFont[]"
+},
+{
+  "name":"java.lang.ClassLoader",
+  "methods":[{"name":"getPlatformClassLoader","parameterTypes":[] }]
+},
+{
+  "name":"java.lang.NoSuchMethodError"
+}
+]
