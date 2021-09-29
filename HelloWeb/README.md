@@ -17,13 +17,3 @@ A list of the basic requirements can be found online in the [Gluon documentation
     mvn gluonfx:build gluonfx:nativerun -Pweb
 
 NOTE: Gluon currently supports Chrome, Chromium, and Firefox browser.
-
-### Desktop
-
-Build a native image using:
-
-    mvn gluonfx:build
-
-Run the native image app:
-
-    mvn gluonfx:nativerun
