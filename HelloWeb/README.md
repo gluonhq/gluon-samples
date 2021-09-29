@@ -10,11 +10,13 @@ A list of the basic requirements can be found online in the [Gluon documentation
 
 ### Run the sample
 
-    mvn javafx:run
+    mvn gluonfx:run
 
 ### Run the sample in browser
 
     mvn gluonfx:build gluonfx:nativerun -Pweb
+
+NOTE: Gluon currently supports Chrome, Chromium, and Firefox browser.
 
 ### Desktop
 
