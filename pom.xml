@@ -28,6 +28,7 @@
         <module>HelloGluon</module>
         <module>HelloMaps</module>
         <module>HelloPi</module>
+        <module>HelloWeb</module>
 
         <module>alarm</module>
         <module>beacons</module>
