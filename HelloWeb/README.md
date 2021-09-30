@@ -17,3 +17,8 @@ A list of the basic requirements can be found online in the [Gluon documentation
     mvn gluonfx:build gluonfx:nativerun -Pweb
 
 NOTE: Gluon currently supports Chrome, Chromium, and Firefox browser.
+
+
+### Live preview
+
+Have a look at [our live preview](https://docs.gluonhq.com/preview/web/)
