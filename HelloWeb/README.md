@@ -22,3 +22,4 @@ NOTE: Gluon currently supports Chrome, Chromium, and Firefox browser.
 ### Live preview
 
 Have a look at [our live preview](https://docs.gluonhq.com/preview/web/)
+Note: this page may take a while to load, because we're currently loading too many dependencies. We will work on that.
