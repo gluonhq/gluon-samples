@@ -37,7 +37,7 @@ import javafx.stage.Stage;
 
 public class Beacons extends Application {
 
-    private final AppManager app = AppManager.initialize(this::postInit);
+    private final AppManager appManager = AppManager.initialize(this::postInit);
 
     @Override
     public void init() {
@@ -47,7 +47,7 @@ public class Beacons extends Application {
 
     @Override
     public void start(Stage stage) {
-        app.start(stage);
+        appManager.start(stage);
     }
 
     public void postInit(Scene scene) {

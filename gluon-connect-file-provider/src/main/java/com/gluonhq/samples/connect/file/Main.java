@@ -57,7 +57,7 @@ public class Main extends Application {
     private static final String FILELIST_VIEW = HOME_VIEW;
     private static final String FILEOBJECT_VIEW = "FileObjectView";
 
-    private final AppManager app = AppManager.initialize(this::postInit);
+    private final AppManager appManager = AppManager.initialize(this::postInit);
 
     public Main() {
         try {
@@ -91,7 +91,7 @@ public class Main extends Application {
 
     @Override
     public void init() {
-        app.addViewFactory(FILELIST_VIEW, () -> {
+        appManager.addViewFactory(FILELIST_VIEW, () -> {
             try {
                 return new FileListView();
             } catch (IOException e) {
@@ -99,7 +99,7 @@ public class Main extends Application {
             }
             return null;
         });
-        app.addViewFactory(FILEOBJECT_VIEW, () -> {
+        appManager.addViewFactory(FILEOBJECT_VIEW, () -> {
             try {
                 return new FileObjectView();
             } catch (IOException e) {
@@ -111,7 +111,7 @@ public class Main extends Application {
     }
 
     private void updateDrawer() {
-        NavigationDrawer navigationDrawer = app.getDrawer();
+        NavigationDrawer navigationDrawer = appManager.getDrawer();
         NavigationDrawer.Header header = new NavigationDrawer.Header("Gluon Mobile", "Gluon Connect File Provider Sample",
                 new Avatar(21, new Image(getClass().getResourceAsStream("/icon.png"))));
         navigationDrawer.setHeader(header);
@@ -120,16 +120,16 @@ public class Main extends Application {
         navigationDrawer.getItems().addAll(listItem, objectItem);
         navigationDrawer.selectedItemProperty().addListener((obs, oldItem, newItem) -> {
             if (newItem.equals(listItem)) {
-                app.switchView(FILELIST_VIEW);
+                appManager.switchView(FILELIST_VIEW);
             } else if (newItem.equals(objectItem)) {
-                app.switchView(FILEOBJECT_VIEW);
+                appManager.switchView(FILEOBJECT_VIEW);
             }
         });
     }
 
     @Override
     public void start(Stage stage) {
-        app.start(stage);
+        appManager.start(stage);
     }
 
     public void postInit(Scene scene) {

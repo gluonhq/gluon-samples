@@ -43,19 +43,19 @@ public class Main extends Application {
     private static final String RESTLIST_VIEW = HOME_VIEW;
     private static final String RESTOBJECT_VIEW = "RestObjectView";
 
-    private final AppManager app = AppManager.initialize(this::postInit);
+    private final AppManager appManager = AppManager.initialize(this::postInit);
 
     @Override
     public void init() {
-        app.addViewFactory(RESTLIST_VIEW, () -> new RestListView());
-        app.addViewFactory(RESTOBJECT_VIEW, () -> new RestObjectView());
+        appManager.addViewFactory(RESTLIST_VIEW, () -> new RestListView());
+        appManager.addViewFactory(RESTOBJECT_VIEW, () -> new RestObjectView());
 
         updateDrawer();
     }
 
     @Override
     public void start(Stage stage) {
-        app.start(stage);
+        appManager.start(stage);
     }
 
     public void postInit(Scene scene) {
@@ -65,7 +65,7 @@ public class Main extends Application {
     }
 
     private void updateDrawer() {
-        NavigationDrawer navigationDrawer = app.getDrawer();
+        NavigationDrawer navigationDrawer = appManager.getDrawer();
         NavigationDrawer.Header header = new NavigationDrawer.Header("Gluon Mobile", "Gluon Connect Rest Provider Sample",
                 new Avatar(21, new Image(getClass().getResourceAsStream("/icon.png"))));
         navigationDrawer.setHeader(header);
@@ -74,9 +74,9 @@ public class Main extends Application {
         navigationDrawer.getItems().addAll(listItem, objectItem);
         navigationDrawer.selectedItemProperty().addListener((obs, oldItem, newItem) -> {
             if (newItem.equals(listItem)) {
-                app.switchView(RESTLIST_VIEW);
+                appManager.switchView(RESTLIST_VIEW);
             } else if (newItem.equals(objectItem)) {
-                app.switchView(RESTOBJECT_VIEW);
+                appManager.switchView(RESTOBJECT_VIEW);
             }
         });
     }

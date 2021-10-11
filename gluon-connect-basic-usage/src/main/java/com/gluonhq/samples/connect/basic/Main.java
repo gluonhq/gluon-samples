@@ -43,18 +43,18 @@ public class Main extends Application {
 
     public static final String LIST_VIEW = HOME_VIEW;
     public static final String OBJECT_VIEW = "ObjectView";
-    private final AppManager app = AppManager.initialize(this::postInit);
+    private final AppManager appManager = AppManager.initialize(this::postInit);
 
     @Override
     public void init() {
-        app.addViewFactory(LIST_VIEW, BasicListView::new);
-        app.addViewFactory(OBJECT_VIEW, BasicObjectView::new);
+        appManager.addViewFactory(LIST_VIEW, BasicListView::new);
+        appManager.addViewFactory(OBJECT_VIEW, BasicObjectView::new);
         updateDrawer();
     }
 
     @Override
     public void start(Stage stage) {
-        app.start(stage);
+        appManager.start(stage);
     }
 
     public void postInit(Scene scene) {
@@ -64,7 +64,7 @@ public class Main extends Application {
     }
 
     private void updateDrawer() {
-        NavigationDrawer navigationDrawer = app.getDrawer();
+        NavigationDrawer navigationDrawer = appManager.getDrawer();
         NavigationDrawer.Header header = new NavigationDrawer.Header("Gluon Mobile", "Gluon Connect Sample",
                 new Avatar(21, new Image(getClass().getResourceAsStream("/icon.png"))));
         navigationDrawer.setHeader(header);
@@ -73,9 +73,9 @@ public class Main extends Application {
         navigationDrawer.getItems().addAll(listItem, objectItem);
         navigationDrawer.selectedItemProperty().addListener((obs, oldItem, newItem) -> {
             if (newItem.equals(listItem)) {
-                app.switchView(LIST_VIEW);
+                appManager.switchView(LIST_VIEW);
             } else if (newItem.equals(objectItem)) {
-                app.switchView(OBJECT_VIEW);
+                appManager.switchView(OBJECT_VIEW);
             }
         });
     }

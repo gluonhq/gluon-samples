@@ -48,11 +48,11 @@ import static com.gluonhq.charm.glisten.application.AppManager.HOME_VIEW;
 
 public class HelloGluon extends Application {
 
-    private final AppManager app = AppManager.initialize(this::postInit);
+    private final AppManager appManager = AppManager.initialize(this::postInit);
 
     @Override
     public void init() {
-        app.addViewFactory(HOME_VIEW, () -> {
+        appManager.addViewFactory(HOME_VIEW, () -> {
             FloatingActionButton fab = new FloatingActionButton(MaterialDesignIcon.SEARCH.text,
                     e -> System.out.println("Search"));
 
@@ -80,7 +80,7 @@ public class HelloGluon extends Application {
 
     @Override
     public void start(Stage stage) {
-        app.start(stage);
+        appManager.start(stage);
     }
 
     public void postInit(Scene scene) {

@@ -37,7 +37,7 @@ import javafx.stage.Stage;
 public class Notes extends Application {
 
     public static final String POPUP_FILTER_NOTES = "Filter Notes";
-    private final AppManager app = AppManager.initialize(this::postInit);
+    private final AppManager appManager = AppManager.initialize(this::postInit);
 
     @Override
     public void init() {
@@ -46,7 +46,7 @@ public class Notes extends Application {
 
     @Override
     public void start(Stage stage) {
-        app.start(stage);
+        appManager.start(stage);
     }
 
     public void postInit(Scene scene) {

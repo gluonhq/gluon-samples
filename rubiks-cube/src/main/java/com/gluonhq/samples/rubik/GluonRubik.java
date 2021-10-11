@@ -47,21 +47,21 @@ import static com.gluonhq.charm.glisten.application.AppManager.SPLASH_VIEW;
 
 public class GluonRubik extends Application {
 
-    private final AppManager app = AppManager.initialize(this::postInit);
+    private final AppManager appManager = AppManager.initialize(this::postInit);
     private RubikView rubikView;
 
     @Override
     public void init() {
-        app.addViewFactory(HOME_VIEW, () -> {
+        appManager.addViewFactory(HOME_VIEW, () -> {
             rubikView = new RubikView();
             return rubikView;
         });
-        app.addViewFactory(SPLASH_VIEW, () -> new SplashView(null, new Splash(), Duration.seconds(3)));
+        appManager.addViewFactory(SPLASH_VIEW, () -> new SplashView(null, new Splash(), Duration.seconds(3)));
     }
 
     @Override
     public void start(Stage stage) {
-        app.start(stage);
+        appManager.start(stage);
     }
 
     public void postInit(Scene scene) {
