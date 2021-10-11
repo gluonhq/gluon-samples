@@ -58,7 +58,7 @@ public class Main extends Application {
         appManager.start(stage);
     }
 
-    public void postInit(Scene scene) {
+    private void postInit(Scene scene) {
         Swatch.BLUE.assignTo(scene);
 
         ((Stage) scene.getWindow()).getIcons().add(new Image(Main.class.getResourceAsStream("/icon.png")));

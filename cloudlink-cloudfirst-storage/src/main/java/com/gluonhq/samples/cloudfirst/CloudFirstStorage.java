@@ -48,7 +48,7 @@ public class CloudFirstStorage extends Application {
         appManager.start(stage);
     }
 
-    public void postInit(Scene scene) {
+    private void postInit(Scene scene) {
         Swatch.LIGHT_GREEN.assignTo(scene);
 
         ((Stage) scene.getWindow()).getIcons().add(new Image(CloudFirstStorage.class.getResourceAsStream("/icon.png")));

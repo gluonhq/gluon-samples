@@ -49,7 +49,7 @@ public class GluonApplication extends Application {
         appManager.start(stage);
     }
 
-    public void postInit(Scene scene) {
+    private void postInit(Scene scene) {
         Swatch.getRandom().assignTo(scene);
 
         ((Stage) scene.getWindow()).getIcons()

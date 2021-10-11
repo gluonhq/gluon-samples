@@ -48,7 +48,7 @@ public class Comments extends Application {
         appManager.start(stage);
     }
 
-    public void postInit(Scene scene) {
+    private void postInit(Scene scene) {
         AppViewManager.registerDrawer();
         Swatch.BLUE.assignTo(scene);
 

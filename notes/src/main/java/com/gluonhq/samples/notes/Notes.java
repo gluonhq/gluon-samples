@@ -49,7 +49,7 @@ public class Notes extends Application {
         appManager.start(stage);
     }
 
-    public void postInit(Scene scene) {
+    private void postInit(Scene scene) {
         Swatch.LIGHT_GREEN.assignTo(scene);
 
         scene.getStylesheets().add(Notes.class.getResource("style.css").toExternalForm());

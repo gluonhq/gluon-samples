@@ -48,7 +48,7 @@ public class GoNative extends Application {
         appManager.start(stage);
     }
 
-    public void postInit(Scene scene) {
+    private void postInit(Scene scene) {
         Swatch.BLUE.assignTo(scene);
 
         scene.getStylesheets().add(GoNative.class.getResource("style.css").toExternalForm());

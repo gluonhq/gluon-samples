@@ -51,7 +51,7 @@ public class PushNotes extends Application {
         appManager.start(stage);
     }
 
-    public void postInit(Scene scene) {
+    private void postInit(Scene scene) {
         Swatch.LIGHT_GREEN.assignTo(scene);
 
         scene.getStylesheets().add(PushNotes.class.getResource("style.css").toExternalForm());

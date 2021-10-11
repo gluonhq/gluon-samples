@@ -55,7 +55,7 @@ public class Alarm extends Application {
         appManager.start(stage);
     }
 
-    public void postInit(Scene scene) {
+    private void postInit(Scene scene) {
         Swatch.ORANGE.assignTo(scene);
 
         scene.getStylesheets().add(Alarm.class.getResource("style.css").toExternalForm());

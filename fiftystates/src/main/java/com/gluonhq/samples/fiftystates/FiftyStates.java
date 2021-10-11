@@ -48,7 +48,7 @@ public class FiftyStates extends Application {
         appManager.start(stage);
     }
 
-    public void postInit(Scene scene) {
+    private void postInit(Scene scene) {
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
         ((Stage) scene.getWindow()).getIcons().add(new Image(FiftyStates.class.getResourceAsStream("/icon.png")));

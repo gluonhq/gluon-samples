@@ -64,7 +64,7 @@ public class GluonRubik extends Application {
         appManager.start(stage);
     }
 
-    public void postInit(Scene scene) {
+    private void postInit(Scene scene) {
         Swatch.TEAL.assignTo(scene);
 
         if (Platform.isDesktop()) {

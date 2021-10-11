@@ -83,7 +83,7 @@ public class HelloGluon extends Application {
         appManager.start(stage);
     }
 
-    public void postInit(Scene scene) {
+    private void postInit(Scene scene) {
         Swatch.LIGHT_GREEN.assignTo(scene);
         scene.getStylesheets().add(HelloGluon.class.getResource("styles.css").toExternalForm());
 
