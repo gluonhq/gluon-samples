@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2019 Gluon
+/*
+ * Copyright (c) 2019, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,12 +28,13 @@ package com.gluonhq.hello;
 
 import com.gluonhq.attach.display.DisplayService;
 import com.gluonhq.attach.util.Platform;
-import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.FloatingActionButton;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.charm.glisten.visual.Swatch;
+import javafx.application.Application;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -41,12 +42,17 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-public class HelloGluon extends MobileApplication {
+import static com.gluonhq.charm.glisten.application.AppManager.HOME_VIEW;
+
+public class HelloGluon extends Application {
+
+    private final AppManager app = AppManager.initialize(this::postInit);
 
     @Override
     public void init() {
-        addViewFactory(HOME_VIEW, () -> {
+        app.addViewFactory(HOME_VIEW, () -> {
             FloatingActionButton fab = new FloatingActionButton(MaterialDesignIcon.SEARCH.text,
                     e -> System.out.println("Search"));
 
@@ -73,6 +79,10 @@ public class HelloGluon extends MobileApplication {
     }
 
     @Override
+    public void start(Stage stage) {
+        app.start(stage);
+    }
+
     public void postInit(Scene scene) {
         Swatch.LIGHT_GREEN.assignTo(scene);
         scene.getStylesheets().add(HelloGluon.class.getResource("styles.css").toExternalForm());

@@ -26,7 +26,7 @@
  */
 package com.gluonhq.samples.rubik.views;
 
-import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
@@ -77,7 +77,7 @@ public class RubikView extends View {
         rubik.isSolved().addListener((ov,b,b1)->{
             if(b1){
                 timer.stop();
-                MobileApplication.getInstance().showMessage("Solved in " + (rubik.getCount().get() + 1) + " movements!");
+                AppManager.getInstance().showMessage("Solved in " + (rubik.getCount().get() + 1) + " movements!");
             }
         });
         

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2020, Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,8 +28,7 @@ package com.gluonhq.samples.beacons.views;
 
 import com.gluonhq.attach.ble.Proximity;
 import com.gluonhq.attach.ble.ScanDetection;
-import com.gluonhq.samples.beacons.Beacons;
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
@@ -40,7 +39,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class BeaconPresenter extends GluonPresenter<Beacons> {
+public class BeaconPresenter {
 
     @FXML
     private View beacon;
@@ -105,9 +104,9 @@ public class BeaconPresenter extends GluonPresenter<Beacons> {
 
         beacon.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
-                AppBar appBar = getApp().getAppBar();
+                AppBar appBar = AppManager.getInstance().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.CHEVRON_LEFT.button(e ->
-                        getApp().switchToPreviousView()));
+                        AppManager.getInstance().switchToPreviousView()));
                 appBar.setTitleText("Beacon");
             }
         });

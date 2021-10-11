@@ -28,16 +28,15 @@ package com.gluonhq.samples.gonative.views;
 
 import com.gluonhq.attach.util.Platform;
 import com.gluonhq.attachextended.log.LogService;
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.samples.gonative.GoNative;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class MainPresenter extends GluonPresenter<GoNative> {
+public class MainPresenter {
 
     @FXML
     private View main;
@@ -51,8 +50,8 @@ public class MainPresenter extends GluonPresenter<GoNative> {
     public void initialize() {
         main.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
-                AppBar appBar = getApp().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getApp().getDrawer().open()));
+                AppBar appBar = AppManager.getInstance().getAppBar();
+                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> AppManager.getInstance().getDrawer().open()));
                 appBar.setTitleText("Native Services");
             }
         });

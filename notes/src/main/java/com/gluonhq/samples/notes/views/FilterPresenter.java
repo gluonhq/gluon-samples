@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2020, Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,18 +28,18 @@ package com.gluonhq.samples.notes.views;
 
 import com.gluonhq.attach.display.DisplayService;
 import com.gluonhq.attach.util.Platform;
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.samples.notes.Notes;
 import com.gluonhq.samples.notes.model.Note;
-import java.util.function.Predicate;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
-public class FilterPresenter extends GluonPresenter<Notes> {
+import java.util.function.Predicate;
+
+public class FilterPresenter {
 
     @FXML private TextField searchField;
     @FXML private ToolBar toolBar;
@@ -58,13 +58,13 @@ public class FilterPresenter extends GluonPresenter<Notes> {
     
     @FXML
     private void search() {
-        getApp().hideLayer(Notes.POPUP_FILTER_NOTES);
+        AppManager.getInstance().hideLayer(Notes.POPUP_FILTER_NOTES);
     }
     
     @FXML
     private void close() {
         searchField.clear();
-        getApp().hideLayer(Notes.POPUP_FILTER_NOTES);
+        AppManager.getInstance().hideLayer(Notes.POPUP_FILTER_NOTES);
     }
 
     Predicate<? super Note> getPredicate() {

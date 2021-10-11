@@ -119,6 +119,9 @@
                         <list>storage</list>
                     </attachList>
                     <mainClass>${main.class}</mainClass>
+                    <reflectionList>
+                        <list>com.gluonhq.samples.gonative.views.MainPresenter</list>
+                    </reflectionList>
                 </configuration>
             </plugin>
         </plugins>

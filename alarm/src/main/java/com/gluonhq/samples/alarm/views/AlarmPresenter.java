@@ -26,7 +26,7 @@
  */
 package com.gluonhq.samples.alarm.views;
 
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.ExpansionPanelContainer;
 import com.gluonhq.charm.glisten.control.TextField;
@@ -34,7 +34,6 @@ import com.gluonhq.charm.glisten.control.TimePicker;
 import com.gluonhq.charm.glisten.control.Toast;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.samples.alarm.Alarm;
 import com.gluonhq.samples.alarm.model.Event;
 import com.gluonhq.samples.alarm.service.Service;
 import javafx.beans.binding.Bindings;
@@ -46,7 +45,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.util.StringConverter;
 
 import javax.inject.Inject;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -55,7 +53,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-public class AlarmPresenter extends GluonPresenter<Alarm> {
+public class AlarmPresenter {
 
     @FXML private View alarm;
     @FXML private ExpansionPanelContainer expansionContainer;
@@ -91,9 +89,9 @@ public class AlarmPresenter extends GluonPresenter<Alarm> {
 
         alarm.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
-                AppBar appBar = getApp().getAppBar();
+                AppBar appBar = AppManager.getInstance().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e ->
-                        getApp().getDrawer().open()));
+                        AppManager.getInstance().getDrawer().open()));
                 appBar.setTitleText(resources.getString("appbar.title"));
                 appBar.getActionItems().add(MaterialDesignIcon.LIST.button(e ->
                         AppViewManager.EVENTS_VIEW.switchView()));

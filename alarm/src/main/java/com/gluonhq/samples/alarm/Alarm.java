@@ -27,20 +27,22 @@
 package com.gluonhq.samples.alarm;
 
 import com.airhacks.afterburner.injection.Injector;
-import com.gluonhq.attach.util.Constants;
-import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.visual.Swatch;
 import com.gluonhq.samples.alarm.service.Service;
 import com.gluonhq.samples.alarm.views.AppViewManager;
+import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class Alarm extends MobileApplication {
+public class Alarm extends Application {
+
+    private final AppManager app = AppManager.initialize(this::postInit);
 
     @Override
     public void init() {
-        AppViewManager.registerViewsAndDrawer(this);
+        AppViewManager.registerViewsAndDrawer();
 
         // Retrieve events as soon as possible, so they become available for
         // notifications delivered when the app is closed
@@ -49,6 +51,10 @@ public class Alarm extends MobileApplication {
     }
 
     @Override
+    public void start(Stage stage) {
+        app.start(stage);
+    }
+
     public void postInit(Scene scene) {
         Swatch.ORANGE.assignTo(scene);
 

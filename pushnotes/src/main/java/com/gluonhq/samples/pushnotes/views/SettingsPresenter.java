@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2020, Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,8 +26,8 @@
  */
 package com.gluonhq.samples.pushnotes.views;
 
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInUpTransition;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.SettingsPane;
 import com.gluonhq.charm.glisten.control.settings.DefaultOption;
@@ -36,7 +36,6 @@ import com.gluonhq.charm.glisten.control.settings.OptionBase;
 import com.gluonhq.charm.glisten.control.settings.OptionEditor;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.samples.pushnotes.PushNotes;
 import com.gluonhq.samples.pushnotes.model.Settings;
 import com.gluonhq.samples.pushnotes.service.Service;
 import javafx.beans.property.BooleanProperty;
@@ -52,7 +51,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
-public class SettingsPresenter extends GluonPresenter<PushNotes> {
+public class SettingsPresenter {
 
     @FXML private View settings;
 
@@ -67,11 +66,11 @@ public class SettingsPresenter extends GluonPresenter<PushNotes> {
         settings.setShowTransitionFactory(BounceInUpTransition::new);
         settings.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
-                AppBar appBar = getApp().getAppBar();
+                AppBar appBar = AppManager.getInstance().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().getDrawer().open()));
+                        AppManager.getInstance().getDrawer().open()));
                 appBar.setTitleText(resources.getString("appbar.title"));
-                appBar.getActionItems().add(MaterialDesignIcon.CLOSE.button(e -> getApp().goHome()));
+                appBar.getActionItems().add(MaterialDesignIcon.CLOSE.button(e -> AppManager.getInstance().goHome()));
             }
         });
         

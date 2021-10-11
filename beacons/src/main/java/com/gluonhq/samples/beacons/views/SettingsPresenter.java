@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2020, Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,10 +26,8 @@
  */
 package com.gluonhq.samples.beacons.views;
 
-import com.gluonhq.samples.beacons.Beacons;
-import com.gluonhq.samples.beacons.settings.Settings;
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.SettingsPane;
 import com.gluonhq.charm.glisten.control.settings.DefaultOption;
@@ -37,13 +35,14 @@ import com.gluonhq.charm.glisten.control.settings.Option;
 import com.gluonhq.charm.glisten.control.settings.OptionBase;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
+import com.gluonhq.samples.beacons.settings.Settings;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
 
 import javax.inject.Inject;
 
-public class SettingsPresenter extends GluonPresenter<Beacons> {
+public class SettingsPresenter {
 
     @FXML
     private View settings;
@@ -61,8 +60,8 @@ public class SettingsPresenter extends GluonPresenter<Beacons> {
         
         settings.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
-                AppBar appBar = getApp().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.CHEVRON_LEFT.button(e -> getApp().switchToPreviousView()));
+                AppBar appBar = AppManager.getInstance().getAppBar();
+                appBar.setNavIcon(MaterialDesignIcon.CHEVRON_LEFT.button(e -> AppManager.getInstance().switchToPreviousView()));
                 appBar.setTitleText("Settings");
                 appBar.getActionItems().add(MaterialDesignIcon.SYNC.button(e -> {
                     config.setUuid(Settings.UUID);

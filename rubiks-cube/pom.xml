@@ -57,7 +57,7 @@
         <dependency>
             <groupId>org.fxyz3d</groupId>
             <artifactId>fxyz3d-importers</artifactId>
-            <version>0.5.3</version>
+            <version>0.5.4</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.openjfx</groupId>

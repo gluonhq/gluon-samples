@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2017, 2018 Gluon
+/*
+ * Copyright (c) 2017, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,12 +26,11 @@
  */
 package com.gluonhq.samples.cloudfirst.views;
 
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.samples.cloudfirst.CloudFirstStorage;
 import com.gluonhq.samples.cloudfirst.model.Model;
 import com.gluonhq.samples.cloudfirst.model.Note;
 import com.gluonhq.samples.cloudfirst.service.Service;
@@ -44,7 +43,7 @@ import javafx.scene.control.TextField;
 import javax.inject.Inject;
 import java.util.ResourceBundle;
 
-public class EditionPresenter extends GluonPresenter<CloudFirstStorage> {
+public class EditionPresenter {
 
     @Inject private Service service;
     
@@ -94,8 +93,8 @@ public class EditionPresenter extends GluonPresenter<CloudFirstStorage> {
                     editMode = false;
                 }
                  
-                AppBar appBar = getApp().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getApp().getDrawer().open()));
+                AppBar appBar = AppManager.getInstance().getAppBar();
+                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> AppManager.getInstance().getDrawer().open()));
                 appBar.setTitleText(
                         editMode ? 
                         resources.getString("appbar.edit.note") : 
@@ -123,6 +122,6 @@ public class EditionPresenter extends GluonPresenter<CloudFirstStorage> {
         title.clear();
         comment.clear();
         model.activeNote().set(null);
-        getApp().goHome();
+        AppManager.getInstance().goHome();
     }
 }

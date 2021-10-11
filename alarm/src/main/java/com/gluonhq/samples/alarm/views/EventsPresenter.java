@@ -26,12 +26,11 @@
  */
 package com.gluonhq.samples.alarm.views;
 
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.samples.alarm.Alarm;
 import com.gluonhq.samples.alarm.model.Event;
 import com.gluonhq.samples.alarm.service.Service;
 import javafx.collections.FXCollections;
@@ -48,7 +47,7 @@ import java.util.Comparator;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class EventsPresenter extends GluonPresenter<Alarm> {
+public class EventsPresenter {
 
     @FXML private View result;
 
@@ -63,9 +62,9 @@ public class EventsPresenter extends GluonPresenter<Alarm> {
 
         result.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
-                AppBar appBar = getApp().getAppBar();
+                AppBar appBar = AppManager.getInstance().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e ->
-                        getApp().getDrawer().open()));
+                        AppManager.getInstance().getDrawer().open()));
                 appBar.setTitleText(resources.getString("appbar.title"));
                 appBar.getActionItems().add(MaterialDesignIcon.ALARM_ADD.button(e ->
                         AppViewManager.ALARM_VIEW.switchView()));

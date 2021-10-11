@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2020 Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,29 +26,38 @@
  */
 package com.gluonhq.samples.connect.rest;
 
-import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.Avatar;
 import com.gluonhq.charm.glisten.control.NavigationDrawer;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.charm.glisten.visual.Swatch;
+import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class Main extends MobileApplication {
+import static com.gluonhq.charm.glisten.application.AppManager.HOME_VIEW;
+
+public class Main extends Application {
 
     private static final String RESTLIST_VIEW = HOME_VIEW;
     private static final String RESTOBJECT_VIEW = "RestObjectView";
 
+    private final AppManager app = AppManager.initialize(this::postInit);
+
     @Override
     public void init() {
-        addViewFactory(RESTLIST_VIEW, () -> new RestListView());
-        addViewFactory(RESTOBJECT_VIEW, () -> new RestObjectView());
+        app.addViewFactory(RESTLIST_VIEW, () -> new RestListView());
+        app.addViewFactory(RESTOBJECT_VIEW, () -> new RestObjectView());
 
         updateDrawer();
     }
 
     @Override
+    public void start(Stage stage) {
+        app.start(stage);
+    }
+
     public void postInit(Scene scene) {
         Swatch.BLUE.assignTo(scene);
 
@@ -56,7 +65,7 @@ public class Main extends MobileApplication {
     }
 
     private void updateDrawer() {
-        NavigationDrawer navigationDrawer = getDrawer();
+        NavigationDrawer navigationDrawer = app.getDrawer();
         NavigationDrawer.Header header = new NavigationDrawer.Header("Gluon Mobile", "Gluon Connect Rest Provider Sample",
                 new Avatar(21, new Image(getClass().getResourceAsStream("/icon.png"))));
         navigationDrawer.setHeader(header);
@@ -65,9 +74,9 @@ public class Main extends MobileApplication {
         navigationDrawer.getItems().addAll(listItem, objectItem);
         navigationDrawer.selectedItemProperty().addListener((obs, oldItem, newItem) -> {
             if (newItem.equals(listItem)) {
-                switchView(RESTLIST_VIEW);
+                app.switchView(RESTLIST_VIEW);
             } else if (newItem.equals(objectItem)) {
-                switchView(RESTOBJECT_VIEW);
+                app.switchView(RESTOBJECT_VIEW);
             }
         });
     }

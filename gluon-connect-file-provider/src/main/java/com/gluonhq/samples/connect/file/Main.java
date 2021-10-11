@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2016, 2020 Gluon
+/*
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,11 +28,12 @@ package com.gluonhq.samples.connect.file;
 
 import com.gluonhq.attach.util.Services;
 import com.gluonhq.attach.storage.StorageService;
-import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.Avatar;
 import com.gluonhq.charm.glisten.control.NavigationDrawer;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
 import com.gluonhq.charm.glisten.visual.Swatch;
+import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -41,7 +42,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Main extends MobileApplication {
+import static com.gluonhq.charm.glisten.application.AppManager.HOME_VIEW;
+
+public class Main extends Application {
 
     public static final File ROOT_DIR; 
     
@@ -53,6 +56,8 @@ public class Main extends MobileApplication {
     
     private static final String FILELIST_VIEW = HOME_VIEW;
     private static final String FILEOBJECT_VIEW = "FileObjectView";
+
+    private final AppManager app = AppManager.initialize(this::postInit);
 
     public Main() {
         try {
@@ -86,7 +91,7 @@ public class Main extends MobileApplication {
 
     @Override
     public void init() {
-        addViewFactory(FILELIST_VIEW, () -> {
+        app.addViewFactory(FILELIST_VIEW, () -> {
             try {
                 return new FileListView();
             } catch (IOException e) {
@@ -94,7 +99,7 @@ public class Main extends MobileApplication {
             }
             return null;
         });
-        addViewFactory(FILEOBJECT_VIEW, () -> {
+        app.addViewFactory(FILEOBJECT_VIEW, () -> {
             try {
                 return new FileObjectView();
             } catch (IOException e) {
@@ -106,7 +111,7 @@ public class Main extends MobileApplication {
     }
 
     private void updateDrawer() {
-        NavigationDrawer navigationDrawer = getDrawer();
+        NavigationDrawer navigationDrawer = app.getDrawer();
         NavigationDrawer.Header header = new NavigationDrawer.Header("Gluon Mobile", "Gluon Connect File Provider Sample",
                 new Avatar(21, new Image(getClass().getResourceAsStream("/icon.png"))));
         navigationDrawer.setHeader(header);
@@ -115,14 +120,18 @@ public class Main extends MobileApplication {
         navigationDrawer.getItems().addAll(listItem, objectItem);
         navigationDrawer.selectedItemProperty().addListener((obs, oldItem, newItem) -> {
             if (newItem.equals(listItem)) {
-                switchView(FILELIST_VIEW);
+                app.switchView(FILELIST_VIEW);
             } else if (newItem.equals(objectItem)) {
-                switchView(FILEOBJECT_VIEW);
+                app.switchView(FILEOBJECT_VIEW);
             }
         });
     }
 
     @Override
+    public void start(Stage stage) {
+        app.start(stage);
+    }
+
     public void postInit(Scene scene) {
         Swatch.BLUE.assignTo(scene);
 

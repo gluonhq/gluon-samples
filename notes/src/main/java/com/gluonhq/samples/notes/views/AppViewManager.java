@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, 2020, Gluon
+ * Copyright (c) 2017, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,9 +28,8 @@ package com.gluonhq.samples.notes.views;
 
 import com.gluonhq.charm.glisten.afterburner.AppView;
 import com.gluonhq.charm.glisten.afterburner.AppViewRegistry;
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.afterburner.Utils;
-import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.Avatar;
 import com.gluonhq.charm.glisten.control.NavigationDrawer;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
@@ -39,7 +38,9 @@ import javafx.scene.image.Image;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.*;
+import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.HOME_VIEW;
+import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.SHOW_IN_DRAWER;
+import static com.gluonhq.charm.glisten.afterburner.AppView.Flag.SKIP_VIEW_STACK;
 
 public class AppViewManager {
 
@@ -51,23 +52,23 @@ public class AppViewManager {
     public static final AppView EDITION_VIEW = view(bundle.getString("view.edition.text"), EditionPresenter.class, MaterialDesignIcon.EDIT, SHOW_IN_DRAWER);
     public static final AppView SETTINGS_VIEW = view(bundle.getString("view.settings.text"), SettingsPresenter.class, MaterialDesignIcon.SETTINGS, SHOW_IN_DRAWER);
     
-    private static AppView view(String title, Class<? extends GluonPresenter<?>> presenterClass, MaterialDesignIcon menuIcon, AppView.Flag... flags ) {
+    private static AppView view(String title, Class<?> presenterClass, MaterialDesignIcon menuIcon, AppView.Flag... flags ) {
         return REGISTRY.createView(name(presenterClass), title, presenterClass, menuIcon, flags);
     }
 
-    private static String name(Class<? extends GluonPresenter<?>> presenterClass) {
+    private static String name(Class<?> presenterClass) {
         return presenterClass.getSimpleName().toUpperCase(Locale.ROOT).replace("PRESENTER", "");
     }
     
-    public static void registerViewsAndDrawer(MobileApplication app) {
+    public static void registerViewsAndDrawer() {
         for (AppView view : REGISTRY.getViews()) {
-            view.registerView(app);
+            view.registerView();
         }
 
         NavigationDrawer.Header header = new NavigationDrawer.Header(bundle.getString("drawer.header.title"),
                 bundle.getString("drawer.header.description"),
                 new Avatar(21, new Image(AppViewManager.class.getResourceAsStream("/icon.png"))));
 
-        Utils.buildDrawer(app.getDrawer(), header, REGISTRY.getViews());
+        Utils.buildDrawer(AppManager.getInstance().getDrawer(), header, REGISTRY.getViews());
     }
 }
