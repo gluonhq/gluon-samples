@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2020, Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,24 +27,31 @@
 package com.gluonhq.samples.beacons;
 
 import com.gluonhq.attach.util.Constants;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.samples.beacons.views.AppViewManager;
-import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.visual.Swatch;
+import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class Beacons extends MobileApplication {
+public class Beacons extends Application {
+
+    private final AppManager appManager = AppManager.initialize(this::postInit);
 
     @Override
     public void init() {
         System.setProperty(Constants.ATTACH_DEBUG, "true");
-        AppViewManager.registerViews(this);
+        AppViewManager.registerViews();
     }
 
     @Override
-    public void postInit(Scene scene) {
-        AppViewManager.registerDrawer(this);
+    public void start(Stage stage) {
+        appManager.start(stage);
+    }
+
+    private void postInit(Scene scene) {
+        AppViewManager.registerDrawer();
         Swatch.BLUE.assignTo(scene);
 
         scene.getStylesheets().add(Beacons.class.getResource("style.css").toExternalForm());

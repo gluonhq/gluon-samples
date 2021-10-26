@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2017, 2020 Gluon
+/*
+ * Copyright (c) 2017, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,22 +26,29 @@
  */
 package com.gluonhq.samples.cloudfirst;
 
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.samples.cloudfirst.views.AppViewManager;
-import com.gluonhq.charm.glisten.application.MobileApplication;
 import com.gluonhq.charm.glisten.visual.Swatch;
+import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class CloudFirstStorage extends MobileApplication {
+public class CloudFirstStorage extends Application {
+
+    private final AppManager appManager = AppManager.initialize(this::postInit);
 
     @Override
     public void init() {
-        AppViewManager.registerViewsAndDrawer(this);
+        AppViewManager.registerViewsAndDrawer();
     }
 
     @Override
-    public void postInit(Scene scene) {
+    public void start(Stage stage) {
+        appManager.start(stage);
+    }
+
+    private void postInit(Scene scene) {
         Swatch.LIGHT_GREEN.assignTo(scene);
 
         ((Stage) scene.getWindow()).getIcons().add(new Image(CloudFirstStorage.class.getResourceAsStream("/icon.png")));

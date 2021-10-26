@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2020, Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,20 +26,29 @@
  */
 package com.gluonhq.samples.fiftystates;
 
-import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.application.AppManager;
+import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class FiftyStates extends MobileApplication {
+import static com.gluonhq.charm.glisten.application.AppManager.HOME_VIEW;
+
+public class FiftyStates extends Application {
+
+    private final AppManager appManager = AppManager.initialize(this::postInit);
 
     @Override
     public void init() {
-        addViewFactory(HOME_VIEW, BasicView::new);
+        appManager.addViewFactory(HOME_VIEW, BasicView::new);
     }
 
     @Override
-    public void postInit(Scene scene) {
+    public void start(Stage stage) {
+        appManager.start(stage);
+    }
+
+    private void postInit(Scene scene) {
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
         ((Stage) scene.getWindow()).getIcons().add(new Image(FiftyStates.class.getResourceAsStream("/icon.png")));

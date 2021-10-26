@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2020, Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,9 +29,8 @@ package com.gluonhq.samples.beacons.views;
 import com.gluonhq.attach.ble.BleService;
 import com.gluonhq.attach.ble.Configuration;
 import com.gluonhq.attach.ble.ScanDetection;
-import com.gluonhq.samples.beacons.Beacons;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.samples.beacons.settings.Settings;
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.CharmListCell;
 import com.gluonhq.charm.glisten.control.CharmListView;
@@ -47,7 +46,7 @@ import javafx.scene.control.Label;
 import javax.inject.Inject;
 import java.util.function.Consumer;
 
-public class BeaconsPresenter extends GluonPresenter<Beacons> {
+public class BeaconsPresenter {
 
     @Inject
     Settings settings;
@@ -141,9 +140,9 @@ public class BeaconsPresenter extends GluonPresenter<Beacons> {
 
         beacons.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
-                AppBar appBar = getApp().getAppBar();
+                AppBar appBar = AppManager.getInstance().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.CHEVRON_LEFT.button(e ->
-                        getApp().goHome()));
+                        AppManager.getInstance().goHome()));
                 appBar.setTitleText("Scan Beacons");
                 appBar.getActionItems().setAll(actions);
             }

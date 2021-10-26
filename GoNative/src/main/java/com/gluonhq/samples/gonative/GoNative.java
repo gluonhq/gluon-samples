@@ -26,22 +26,29 @@
  */
 package com.gluonhq.samples.gonative;
 
-import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.visual.Swatch;
 import com.gluonhq.samples.gonative.views.AppViewManager;
+import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class GoNative extends MobileApplication {
+public class GoNative extends Application {
+
+    private final AppManager appManager = AppManager.initialize(this::postInit);
 
     @Override
     public void init() {
-        AppViewManager.registerViewsAndDrawer(this);
+        AppViewManager.registerViewsAndDrawer();
     }
 
     @Override
-    public void postInit(Scene scene) {
+    public void start(Stage stage) {
+        appManager.start(stage);
+    }
+
+    private void postInit(Scene scene) {
         Swatch.BLUE.assignTo(scene);
 
         scene.getStylesheets().add(GoNative.class.getResource("style.css").toExternalForm());

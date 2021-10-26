@@ -41,7 +41,12 @@
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-cloudlink-client</artifactId>
-            <version>${charm.version}</version>
+            <version>${charm.cloudlink.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>connect</artifactId>
+            <version>${connect.version}</version>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>

@@ -32,12 +32,6 @@
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-glisten</artifactId>
             <version>${charm.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.gluonhq.attach</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.gluonhq</groupId>
@@ -47,7 +41,12 @@
         <dependency>
             <groupId>com.gluonhq</groupId>
             <artifactId>charm-cloudlink-client</artifactId>
-            <version>${charm.version}</version>
+            <version>${charm.cloudlink.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gluonhq</groupId>
+            <artifactId>connect</artifactId>
+            <version>${connect.version}</version>
         </dependency>
         <dependency>
             <groupId>com.gluonhq.attach</groupId>
@@ -131,7 +130,7 @@
                         <list>storage</list>
                     </attachList>
                     <mainClass>${main.class}</mainClass>
-                    <!-- Run mvn javafx:runagent to generate reflection, resources and bundles lists -->
+                    <!-- Run mvn gluonfx:runagent to generate reflection, resources and bundles lists -->
                 </configuration>
             </plugin>
         </plugins>

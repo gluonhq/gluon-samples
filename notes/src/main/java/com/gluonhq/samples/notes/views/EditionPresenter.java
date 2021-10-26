@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2020, Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,12 +26,11 @@
  */
 package com.gluonhq.samples.notes.views;
 
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.samples.notes.Notes;
 import com.gluonhq.samples.notes.model.Model;
 import com.gluonhq.samples.notes.model.Note;
 import com.gluonhq.samples.notes.service.Service;
@@ -44,7 +43,7 @@ import javafx.scene.control.TextField;
 import javax.inject.Inject;
 import java.util.ResourceBundle;
 
-public class EditionPresenter extends GluonPresenter<Notes> {
+public class EditionPresenter {
 
     @Inject private Service service;
 
@@ -93,8 +92,8 @@ public class EditionPresenter extends GluonPresenter<Notes> {
                     editMode = false;
                 }
                  
-                AppBar appBar = getApp().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getApp().getDrawer().open()));
+                AppBar appBar = AppManager.getInstance().getAppBar();
+                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> AppManager.getInstance().getDrawer().open()));
                 appBar.setTitleText(resources.getString(editMode ? "appbar.title.edit" : "appbar.title.add"));
             } else {
                 title.clear();
@@ -119,7 +118,7 @@ public class EditionPresenter extends GluonPresenter<Notes> {
         title.clear();
         comment.clear();
         model.activeNote().set(null);
-        getApp().goHome();
+        AppManager.getInstance().goHome();
     }
     
 }

@@ -15,7 +15,7 @@
     <name>Hello Maps</name>
 
     <properties>
-        <maps.version>2.0.0-ea+3</maps.version>
+        <maps.version>2.0.0-ea+5</maps.version>
         <main.class>com.gluonhq.HelloMaps</main.class>
     </properties>
 
@@ -97,7 +97,6 @@
                 <version>${gluonfx.maven.plugin.version}</version>
                 <configuration>
                     <target>${gluonfx.target}</target>
-                    <verbose>true</verbose>
                     <attachList>
                         <list>display</list>
                         <list>lifecycle</list>

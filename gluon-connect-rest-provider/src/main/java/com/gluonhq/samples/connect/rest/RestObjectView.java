@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2018 Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,6 @@
  */
 package com.gluonhq.samples.connect.rest;
 
-import com.gluonhq.attach.util.Platform;
 import com.gluonhq.attach.util.Services;
 import com.gluonhq.attach.browser.BrowserService;
 import com.gluonhq.charm.glisten.control.AppBar;
@@ -67,22 +66,17 @@ public class RestObjectView extends View {
         lbTitle.setWrapText(true);
         hlLink.setWrapText(true);
 
-        hlLink.setOnAction(e -> {
-            if (Platform.isDesktop()) {
-                getApplication().getHostServices().showDocument(hlLink.getText());
-            } else {
-                Services.get(BrowserService.class).ifPresent(service -> {
-                    try {
-                        service.launchExternalBrowser(hlLink.getText());
-                    } catch (IOException | URISyntaxException ex) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("Failed to open URL");
-                        alert.setContentText("Failed to open URL. Reason: " + ex.getMessage());
-                        alert.showAndWait();
-                    }
-                });
-            }
-        });
+        hlLink.setOnAction(e ->
+            Services.get(BrowserService.class).ifPresent(service -> {
+                try {
+                    service.launchExternalBrowser(hlLink.getText());
+                } catch (IOException | URISyntaxException ex) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Failed to open URL");
+                    alert.setContentText("Failed to open URL. Reason: " + ex.getMessage());
+                    alert.showAndWait();
+                }
+            }));
 
         setCenter(gridPane);
 
@@ -113,7 +107,7 @@ public class RestObjectView extends View {
 
     @Override
     protected void updateAppBar(AppBar appBar) {
-        appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getApplication().getDrawer().open()));
+        appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getAppManager().getDrawer().open()));
         appBar.setTitleText("Rest Object Viewer");
     }
 

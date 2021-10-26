@@ -32,7 +32,6 @@ import com.gluonhq.cloudlink.client.data.DataClient;
 import com.gluonhq.cloudlink.client.data.DataClientBuilder;
 import com.gluonhq.cloudlink.client.data.OperationMode;
 import com.gluonhq.cloudlink.client.data.SyncFlag;
-import com.gluonhq.connect.ConnectState;
 import com.gluonhq.connect.GluonObservableList;
 import com.gluonhq.connect.provider.DataProvider;
 import com.gluonhq.samples.alarm.model.Event;
@@ -47,7 +46,6 @@ import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Singleton
 public class Service {

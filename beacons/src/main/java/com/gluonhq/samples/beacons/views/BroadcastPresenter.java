@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2020, Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,12 +27,11 @@
 package com.gluonhq.samples.beacons.views;
 
 import com.gluonhq.attach.ble.BleService;
-import com.gluonhq.samples.beacons.Beacons;
-import com.gluonhq.samples.beacons.settings.Settings;
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
+import com.gluonhq.samples.beacons.settings.Settings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
@@ -42,7 +41,7 @@ import javafx.scene.control.Label;
 import javax.inject.Inject;
 import java.util.UUID;
 
-public class BroadcastPresenter extends GluonPresenter<Beacons> {
+public class BroadcastPresenter {
 
     @FXML
     private View broadcastView;
@@ -91,9 +90,9 @@ public class BroadcastPresenter extends GluonPresenter<Beacons> {
                     .ifPresent(p -> ((SettingsPresenter) p).setupBroadcastBeacon());
         });
         broadcastView.showingProperty().addListener((obs, oldValue, newValue) -> {
-            AppBar appBar = getApp().getAppBar();
+            AppBar appBar = AppManager.getInstance().getAppBar();
             appBar.setNavIcon(MaterialDesignIcon.CHEVRON_LEFT.button(e ->
-                    getApp().goHome()));
+                    AppManager.getInstance().goHome()));
             appBar.setTitleText("Broadcast Beacon");
             BleService.create()
                 .map(ble -> appBar.getActionItems().setAll(settingsButton, playButton, stopButton))

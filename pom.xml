@@ -12,13 +12,15 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>11</maven.compiler.release>
-        <javafx.version>17.0.0.1</javafx.version>
-        <charm.version>6.0.6</charm.version>
-        <glisten.afterburner.version>2.0.5</glisten.afterburner.version>
+        <javafx.version>17.0.1</javafx.version>
+        <charm.version>6.1.0</charm.version>
+        <charm.cloudlink.version>6.0.7</charm.cloudlink.version>
+        <glisten.afterburner.version>2.1.0</glisten.afterburner.version>
         <attach.version>4.0.13</attach.version>
         <connect.version>2.0.1</connect.version>
         <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
         <gluonfx.maven.plugin.version>1.0.7</gluonfx.maven.plugin.version>
+        <gluonfx.target>host</gluonfx.target>
     </properties>
 
     <modules>
@@ -39,22 +41,11 @@
         <module>gluon-connect-basic-usage</module>
         <module>gluon-connect-file-provider</module>
         <module>gluon-connect-rest-provider</module>
-        <module>gonative</module>
+        <module>GoNative</module>
         <module>hello-tribuo</module>
         <module>notes</module>
         <module>pushnotes</module>
         <module>rubiks-cube</module>
     </modules>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>maven-central</id>
-            <url>https://repo1.maven.apache.org/maven2/</url>
-        </pluginRepository>
-        <pluginRepository>
-            <id>maven-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </pluginRepository>
-    </pluginRepositories>
 
 </project>

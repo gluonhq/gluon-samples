@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2020, Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,14 +26,13 @@
  */
 package com.gluonhq.samples.pushnotes.views;
 
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.samples.pushnotes.PushNotes;
-import com.gluonhq.samples.pushnotes.model.Note;
 import com.gluonhq.samples.pushnotes.model.Model;
+import com.gluonhq.samples.pushnotes.model.Note;
 import com.gluonhq.samples.pushnotes.service.Service;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
@@ -44,7 +43,7 @@ import javafx.scene.control.TextField;
 import javax.inject.Inject;
 import java.util.ResourceBundle;
 
-public class EditionPresenter extends GluonPresenter<PushNotes> {
+public class EditionPresenter {
 
     @Inject private Service service;
 
@@ -93,8 +92,8 @@ public class EditionPresenter extends GluonPresenter<PushNotes> {
                     editMode = false;
                 }
                  
-                AppBar appBar = getApp().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> getApp().getDrawer().open()));
+                AppBar appBar = AppManager.getInstance().getAppBar();
+                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> AppManager.getInstance().getDrawer().open()));
                 appBar.setTitleText(resources.getString(editMode ? "appbar.title.edit" : "appbar.title.add"));
             } else {
                 title.clear();
@@ -119,7 +118,7 @@ public class EditionPresenter extends GluonPresenter<PushNotes> {
         title.clear();
         comment.clear();
         model.activeNote().set(null);
-        getApp().goHome();
+        AppManager.getInstance().goHome();
     }
     
 }

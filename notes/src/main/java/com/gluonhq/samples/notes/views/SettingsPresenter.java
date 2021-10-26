@@ -26,8 +26,8 @@
  */
 package com.gluonhq.samples.notes.views;
 
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInUpTransition;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.SettingsPane;
 import com.gluonhq.charm.glisten.control.settings.DefaultOption;
@@ -36,7 +36,6 @@ import com.gluonhq.charm.glisten.control.settings.OptionBase;
 import com.gluonhq.charm.glisten.control.settings.OptionEditor;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.samples.notes.Notes;
 import com.gluonhq.samples.notes.model.Settings;
 import com.gluonhq.samples.notes.service.Service;
 import javafx.beans.property.BooleanProperty;
@@ -52,7 +51,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
-public class SettingsPresenter extends GluonPresenter<Notes> {
+public class SettingsPresenter {
 
     @FXML private View settings;
 
@@ -67,11 +66,11 @@ public class SettingsPresenter extends GluonPresenter<Notes> {
         settings.setShowTransitionFactory(BounceInUpTransition::new);
         settings.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
-                AppBar appBar = getApp().getAppBar();
+                AppBar appBar = AppManager.getInstance().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().getDrawer().open()));
+                        AppManager.getInstance().getDrawer().open()));
                 appBar.setTitleText(resources.getString("appbar.title"));
-                appBar.getActionItems().add(MaterialDesignIcon.CLOSE.button(e -> getApp().goHome()));
+                appBar.getActionItems().add(MaterialDesignIcon.CLOSE.button(e -> AppManager.getInstance().goHome()));
             }
         });
         

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2020, Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,12 +26,11 @@
  */
 package com.gluonhq.samples.comments.views;
 
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.animation.BounceInRightTransition;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.mvc.View;
 import com.gluonhq.charm.glisten.visual.MaterialDesignIcon;
-import com.gluonhq.samples.comments.Comments;
 import com.gluonhq.samples.comments.cloud.Service;
 import com.gluonhq.samples.comments.model.Comment;
 import javafx.beans.binding.Bindings;
@@ -40,9 +39,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
 import javax.inject.Inject;
 
-public class EditionPresenter extends GluonPresenter<Comments> {
+public class EditionPresenter {
 
     @Inject 
     private Service service;
@@ -64,9 +64,9 @@ public class EditionPresenter extends GluonPresenter<Comments> {
         
         edition.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
-                AppBar appBar = getApp().getAppBar();
-                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().getDrawer().open()));
+                AppBar appBar = AppManager.getInstance().getAppBar();
+                appBar.setNavIcon(MaterialDesignIcon.MENU.button(e ->
+                        AppManager.getInstance().getDrawer().open()));
                 appBar.setTitleText("Edition");
                 submit.setOpacity(1);
             }
@@ -82,7 +82,7 @@ public class EditionPresenter extends GluonPresenter<Comments> {
     void onCancel(ActionEvent event) {
         authorText.setText("");
         commentsText.setText("");
-        getApp().goHome();
+        AppManager.getInstance().goHome();
     }
 
     @FXML
@@ -90,6 +90,6 @@ public class EditionPresenter extends GluonPresenter<Comments> {
         service.addComment(new Comment(authorText.getText(), commentsText.getText()));
         authorText.setText("");
         commentsText.setText("");
-        getApp().goHome();
+        AppManager.getInstance().goHome();
     }
 }

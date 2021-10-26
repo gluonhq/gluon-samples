@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2020, Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,23 +26,30 @@
  */
 package com.gluonhq.samples.comments;
 
-import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.visual.Swatch;
 import com.gluonhq.samples.comments.views.AppViewManager;
+import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class Comments extends MobileApplication {
+public class Comments extends Application {
+
+    private final AppManager appManager = AppManager.initialize(this::postInit);
 
     @Override
     public void init() {
-        AppViewManager.registerViews(this);
+        AppViewManager.registerViews();
     }
 
     @Override
-    public void postInit(Scene scene) {
-        AppViewManager.registerDrawer(this);
+    public void start(Stage stage) {
+        appManager.start(stage);
+    }
+
+    private void postInit(Scene scene) {
+        AppViewManager.registerDrawer();
         Swatch.BLUE.assignTo(scene);
 
         ((Stage) scene.getWindow()).getIcons().add(new Image(Comments.class.getResourceAsStream("/icon.png")));

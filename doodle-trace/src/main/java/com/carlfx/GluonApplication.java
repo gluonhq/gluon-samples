@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2018 Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,21 +26,30 @@
  */
 package com.carlfx;
 
-import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.visual.Swatch;
+import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class GluonApplication extends MobileApplication {
+import static com.gluonhq.charm.glisten.application.AppManager.HOME_VIEW;
+
+public class GluonApplication extends Application {
+
+    private final AppManager appManager = AppManager.initialize(this::postInit);
 
     @Override
     public void init() {
-        addViewFactory(HOME_VIEW, () -> new DoodleTrace());
+        appManager.addViewFactory(HOME_VIEW, () -> new DoodleTrace());
     }
 
     @Override
-    public void postInit(Scene scene) {
+    public void start(Stage stage) {
+        appManager.start(stage);
+    }
+
+    private void postInit(Scene scene) {
         Swatch.getRandom().assignTo(scene);
 
         ((Stage) scene.getWindow()).getIcons()

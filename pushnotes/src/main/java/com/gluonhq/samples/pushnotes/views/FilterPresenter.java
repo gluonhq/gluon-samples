@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2020, Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,19 +28,18 @@ package com.gluonhq.samples.pushnotes.views;
 
 import com.gluonhq.attach.display.DisplayService;
 import com.gluonhq.attach.util.Platform;
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.samples.pushnotes.PushNotes;
 import com.gluonhq.samples.pushnotes.model.Note;
-
-import java.util.function.Predicate;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
-public class FilterPresenter extends GluonPresenter<PushNotes> {
+import java.util.function.Predicate;
+
+public class FilterPresenter {
 
     @FXML private TextField searchField;
     @FXML private ToolBar toolBar;
@@ -59,13 +58,13 @@ public class FilterPresenter extends GluonPresenter<PushNotes> {
     
     @FXML
     private void search() {
-        getApp().hideLayer(PushNotes.POPUP_FILTER_NOTES);
+        AppManager.getInstance().hideLayer(PushNotes.POPUP_FILTER_NOTES);
     }
     
     @FXML
     private void close() {
         searchField.clear();
-        getApp().hideLayer(PushNotes.POPUP_FILTER_NOTES);
+        AppManager.getInstance().hideLayer(PushNotes.POPUP_FILTER_NOTES);
     }
 
     Predicate<? super Note> getPredicate() {

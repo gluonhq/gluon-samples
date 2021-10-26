@@ -27,11 +27,12 @@
 package com.gluonhq.samples.rubik;
 
 import com.gluonhq.attach.util.Platform;
-import com.gluonhq.charm.glisten.application.MobileApplication;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.mvc.SplashView;
 import com.gluonhq.charm.glisten.visual.Swatch;
 import com.gluonhq.samples.rubik.views.RubikView;
 import com.gluonhq.samples.rubik.views.Splash;
+import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -41,21 +42,29 @@ import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.util.Duration;
 
-public class GluonRubik extends MobileApplication {
+import static com.gluonhq.charm.glisten.application.AppManager.HOME_VIEW;
+import static com.gluonhq.charm.glisten.application.AppManager.SPLASH_VIEW;
 
-    RubikView rubikView;
+public class GluonRubik extends Application {
+
+    private final AppManager appManager = AppManager.initialize(this::postInit);
+    private RubikView rubikView;
 
     @Override
     public void init() {
-        addViewFactory(HOME_VIEW, () -> {
+        appManager.addViewFactory(HOME_VIEW, () -> {
             rubikView = new RubikView();
             return rubikView;
         });
-        addViewFactory(SPLASH_VIEW, () -> new SplashView(null, new Splash(), Duration.seconds(3)));
+        appManager.addViewFactory(SPLASH_VIEW, () -> new SplashView(null, new Splash(), Duration.seconds(3)));
     }
 
     @Override
-    public void postInit(Scene scene) {
+    public void start(Stage stage) {
+        appManager.start(stage);
+    }
+
+    private void postInit(Scene scene) {
         Swatch.TEAL.assignTo(scene);
 
         if (Platform.isDesktop()) {

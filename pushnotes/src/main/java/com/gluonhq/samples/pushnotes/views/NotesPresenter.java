@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, 2020, Gluon
+ * Copyright (c) 2016, 2021, Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,9 +26,9 @@
  */
 package com.gluonhq.samples.pushnotes.views;
 
-import com.gluonhq.charm.glisten.afterburner.GluonPresenter;
 import com.gluonhq.charm.glisten.afterburner.GluonView;
 import com.gluonhq.charm.glisten.animation.BounceInLeftTransition;
+import com.gluonhq.charm.glisten.application.AppManager;
 import com.gluonhq.charm.glisten.control.AppBar;
 import com.gluonhq.charm.glisten.control.CharmListView;
 import com.gluonhq.charm.glisten.control.FloatingActionButton;
@@ -56,7 +56,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.ResourceBundle;
 
-public class NotesPresenter extends GluonPresenter<PushNotes> {
+public class NotesPresenter {
 
     private static final PseudoClass PSEUDO_FILTER_ENABLED = PseudoClass.getPseudoClass("filter-enabled");
 
@@ -74,15 +74,15 @@ public class NotesPresenter extends GluonPresenter<PushNotes> {
     
     public void initialize() {
         Button filterButton = MaterialDesignIcon.FILTER_LIST.button(e ->
-                getApp().showLayer(PushNotes.POPUP_FILTER_NOTES));
+                AppManager.getInstance().showLayer(PushNotes.POPUP_FILTER_NOTES));
         filterButton.getStyleClass().add("filter-button");
 
         notes.setShowTransitionFactory(BounceInLeftTransition::new);
         notes.showingProperty().addListener((obs, oldValue, newValue) -> {
             if (newValue) {
-                AppBar appBar = getApp().getAppBar();
+                AppBar appBar = AppManager.getInstance().getAppBar();
                 appBar.setNavIcon(MaterialDesignIcon.MENU.button(e -> 
-                        getApp().getDrawer().open()));
+                        AppManager.getInstance().getDrawer().open()));
                 appBar.setTitleText(resources.getString("appbar.title"));
                 appBar.getActionItems().add(filterButton);
             }
@@ -104,7 +104,7 @@ public class NotesPresenter extends GluonPresenter<PushNotes> {
         floatingActionButton.setOnAction(e -> edit(null));
         floatingActionButton.showOn(notes);
         
-        getApp().addLayerFactory(PushNotes.POPUP_FILTER_NOTES, () -> {
+        AppManager.getInstance().addLayerFactory(PushNotes.POPUP_FILTER_NOTES, () -> {
             GluonView filterView = new GluonView(FilterPresenter.class);
             FilterPresenter filterPresenter = (FilterPresenter) filterView.getPresenter();
             
