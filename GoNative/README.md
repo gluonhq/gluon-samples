@@ -5,7 +5,7 @@ A simple Gluon Mobile application with Java 11+, JavaFX 15+, and GraalVM that us
 
 ## Documentation
 
-Read about this sample [here](https://docs.gluonhq.com/#_gonative_sample)
+Read about this sample [here](https://docs.gluonhq.com/samples/gonative/)
 
 ## Quick Instructions
 
