@@ -17,7 +17,7 @@
 
     <properties>
         <main.class>com.gluonhq.samples.gonative.GoNative</main.class>
-        <attach.extended.version>4.0.12</attach.extended.version>
+        <attach.extended.version>4.0.13</attach.extended.version>
         <attach.extended.classifier>desktop</attach.extended.classifier>
     </properties>
 
