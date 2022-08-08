@@ -19,7 +19,7 @@
         <attach.version>4.0.14</attach.version>
         <connect.version>2.0.1</connect.version>
         <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
-        <gluonfx.maven.plugin.version>1.0.14</gluonfx.maven.plugin.version>
+        <gluonfx.maven.plugin.version>1.0.15</gluonfx.maven.plugin.version>
         <gluonfx.target>host</gluonfx.target>
     </properties>
 
