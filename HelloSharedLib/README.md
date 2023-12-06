@@ -20,11 +20,15 @@ Compile and run the sample `sample/example.cpp` that makes use of the library ru
 
 - Linux, macOS:
 
+    ```
     ./run.sh
+    ```
 
 - Windows
 
+    ```
     run.bat
+    ```
 
 The expected output is:
 
