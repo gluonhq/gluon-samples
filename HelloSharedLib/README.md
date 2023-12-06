@@ -8,7 +8,7 @@ A simple Hello World application with Java 11+ and GraalVM that shows how to cre
 We use [GluonFX plugin](https://docs.gluonhq.com/) to build a native image for platforms including desktop, android and iOS.
 Please follow the prerequisites as stated [here](https://docs.gluonhq.com/#_requirements).
 
-### Desktop (Linux and macOS)
+### Desktop (Linux, macOS, Windows)
 
 Build a native image as shared library using:
 
@@ -16,9 +16,15 @@ Build a native image as shared library using:
 
 ### Test the shared library
 
-Compile and run the sample `sample/example.cpp` that makes use of the library:
+Compile and run the sample `sample/example.cpp` that makes use of the library running from the command line:
+
+- Linux, macOS:
 
     ./run.sh
+
+- Windows
+
+    run.bat
 
 The expected output is:
 
