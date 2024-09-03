@@ -32,6 +32,7 @@
         <module>HelloPi</module>
         <module>HelloWeb</module>
         <module>HelloSharedLib</module>
+        <module>HelloStaticLib</module>
 
         <module>alarm</module>
         <module>beacons</module>
