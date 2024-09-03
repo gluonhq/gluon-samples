@@ -6,18 +6,20 @@
 arch=`uname -m`
 case $(uname | tr '[:upper:]' '[:lower:]') in
   linux*)
-    g++ sample/example.cpp -I target/gluonfx/x86_64-linux/gvm/HelloStaticLib -L target/gluonfx/x86_64-linux/gvm/HelloStaticLib -Wl,target/gluonfx/x86_64-linux/HelloStaticLib.so -o target/example
-    ./target/example 1 2
+    arch="x86_64-linux"
+    g++ -c sample/example.c -I target/gluonfx/$arch/gvm/HelloStaticLib -o target/example.o
+    g++ target/example.o -L$HOME/.gluon/substrate/javaStaticSdk/24-1/linux-x86_64/lib -Ltarget/gluonfx/$arch/gvm -lHelloStaticLib -lvmone -lz -o target/gluonfx/$arch/HelloExample
+    ./target/gluonfx/$arch/HelloExample 1 2
     ;;
   darwin*)
     # Mac OS X platform
     case "$arch" in
-        x86_64) arch="x86_64-darwin" ;;
-        arm64) arch="aarch64-darwin" ;;
+        x86_64) arch="x86_64-darwin" arch2="darwin-x86_64";;
+        arm64) arch="aarch64-darwin" arch2="darwin-aarch64";;
     esac
 
     clang -c sample/example.c -I target/gluonfx/$arch/gvm/HelloStaticLib -o target/example.o
-    clang target/example.o -Ltarget/gluonfx/$arch/gvm/HelloStaticLib -L/Users/JosePereda/Downloads/iostmp/lib -Ltarget/gluonfx/$arch/gvm -lHelloStaticLib -lvmone -framework AppKit -lz -o target/gluonfx/$arch/HelloExample
+    clang target/example.o -L$HOME/.gluon/substrate/javaStaticSdk/24-1/$arch2/lib -Ltarget/gluonfx/$arch/gvm -lHelloStaticLib -lvmone -framework AppKit -lz -o target/gluonfx/$arch/HelloExample
     ./target/gluonfx/$arch/HelloExample 1 2
     ;;
   *)
