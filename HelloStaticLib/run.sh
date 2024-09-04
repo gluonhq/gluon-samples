@@ -8,7 +8,7 @@ case $(uname | tr '[:upper:]' '[:lower:]') in
   linux*)
     arch="x86_64-linux"
     g++ -c sample/example.c -I target/gluonfx/$arch/gvm/HelloStaticLib -o target/example.o
-    g++ target/example.o -L$HOME/.gluon/substrate/javaStaticSdk/24-1/linux-x86_64/lib -Ltarget/gluonfx/$arch/gvm -lHelloStaticLib -lvmone -lz -o target/gluonfx/$arch/HelloExample
+    g++ target/example.o -Ltarget/gluonfx/$arch/gvm -lHelloStaticLib -lvmone -lz -o target/gluonfx/$arch/HelloExample
     ./target/gluonfx/$arch/HelloExample 1 2
     ;;
   darwin*)
@@ -19,7 +19,7 @@ case $(uname | tr '[:upper:]' '[:lower:]') in
     esac
 
     clang -c sample/example.c -I target/gluonfx/$arch/gvm/HelloStaticLib -o target/example.o
-    clang target/example.o -L$HOME/.gluon/substrate/javaStaticSdk/24-1/$arch2/lib -Ltarget/gluonfx/$arch/gvm -lHelloStaticLib -lvmone -framework AppKit -lz -o target/gluonfx/$arch/HelloExample
+    clang target/example.o -Ltarget/gluonfx/$arch/gvm -lHelloStaticLib -lvmone -framework AppKit -lz -o target/gluonfx/$arch/HelloExample
     ./target/gluonfx/$arch/HelloExample 1 2
     ;;
   *)
