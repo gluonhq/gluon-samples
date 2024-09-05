@@ -36,12 +36,13 @@ Build a native image as static library for Android using:
 
 On a regular Android project that includes already C++ code, add the headers:
 
-- target/gluonfx/$arch-$os/gvm/HelloStaticLib/graal_isolate.h
-- target/gluonfx/$arch-$os/gvm/HelloStaticLib/hello.hellostaticlib.h
+- target/gluonfx/aarch64-android/gvm/HelloStaticLib/graal_isolate.h
+- target/gluonfx/aarch64-android/gvm/HelloStaticLib/hello.hellostaticlib.h
 
-and the library:
+and the libraries:
 
-- target/gluonfx/$arch-$os/HelloStaticLib.dylib
+- target/gluonfx/aarch64-android/gvm/HelloStaticLib.a
+- target/gluonfx/aarch64-android/gvm/vmoneb.a
 
 to the project.
 
@@ -101,12 +102,13 @@ Build a native image as static library for iOS using:
 
 On a regular iOS project, add the headers:
 
-- target/gluonfx/$arch-$os/gvm/HelloStaticLib/graal_isolate.h
-- target/gluonfx/$arch-$os/gvm/HelloStaticLib/hello.hellostaticlib.h
+- target/gluonfx/arm64-ios/gvm/HelloStaticLib/graal_isolate.h
+- target/gluonfx/arm64-ios/gvm/HelloStaticLib/hello.hellostaticlib.h
 
-and the library:
+and the libraries:
 
-- target/gluonfx/$arch-$os/HelloStaticLib.dylib
+- target/gluonfx/arm64-ios/gvm/HelloStaticLib.a
+- target/gluonfx/arm64-ios/gvm/vmoneb.a
 
 to the project. 
 

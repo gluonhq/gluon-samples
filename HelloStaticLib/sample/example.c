@@ -4,7 +4,6 @@
 
 int main(int argc, char **argv) {
 
-  fprintf(stderr, "main\n");
   graal_isolatethread_t *thread = NULL;
   if (graal_create_isolate(NULL, NULL, &thread) != 0) {
         fprintf(stderr, "graal_create_isolate error\n");
@@ -29,6 +28,5 @@ int main(int argc, char **argv) {
      return 1;
   }
 
-  fprintf(stderr, "Done!\n");
   return 0;
 }
