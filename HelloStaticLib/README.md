@@ -46,7 +46,7 @@ and the libraries:
 
 to the project.
 
-In the Cpp file with the JNI implementations, import the header:
+In the C file with the JNI implementations, import the header:
 ```
 #include <hello.hellostaticlib.h>
 ```
