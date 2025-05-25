@@ -12,7 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>21</maven.compiler.release>
-        <javafx.version>24-ea+5</javafx.version>
+        <javafx.version>24</javafx.version>
         <charm.version>6.2.3</charm.version>
         <charm.cloudlink.version>6.0.7</charm.cloudlink.version>
         <glisten.afterburner.version>2.1.0</glisten.afterburner.version>
