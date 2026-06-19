@@ -1,0 +1,1894 @@
+[
+{
+  "name":"java.lang.NullPointerException"
+},
+{
+  "name":"java.lang.Object"
+},
+{
+  "name":"java.lang.RuntimeException"
+},
+{
+  "name":"java.lang.String"
+},
+{
+  "name":"java.lang.UnsatisfiedLinkError"
+},
+{
+  "name":"java.nio.Buffer"
+},
+{
+  "name":"java.security.MessageDigestSpi"
+},
+{
+  "name":"java.security.SecureRandomParameters"
+},
+{
+  "name":"long[]"
+},
+{
+  "name":"org.bytedeco.javacpp.BoolPointer"
+},
+{
+  "name":"org.bytedeco.javacpp.BooleanPointer"
+},
+{
+  "name":"org.bytedeco.javacpp.BytePointer"
+},
+{
+  "name":"org.bytedeco.javacpp.CLongPointer"
+},
+{
+  "name":"org.bytedeco.javacpp.CharPointer"
+},
+{
+  "name":"org.bytedeco.javacpp.DoublePointer"
+},
+{
+  "name":"org.bytedeco.javacpp.FloatPointer"
+},
+{
+  "name":"org.bytedeco.javacpp.IntPointer"
+},
+{
+  "name":"org.bytedeco.javacpp.Loader"
+},
+{
+  "name":"org.bytedeco.javacpp.LongPointer"
+},
+{
+  "name":"org.bytedeco.javacpp.Pointer"
+},
+{
+  "name":"org.bytedeco.javacpp.Pointer$NativeDeallocator"
+},
+{
+  "name":"org.bytedeco.javacpp.PointerPointer"
+},
+{
+  "name":"org.bytedeco.javacpp.ShortPointer"
+},
+{
+  "name":"org.bytedeco.javacpp.SizeTPointer"
+},
+{
+  "name":"org.bytedeco.javacpp.presets.javacpp",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.bytedeco.openblas.global.openblas"
+},
+{
+  "name":"org.bytedeco.openblas.global.openblas$LAPACK_C_SELECT1"
+},
+{
+  "name":"org.bytedeco.openblas.global.openblas$LAPACK_C_SELECT2"
+},
+{
+  "name":"org.bytedeco.openblas.global.openblas$LAPACK_D_SELECT2"
+},
+{
+  "name":"org.bytedeco.openblas.global.openblas$LAPACK_D_SELECT3"
+},
+{
+  "name":"org.bytedeco.openblas.global.openblas$LAPACK_S_SELECT2"
+},
+{
+  "name":"org.bytedeco.openblas.global.openblas$LAPACK_S_SELECT3"
+},
+{
+  "name":"org.bytedeco.openblas.global.openblas$LAPACK_Z_SELECT1"
+},
+{
+  "name":"org.bytedeco.openblas.global.openblas$LAPACK_Z_SELECT2"
+},
+{
+  "name":"org.bytedeco.openblas.global.openblas_nolapack"
+},
+{
+  "name":"org.bytedeco.openblas.presets.openblas",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.bytedeco.openblas.presets.openblas_nolapack",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.bytedeco.openblas.presets.openblas_nolapack$MklDomainSetNumThreads"
+},
+{
+  "name":"org.bytedeco.openblas.presets.openblas_nolapack$MklSetNumThreadsLocal"
+},
+{
+  "name":"org.bytedeco.openblas.presets.openblas_nolapack$SetNumThreads"
+},
+{
+  "name":"org.nd4j.linalg.api.rng.distribution.factory.DefaultDistributionFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.nd4j.linalg.convolution.DefaultConvolutionInstance",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.nd4j.linalg.cpu.nativecpu.BlasWrapper",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.nd4j.linalg.cpu.nativecpu.CpuAffinityManager",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.nd4j.linalg.cpu.nativecpu.CpuMemoryManager",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory",
+  "methods":[{"name":"<init>","parameterTypes":["org.nd4j.linalg.api.buffer.DataType","char"] }]
+},
+{
+  "name":"org.nd4j.linalg.cpu.nativecpu.DirectShapeInfoProvider",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.nd4j.linalg.cpu.nativecpu.buffer.DefaultDataBufferFactory",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.nd4j.linalg.cpu.nativecpu.cache.ConstantBuffersCache",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.nd4j.linalg.cpu.nativecpu.ops.NativeOpExecutioner",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.nd4j.linalg.cpu.nativecpu.rng.CpuNativeRandom",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.nd4j.linalg.cpu.nativecpu.workspace.CpuWorkspaceManager",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$ArgumentsList"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Assert"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Conditional"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$ConstNDArrayVector"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$ConstNDArrayVector$Iterator"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$ConstantDataBuffer"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$ConstantDescriptor"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Context"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$ContextBuffers"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$ContextPrototype"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$CurrentIndexing"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$DataBuffer"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$DebugInfo"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$DeclarableOp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Environment",
+  "allDeclaredFields":true,
+  "allPublicFields":true,
+  "allDeclaredMethods":true,
+  "allPublicMethods":true,
+  "allDeclaredConstructors":true,
+  "allPublicConstructors":true
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$ErrorReference"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$ExternalWorkspace"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Floor"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$FlowPath"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$GraphProfile"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$GraphState"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$IntIntPair"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$IntVectorVector"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Intervals"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$KeyPair"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$LaunchContext"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Log1p"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$LogicOp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$LongVectorVector"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$NDArray"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$NDArrayList"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$NDArrayVector"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$NDArrayVector$Iterator"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$NDIndex"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$NDIndexAll"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$NDIndexInterval"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$NDIndexPoint"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$NodeProfile"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$OpArgsHolder"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$OpDescriptor"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$OpRegistrator"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Pair"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$PlatformHelper"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Pow"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Pow_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$RandomBuffer"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$RandomGenerator"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$ResultSet"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$ResultWrapper"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Return"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Scope"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$ShapeDescriptor"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$ShapeInformation"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$ShapeList"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Stash"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Switch"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$TadDescriptor"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$TadPack"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Variable"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$VariableSpace"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$VariablesSet"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Where"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$While"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Workspace"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$Xoroshiro128"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$_loader"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$absolute_difference_loss"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$absolute_difference_loss_grad"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$add"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$add_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$adjust_contrast"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$adjust_contrast_v2"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$adjust_hue"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$adjust_saturation"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$alpha_dropout_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$apply_sgd"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$argmax"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$argmin"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$assign"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$assign_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$avgpool2d"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$avgpool2d_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$avgpool3dnew"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$avgpool3dnew_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$axpy"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$batch_to_space"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$batch_to_space_nd"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$batched_gemm"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$batchnorm"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$batchnorm_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$betainc"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$biasadd"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$biasadd_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$bincount"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$bitcast"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$bits_hamming_distance"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$bitwise_and"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$bitwise_or"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$bitwise_xor"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$boolean_and"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$boolean_not"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$boolean_or"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$boolean_xor"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$broadcast_dynamic_shape"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$broadcast_to"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$broadcastgradientargs"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$cast"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$check_numerics"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$cholesky"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$choose"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$clip_by_global_norm"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$clipbyavgnorm"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$clipbyavgnorm_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$clipbynorm"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$clipbynorm_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$clipbyvalue"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$clone_list"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$col2im"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$compare_and_bitpack"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$concat"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$concat_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$confusion_matrix"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$conv1d"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$conv1d_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$conv2d"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$conv2d_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$conv2d_input_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$conv3dnew"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$conv3dnew_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$cosine_distance_loss"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$cosine_distance_loss_grad"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$create"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$create_list"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$crelu"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$crelu_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$crop_and_resize"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$cross"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$cube"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$cube_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$cumprod"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$cumprod_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$cumsum"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$cumsum_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$cyclic_rshift_bits"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$cyclic_shift_bits"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$deconv2d"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$deconv2d_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$deconv2d_tf"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$deconv3d"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$deconv3d_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$depth_to_space"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$depthwise_conv2d"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$depthwise_conv2d_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$diag"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$diag_part"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$digamma"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$dilation2d"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$divide"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$divide_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$divide_no_nan"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$dot_product_attention"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$dot_product_attention_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$draw_bounding_boxes"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$dropout"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$dropout_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$dynamic_bidirectional_rnn"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$dynamic_partition"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$dynamic_partition_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$dynamic_rnn"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$dynamic_stitch"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$elu"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$elu_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$embedding_lookup"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$eq_scalar"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$equals"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$evaluate_reduction_shape"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$expand_dims"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$expose"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$extract_image_patches"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$eye"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$fake_quant_with_min_max_vars"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$fake_quant_with_min_max_vars_per_channel"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$fill"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$fill_as"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$firas_sparse"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$flatten"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$floordiv"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$floordiv_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$floormod"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$floormod_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$fused_batch_norm"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$gather"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$gather_list"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$gather_nd"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$get_seed"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$greater"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$greater_equal"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$gru"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$gruCell"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$gruCell_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$gru_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$gt_scalar"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$gte_scalar"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$hardsigmoid"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$hardsigmoid_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$hardtanh"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$hardtanh_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$hashcode"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$hinge_loss"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$hinge_loss_grad"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$histogram"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$histogram_fixed_width"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$huber_loss"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$huber_loss_grad"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$identity"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$identity_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$identity_n"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$igamma"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$igammac"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$im2col"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$im2col_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$image_resize"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$in_top_k"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$invert_permutation"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$is_non_decreasing"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$is_numeric_tensor"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$is_strictly_increasing"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$ismax"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$l2_loss"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$layer_norm"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$layer_norm_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$less"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$less_equal"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lgamma"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lin_space"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$listdiff"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$log_loss"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$log_loss_grad"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$log_matrix_determinant"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$log_poisson_loss"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$log_poisson_loss_grad"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$log_softmax"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$log_softmax_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$logdet"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lrelu"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lrelu_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lrn"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lrn_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lstm"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lstmBlock"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lstmBlockCell"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lstmCell"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lstmLayer"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lstmLayerCell"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lstmLayerCellBp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lstmLayer_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lstsq"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lt_scalar"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lte_scalar"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$lu"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$matmul"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$matmul_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$matrix_band_part"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$matrix_determinant"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$matrix_diag"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$matrix_diag_part"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$matrix_inverse"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$matrix_set_diag"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$max_pool_with_argmax"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$maximum"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$maximum_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$maxpool2d"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$maxpool2d_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$maxpool3dnew"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$maxpool3dnew_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$mean_pairwssqerr_loss"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$mean_pairwssqerr_loss_grad"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$mean_sqerr_loss"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$mean_sqerr_loss_grad"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$mergeadd"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$mergeadd_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$mergeavg"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$mergeavg_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$mergemax"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$mergemax_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$mergemaxindex"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$meshgrid"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$minimum"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$minimum_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$mirror_pad"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$mod"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$mod_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$moments"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$multi_head_dot_product_attention"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$multi_head_dot_product_attention_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$multiply"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$multiply_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$neq_scalar"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$non_max_suppression"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$non_max_suppression_overlaps"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$non_max_suppression_v3"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$noop"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$norm"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$normalize_moments"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$not_equals"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$nth_element"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$onehot"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$ones_as"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$order"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$pad"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$parallel_stack"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$percentile"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$permute"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$pick_list"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$pnormpool2d"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$pnormpool2d_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$pointwise_conv2d"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$polygamma"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$prelu"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$prelu_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$qr"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$random_bernoulli"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$random_crop"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$random_exponential"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$random_gamma"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$random_multinomial"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$random_normal"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$random_poisson"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$random_shuffle"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$randomuniform"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$range"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$rank"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$rationaltanh"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$rationaltanh_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$read_list"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$realdiv"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$realdiv_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$rectifiedtanh"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$rectifiedtanh_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_dot_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_logsumexp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_max"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_max_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_mean"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_mean_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_min"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_min_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_norm1"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_norm1_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_norm2"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_norm2_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_norm_max"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_norm_max_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_prod"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_prod_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_sqnorm"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_sqnorm_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_stdev"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_stdev_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_sum"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_sum_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_variance"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reduce_variance_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$relu"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$relu6"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$relu6_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$relu_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$relu_layer"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$repeat"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reshape"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reshapeas"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$resize_area"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$resize_bicubic"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$resize_bilinear"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$resize_nearest_neighbor"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reverse"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reverse_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reverse_sequence"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reversedivide"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reversedivide_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reversemod"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reversemod_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reversesubtract"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$reversesubtract_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$rint"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$roll"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$rshift_bits"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$scatter_add"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$scatter_div"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$scatter_list"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$scatter_max"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$scatter_min"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$scatter_mul"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$scatter_nd"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$scatter_nd_add"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$scatter_nd_sub"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$scatter_nd_update"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$scatter_sub"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$scatter_upd"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$scatter_update"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$sconv2d"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$sconv2d_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$segment_max"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$segment_max_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$segment_mean"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$segment_mean_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$segment_min"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$segment_min_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$segment_prod"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$segment_prod_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$segment_sum"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$segment_sum_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$select"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$selu"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$selu_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$sequence_mask"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$set_seed"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$shape_of"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$shapes_of"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$shift_bits"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$sigm_cross_entropy_loss"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$sigm_cross_entropy_loss_grad"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$sigmoid"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$sigmoid_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$size"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$size_at"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$size_list"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$slice"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$slice_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$softmax"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$softmax_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$softmax_cross_entropy_loss"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$softmax_cross_entropy_loss_grad"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$softmax_cross_entropy_loss_with_logits"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$softmax_cross_entropy_loss_with_logits_grad"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$softplus"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$softplus_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$softsign"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$softsign_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$solve"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$solve_ls"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$space_to_batch"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$space_to_batch_nd"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$space_to_depth"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$sparse_softmax_cross_entropy_loss_with_logits"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$sparse_softmax_cross_entropy_loss_with_logits_grad"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$split"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$split_list"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$split_v"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$square"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$squaredsubtract"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$squaredsubtract_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$squeeze"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$sru"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$sruCell"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$sru_bi"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$sru_bi_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$sru_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$stack"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$stack_list"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$standardize"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$standardize_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$static_bidirectional_rnn"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$static_rnn"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$stop_gradient"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$strided_slice"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$strided_slice_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$subtract"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$subtract_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$sufficient_statistics"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$svd"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$tanh"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$tanh_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$tear"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$tensormmul"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$tensormmul_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$test_output_reshape"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$test_scalar"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$testcustom"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$testop2i2o"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$testreduction"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$tf_atan2"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$thresholdedrelu"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$thresholdedrelu_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$tile"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$tile_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$tile_to_shape"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$tile_to_shape_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$to_double"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$to_float16"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$to_float32"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$to_int32"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$to_int64"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$to_uint32"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$to_uint64"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$toggle_bits"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$top_k"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$trace"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$transpose"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$tri"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$triangular_solve"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$triu"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$triu_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$truncatediv"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$unique"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$unique_with_counts"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$unsorted_segment_max"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$unsorted_segment_max_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$unsorted_segment_mean"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$unsorted_segment_mean_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$unsorted_segment_min"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$unsorted_segment_min_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$unsorted_segment_prod"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$unsorted_segment_prod_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$unsorted_segment_sqrt_n"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$unsorted_segment_sqrt_n_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$unsorted_segment_sum"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$unsorted_segment_sum_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$unstack"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$unstack_list"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$upsampling2d"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$upsampling2d_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$upsampling3d"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$upsampling3d_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$utf8string"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$weighted_cross_entropy_with_logits"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$where_np"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$write_list"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$xw_plus_b"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$xw_plus_b_bp"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$zero_fraction"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$zeros_as"
+},
+{
+  "name":"org.nd4j.nativeblas.Nd4jCpu$zeta"
+},
+{
+  "name":"org.nd4j.nativeblas.OpaqueConstantDataBuffer",
+  "allDeclaredFields":true,
+  "allPublicFields":true,
+  "allDeclaredMethods":true,
+  "allPublicMethods":true,
+  "allDeclaredConstructors":true,
+  "allPublicConstructors":true
+},
+{
+  "name":"org.nd4j.nativeblas.OpaqueContext",
+  "allDeclaredFields":true,
+  "allPublicFields":true,
+  "allDeclaredMethods":true,
+  "allPublicMethods":true,
+  "allDeclaredConstructors":true,
+  "allPublicConstructors":true
+},
+{
+  "name":"org.nd4j.nativeblas.OpaqueDataBuffer",
+  "allDeclaredFields":true,
+  "allPublicFields":true,
+  "allDeclaredMethods":true,
+  "allPublicMethods":true,
+  "allDeclaredConstructors":true,
+  "allPublicConstructors":true
+},
+{
+  "name":"org.nd4j.nativeblas.OpaqueLaunchContext",
+  "allDeclaredFields":true,
+  "allPublicFields":true,
+  "allDeclaredMethods":true,
+  "allPublicMethods":true,
+  "allDeclaredConstructors":true,
+  "allPublicConstructors":true
+},
+{
+  "name":"org.nd4j.nativeblas.OpaqueRandomGenerator",
+  "allDeclaredFields":true,
+  "allPublicFields":true,
+  "allDeclaredMethods":true,
+  "allPublicMethods":true,
+  "allDeclaredConstructors":true,
+  "allPublicConstructors":true
+},
+{
+  "name":"org.nd4j.nativeblas.OpaqueResultWrapper",
+  "allDeclaredFields":true,
+  "allPublicFields":true,
+  "allDeclaredMethods":true,
+  "allPublicMethods":true,
+  "allDeclaredConstructors":true,
+  "allPublicConstructors":true
+},
+{
+  "name":"org.nd4j.nativeblas.OpaqueShapeList",
+  "allDeclaredFields":true,
+  "allPublicFields":true,
+  "allDeclaredMethods":true,
+  "allPublicMethods":true,
+  "allDeclaredConstructors":true,
+  "allPublicConstructors":true
+},
+{
+  "name":"org.nd4j.nativeblas.OpaqueTadPack",
+  "allDeclaredFields":true,
+  "allPublicFields":true,
+  "allDeclaredMethods":true,
+  "allPublicMethods":true,
+  "allDeclaredConstructors":true,
+  "allPublicConstructors":true
+},
+{
+  "name":"org.nd4j.nativeblas.OpaqueVariable",
+  "allDeclaredFields":true,
+  "allPublicFields":true,
+  "allDeclaredMethods":true,
+  "allPublicMethods":true,
+  "allDeclaredConstructors":true,
+  "allPublicConstructors":true
+},
+{
+  "name":"org.nd4j.nativeblas.OpaqueVariablesSet",
+  "allDeclaredFields":true,
+  "allPublicFields":true,
+  "allDeclaredMethods":true,
+  "allPublicMethods":true,
+  "allDeclaredConstructors":true,
+  "allPublicConstructors":true
+},
+{
+  "name":"sun.misc.Unsafe",
+  "fields":[{"name":"theUnsafe"}],
+  "methods":[
+    {"name":"arrayBaseOffset","parameterTypes":["java.lang.Class"] }, 
+    {"name":"getByte","parameterTypes":["long"] }, 
+    {"name":"getChar","parameterTypes":["long"] }, 
+    {"name":"getDouble","parameterTypes":["long"] }, 
+    {"name":"getFloat","parameterTypes":["long"] }, 
+    {"name":"getInt","parameterTypes":["long"] }, 
+    {"name":"getLong","parameterTypes":["long"] }, 
+    {"name":"getShort","parameterTypes":["long"] }
+  ]
+},
+{
+  "name":"sun.security.provider.NativePRNG",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.SHA",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+}
+]

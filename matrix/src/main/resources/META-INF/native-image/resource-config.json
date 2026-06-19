@@ -1,0 +1,15 @@
+{
+  "resources":[
+    {"pattern":"\\QMETA-INF/services/java.nio.file.spi.FileSystemProvider\\E"}, 
+    {"pattern":"\\QMETA-INF/services/org.nd4j.common.base.PreconditionsFormat\\E"}, 
+    {"pattern":"\\QMETA-INF/services/org.nd4j.linalg.compression.NDArrayCompressor\\E"}, 
+    {"pattern":"\\QMETA-INF/services/org.nd4j.linalg.env.EnvironmentalAction\\E"}, 
+    {"pattern":"\\QMETA-INF/services/org.nd4j.linalg.factory.Nd4jBackend\\E"}, 
+    {"pattern":"\\Qai/skymind/\\E"},
+    {"pattern":"\\Qnd4j-native.properties\\E"},
+    {"pattern":"\\Qorg/slf4j/impl/StaticLoggerBinder.class\\E"}
+  ],
+  "bundles":[]
+}
+
+

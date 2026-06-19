@@ -1,0 +1,10 @@
+{
+  "resources":[
+    {"pattern":"\\Qai/skymind/\\E"},
+    {"pattern":"\\Qnd4j-native.properties\\E"},
+    {"pattern": ".*/libnd4jcpu.dylib"},
+    {"pattern": ".*/libjnind4jcpu.dylib"},
+    {"pattern":"\\Qorg/slf4j/impl/StaticLoggerBinder.class\\E"}
+  ],
+  "bundles":[]
+}
